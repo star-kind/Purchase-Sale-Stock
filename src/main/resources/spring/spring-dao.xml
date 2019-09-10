@@ -47,7 +47,7 @@
 	<!-- 配置MyBatis的映射扫描器:为了让spring去指定的mapper包扫描里面的接口, mybatis就会使用动态代理技术创建对应接口的实现类,spring为就去管理这些实现类的对象, 
 		这些对象的名称,默认就是对应接口名称(首字母小写) -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!-- mapper:即当前项目根包名字 -->
+		<!-- value:mapper层根包名 -->
 		<property name="basePackage" value="mapper" />
 	</bean>
 </beans>

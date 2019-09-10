@@ -28,7 +28,7 @@
 
 	<!-- 配置组件扫描 -->
 	<!--validator:向处理器适配器,注入校验器 -->
-	<!-- controller:根包名 -->
+	<!-- controller:控制器层根包名 -->
 	<context:component-scan
 		base-package="controller" />
 
@@ -40,7 +40,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- 配置注解驱动:JSON -->
+	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters
 			register-defaults="true">
@@ -90,7 +90,7 @@
 			<mvc:exclude-mapping
 				path="/account/reviseBaseProfileHandler" />
 
-			<!-- 3. 拦截器类 mechanism(机关/制/理) -->
+			<!-- 3. 拦截器,各请求前往该类进行处理 -->
 			<bean class="mechanism.LoginMechanism" />
 		</mvc:interceptor>
 	</mvc:interceptors>

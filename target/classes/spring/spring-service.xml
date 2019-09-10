@@ -18,13 +18,13 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 
 	<!-- 配置组件扫描 -->
 	<!--组件扫描，如果想要类被组件扫描到,并在Spring容器中注册的话, 必须在类名上添加上注解@Repository、@Service、@Controller、@Component 
 		(这四个注解功能一样，名字不同只是为了区分不同功能)@Component 是通用组件 -->
-	<!-- base-package="根包" -->
+	<!-- base-package="业务层根包名" -->
 	<context:component-scan base-package="service" />
 
 </beans>
