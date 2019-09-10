@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.table-head {
+	font-size: 14px;
+	background: #eee;
+	font-weight: normal;
+}
+
+/*表格样式*/
+.member-table {
+	width: 90%;
+	background: #ccc;
+	margin: 10px auto;
+	/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+	border-collapse: collapse;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.member-table th td {
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+.member-table tr {
+	background: #fff;
+}
+
+.member-table tr:hover {
+	background: #cc0;
+}
+
+.member-table td {
+	text-align: center;
+}
+
+.member-table td a {
+	color: #06f;
+	text-decoration: none;
+}
+
+.member-table td a:hover {
+	color: #06f;
+	text-decoration: underline;
+}
+
+.member-table caption {
+	height: 40px;
+}

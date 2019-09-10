@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/*外层div*/
+.ex_div {
+	border-radius: 4px;
+	position: relative;
+	background: #fff;
+	width: 100%;
+	height: 200px;
+	margin: 0px auto;
+}
+
+/*表单*/
+.form_diy {
+	border: 1px solid #000;
+	padding: 30px 30px 30px 30px;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 45px;
+} 
+
+/*input文本框*/
+.input_text {
+	margin-bottom: 20px;
+	width: 50%;
+	height: 38px;
+}
+
+/*按钮*/
+.commit_admin00 {
+	cursor: pointer;
+	background: #3B78DD;
+	color: #fff;
+	width: 50%;
+	height: 35px;
+	margin-top: 28px;
+	border-radius: 4px;
+	border: 0;
+	outline: none;
+}
+
+/*表单标题*/
+.form_title {
+	text-align: center;
+	margin-top: 0;
+	font-size: 26px;
+	color: #00804b;
+}

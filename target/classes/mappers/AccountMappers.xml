@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--映射接口包 -->
+<mapper namespace="mapper.AccountsMapper">
+	<update id="updatePartialProfileById">
+		UPDATE
+		accounts
+		SET
+		usrname=#{usrname},
+		phone=#{phone}
+		WHERE
+		usrid=#{usrid}
+	</update>
+
+	<insert id="insertIntoAccounts">
+		INSERT
+		INTO
+		accounts
+		(usrid,
+		usrname,
+		region_department,
+		competence,
+		active_status,
+		phone,
+		reg_time,
+		modified_time,
+		password,
+		salt)
+		VALUES
+		(#{usrid},
+		#{usrname},
+		#{regionDepartment},
+		#{competence},
+		#{activeStatus},
+		#{phone},
+		#{regTime},
+		#{modifiedTime},
+		#{password},
+		#{salt})
+	</insert>
+
+	<select id="selectByUname" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department AS regionDepartment,
+		competence,
+		active_status AS
+		activeStatus,
+		phone,
+		reg_time AS regTime,
+		modified_time AS modifiedTime,
+		password,
+		salt
+		FROM
+		accounts
+		WHERE
+		usrname=#{usrname}
+	</select>
+
+	<select id="countUidByPhone" resultType="java.lang.Integer">
+		SELECT
+		COUNT(usrid)
+		FROM
+		accounts
+		WHERE
+		phone=#{phone}
+	</select>
+
+	<select id="selectAllFromAccounts" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department AS regionDepartment,
+		competence,
+		active_status AS activeStatus,
+		phone,
+		reg_time AS regTime,
+		modified_time
+		AS modifiedTime,
+		password,
+		salt
+		FROM
+		accounts
+	</select>
+
+	<delete id="deleteOneUsrByUsrid">
+		DELETE FROM accounts WHERE usrid=#{usrid}
+	</delete>
+
+	<update id="updateAccountProfileByUsrid">
+		UPDATE
+		accounts
+		SET
+		usrname=#{usrname},
+		phone=#{phone},
+		competence=#{competence},
+		region_department=#{regionDepartment},
+		modified_time=#{modifiedTime}
+		WHERE
+		usrid=#{usrid}
+	</update>
+
+	<select id="selectAccountByUsrid" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department AS regionDepartment,
+		competence,
+		active_status AS activeStatus,
+		phone,
+		reg_time AS regTime,
+		modified_time
+		AS modifiedTime,
+		password,
+		salt
+		FROM
+		accounts
+		WHERE
+		usrid=#{usrid}
+	</select>
+
+	<!-- 多ID批量注销 -->
+	<update id="batchSetCancelByUsrid">
+		UPDATE accounts SET active_status=0 WHERE usrid IN
+		<foreach collection="usrids" index="index" item="usrid"
+			separator="," open="(" close=")">
+
+			#{usrid}
+
+		</foreach>
+	</update>
+
+
+	<!-- 多ID批量激活 -->
+	<update id="batchSetActiveByUsrid">
+		UPDATE accounts SET active_status=1 WHERE usrid IN
+		<foreach collection="usrids" index="index" item="usrid"
+			separator="," open="(" close=")">
+
+			#{usrid}
+
+		</foreach>
+	</update>
+
+	<update id="updatePasswordByUsrid">
+		UPDATE accounts SET password=#{password} WHERE
+		usrid=#{usrid}
+	</update>
+
+	<select id="selectByRegionDepartment" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department
+		AS regionDepartment,
+		phone,
+		competence,
+		active_status AS activeStatus,
+		reg_time AS regTime,
+		modified_time AS
+		modifiedTime
+		FROM
+		accounts
+		WHERE
+		region_department
+		BETWEEN
+		#{start}
+		AND
+		#{end}
+	</select>
+
+	<select id="selectByCompetence" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department
+		AS regionDepartment,
+		phone,
+		competence,
+		active_status AS
+		activeStatus,
+		reg_time AS regTime,
+		modified_time AS
+		modifiedTime
+		FROM
+		accounts
+		WHERE
+		competence=#{competence}
+	</select>
+
+	<select id="selectByActiveStatus" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department
+		AS regionDepartment,
+		phone,
+		competence,
+		active_status AS activeStatus,
+		reg_time AS regTime,
+		modified_time AS
+		modifiedTime
+		FROM
+		accounts
+		WHERE
+		active_status=#{activeStatus}
+	</select>
+
+	<select id="selectLikeUsrname" resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department
+		AS regionDepartment,
+		phone,
+		competence,
+		active_status AS
+		activeStatus,
+		reg_time AS regTime,
+		modified_time AS
+		modifiedTime
+		FROM
+		accounts
+		WHERE
+		usrname
+		LIKE
+		CONCAT
+		('%',#{Usrname},'%')
+	</select>
+</mapper>

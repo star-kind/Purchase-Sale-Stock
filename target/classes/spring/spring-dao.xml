@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<!-- 导入数据库属性配置文件 -->
+	<util:properties id="dbConfig"
+		location="classpath*:database.properties" />
+
+	<!-- 配置数据库连接池(数据源) -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{dbConfig.driver}" />
+		<property name="url" value="#{dbConfig.url}" />
+		<property name="username" value="#{dbConfig.username}" />
+		<property name="password" value="#{dbConfig.password}" />
+		<property name="initialSize" value="#{dbConfig.initialSize}" />
+		<property name="maxActive" value="#{dbConfig.maxActive}" />
+	</bean>
+
+	<!-- 配置MyBatis的SqlSessionFactory工厂 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!--加载mybatis配置文件 -->
+		<property name="mapperLocations"
+			value="classpath*:mappers/*.xml" />
+	</bean>
+
+	<!-- 配置MyBatis的映射扫描器:为了让spring去指定的mapper包扫描里面的接口, mybatis就会使用动态代理技术创建对应接口的实现类,spring为就去管理这些实现类的对象, 
+		这些对象的名称,默认就是对应接口名称(首字母小写) -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- mapper:即当前项目根包名字 -->
+		<property name="basePackage" value="mapper" />
+	</bean>
+</beans>

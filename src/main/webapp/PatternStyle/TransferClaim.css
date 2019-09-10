@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+h4 {
+	color: cadetblue;
+}
+
+#total_area {
+	text-align: center;
+	margin: 0px auto;
+	width: 100%;
+}
+
+#total_area table {
+	width: 100%;
+}
+
+.links_dept {
+	text-decoration: none;
+	width: 100%;
+}
+
+.data_cells {
+	padding: 20px;
+	width: 100%;
+}
+
+.t_rows {
+	background: #ce5c00;
+	width: 100%;
+}
+
+.back_to {
+	margin-top: 100px;
+}
+
+/*美化a元素标签样式*/
+.btn_A {
+	border: 3px;
+	border-radius: 1px solid;
+	font-size: 20px;
+	color: #ce5c00;
+	border-color: #ce5c00;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	height: 40px;
+}
+
+.btn_A a {
+	color: #0084ff;
+	text-decoration: none;
+}
+
+/* 进入对应版块信息提示 */
+.into-info {
+	margin-top: 50px;
+}
