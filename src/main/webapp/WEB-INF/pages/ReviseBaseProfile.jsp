@@ -71,7 +71,7 @@
 		var spanHint = $("#span_hint");
 
 		$.ajax({
-			url : '/stocker-managet/account/exhibitionBaseProfileHandler',
+			url : '/stocker-manager/account/exhibitionBaseProfileHandler',
 			type : 'GET',
 			dataType : 'json',
 			success : function(json) {

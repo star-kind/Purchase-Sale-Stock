@@ -12,11 +12,14 @@
 <link rel="stylesheet" type="text/css" href="CssFrame/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="CssFrame/bootstrap-theme.css">
 
+<!-- 自定义css -->
+<link rel="stylesheet" type="text/css" href="PatternStyle/Login.css">
+
 </head>
 <body>
 	<div class="container" id="content">
-		<div class="row" style="text-align: center;">
-			<h2 class="col-md-5">进销存管理系统</h2>
+		<div class="row" style="text-align: center; margin-left: 570px; margin-top: 58px;">
+			<h3 class="col-md-5" style="width: 250px;">进销存管理系统登录</h3>
 		</div>
 
 		<div style="width: 320px; margin-bottom: 30px;">
@@ -24,24 +27,25 @@
 		</div>
 
 		<!--  -->
-		<div class="panel panel-default">
+		<div class="panel panel-default" id="mine_panel">
 			<div class="panel-heading">
 				<div class="row">
 					<form id="form_usr_login" class="bs-example bs-example-form col-md-5" role="form" style="margin: 20px 0 10px 0;">
-						<p id="form_title">账号登录</p>
 
 						<div class="input-group">
-							<input id="usrname" class="form-control" placeholder="请输入用户名" type="text" name="usrname" maxlength="28">
+							<input id="usrname" class="form-control" placeholder="请输入用户名" type="text" name="usrname" maxlength="28"
+								style="width: 440px;">
 						</div>
 
 						<div class="input-group">
-							<input id="password" class="form-control" placeholder="请输入密码" type="password" name="password" maxlength="22">
+							<input id="password" class="form-control" placeholder="请输入密码" type="password" name="password" maxlength="22"
+								style="width: 440px;">
 						</div>
 
 						<input type="button" id="commit_login" value="登录" style="margin-top: 14px;" class="btn btn-default col-md-2">
 
-						<div style="margin-top: 21px;">
-							<a href="Registration.jsp" style="margin-left: 30px;">注册账号</a>
+						<div style="margin-top: 38px;">
+							<a href="Registration.jsp">注册账号</a>
 						</div>
 
 					</form>

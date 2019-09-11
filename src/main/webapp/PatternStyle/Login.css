@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#content {
+	margin-left: 5%;
+}
+
+#mine_panel {
+	margin-left: 40%;
+	width: 502px;
+}
+
+#commit_login {
+	margin-left: 12%;
+	margin-top: 5px;
+	width: 70px;
+}
+
+.input-group {
+	margin-bottom: 16px;
+}
+
+a {
+	margin-left: 8%;
+}
