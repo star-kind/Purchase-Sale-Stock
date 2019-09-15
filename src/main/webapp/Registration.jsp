@@ -31,38 +31,37 @@
 		</div>
 
 		<!-- 注册资料填写 -->
-		<div class="panel panel-default" style="margin-top: 100px;">
+		<div class="panel panel-default" style="margin-top: 80px; margin-left: 17%;">
 			<div class="panel-heading">
 				<div class="row">
 
-					<form id="form_usr" class="form_diy bs-example bs-example-form col-md-5" role="form"
-						style="width: 88%; margin-left: 60px;">
+					<form id="form_usr" class="bs-example bs-example-form col-md-5" role="form" style="margin-left: 29%;">
 
 						<p class="form_title">Add A New Account</p>
 
 						<!-- 名字 -->
-						<div class="form-group input-group">
+						<div class="form-group">
 							<p>plz input uname</p>
 							<input class="input_text form-control" placeholder="plz input uname" type="text" name="usrname" maxlength="12">
 						</div>
 
 						<!-- phone -->
-						<div class="form-group input-group">
+						<div class="form-group">
 							<p>plz input phone</p>
 							<input class="input_text form-control" placeholder="plz input phone" type="text" name="phone" maxlength="30">
 						</div>
 
 						<!-- 部门 -->
-						<div class="form-group input-group">
+						<div class="form-group">
 							<p>plz input dept number</p>
 							<input class="input_text form-control" placeholder="plz input deptno" type="text" name="regionDepartment"
 								maxlength="3">
 						</div>
 
 						<!-- 职权 -->
-						<div class="form-group input-group">
+						<div class="form-group">
 							<p>职权岗位</p>
-							<select id="competence_select" style="width: 240px; height: 70px; margin-bottom: 40px;" name="competence">
+							<select id="competence_select" style="width: 150px; height: 45px; margin-bottom: 30px;" name="competence">
 								<option value="0">管理员</option>
 								<option value="1">总经理</option>
 								<option value="2">采购经理</option>
@@ -72,7 +71,7 @@
 							</select>
 						</div>
 
-						<div class="form-group input-group">
+						<div class="form-group">
 							<input type="button" class="commit_admin00 btn-primary" value="Submit" onclick="commit00()" style="width: 68px;">
 						</div>
 					</form>

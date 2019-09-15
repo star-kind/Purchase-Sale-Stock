@@ -61,7 +61,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @param affect
 	 */
 	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
-		String str = "<p>采购专员" + usrname + "于" + nowTime + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+		String str = "<p>采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
 
 		if (affect == 1) {
 			textWriter(str, LOG_URI);

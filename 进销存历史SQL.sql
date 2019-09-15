@@ -101,7 +101,7 @@ CREATE TABLE `accounts` (
   `salt` varchar(20) NOT NULL,
   PRIMARY KEY (`usrid`),
   UNIQUE KEY `usrname` (`usrname`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 # -----------------------------------------------
 SELECT usrid,usrname FROM accounts;
@@ -146,8 +146,7 @@ insert into purchase (commodity, is_agree,
       supplier, quantity, amount_money, 
       payment_method, is_pay, is_enter_store, 
       operator, purchase_time)
-values (
-    	'单例设计模式',
+values ('单例设计模式',
     	1,
     	'java',
     	'120',
@@ -156,5 +155,14 @@ values (
     	1,
     	1,
     	'admin',
-    	'2011-11-11 11:50:02'
-);
+    	'2011-11-11 11:50:02');
+    	
+-- 修改列注释
+ALTER TABLE accounts MODIFY COLUMN `active_status` int(1) DEFAULT '1' COMMENT '激活状态 0-已注销,1-已激活';
+
+ALTER TABLE accounts MODIFY COLUMN `reg_time` date NOT NULL COMMENT '帐号注册时间';
+
+ALTER TABLE accounts MODIFY COLUMN `password` varchar(50) NOT NULL COMMENT '密码';                                                                                        
+ALTER TABLE accounts MODIFY COLUMN `salt` varchar(20) NOT NULL COMMENT '盐值';
+
+ALTER TABLE accounts MODIFY COLUMN `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号';

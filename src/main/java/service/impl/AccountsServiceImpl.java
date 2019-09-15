@@ -61,8 +61,8 @@ public class AccountsServiceImpl implements AccountsService {
 		// 查询此电话所绑定之账户数量,并以此判断是否可注册
 		String phone = accounts.getPhone();
 		int i = accountsMapper.countUidByPhone(phone);
-		if (i > 3) {
-			throw new CountPhoneOutRangeException("sorry,1个电话至多只准绑定注册3个账户");
+		if (i > 1) {
+			throw new CountPhoneOutRangeException("sorry,1个电话至多只准绑定注册1个账户");
 		}
 
 		// 统计注册账号提交之数据个数是否为4

@@ -6,16 +6,17 @@
 |          |   `usrname` varchar(30) NOT NULL,                                                                                         |
 |          |   `region_department` int(4) NOT NULL COMMENT '地方区域部门,如0-15为常川分部,16-21为滨河分部',                            |
 |          |   `competence` int(1) DEFAULT NULL COMMENT '岗位对应之权限,0:管理员,1:总经理,2:采购经理,3:销售经理,4:仓库主管,5普通雇员', |
-|          |   `active_status` int(1) DEFAULT '1' COMMENT '激活状态 0-Sleep,1-Awake',                                                  |
-|          |   `phone` char(30) NOT NULL COMMENT '1个号码至多只准关联3个账号',                                                         |
-|          |   `reg_time` date NOT NULL,                                                                                               |
+|          |   `active_status` int(1) DEFAULT '1' COMMENT '激活状态 0-已注销,1-已激活',                                                |
+|          |   `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号',                                                         |
+|          |   `reg_time` date NOT NULL COMMENT '帐号注册时间',                                                                        |
 |          |   `modified_time` date NOT NULL COMMENT '上次更新时间',                                                                   |
-|          |   `password` varchar(50) NOT NULL,                                                                                        |
-|          |   `salt` varchar(20) NOT NULL,                                                                                            |
+|          |   `password` varchar(50) NOT NULL COMMENT '密码',                                                                         |
+|          |   `salt` varchar(20) NOT NULL COMMENT '盐值',                                                                             |
 |          |   PRIMARY KEY (`usrid`),                                                                                                  |
 |          |   UNIQUE KEY `usrname` (`usrname`)                                                                                        |
-|          | ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8                                                                    |
+|          | ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8                                                                    |
 +----------+---------------------------------------------------------------------------------------------------------------------------+
+
 
 -- =======================================================================================================
 

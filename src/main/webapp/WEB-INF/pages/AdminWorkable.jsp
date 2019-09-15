@@ -19,41 +19,14 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/FormCommon.css">
 <!-- 表格样式 -->
 <link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
+<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/Accesses.css">
+
+<!-- bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap-theme.css">
 
 </head>
 <body>
-	<style type="text/css">
-/* A元素标签 */
-.accesses {
-	height: 60px;
-	width: 100%;
-	overflow: hidden;
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	/*底端加上实线*/
-	border-bottom: 1px solid #dcdeda;
-}
-
-.accesses ul {
-	margin-top: 0px;
-}
-
-.accesses ul li {
-	width: auto;
-	height: 60px;
-	line-height: 50px;
-	overflow: hidden;
-	float: left;
-	padding: 0px 0px 0px 26px;
-	font-size: 16px;
-}
-
-.a_links {
-	font-size: 16px;
-}
-</style>
-	<!--  -->
 	<div class="accesses">
 		<ul>
 			<li><a href="showAllAccount" class="a_links" onclick="opens(1)">Roster</a></li>
@@ -61,12 +34,10 @@
 			<li><a href="javascript:opens(2)" class="a_links">按类型查看</a></li>
 
 			<li><a href="${basePath}/cross/toSubstacne" class="a_links">Substance</a></li>
-			
+
 			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回Transfer</a></li>
 		</ul>
 	</div>
-	<br>
-	<br>
 
 	<!-- 账号列表 -->
 	<div class="detail_zone div_module" style="display: block;" id="room1">

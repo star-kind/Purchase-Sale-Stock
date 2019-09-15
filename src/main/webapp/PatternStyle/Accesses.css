@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* A元素标签 */
+.accesses {
+	height: 60px;
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	/*底端加上实线*/
+	border-bottom: 1px solid #dcdeda;
+	margin-bottom: 35px;
+}
+
+.accesses ul {
+	margin-top: 0px;
+}
+
+.accesses ul li {
+	width: auto;
+	height: 60px;
+	line-height: 50px;
+	overflow: hidden;
+	float: left;
+	padding: 0px 0px 0px 26px;
+	font-size: 16px;
+}
+
+.a_links {
+	font-size: 16px;
+}

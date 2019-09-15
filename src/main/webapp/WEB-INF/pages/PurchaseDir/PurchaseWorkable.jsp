@@ -12,16 +12,36 @@
 <!-- JavaScript 点击链接切换division  -->
 <script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
 
-<!-- 表单样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/FormCommon.css">
-<!-- 表格样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
+<!-- bootstrap JS -->
+<script src="${basePath}/jquery/bootstrap.js"></script>
+<script src="${basePath}/jquery/bootstrap.js"></script>
 
+<!-- bootstrap CSS -->
 <link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap-theme.css">
 
+<!-- address tag css -->
+<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/Accesses.css">
+
 </head>
 <body>
-	<main> </main>
+	<main>
+	<div class="accesses">
+		<ul>
+			<li><a href="#" class="a_links" onclick="opens(1)">申请采购货品</a></li>
+
+			<li><a href="javascript:opens(2)" class="a_links">查看全部申请单</a></li>
+
+			<li><a href="#" class="a_links">采买活动记录</a></li>
+
+			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回Transfer</a></li>
+		</ul>
+	</div>
+
+	<div class="detail_zone div_module" style="display: none;" id="room1">
+		<jsp:include page="AddApp.jsp"></jsp:include>
+	</div>
+
+	</main>
 </body>
 </html>
