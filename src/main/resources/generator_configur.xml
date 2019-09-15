@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
 	<context id="testTables" targetRuntime="MyBatis3">
@@ -46,7 +45,7 @@
 
 		<!-- 指定数据库表 -->
 		<table tableName="purchase" />
-		
+
 	</context>
 
 </generatorConfiguration>

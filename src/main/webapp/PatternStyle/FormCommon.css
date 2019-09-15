@@ -17,7 +17,7 @@
 	text-align: center;
 	width: 100%;
 	margin-bottom: 45px;
-} 
+}
 
 /*input文本框*/
 .input_text {
@@ -45,4 +45,17 @@
 	margin-top: 0;
 	font-size: 26px;
 	color: #00804b;
+}
+
+div.changeDiv input {
+	font-size: 1em;
+	font-family: 仿宋, serif;
+	width: 100px;
+	display: block;
+	margin-left: 10%;
+	opacity: 0.8;
+	padding: 0.2em;
+	color: #000000;
+	border-radius: 10px;
+	background-color: #bed8df;
 }

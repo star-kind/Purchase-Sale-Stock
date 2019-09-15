@@ -17,6 +17,9 @@
 <!-- 表格样式 -->
 <link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
 
+<link rel="stylesheet" type="text/css" href="CssFrame/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="CssFrame/bootstrap-theme.css">
+
 </head>
 <body>
 	<!-- reg area -->
@@ -40,29 +43,33 @@
 						<!-- 名字 -->
 						<div class="form-group input-group">
 							<p>plz input uname</p>
-							<input class="input_text form-control" placeholder="plz input uname" type="text" name="usrname" maxlength="12"
-								minlength="3">
+							<input class="input_text form-control" placeholder="plz input uname" type="text" name="usrname" maxlength="12">
 						</div>
 
 						<!-- phone -->
 						<div class="form-group input-group">
 							<p>plz input phone</p>
-							<input class="input_text form-control" placeholder="plz input phone" type="text" name="phone" maxlength="30"
-								minlength="5">
+							<input class="input_text form-control" placeholder="plz input phone" type="text" name="phone" maxlength="30">
 						</div>
 
 						<!-- 部门 -->
 						<div class="form-group input-group">
 							<p>plz input dept number</p>
 							<input class="input_text form-control" placeholder="plz input deptno" type="text" name="regionDepartment"
-								maxlength="3" minlength="2">
+								maxlength="3">
 						</div>
 
 						<!-- 职权 -->
 						<div class="form-group input-group">
-							<p>plz input competence</p>
-							<input class="input_text form-control" placeholder="plz input competence" type="text" name="competence"
-								maxlength="1" minlength="1">
+							<p>职权岗位</p>
+							<select id="competence_select" style="width: 240px; height: 70px; margin-bottom: 40px;" name="competence">
+								<option value="0">管理员</option>
+								<option value="1">总经理</option>
+								<option value="2">采购经理</option>
+								<option value="3">销售经理</option>
+								<option value="4">仓库主管</option>
+								<option value="5">普通雇员</option>
+							</select>
 						</div>
 
 						<div class="form-group input-group">
@@ -87,7 +94,16 @@
 <script type="text/javascript">
 	/** 注册账号*/
 	function commit00() {
-		var profile = $('#form_usr').serialize();
+		var form = document.getElementById('form_usr');
+		var profile = new FormData(form);
+
+		profile.get('usrname');
+		profile.get('phone');
+		profile.get('regionDepartment');
+
+		var select = document.getElementById('competence_select').value;
+		profile.append('competence', select);
+
 		$.ajax({
 			type : 'POST',
 			url : 'account/reg',

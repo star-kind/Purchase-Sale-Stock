@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Supervises Account Services</title>
+<title>帐号管理模块</title>
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->

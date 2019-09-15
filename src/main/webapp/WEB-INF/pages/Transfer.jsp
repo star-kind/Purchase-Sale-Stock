@@ -31,18 +31,18 @@
 		</div>
 
 		<table>
-			<h4 style="text-align: center;">Please select your department</h4>
+			<h4 style="text-align: center;">选择模块</h4>
 			<tbody>
 
 				<tr class="t_rows">
-					<td class="data_cells"><a href="${basePath}/account/toAdminWorkable" class="links_dept">IT Tech</a></td>
+					<td class="data_cells"><a href="${basePath}/account/toAdminWorkable" class="links_dept">账户管理</a></td>
 				</tr>
 
 				<tr class="t_rows">
 					<td class="data_cells"><a href="" class="links_dept">Sale</a></td>
 				</tr>
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">Buying</a></td>
+					<td class="data_cells"><a href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler" class="links_dept">采购部</a></td>
 				</tr>
 				<tr class="t_rows">
 					<td class="data_cells"><a href="" class="links_dept">Store</a></td>
@@ -56,6 +56,7 @@
 
 	<div style="text-align: center; font-size: 18px; color: #d01d24;" class="into-info">
 		<p>${info}</p>
+		<p>${info00}</p>
 	</div>
 
 	<div class="back_to" style="text-align: center;">

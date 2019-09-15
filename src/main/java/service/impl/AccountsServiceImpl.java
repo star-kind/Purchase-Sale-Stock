@@ -359,9 +359,13 @@ public class AccountsServiceImpl implements AccountsService {
 	public String checkAdminCompetence(Integer uid, ModelMap model) {
 		Accounts acc = accountsMapper.selectAccountByUsrid(uid);
 		Integer competence = acc.getCompetence();
+		Integer status = acc.getActiveStatus();
 
 		if (competence != 0) {
 			model.addAttribute("info", "您非管理员,无权入此模块");
+			return "Transfer";
+		} else if (status == 0) {
+			model.addAttribute("info00", "您已被注销,无权入此模块");
 			return "Transfer";
 		}
 

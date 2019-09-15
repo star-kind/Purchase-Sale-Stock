@@ -22,6 +22,7 @@ import service.ex.DeleteAccountDefeatException;
 import service.ex.KeywordErrException;
 import service.ex.NoResultRecordException;
 import service.ex.SelfServiceException;
+import service.ex.ServiceExceptionEnum;
 import service.ex.SubmitDataUnCompletelyException;
 import service.ex.UnameDuplicateConflictExcept;
 import service.ex.UnameOrKeyIsNullException;
@@ -76,10 +77,12 @@ public class ControllerToolKit {
 	 * @param e
 	 * @return
 	 */
-	@ExceptionHandler({SelfServiceException.class})
 	@ResponseBody
+	@ExceptionHandler({SelfServiceException.class})
 	public ResponseResult<Void> exceptioHandler(Throwable e) {
 		ResponseResult<Void> rr = new ResponseResult<Void>();
+
+		ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
 		rr.setMessage(e.getMessage());
 
@@ -101,6 +104,13 @@ public class ControllerToolKit {
 			rr.setState(607);
 		} else if (e instanceof NoResultRecordException) {
 			rr.setState(608);
+		}
+
+		// 使用switch-case
+		switch (e.getMessage()) {
+			case "您已下线,请重新登录" :
+				rr.setState(instance.OFFLINE_LOGIN.getCode());
+				break;
 		}
 
 		return rr;
@@ -158,6 +168,30 @@ public class ControllerToolKit {
 	public void textWriter(String string) {
 		try {
 			fos = new FileOutputStream(FILE_URI, true);
+			buff = string.getBytes();
+			fos.write(buff);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * 将String写入文本中
+	 * 
+	 * @param string
+	 */
+	public void textWriter(String string, String logPath) {
+		try {
+			fos = new FileOutputStream(logPath, true);
 			buff = string.getBytes();
 			fos.write(buff);
 		} catch (FileNotFoundException e) {

@@ -141,3 +141,20 @@ ALTER TABLE accounts MODIFY COLUMN `competence` int(1) DEFAULT NULL COMMENT '岗
 SHOW CREATE TABLE accounts;
 
 -- -------------------------------------------------------------------------------------
+
+insert into purchase (commodity, is_agree, 
+      supplier, quantity, amount_money, 
+      payment_method, is_pay, is_enter_store, 
+      operator, purchase_time)
+values (
+    	'单例设计模式',
+    	1,
+    	'java',
+    	'120',
+    	'100',
+    	0,
+    	1,
+    	1,
+    	'admin',
+    	'2011-11-11 11:50:02'
+);

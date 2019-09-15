@@ -71,7 +71,7 @@ public class AccountsController extends ControllerToolKit {
 	}
 
 	/**
-	 * 跳转至 adminWorkable
+	 * 跳转至AdminWorkable模块
 	 * 
 	 * @param session
 	 * @param modelMap
@@ -82,9 +82,9 @@ public class AccountsController extends ControllerToolKit {
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 		System.out.println("uid: " + uid);
 
-		String r = accountsService.checkAdminCompetence(uid, modelMap);
+		String url = accountsService.checkAdminCompetence(uid, modelMap);
 
-		return r;
+		return url;
 	}
 
 	@RequestMapping(value = "showAllAccount", method = {RequestMethod.GET})

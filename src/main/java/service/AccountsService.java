@@ -71,7 +71,7 @@ public interface AccountsService {
 	Accounts login(String username, String password, HttpSession session) throws SelfServiceException;
 
 	/**
-	 * 根据ID检查权限,判断是否为administrator
+	 * 根据ID检查权限,判断是否为administrator,并判断是否已被注销
 	 * 
 	 * @param usrname
 	 * @return

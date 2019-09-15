@@ -1,6 +1,9 @@
 package pojo;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Purchase {
 	/**
@@ -349,6 +352,7 @@ public class Purchase {
 	 *
 	 * @mbggenerated Tue Sep 10 10:00:38 CST 2019
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getPurchaseTime() {
 		return purchaseTime;
 	}
@@ -365,4 +369,34 @@ public class Purchase {
 	public void setPurchaseTime(Date purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Purchase [purchaseId=");
+		builder.append(purchaseId);
+		builder.append(", commodity=");
+		builder.append(commodity);
+		builder.append(", isAgree=");
+		builder.append(isAgree);
+		builder.append(", supplier=");
+		builder.append(supplier);
+		builder.append(", quantity=");
+		builder.append(quantity);
+		builder.append(", amountMoney=");
+		builder.append(amountMoney);
+		builder.append(", paymentMethod=");
+		builder.append(paymentMethod);
+		builder.append(", isPay=");
+		builder.append(isPay);
+		builder.append(", isEnterStore=");
+		builder.append(isEnterStore);
+		builder.append(", operator=");
+		builder.append(operator);
+		builder.append(", purchaseTime=");
+		builder.append(purchaseTime);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }
