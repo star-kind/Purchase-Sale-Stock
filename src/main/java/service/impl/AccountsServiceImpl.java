@@ -271,7 +271,7 @@ public class AccountsServiceImpl implements AccountsService {
 	@Override
 	public List<String> readSubstanceFromLog() throws IOException {
 		String s = null;
-		File file = new File("/home/gzh/eclipse-workspace/stocker-manager/src/main/resources/Account-Log.txt");
+		File file = new File("/home/gzh/eclipse-workspace/Stocker-Manager/src/main/resources/Account-Log.txt");
 
 		FileInputStream fis = new FileInputStream(file);
 
@@ -364,7 +364,9 @@ public class AccountsServiceImpl implements AccountsService {
 		if (competence != 0) {
 			model.addAttribute("info", "您非管理员,无权入此模块");
 			return "Transfer";
-		} else if (status == 0) {
+		}
+
+		if (status == 0) {
 			model.addAttribute("info00", "您已被注销,无权入此模块");
 			return "Transfer";
 		}

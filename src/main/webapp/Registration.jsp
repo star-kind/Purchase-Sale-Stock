@@ -73,7 +73,7 @@
 						</div>
 
 						<div class="form-group input-group">
-							<input type="button" class="commit_admin00 btn-primary" value="Submit" onclick="commit00()">
+							<input type="button" class="commit_admin00 btn-primary" value="Submit" onclick="commit00()" style="width: 68px;">
 						</div>
 					</form>
 
@@ -90,19 +90,9 @@
 
 </body>
 
-
 <script type="text/javascript">
-	/** 注册账号*/
 	function commit00() {
-		var form = document.getElementById('form_usr');
-		var profile = new FormData(form);
-
-		profile.get('usrname');
-		profile.get('phone');
-		profile.get('regionDepartment');
-
-		var select = document.getElementById('competence_select').value;
-		profile.append('competence', select);
+		var profile = $('#form_usr').serialize();
 
 		$.ajax({
 			type : 'POST',

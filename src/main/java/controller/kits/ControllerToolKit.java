@@ -44,7 +44,7 @@ public class ControllerToolKit {
 	/**
 	 * 记录账户模块活动记录的TXT文件之完整路径
 	 */
-	public static final String FILE_URI = "/home/gzh/eclipse-workspace/stocker-manager/src/main/resources/Account-Log.txt";
+	public static final String FILE_URI = "/home/gzh/eclipse-workspace/Stocker-Manager/src/main/resources/Account-Log.txt";
 
 	/**
 	 * 系统换行符

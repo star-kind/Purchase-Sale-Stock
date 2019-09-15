@@ -63,10 +63,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		Integer competence = acc.getCompetence();
 		Integer status = acc.getActiveStatus();
 
-		if (competence != 0) {
-			model.addAttribute("info", "您非管理员,无权入此模块");
+		if (competence != 2) {
+			model.addAttribute("info", "您非采购执事,无权入此模块");
 			return "Transfer";
-		} else if (status == 0) {
+		}
+
+		if (status == 0) {
 			model.addAttribute("info00", "您已被注销,无权入此模块");
 			return "Transfer";
 		}
