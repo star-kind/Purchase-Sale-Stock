@@ -40,9 +40,6 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		// 经手人:usrname
 		purchase.setOperator(usrname);
 
-		// 默认未入库:0
-		purchase.setIsEnterStore(0);
-
 		// 默认未支付:0
 		purchase.setIsPay(0);
 

@@ -48,11 +48,22 @@
 			</div>
 
 			<div class="form-group">
-				<span>请选择支付方式</span> <select name="paymentMethod">
+				<span>请选择支付方式</span>
+				<!--  -->
+				<select name="paymentMethod">
 					<option value="0">现金</option>
 					<option value="1">网银</option>
 					<option value="2">信用卡</option>
 					<option value="3">其它</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<span>请选择是否已经入仓库</span>
+				<!--  -->
+				<select name="isEnterStore">
+					<option value="0">未入仓库</option>
+					<option value="1">已入仓库</option>
 				</select>
 			</div>
 

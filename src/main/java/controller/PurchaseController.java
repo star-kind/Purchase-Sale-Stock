@@ -9,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import controller.kits.ControllerToolKit;
 import controller.kits.PurchaseControllerUtil;
@@ -50,17 +54,23 @@ public class PurchaseController extends ControllerToolKit {
 	}
 
 	/**
+	 * 分页查询
 	 * http://localhost:8080/stocker-manager/PurchaseController/exhibitionAllPurchaseHandler
 	 * 
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "exhibitionAllPurchaseHandler", method = RequestMethod.GET)
-	public ResponseResult<List<Purchase>> exhibitionAllPurchaseHandler() {
+	public ResponseResult<PageInfo<Purchase>> exhibitionAllPurchaseHandler(
+			@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
 		List<Purchase> list = ips.exhibitsAll();
 
-		return new ResponseResult<List<Purchase>>(SUCCESS, list);
+		PageHelper.startPage(pageNum, 4);
+		System.err.println("查询第 " + pageNum + " 页");
 
+		PageInfo<Purchase> info = new PageInfo<Purchase>(list);
+
+		return new ResponseResult<PageInfo<Purchase>>(SUCCESS, info);
 	}
 
 	/**

@@ -46,18 +46,22 @@
 			<br>
 			<br>
 			<caption>The Register List</caption>
-
-			<th class="table-head">全选<input type="checkbox" name="" id="select_check" class="head-box"></th>
-			<th class="table-head">ID</th>
-			<th class="table-head">名字</th>
-			<th class="table-head">地区部门</th>
-			<th class="table-head">职权</th>
-			<th class="table-head">账号状态</th>
-			<th class="table-head">电话</th>
-			<th class="table-head">注册之日</th>
-			<th class="table-head">新改之期</th>
-			<th class="table-head">单独操作1</th>
-			<th class="table-head">单独操作2</th>
+			<thead>
+				<tr>
+					<th class="table-head">全选<input type="checkbox" id="select_check" class="head-box"></th>
+					<th class="table-head">ID</th>
+					<th class="table-head">名字</th>
+					<th class="table-head">地区部门</th>
+					<th class="table-head">职权</th>
+					<th class="table-head">账号状态</th>
+					<th class="table-head">电话</th>
+					<th class="table-head">注册之日</th>
+					<th class="table-head">新改之期</th>
+					<th class="table-head">单独操作1</th>
+					<th class="table-head">单独操作2</th>
+				</tr>
+			</thead>
+			
 			<tbody>
 				<c:forEach items="${list}" var="i">
 					<tr>

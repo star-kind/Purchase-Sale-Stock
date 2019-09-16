@@ -40,7 +40,12 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 		return instance;
 	}
 
-	// 在工程根目录下创建文件夹和里面的文件
+	/**
+	 * 在工程根目录下创建文件夹和里面的文件
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	public static String createDirAndFile() throws IOException {
 		File file = new File(DIR_URI);
 
