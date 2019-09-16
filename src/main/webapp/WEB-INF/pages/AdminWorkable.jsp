@@ -40,9 +40,11 @@
 	</div>
 
 	<!-- 账号列表 -->
-	<div class="detail_zone div_module" style="display: block;" id="room1">
+	<div class="detail_zone div_module" style="display: block; text-align: center;" id="room1">
 
 		<table border="1" class="member-table">
+			<br>
+			<br>
 			<caption>The Register List</caption>
 
 			<th class="table-head">全选<input type="checkbox" name="" id="select_check" class="head-box"></th>
@@ -86,18 +88,19 @@
 	</div>
 
 	<!-- 按条件搜索 -->
-	<div class="detail_zone div_module container" style="display: none;" id="room2">
-		<h3 class="col-md-5">
-			<label>按条件显示相应账户</label>
-		</h3>
+	<div class="detail_zone div_module container" style="display: none; text-align: center;" id="room2">
 
 		<div class="col-md-10">
-			<br> <select id="select_id00" style="height: 55px;">
+			<br>
+			<!--  -->
+			<select id="select_id00" style="height: 55px; margin-right: 82%;">
 				<option>按地区部门展示</option>
 				<option>按职务权限展示</option>
 				<option>按已激活/已注销展示</option>
 				<option>按用户名搜索展示</option>
-			</select> <br> <br>
+			</select>
+			<!--  -->
+			<br> <br>
 		</div>
 
 		<div class="col-md-12">
@@ -136,7 +139,6 @@
 	</div>
 
 </body>
-
 
 <script type="text/javascript">
 	// 全局变量

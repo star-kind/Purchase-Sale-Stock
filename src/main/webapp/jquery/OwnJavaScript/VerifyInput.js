@@ -6,12 +6,12 @@ function veifyIsInputNull() {
 				// trim():除空格
 				switch ($(this).val().trim()) {
 					case "" :
-						alert('未填完');
+						alert('数据未填完');
 						return false;
 						break;
 
 					case null :
-						alert('未填完');
+						alert('数据未填完');
 						return false;
 						break;
 
@@ -41,7 +41,7 @@ function veifyIsInputNull() {
  *            arg5
  * @return {Boolean}
  */
-	function judgeIs(arg0,arg1,arg2,arg3,arg4,arg5) {
+	function judges(arg0,arg1,arg2,arg3,arg4,arg5) {
 		var arr=new Array(arg0,arg1,arg2,arg3,arg4,arg5);
 		var arr000=[];
 

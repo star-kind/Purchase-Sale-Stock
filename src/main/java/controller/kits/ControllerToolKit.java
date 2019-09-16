@@ -61,7 +61,8 @@ public class ControllerToolKit {
 	 */
 	protected static byte[] buff = null;
 
-	// protected static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd
+	// protected static SimpleDateFormat format = new
+	// SimpleDateFormat("yyyy-MM-dd
 	// HH:mm:ss");
 
 	/**
@@ -191,6 +192,9 @@ public class ControllerToolKit {
 	 * 将String写入文本中
 	 * 
 	 * @param string
+	 *            记录
+	 * @param logPath
+	 *            路径
 	 */
 	public void textWriter(String string, String logPath) {
 		try {

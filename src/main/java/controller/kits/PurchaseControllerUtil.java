@@ -19,7 +19,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	private static final Object LOCK = new Object();
 
 	// 文件夹路径
-	private static final String DIR_URI = System.getProperty("user.dir") + "/Logs/";
+	private static final String DIR_URI = "/home/gzh/eclipse-workspace/Stocker-Manager/Logs/";
 
 	// 日志记录文件名
 	private static final String FILE_NAME = "Purchase_Module_Log.txt";
@@ -41,7 +41,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	}
 
 	// 在工程根目录下创建文件夹和里面的文件
-	public static void createDirAndFile() throws IOException {
+	public static String createDirAndFile() throws IOException {
 		File file = new File(DIR_URI);
 
 		if (!file.exists()) {
@@ -51,7 +51,9 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 		File file00 = new File(file, FILE_NAME);
 		file00.createNewFile();
 
-		LOG_URI = file00.getAbsolutePath();
+		String path = file00.getAbsolutePath();
+
+		return path;
 	}
 
 	/**
@@ -62,6 +64,12 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 */
 	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
 		String str = "<p>采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+
+		try {
+			LOG_URI = createDirAndFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		if (affect == 1) {
 			textWriter(str, LOG_URI);

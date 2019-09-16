@@ -38,6 +38,7 @@ public class PurchaseController extends ControllerToolKit {
 	public ResponseResult<Integer> addNewPurchaseAppFormHandler(Purchase purchase, HttpSession session) {
 		String usrname = session.getAttribute("usrname").toString();
 		System.out.println("controller:usrname- " + usrname);
+		System.out.println("controller:purchase- " + purchase);
 
 		Integer affect = ips.addOnePurchaseApplicationForm(purchase, usrname);
 

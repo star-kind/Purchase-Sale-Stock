@@ -23,9 +23,9 @@
 
 </head>
 <body>
-	<div style="text-align: center; font-size: 30px;">
+	<div style="text-align: center; font-size: 33px; margin-top: 10px;">
 
-		<form id="form_purchase" role="form" style="margin-top: 50px;">
+		<form id="form_purchase" role="form" style="margin-top: 76px;">
 			<label>采购申请单</label>
 
 			<div class="form-group">
@@ -37,6 +37,8 @@
 			</div>
 
 			<div class="form-group">
+				<span></span>
+				<!--  -->
 				<input maxlength="10" class="form-control quantity" type="text" name="quantity" placeholder="采购数量">
 			</div>
 
@@ -71,8 +73,16 @@
 		var quantity = $('.quantity').val();
 		var amountMoney = $('.amountMoney').val();
 
-		//验证金额与货物数量是否为正数
-		var r = judgeIs(quantity, amountMoney, null, null, null, null);
+		//检查物量是否为正整数
+		var expression = new RegExp(/^\+?[1-9][0-9]*$/);
+		if (expression.test(quantity) == false) {
+			$('.quantity').css('background-color', '#EF9999');
+			$('.quantity').prev('span').text('货品数量必须为正整数');
+			return;
+		}
+
+		//验证金额与货物数量是否为非零正数
+		var r = judges(quantity, amountMoney, null, null, null, null);
 		if (r == false) {
 			alert('输入的数字不合规');
 			return;
@@ -81,8 +91,19 @@
 		var formData = $('#form_purchase').serialize();
 
 		$.ajax({
-			
-		});		
+			url : '/stocker-manager/PurchaseController/addNewPurchaseAppFormHandler',
+			data : formData,
+			type : 'POST',
+			dataType : 'json',
+			success : function(js) {
+				if (js.state === 200) {
+					alert('采进申请单已成功备案');
+					location.href = '/stocker-manager/PurchaseController/jumpToPurchaseDeptHandler';
+				} else {
+					alert(js.message);
+				}
+			}
+		});
 	}
 </script>
 </html>
