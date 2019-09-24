@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
@@ -15,8 +16,10 @@
 <script src="${basePath}/jquery/bootstrap.js"></script>
 
 <!-- bootstrap CSS -->
-<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/bootstrap-theme.css">
 
 <!-- 校验表单提交 -->
 <script src="${basePath}/jquery/OwnJavaScript/VerifyInput.js"></script>
@@ -42,29 +45,8 @@
 
 			<!--  -->
 			<tfoot>
-				<tr>
-					<td>
-						<!--  -->共<span id="total_pages"></span>页
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<!--  --> 现在是第<span id="current_page"></span>页
-					</td>
-				</tr>
 			</tfoot>
 		</table>
-
-		<!--  -->
-		<div>
-			<span>跳至指定页</span>
-			<p>
-				<input type="text" name="pageNum" id="assign_page">
-				<!--  -->
-				<input type="button" value="GO" onclick="void();">
-			</p>
-		</div>
 
 		<!--  -->
 		<br> <a href="${basePath}/cross/toTransfer">返回中转页</a> <br>

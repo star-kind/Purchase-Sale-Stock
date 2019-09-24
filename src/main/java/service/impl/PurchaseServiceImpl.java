@@ -43,6 +43,9 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		// 默认未支付:0
 		purchase.setIsPay(0);
 
+		// 默认未入库
+		purchase.setIsEnterStore(0);
+
 		// execute
 		int affect = pm.insertIntoNewRow(purchase);
 
@@ -51,7 +54,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 	@Override
 	public List<Purchase> exhibitsAll() {
-		return pm.selectAllPurchase();
+		return pm.selectWhole();
 	}
 
 	@Override

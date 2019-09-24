@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
@@ -10,69 +11,87 @@
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->
-<script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
 
 <!-- 表单样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/FormCommon.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/FormCommon.css">
 <!-- 表格样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/TableCommom.css">
 
 <link rel="stylesheet" type="text/css" href="CssFrame/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="CssFrame/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="CssFrame/bootstrap-theme.css">
 
 </head>
 <body>
 	<!-- reg area -->
-	<div class="col-md-10 ex_div div_module" style="display: block; text-align: center;" id="room1">
+	<div class="col-md-10 ex_div div_module"
+		style="display: block; text-align: center;" id="room1">
 
 		<!-- 错误信息提示 -->
 		<div style="width: 320px; margin-bottom: 30px; text-align: center;">
-			<span id="info-tip" style="font-size: 20px; color: #e71212; font-family: Microsoft YaHei;"> </span>
+			<span id="info-tip"
+				style="font-size: 20px; color: #e71212; font-family: Microsoft YaHei;">
+			</span>
 		</div>
 
 		<!-- 注册资料填写 -->
-		<div class="panel panel-default" style="margin-top: 80px; margin-left: 17%;">
+		<div class="panel panel-default"
+			style="margin-top: 80px; margin-left: 17%;">
 			<div class="panel-heading">
 				<div class="row">
 
-					<form id="form_usr" class="bs-example bs-example-form col-md-5" role="form" style="margin-left: 29%;">
+					<form id="form_usr" class="bs-example bs-example-form col-md-5"
+						role="form" style="margin-left: 29%;">
 
 						<p class="form_title">Add A New Account</p>
 
 						<!-- 名字 -->
 						<div class="form-group">
 							<p>plz input uname</p>
-							<input class="input_text form-control" placeholder="plz input uname" type="text" name="usrname" maxlength="12">
+							<input class="input_text form-control"
+								placeholder="plz input uname" type="text" name="usrname"
+								maxlength="12">
 						</div>
 
 						<!-- phone -->
 						<div class="form-group">
 							<p>plz input phone</p>
-							<input class="input_text form-control" placeholder="plz input phone" type="text" name="phone" maxlength="30">
+							<input class="input_text form-control"
+								placeholder="plz input phone" type="text" name="phone"
+								maxlength="30">
 						</div>
 
 						<!-- 部门 -->
 						<div class="form-group">
 							<p>plz input dept number</p>
-							<input class="input_text form-control" placeholder="plz input deptno" type="text" name="regionDepartment"
-								maxlength="3">
+							<input class="input_text form-control"
+								placeholder="plz input deptno" type="text"
+								name="regionDepartment" maxlength="3">
 						</div>
 
 						<!-- 职权 -->
 						<div class="form-group">
-							<p>职权岗位</p>
-							<select id="competence_select" style="width: 150px; height: 45px; margin-bottom: 30px;" name="competence">
-								<option value="0">管理员</option>
-								<option value="1">总经理</option>
-								<option value="2">采购经理</option>
-								<option value="3">销售经理</option>
-								<option value="4">仓库主管</option>
-								<option value="5">普通雇员</option>
-							</select>
+							<label for="email" class="col-sm-2 control-label">选择岗位</label>
+							<div class="col-sm-6">
+								<select id="competence_select" class="form-control"
+									name="competence">
+									<option value="0">管理员</option>
+									<option value="1">总经理</option>
+									<option value="2">采购经理</option>
+									<option value="3">销售经理</option>
+									<option value="4">仓库主管</option>
+									<option value="5">普通雇员</option>
+								</select>
+							</div>
 						</div>
 
 						<div class="form-group">
-							<input type="button" class="commit_admin00 btn-primary" value="Submit" onclick="commit00()" style="width: 68px;">
+							<input type="button" class="commit_admin00 btn-primary"
+								value="Submit" onclick="commit00()" style="width: 68px;">
 						</div>
 					</form>
 

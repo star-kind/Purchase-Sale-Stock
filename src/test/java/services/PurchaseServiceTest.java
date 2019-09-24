@@ -18,7 +18,7 @@ public class PurchaseServiceTest {
 	@Before
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
-				new String[]{"spring/spring-dao.xml", "spring/spring-service.xml"});
+				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
 	}
 
 	@Test
@@ -27,10 +27,10 @@ public class PurchaseServiceTest {
 
 		Purchase p = new Purchase();
 
-		p.setCommodity("stayin'alive");
-		p.setAmountMoney(300.36f);
-		p.setPaymentMethod(1);
-		p.setSupplier("jeus");
+		p.setCommodity("暗影之道");
+		p.setAmountMoney(1000.36f);
+		p.setPaymentMethod(0);
+		p.setSupplier("Deutschland");
 		p.setQuantity(10);
 
 		try {

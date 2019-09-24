@@ -1,0 +1,28 @@
+2019-09-24 07:31:53 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@161479c6: startup date [Tue Sep 24 07:31:53 CST 2019]; root of context hierarchy
+2019-09-24 07:31:53 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 07:31:54 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 07:31:55 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 07:35:27 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@75329a49: startup date [Tue Sep 24 07:35:27 CST 2019]; root of context hierarchy
+2019-09-24 07:35:27 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 07:35:27 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 07:35:28 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 07:47:54 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@75329a49: startup date [Tue Sep 24 07:47:54 CST 2019]; root of context hierarchy
+2019-09-24 07:47:54 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 07:47:54 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 07:47:55 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 07:56:38 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@75329a49: startup date [Tue Sep 24 07:56:38 CST 2019]; root of context hierarchy
+2019-09-24 07:56:38 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 07:56:38 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 07:56:38 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 07:59:08 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f3f4916: startup date [Tue Sep 24 07:59:08 CST 2019]; root of context hierarchy
+2019-09-24 07:59:08 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 07:59:08 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 07:59:08 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 08:00:24 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f3f4916: startup date [Tue Sep 24 08:00:24 CST 2019]; root of context hierarchy
+2019-09-24 08:00:24 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 08:00:24 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 08:00:25 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-09-24 08:02:15 [INFO ] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f3f4916: startup date [Tue Sep 24 08:02:15 CST 2019]; root of context hierarchy
+2019-09-24 08:02:15 [INFO ] Loading XML bean definitions from class path resource [spring/spring-dao.xml]
+2019-09-24 08:02:15 [INFO ] Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2019-09-24 08:02:15 [INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
