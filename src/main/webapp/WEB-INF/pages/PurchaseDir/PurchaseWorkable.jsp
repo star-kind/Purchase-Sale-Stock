@@ -14,7 +14,7 @@
 
 <!-- bootstrap JS -->
 <script src="${basePath}/jquery/bootstrap.js"></script>
-<script src="${basePath}/jquery/bootstrap.js"></script>
+<script src="${basePath}/jquery/bootstrap.min.js"></script>
 
 <!-- bootstrap CSS -->
 <link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap.css">
@@ -25,7 +25,6 @@
 
 </head>
 <body>
-	<main>
 	<div class="accesses">
 		<ul>
 			<li><a href="#" class="a_links" onclick="opens(1)">申请采购货品</a></li>
@@ -46,6 +45,5 @@
 		<jsp:include page="ExhibitionAllPurchase.jsp"></jsp:include>
 	</div>
 
-	</main>
 </body>
 </html>

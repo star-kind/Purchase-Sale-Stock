@@ -19,7 +19,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	private static final Object LOCK = new Object();
 
 	// 文件夹路径
-	private static final String DIR_URI = "/home/gzh/eclipse-workspace/Stocker-Manager/Logs/";
+	private static final String DIR_URI = "/home/admin/workspace/eclipse/eclipse-workspace/StockerManager/Logs/";
 
 	// 日志记录文件名
 	private static final String FILE_NAME = "Purchase_Module_Log.txt";

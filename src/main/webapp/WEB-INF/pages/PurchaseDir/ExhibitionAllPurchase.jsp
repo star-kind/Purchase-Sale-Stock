@@ -26,7 +26,7 @@
 
 </head>
 <body>
-	<div style="text-align: center; font-size: 33px; margin-top: 10px;">
+	<div style="text-align: center; font-size: 25px; margin-top: 80px;">
 		<table id="purchase_table">
 			<caption>申请单列表</caption>
 			<thead>
@@ -57,12 +57,31 @@
 	$(document).ready(function() {
 		exhibits();
 	});
-	
-	var url='/stocker-manager/PurchaseController/exhibitionAllPurchaseHandler';
-	
+
+	var url = '/stocker-manager/PurchaseController/exhibitionAllPurchaseHandler';
+
 	/**申请单数据展览*/
 	function exhibits() {
-		
+		$.ajax({
+			url : url,
+			type : 'GET',
+			dataType : 'json',
+			success : function(rr) {
+				if (rr.state == 200) {
+					var list = rr.data;
+					victory(list);
+					
+				} else {
+					$('#purchase_table_tbody').hide();
+				}
+			}
+		});
+	}
+
+	function victory(list) {
+		console.log(list);
+		console.log(list.length);
+
 	}
 </script>
 </html>

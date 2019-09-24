@@ -21,7 +21,7 @@
 <body>
 	<div class="container" id="content">
 		<div class="row"
-			style="text-align: center; margin-left: 38%; margin-top: 58px;">
+			style="text-align: center; margin-left: 50%; margin-top: 58px;">
 			<h3 class="col-md-5" style="width: 250px;">进销存管理系统登录</h3>
 		</div>
 

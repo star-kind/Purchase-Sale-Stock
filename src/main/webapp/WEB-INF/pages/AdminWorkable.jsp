@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
@@ -10,20 +11,27 @@
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->
-<script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
 
 <!-- JavaScript 点击链接切换division  -->
-<script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
 
 <!-- 表单样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/FormCommon.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/FormCommon.css">
 <!-- 表格样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/Accesses.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/TableCommom.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/Accesses.css">
 
 <!-- bootstrap CSS -->
-<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="${basePath}/CssFrame/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/bootstrap-theme.css">
 
 </head>
 <body>
@@ -40,7 +48,8 @@
 	</div>
 
 	<!-- 账号列表 -->
-	<div class="detail_zone div_module" style="display: block; text-align: center;" id="room1">
+	<div class="detail_zone div_module"
+		style="display: block; text-align: center;" id="room1">
 
 		<table border="1" class="member-table">
 			<br>
@@ -48,7 +57,8 @@
 			<caption>The Register List</caption>
 			<thead>
 				<tr>
-					<th class="table-head">全选<input type="checkbox" id="select_check" class="head-box"></th>
+					<th class="table-head">全选<input type="checkbox"
+						id="select_check" class="head-box"></th>
 					<th class="table-head">ID</th>
 					<th class="table-head">名字</th>
 					<th class="table-head">地区部门</th>
@@ -61,11 +71,12 @@
 					<th class="table-head">单独操作2</th>
 				</tr>
 			</thead>
-			
+
 			<tbody>
 				<c:forEach items="${list}" var="i">
 					<tr>
-						<td><input type="checkbox" name="ids" class="chk-boxs" value="${i.usrid}"></td>
+						<td><input type="checkbox" name="ids" class="chk-boxs"
+							value="${i.usrid}"></td>
 						<td>${i.usrid}</td>
 						<td>${i.usrname}</td>
 						<td class="RegionDepartment">${i.regionDepartment}</td>
@@ -92,12 +103,14 @@
 	</div>
 
 	<!-- 按条件搜索 -->
-	<div class="detail_zone div_module container" style="display: none; text-align: center;" id="room2">
+	<div class="detail_zone div_module container"
+		style="display: none; text-align: center;" id="room2">
 
 		<div class="col-md-10">
 			<br>
 			<!--  -->
-			<select id="select_id00" style="height: 55px; margin-right: 82%;">
+			<select id="select_id00"
+				style="height: 40px; margin-right: 82%; margin-top: 10%;">
 				<option>按地区部门展示</option>
 				<option>按职务权限展示</option>
 				<option>按已激活/已注销展示</option>
@@ -122,20 +135,24 @@
 		<div>
 			<table border="1" class="member-table table-bordered">
 				<caption>Account List</caption>
-
-				<th class="table-head">ID</th>
-				<th class="table-head">名字</th>
-				<th class="table-head">地区部门</th>
-				<th class="table-head">职权</th>
-				<th class="table-head">账号状态</th>
-				<th class="table-head">电话</th>
-				<th class="table-head">注册之日</th>
-				<th class="table-head">新改之期</th>
-				<th class="table-head">操作-除</th>
-				<th class="table-head">操作-辑</th>
-				<th class="table-head">密码复位</th>
-				<th class="table-head">注销</th>
-				<th class="table-head">激活</th>
+				<thead>
+					<tr>
+						<th class="table-head">ID</th>
+						<th class="table-head">名字</th>
+						<th class="table-head">地区部门</th>
+						<th class="table-head">职权</th>
+						<th class="table-head">账号状态</th>
+						<th class="table-head">电话</th>
+						<th class="table-head">注册之日</th>
+						<th class="table-head">新改之期</th>
+						<th class="table-head">操作-除</th>
+						<th class="table-head">操作-辑</th>
+						<th class="table-head">密码复位</th>
+						<th class="table-head">注销</th>
+						<th class="table-head">激活</th>
+					</tr>
+				</thead>
+				
 				<tbody id="tbody_content">
 				</tbody>
 			</table>

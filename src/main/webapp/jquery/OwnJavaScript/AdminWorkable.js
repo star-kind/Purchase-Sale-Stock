@@ -1,9 +1,9 @@
 $(document).ready(function() {
-			regionDeptNoAsTrueName();
-			competenceNumShowJobName();
-			activeStatusExhibit();
-			changingDateFormat();
-		});
+	regionDeptNoAsTrueName();
+	competenceNumShowJobName();
+	activeStatusExhibit();
+	changingDateFormat();
+});
 
 /**
  * 地区部门编号转为展示真名
@@ -13,9 +13,9 @@ $(document).ready(function() {
 function regionDeptNoAsTrueName() {
 	var rds = [];
 	$('.RegionDepartment').each(function() {
-				var rd = $(this).text();
-				rds.push(rd);
-			});
+		var rd = $(this).text();
+		rds.push(rd);
+	});
 
 	for (var index = 0; index < rds.length; index++) {
 		if (rds[index] >= 0 && rds[index] <= 15) {
@@ -61,9 +61,9 @@ function regionDeptNoAsTrueName() {
 function competenceNumShowJobName() {
 	var compets = [];
 	$('.Competences').each(function() {
-				var compet = $(this).text();
-				compets.push(compet);
-			});
+		var compet = $(this).text();
+		compets.push(compet);
+	});
 
 	for (var i = 0; i < compets.length; i++) {
 		if (compets[i] == 0) {
@@ -90,9 +90,9 @@ function competenceNumShowJobName() {
 function activeStatusExhibit() {
 	var activeStatus = new Array();
 	$('.active_status').each(function() {
-				var activeState = $(this).text();
-				activeStatus.push(activeState);
-			});
+		var activeState = $(this).text();
+		activeStatus.push(activeState);
+	});
 
 	for (var i = 0; i < activeStatus.length; i++) {
 		if (activeStatus[i] == 1) {
@@ -158,21 +158,21 @@ function earseByUid(usrid) {
 		return;
 	}
 	$.ajax({
-				type : 'POST',
-				url : 'earse',
-				data : {
-					'usrid' : usrid
-				},
-				dataType : "json",
-				success : function(r) {
-					if (r.state == 200) {
-						alert('删除成功');
-						location.reload();
-					} else {
-						alert(r.message);
-					}
-				}
-			});
+		type : 'POST',
+		url : 'earse',
+		data : {
+			'usrid' : usrid
+		},
+		dataType : "json",
+		success : function(r) {
+			if (r.state == 200) {
+				alert('删除成功');
+				location.reload();
+			} else {
+				alert(r.message);
+			}
+		}
+	});
 }
 
 /** ***********第三div所辖API[beginning]********** */
@@ -184,7 +184,7 @@ function earseByUid(usrid) {
  * @return {}
  */
 function optionRDContent() {
-	var content = '<select class="seles_second" style="height: 55px;width: 130px" onchange="seleSec()"><option>常川</option>'
+	var content = '<select class="seles_second" style="height: 40px;width: 130px" onchange="seleSec()"><option>常川</option>'
 			+ '<option>滨河</option>'
 			+ '<option>上天院</option>'
 			+ '<option>鸣皋</option>'
@@ -248,59 +248,64 @@ function divInputContent() {
 function seleSec() {
 	var str = '';
 	$('#select_second_area select option:selected').each(function() {
-				// 获取下拉框选项之值
-				str = $('#select_second_area select option:selected').text();// data
-			});
+		// 获取下拉框选项之值
+		str = $('#select_second_area select option:selected').text();// data
+	});
 	console.log(str);
 
-	$.ajax({
-		url : 'search_by_threeType_scene',
-		data : {
-			'str' : str
-		},
-		dataType : 'json',
-		type : 'POST',
-		success : function(r) {
-			if (r.state == 200) {
-				$('#tbody_content').empty();
-				var list = r.data;
+	$
+			.ajax({
+				url : 'search_by_threeType_scene',
+				data : {
+					'str' : str
+				},
+				dataType : 'json',
+				type : 'POST',
+				success : function(r) {
+					if (r.state == 200) {
+						$('#tbody_content').empty();
+						var list = r.data;
 
-				for (var i = 0; i < list.length; i++) {
-					/** 表格中一行 */
-					var tblbody = '<tr> <td>#{usrid}</td> '
-							+ '<td>#{usrname}</td> '
-							+ '<td class="RegionDepartment">#{regionDepartment}</td> '
-							+ '<td class="Competences">#{competence}</td> '
-							+ '<td class="active_status">#{activeStatus}</td> '
-							+ '<td>#{phone}</td> '
-							+ '<td class="timeDate">#{regTime}</td> '
-							+ '<td class="timeDate">#{modifiedTime}</td>'
-							+ '<td><a href="javascript:earseByUid(#{usrid})">褫革</a></td>'
-							+ '<td><a href="emerge?aid=#{usrid}">修葺</a></td>'
-							+ '<td><a href="javascript:singleResetLock(#{usrid})">重置</a></td>'
-							+ '<td><a href="javascript:singleCancel(#{usrid})">注销</a></td>'
-							+ '<td><a href="#" onclick="singleActive(#{usrid})">激活</a></td>'
-							+ '</tr>';
+						for (var i = 0; i < list.length; i++) {
+							/** 表格中一行 */
+							var tblbody = '<tr> <td>#{usrid}</td> '
+									+ '<td>#{usrname}</td> '
+									+ '<td class="RegionDepartment">#{regionDepartment}</td> '
+									+ '<td class="Competences">#{competence}</td> '
+									+ '<td class="active_status">#{activeStatus}</td> '
+									+ '<td>#{phone}</td> '
+									+ '<td class="timeDate">#{regTime}</td> '
+									+ '<td class="timeDate">#{modifiedTime}</td>'
+									+ '<td><a href="javascript:earseByUid(#{usrid})">褫革</a></td>'
+									+ '<td><a href="emerge?aid=#{usrid}">修葺</a></td>'
+									+ '<td><a href="javascript:singleResetLock(#{usrid})">重置</a></td>'
+									+ '<td><a href="javascript:singleCancel(#{usrid})">注销</a></td>'
+									+ '<td><a href="#" onclick="singleActive(#{usrid})">激活</a></td>'
+									+ '</tr>';
 
-					tblbody = tblbody.replace(/#{usrid}/g, list[i].usrid);
-					tblbody = tblbody.replace(/#{usrname}/g, list[i].usrname);
-					tblbody = tblbody.replace(/#{regionDepartment}/g,
-							list[i].regionDepartment);
-					tblbody = tblbody.replace(/#{competence}/g,
-							list[i].competence);
-					tblbody = tblbody.replace(/#{activeStatus}/g,
-							list[i].activeStatus);
-					tblbody = tblbody.replace(/#{phone}/g, list[i].phone);
-					tblbody = tblbody.replace(/#{regTime}/g, list[i].regTime);
-					tblbody = tblbody.replace(/#{modifiedTime}/g,
-							list[i].modifiedTime);
+							tblbody = tblbody.replace(/#{usrid}/g,
+									list[i].usrid);
+							tblbody = tblbody.replace(/#{usrname}/g,
+									list[i].usrname);
+							tblbody = tblbody.replace(/#{regionDepartment}/g,
+									list[i].regionDepartment);
+							tblbody = tblbody.replace(/#{competence}/g,
+									list[i].competence);
+							tblbody = tblbody.replace(/#{activeStatus}/g,
+									list[i].activeStatus);
+							tblbody = tblbody.replace(/#{phone}/g,
+									list[i].phone);
+							tblbody = tblbody.replace(/#{regTime}/g,
+									list[i].regTime);
+							tblbody = tblbody.replace(/#{modifiedTime}/g,
+									list[i].modifiedTime);
 
-					$("#tbody_content").append(tblbody);
+							$("#tbody_content").append(tblbody);
 
+						}
+					}
 				}
-			}
-		}
-	});
+			});
 };
 
 /**
@@ -315,54 +320,59 @@ function getValu() {
 		return;
 	}
 
-	$.ajax({
-		url : 'search_by_confuse_name',
-		data : {
-			'uname' : uname
-		},
-		dataType : 'json',
-		type : 'POST',
-		success : function(r) {
-			if (r.state == 200) {
-				$('#tbody_content').empty();
-				var list = r.data;
+	$
+			.ajax({
+				url : 'search_by_confuse_name',
+				data : {
+					'uname' : uname
+				},
+				dataType : 'json',
+				type : 'POST',
+				success : function(r) {
+					if (r.state == 200) {
+						$('#tbody_content').empty();
+						var list = r.data;
 
-				for (var i = 0; i < list.length; i++) {
-					/** 表格中一行 */
-					var tblbody = '<tr> <td>#{usrid}</td> '
-							+ '<td>#{usrname}</td> '
-							+ '<td class="RegionDepartment">#{regionDepartment}</td> '
-							+ '<td class="Competences">#{competence}</td> '
-							+ '<td class="active_status">#{activeStatus}</td> '
-							+ '<td>#{phone}</td> '
-							+ '<td class="timeDate">#{regTime}</td> '
-							+ '<td class="timeDate">#{modifiedTime}</td>'
-							+ '<td><a href="javascript:earseByUid(#{usrid})">褫革</a></td>'
-							+ '<td><a href="emerge?aid=#{usrid}">修葺</a></td>'
-							+ '<td><a href="javascript:singleResetLock(#{usrid})">重置</a></td>'
-							+ '<td><a href="javascript:singleCancel(#{usrid})">注销</a></td>'
-							+ '<td><a href="#" onclick="singleActive(#{usrid})">激活</a></td>'
-							+ '</tr>';
+						for (var i = 0; i < list.length; i++) {
+							/** 表格中一行 */
+							var tblbody = '<tr> <td>#{usrid}</td> '
+									+ '<td>#{usrname}</td> '
+									+ '<td class="RegionDepartment">#{regionDepartment}</td> '
+									+ '<td class="Competences">#{competence}</td> '
+									+ '<td class="active_status">#{activeStatus}</td> '
+									+ '<td>#{phone}</td> '
+									+ '<td class="timeDate">#{regTime}</td> '
+									+ '<td class="timeDate">#{modifiedTime}</td>'
+									+ '<td><a href="javascript:earseByUid(#{usrid})">褫革</a></td>'
+									+ '<td><a href="emerge?aid=#{usrid}">修葺</a></td>'
+									+ '<td><a href="javascript:singleResetLock(#{usrid})">重置</a></td>'
+									+ '<td><a href="javascript:singleCancel(#{usrid})">注销</a></td>'
+									+ '<td><a href="#" onclick="singleActive(#{usrid})">激活</a></td>'
+									+ '</tr>';
 
-					tblbody = tblbody.replace(/#{usrid}/g, list[i].usrid);
-					tblbody = tblbody.replace(/#{usrname}/g, list[i].usrname);
-					tblbody = tblbody.replace(/#{regionDepartment}/g,
-							list[i].regionDepartment);
-					tblbody = tblbody.replace(/#{competence}/g,
-							list[i].competence);
-					tblbody = tblbody.replace(/#{activeStatus}/g,
-							list[i].activeStatus);
-					tblbody = tblbody.replace(/#{phone}/g, list[i].phone);
-					tblbody = tblbody.replace(/#{regTime}/g, list[i].regTime);
-					tblbody = tblbody.replace(/#{modifiedTime}/g,
-							list[i].modifiedTime);
+							tblbody = tblbody.replace(/#{usrid}/g,
+									list[i].usrid);
+							tblbody = tblbody.replace(/#{usrname}/g,
+									list[i].usrname);
+							tblbody = tblbody.replace(/#{regionDepartment}/g,
+									list[i].regionDepartment);
+							tblbody = tblbody.replace(/#{competence}/g,
+									list[i].competence);
+							tblbody = tblbody.replace(/#{activeStatus}/g,
+									list[i].activeStatus);
+							tblbody = tblbody.replace(/#{phone}/g,
+									list[i].phone);
+							tblbody = tblbody.replace(/#{regTime}/g,
+									list[i].regTime);
+							tblbody = tblbody.replace(/#{modifiedTime}/g,
+									list[i].modifiedTime);
 
-					$("#tbody_content").append(tblbody);
+							$("#tbody_content").append(tblbody);
 
+						}
+					}
 				}
-			}
-		}
-	});
+			});
 }
 
 /** --------第三div所辖API[ending]------------ */
@@ -376,18 +386,18 @@ function getValu() {
 function singleResetLock(usrid) {
 	var path = 'single/' + usrid + '/reset_pwd';
 	$.ajax({
-				url : path,
-				dataType : 'json',
-				type : 'GET',
-				success : function(r) {
-					if (r.state == 200) {
-						alert('该账号密码复位成功')
-					} else {
-						alert('系统故障,请排查维修')
-					}
+		url : path,
+		dataType : 'json',
+		type : 'GET',
+		success : function(r) {
+			if (r.state == 200) {
+				alert('该账号密码复位成功')
+			} else {
+				alert('系统故障,请排查维修')
+			}
 
-				}
-			})
+		}
+	})
 }
 
 /**
@@ -402,18 +412,18 @@ function singleCancel(usrid) {
 		return;
 	}
 	$.ajax({
-				url : path,
-				dataType : 'json',
-				type : 'GET',
-				success : function(r) {
-					if (r.state == 200) {
-						alert('已将' + r.data + '个账号注销')
-					} else {
-						alert('系统故障,请排查维修')
-					}
+		url : path,
+		dataType : 'json',
+		type : 'GET',
+		success : function(r) {
+			if (r.state == 200) {
+				alert('已将' + r.data + '个账号注销')
+			} else {
+				alert('系统故障,请排查维修')
+			}
 
-				}
-			})
+		}
+	})
 }
 
 /**
@@ -426,18 +436,18 @@ function singleActive(usrid) {
 	var path = 'single/' + usrid + '/active';
 
 	$.ajax({
-				url : path,
-				dataType : 'json',
-				type : 'GET',
-				success : function(r) {
-					if (r.state == 200) {
-						alert('已激活' + r.data + '个账号');
-					} else {
-						alert('系统故障,请排查维修')
-					}
+		url : path,
+		dataType : 'json',
+		type : 'GET',
+		success : function(r) {
+			if (r.state == 200) {
+				alert('已激活' + r.data + '个账号');
+			} else {
+				alert('系统故障,请排查维修')
+			}
 
-				}
-			})
+		}
+	})
 }
 
 /**
@@ -445,18 +455,17 @@ function singleActive(usrid) {
  */
 function readOutSubstacne() {
 	$.ajax({
-				url : '/stocker-manager/account/read_substacne',
-				dataType : 'json',
-				type : 'GET',
-				success : function(r) {
-					if (r.state == 200) {
-						$("#log_substance").empty();
-						$("#log_substance").html(r.data);
+		url : '/stocker-manager/account/read_substacne',
+		dataType : 'json',
+		type : 'GET',
+		success : function(r) {
+			if (r.state == 200) {
+				$("#log_substance").empty();
+				$("#log_substance").html(r.data);
 
-					} else {
-						$("#log_substance")
-								.append('<h1>what is your problem?</h1>')
-					}
-				}
-			})
+			} else {
+				$("#log_substance").append('<h1>what is your problem?</h1>')
+			}
+		}
+	})
 }

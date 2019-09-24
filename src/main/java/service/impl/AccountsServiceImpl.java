@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import controller.kits.ControllerToolKit;
 import mapper.AccountsMapper;
 import pojo.Accounts;
 import service.AccountsService;
@@ -97,8 +98,8 @@ public class AccountsServiceImpl implements AccountsService {
 		AccountServiceUtil util = new AccountServiceUtil();
 
 		// 抛异常:用户名或密码为空
-		if (usrname == null || "".equals(usrname) || "springmvc".equals(usrname) || password == null || "".equals(password)
-				|| "springmvc".equals(password)) {
+		if (usrname == null || "".equals(usrname) || "springmvc".equals(usrname) || password == null
+				|| "".equals(password) || "springmvc".equals(password)) {
 			throw new UnameOrKeyIsNullException("用户名或密码未输入");
 		}
 
@@ -271,7 +272,10 @@ public class AccountsServiceImpl implements AccountsService {
 	@Override
 	public List<String> readSubstanceFromLog() throws IOException {
 		String s = null;
-		File file = new File("/home/gzh/eclipse-workspace/Stocker-Manager/src/main/resources/Account-Log.txt");
+		
+		ControllerToolKit kit = new ControllerToolKit();
+		
+		File file = new File(kit.FILE_URI);
 
 		FileInputStream fis = new FileInputStream(file);
 

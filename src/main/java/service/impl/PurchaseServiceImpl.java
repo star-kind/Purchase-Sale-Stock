@@ -43,9 +43,6 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		// 默认未支付:0
 		purchase.setIsPay(0);
 
-		// 默认未入库
-		purchase.setIsEnterStore(0);
-
 		// execute
 		int affect = pm.insertIntoNewRow(purchase);
 
