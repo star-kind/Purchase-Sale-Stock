@@ -11,7 +11,6 @@ public enum ServiceExceptionEnum {
 	INSTANCE,
 	/** 您已下线,请重新登录 */
 	OFFLINE_LOGIN(410, "您已下线,请重新登录")
-
 	;
 
 	private Integer code;

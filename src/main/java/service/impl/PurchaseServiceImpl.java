@@ -23,6 +23,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	@Autowired
 	private AccountsMapper am;
 
+	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
+
 	@Override
 	public Integer addOnePurchaseApplicationForm(Purchase purchase, String usrname) throws SelfServiceException {
 		// 经办人ID是否为空
@@ -72,6 +74,18 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 		// 返回"上一级目录/页面名"
 		return "PurchaseDir/PurchaseWorkable";
+	}
+
+	@Override
+	public List<Purchase> exhibitsPurchaseByOperator(String operator) throws SelfServiceException {
+		if (operator == null || "".equals(operator)) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		List<Purchase> list = pm.selectWholeByOperator(operator);
+
+		return list;
 	}
 
 }

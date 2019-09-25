@@ -21,6 +21,17 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void selectByOperatorTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> list = pm.selectWholeByOperator("user333");
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+	}
+
+	@Test
 	public void insertIntoTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 
@@ -40,16 +51,16 @@ public class PurchaseMapperTest {
 		int row = pm.insertIntoNewRow(p);
 		System.out.println("row-" + row);
 	}
-	
+
 	@Test
 	public void selectAllTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
-		
+
 		List<Purchase> list = pm.selectAllPurchase();
-		
+
 		for (Purchase purchase : list) {
 			System.out.println(purchase.toString());
 		}
 	}
-	
+
 }

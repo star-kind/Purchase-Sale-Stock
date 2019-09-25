@@ -15,6 +15,15 @@ import service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 根据采购经理暂时其历史办理单子
+	 * 
+	 * @param operator
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	List<Purchase> exhibitsPurchaseByOperator(String operator) throws SelfServiceException;
+
+	/**
 	 * 检查是否为激活状态下的采购专员
 	 * 
 	 * @param usrid
@@ -26,8 +35,7 @@ public interface IPurchaseService {
 	 * 采购经理增加一份进货采购申请单
 	 * 
 	 * @param purchase
-	 * @param usrname
-	 *            采购经理之名
+	 * @param usrname  采购经理之名
 	 * @return
 	 * @throws SelfServiceException
 	 */

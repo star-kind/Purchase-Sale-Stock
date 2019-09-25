@@ -63,6 +63,22 @@ public class PurchaseController extends ControllerToolKit {
 	}
 
 	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitionPurchaseByOperatorHandler", method = RequestMethod.GET)
+	public ResponseResult<List<Purchase>> exhibitionPurchaseByOperatorHandler(HttpSession session) {
+		String operator = session.getAttribute("usrname").toString();
+		System.out.println("operator--" + operator);
+
+		List<Purchase> list = ips.exhibitsPurchaseByOperator(operator);
+		return new ResponseResult<List<Purchase>>(SUCCESS, list);
+
+	}
+
+	/**
 	 * 跳转至采购部模块
 	 * 
 	 * @param session

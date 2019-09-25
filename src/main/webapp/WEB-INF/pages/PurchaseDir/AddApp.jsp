@@ -28,7 +28,8 @@
 <body>
 	<div style="text-align: center; font-size: 28px; margin-top: 10px;">
 
-		<form id="form_purchase" role="form" style="margin-top: 76px;">
+		<form id="form_purchase" role="form"
+			style="margin-top: 76px; width: 80%; margin-left: 10%;">
 			<label>采购申请单</label>
 
 			<div class="form-group">

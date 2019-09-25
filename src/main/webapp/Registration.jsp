@@ -91,7 +91,8 @@
 
 						<div class="form-group">
 							<input type="button" class="commit_admin00 btn-primary"
-								value="Submit" onclick="commit00()" style="width: 68px;">
+								value="Submit" onclick="commit00()"
+								style="width: 68px; margin-top: 0%;">
 						</div>
 					</form>
 

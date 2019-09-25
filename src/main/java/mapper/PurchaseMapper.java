@@ -13,6 +13,14 @@ import pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 根据单子实际负责人查询属于他经手的单子
+	 * 
+	 * @param operator
+	 * @return
+	 */
+	List<Purchase> selectWholeByOperator(@Param("operator") String operator);
+
+	/**
 	 * 全体查询
 	 * 
 	 * @return

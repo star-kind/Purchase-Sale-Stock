@@ -166,3 +166,5 @@ ALTER TABLE accounts MODIFY COLUMN `password` varchar(50) NOT NULL COMMENT '密�
 ALTER TABLE accounts MODIFY COLUMN `salt` varchar(20) NOT NULL COMMENT '盐值';
 
 ALTER TABLE accounts MODIFY COLUMN `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号';
+
+select * from purchase where operator ='user333';

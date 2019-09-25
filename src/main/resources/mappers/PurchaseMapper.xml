@@ -139,6 +139,15 @@
 		FROM
 		purchase
 	</select>
+	
+	<select id="selectWholeByOperator" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		purchase
+		WHERE
+		operator=#{operator,jdbcType=VARCHAR}
+	</select>
 
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="pojo.PurchaseExample">
