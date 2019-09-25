@@ -273,9 +273,7 @@ public class AccountsServiceImpl implements AccountsService {
 	public List<String> readSubstanceFromLog() throws IOException {
 		String s = null;
 		
-		ControllerToolKit kit = new ControllerToolKit();
-		
-		File file = new File(kit.FILE_URI);
+		File file = new File(ControllerToolKit.FILE_URI);
 
 		FileInputStream fis = new FileInputStream(file);
 

@@ -18,14 +18,13 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	// 锁
 	private static final Object LOCK = new Object();
 
-	// 文件夹路径
-	private static final String DIR_URI = "/home/admin/workspace/eclipse/eclipse-workspace/StockerManager/Logs/";
-
 	// 日志记录文件名
 	private static final String FILE_NAME = "Purchase_Module_Log.txt";
 
 	// 日志记录文件之路径
 	public static String LOG_URI = null;
+
+	// TODO 标准日志记录语句初始化 String sentence="<p>";
 
 	public static PurchaseControllerUtil getInstance() {
 		if (instance == null) {
@@ -47,7 +46,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @throws IOException
 	 */
 	public static String createDirAndFile() throws IOException {
-		File file = new File(DIR_URI);
+		File file = new File(ENGINE_DAILY_PATH);
 
 		if (!file.exists()) {
 			file.mkdir();

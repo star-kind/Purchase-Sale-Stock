@@ -42,9 +42,14 @@ public class ControllerToolKit {
 	public static final Integer SUCCESS = 200;
 
 	/**
+	 * 工程下的日志目录绝对路径
+	 */
+	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/StockerManager/Logs/";
+
+	/**
 	 * 记录账户模块活动记录的TXT文件之完整路径
 	 */
-	public static final String FILE_URI = "/home/admin/workspace/eclipse/eclipse-workspace/StockerManager/Logs/Account-Log.txt";
+	public static final String FILE_URI = ENGINE_DAILY_PATH + "Account-Log.txt";
 
 	/**
 	 * 系统换行符
@@ -82,7 +87,7 @@ public class ControllerToolKit {
 	 * @return
 	 */
 	@ResponseBody
-	@ExceptionHandler({SelfServiceException.class})
+	@ExceptionHandler({ SelfServiceException.class })
 	public ResponseResult<Void> exceptioHandler(Throwable e) {
 		ResponseResult<Void> rr = new ResponseResult<Void>();
 
@@ -112,9 +117,9 @@ public class ControllerToolKit {
 
 		// 使用switch-case
 		switch (e.getMessage()) {
-			case "您已下线,请重新登录" :
-				rr.setState(instance.OFFLINE_LOGIN.getCode());
-				break;
+		case "您已下线,请重新登录":
+			rr.setState(instance.OFFLINE_LOGIN.getCode());
+			break;
 		}
 
 		return rr;
@@ -126,8 +131,8 @@ public class ControllerToolKit {
 	 * @return
 	 */
 	public ArrayList<HashMap<Integer, String[]>> addScopeArray() {
-		String[] competence = {"管理员", "总经理", "采购经理", "销售经理", "仓库主管", "普通雇员"};
-		String[] activeStatus = {"已注销", "已激活"};
+		String[] competence = { "管理员", "总经理", "采购经理", "销售经理", "仓库主管", "普通雇员" };
+		String[] activeStatus = { "已注销", "已激活" };
 
 		HashMap<Integer, String[]> hashMap = new HashMap<Integer, String[]>();
 
@@ -191,10 +196,8 @@ public class ControllerToolKit {
 	/**
 	 * 将String写入文本中
 	 * 
-	 * @param string
-	 *            记录
-	 * @param logPath
-	 *            路径
+	 * @param string  记录
+	 * @param logPath 路径
 	 */
 	public void textWriter(String string, String logPath) {
 		try {
@@ -281,8 +284,8 @@ public class ControllerToolKit {
 		for (int i = 0; i < usrids.length; i++) {
 			str += Integer.valueOf(usrids[i]) + ",";
 		}
-		String string = usrids.length + "位用户:ID为{ " + str + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销," + "执行人为: "
-				+ session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+		String string = usrids.length + "位用户:ID为{ " + str + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
+				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
 		textWriter(string);
 
@@ -318,8 +321,8 @@ public class ControllerToolKit {
 		for (int i = 0; i < usrids.length; i++) {
 			str += Integer.valueOf(usrids[i]) + ",";
 		}
-		String string = "<p>" + usrids.length + "位用户:ID为{ " + str + "}提交重置密码请求,其中" + affects + "位用户于" + now_time + "完成密码重置,"
-				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+		String string = "<p>" + usrids.length + "位用户:ID为{ " + str + "}提交重置密码请求,其中" + affects + "位用户于" + now_time
+				+ "完成密码重置," + "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
 		textWriter(string);
 	}
@@ -354,8 +357,8 @@ public class ControllerToolKit {
 	 * @param session
 	 */
 	public void earseAnAccountRecords(Integer usrid, Integer code, HttpSession session) {
-		String string = "<p>ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: " + session.getAttribute("usrname").toString()
-				+ LINE_SEPARATOR;
+		String string = "<p>ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: "
+				+ session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
 		if (code == 1) {
 			textWriter(string);
@@ -384,7 +387,8 @@ public class ControllerToolKit {
 	 * @param affect
 	 */
 	public void reviseBaseProfileHandlerRecord(Integer uid, String uname, String phone, Integer affect) {
-		String record = "<p>ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone + LINE_SEPARATOR;
+		String record = "<p>ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone
+				+ LINE_SEPARATOR;
 
 		if (affect == 1) {
 			textWriter(record);
