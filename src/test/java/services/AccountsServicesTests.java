@@ -11,22 +11,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import pojo.Accounts;
-import service.AccountsService;
+import service.IAccountsService;
 import service.ex.SelfServiceException;
 
 public class AccountsServicesTests {
 	private ApplicationContext applicationContext;
-	private AccountsService accountsService;
+	private IAccountsService accountsService;
 
 	@Before
 	public void setUp() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
-				new String[]{"spring/spring-dao.xml", "spring/spring-service.xml"});
+				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
 	}
 
 	@Test
 	public void testReg() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 		Accounts accounts = new Accounts();
 		accounts.setUsrname("");
 		accounts.setPhone("1889940007");
@@ -43,7 +43,7 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testDeleteAccount() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 		try {
 			Integer integer = accountsService.earseAnAccount(5);
 			System.out.println("row:" + integer);
@@ -54,12 +54,12 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testLoginAccount() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		HttpSession session = null;
 		try {
-			Accounts login = accountsService.login("mana", "666666", session);
-			System.out.println("ok");
+			Accounts login = accountsService.login("mana", "666", session);
+			System.out.println("ok," + login.hashCode());
 		} catch (SelfServiceException e) {
 			System.out.println(e.getMessage());
 		}
@@ -67,7 +67,7 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testAlterAccount() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		try {
 			Integer affect = accountsService.alterAccountProfile("", "56788-sp", 5, 100, 20);
@@ -79,15 +79,15 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testResetKeywordAccount() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
-		Integer[] ids = {7, 11, 12};
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
+		Integer[] ids = { 7, 11, 12 };
 		Integer affects = accountsService.multipleResetPwd(ids);
 		System.out.println("\\+" + affects);
 	}
 
 	@Test
 	public void testSearchByRD() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		List<Accounts> list = accountsService.gainByRegionDepartment("鸦岭");
 		for (Accounts accounts : list) {
@@ -97,7 +97,7 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testSearchByCompetence() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		List<Accounts> list = accountsService.gainByCompetence("仓库主管");
 		for (Accounts accounts : list) {
@@ -107,7 +107,7 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testReadSubstance() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		try {
 			List<String> list = accountsService.readSubstanceFromLog();
@@ -120,7 +120,7 @@ public class AccountsServicesTests {
 
 	@Test
 	public void testUpdateLockWord() {
-		accountsService = (AccountsService) applicationContext.getBean("accountsServiceImpl");
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		try {
 			Integer effect = accountsService.revisePassword("3333", "3210", 33);
@@ -129,5 +129,5 @@ public class AccountsServicesTests {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 }

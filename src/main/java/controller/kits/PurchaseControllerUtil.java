@@ -24,8 +24,6 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	// 日志记录文件之路径
 	public static String LOG_URI = null;
 
-	// TODO 标准日志记录语句初始化 String sentence="<p>";
-
 	public static PurchaseControllerUtil getInstance() {
 		if (instance == null) {
 			// 决定是否需要锁定
@@ -67,7 +65,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @param affect
 	 */
 	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
-		String str = "<p>采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+		sentence += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
 
 		try {
 			LOG_URI = createDirAndFile();
@@ -76,7 +74,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 		}
 
 		if (affect == 1) {
-			textWriter(str, LOG_URI);
+			textWriter(sentence, LOG_URI);
 		}
 	}
 

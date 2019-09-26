@@ -10,7 +10,25 @@ public enum ServiceExceptionEnum {
 	/** 实例成员 */
 	INSTANCE,
 	/** 您已下线,请重新登录 */
-	OFFLINE_LOGIN(410, "您已下线,请重新登录")
+	OFFLINE_LOGIN(410, "您已下线,请重新登录"),
+	/** 用户名冲突重复 */
+	UNAME_DUPLICATE_CONFLICT(411, "此名已有人先用,请另换名字"),
+	/** ("1个电话至多只准绑定注册1个账户") */
+	COUNT_PHONE_OUT_RANGE(412, "1个电话至多只准绑定注册1个账户"),
+	/** "您尚未填完信息" */
+	SUBMIT_DATA_UNCOMPLETELY(413, "您尚未填完信息"),
+	/** "用户名或密码未输入" */
+	UNAME_OR_KWD_NOT_INPUT(414, "用户名或密码未输入"),
+	/** "用户名错误,无此用户名" */
+	USRNAME_ERR(415, "用户名错误,无此用户名"),
+	/** "密码错误,请检查密码无误后再登录" */
+	KEYWORD_ERR(416, "密码错误,请检查密码无误后再登录"),
+	/** 您的账号已被注销,请联络管理员重新激活 */
+	CANCELED_ACCOUNT(417, "您的账号已被注销,请联络管理员重新激活"),
+	/** 系统繁忙,请稍后重试 */
+	SYSTEM_BUSY(418, "系统繁忙,请稍后重试"),
+	/**("未寻获有关结果")*/
+	NO_RESULT_RECORD(419,"未寻获有关结果");
 	;
 
 	private Integer code;

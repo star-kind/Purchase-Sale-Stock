@@ -6,17 +6,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.ModelMap;
 
 import pojo.Accounts;
-import service.ex.NoResultRecordException;
 import service.ex.SelfServiceException;
 
 /**
  * 账户之业务接口
  */
-public interface AccountsService {
+public interface IAccountsService {
 	/**
 	 * 据ID检出资料
 	 * 
@@ -40,12 +38,9 @@ public interface AccountsService {
 	/**
 	 * 修改密码
 	 * 
-	 * @param old
-	 *            旧密码
-	 * @param trueNew
-	 *            页面提交之新密码
-	 * @param uid
-	 *            账号ID
+	 * @param old     旧密码
+	 * @param trueNew 页面提交之新密码
+	 * @param uid     账号ID
 	 * @return
 	 * @throws SelfServiceException
 	 */
@@ -115,8 +110,8 @@ public interface AccountsService {
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	Integer alterAccountProfile(String usrname, String phone, Integer competence, Integer regionDepartment, Integer usrid)
-			throws SelfServiceException;
+	Integer alterAccountProfile(String usrname, String phone, Integer competence, Integer regionDepartment,
+			Integer usrid) throws SelfServiceException;
 
 	/**
 	 * 获取要修改的目标简介,并转发至指定编辑页
@@ -154,8 +149,7 @@ public interface AccountsService {
 	/**
 	 * 按部门地区编号查询对应账户
 	 * 
-	 * @param regionDepartment
-	 *            页面上的地区部门之名
+	 * @param regionDepartment 页面上的地区部门之名
 	 * @return
 	 */
 	List<Accounts> gainByRegionDepartment(String regionDepartment);
@@ -181,9 +175,9 @@ public interface AccountsService {
 	 * 
 	 * @param name
 	 * @return
-	 * @throws NoResultRecordException
+	 * @throws SelfServiceException
 	 */
-	List<Accounts> findBaseOnLikeName(String name) throws NoResultRecordException;
+	List<Accounts> findBaseOnLikeName(String name) throws SelfServiceException;
 
 	/**
 	 * 从log文本内读取内容

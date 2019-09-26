@@ -18,26 +18,20 @@ import org.springframework.ui.ModelMap;
 import controller.kits.ControllerToolKit;
 import mapper.AccountsMapper;
 import pojo.Accounts;
-import service.AccountsService;
-import service.ex.CanceledAccountException;
-import service.ex.CountPhoneOutRangeException;
-import service.ex.DeleteAccountDefeatException;
-import service.ex.KeywordErrException;
-import service.ex.NoResultRecordException;
+import service.IAccountsService;
 import service.ex.SelfServiceException;
-import service.ex.SubmitDataUnCompletelyException;
-import service.ex.UnameDuplicateConflictExcept;
-import service.ex.UnameOrKeyIsNullException;
-import service.ex.UsrnameErrException;
+import service.ex.ServiceExceptionEnum;
 import service.util.AccountServiceUtil;
 
 @Service
-public class AccountsServiceImpl implements AccountsService {
+public class AccountsServiceImpl implements IAccountsService {
 	@Autowired
 	private AccountsMapper accountsMapper;
 
 	// 默认密码
 	private static String DEFAULT_KEY = "666";
+
+	public ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
 	@Override
 	public Integer registerRole(Accounts accounts) throws SelfServiceException {
@@ -49,7 +43,8 @@ public class AccountsServiceImpl implements AccountsService {
 		String usrname = accounts.getUsrname();
 		Accounts accounts1 = accountsMapper.selectByUname(usrname);
 		if (accounts1 != null) {
-			throw new UnameDuplicateConflictExcept("sorry,此名已有人先用,请另换名字");
+			String description = ServiceExceptionEnum.UNAME_DUPLICATE_CONFLICT.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 时间设默值
@@ -63,13 +58,15 @@ public class AccountsServiceImpl implements AccountsService {
 		String phone = accounts.getPhone();
 		int i = accountsMapper.countUidByPhone(phone);
 		if (i > 1) {
-			throw new CountPhoneOutRangeException("sorry,1个电话至多只准绑定注册1个账户");
+			String description = ServiceExceptionEnum.COUNT_PHONE_OUT_RANGE.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 统计注册账号提交之数据个数是否为4
 		Integer m = util.checkCommittedAccounts(accounts);
 		if (m != 4) {
-			throw new SubmitDataUnCompletelyException("sorry,您尚未填完信息");
+			String description = ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 生成盐值
@@ -100,29 +97,32 @@ public class AccountsServiceImpl implements AccountsService {
 		// 抛异常:用户名或密码为空
 		if (usrname == null || "".equals(usrname) || "springmvc".equals(usrname) || password == null
 				|| "".equals(password) || "springmvc".equals(password)) {
-			throw new UnameOrKeyIsNullException("用户名或密码未输入");
+			String description = ServiceExceptionEnum.UNAME_OR_KWD_NOT_INPUT.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 据用户名查数据,为空报异常
 		Accounts accounts = accountsMapper.selectByUname(usrname);
 
 		if (accounts == null) {
-			throw new UsrnameErrException("用户名错误,无此用户名");
+			String description = ServiceExceptionEnum.USRNAME_ERR.getDescription();
+			throw new SelfServiceException(description);
 		}
 
-		// 获取数据库中的密码原文和盐
-		String salt = accounts.getSalt();
+		// 获取数据库中的密码原文
 		String text = accounts.getPassword();
 
 		// 登录密码与密码原文代入verify中,为假则报异常
 		boolean verify = util.verify(password, text);
 		if (verify == false) {
-			throw new KeywordErrException("密码错误,请检查密码无误后再登录");
+			String description = ServiceExceptionEnum.KEYWORD_ERR.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 验证激活态是否为1 or 0
 		if (accounts.getActiveStatus() == 0) {
-			throw new CanceledAccountException("您的账号已被注销,请联络管理员重新激活");
+			String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 保存至session
@@ -145,7 +145,8 @@ public class AccountsServiceImpl implements AccountsService {
 	public Integer earseAnAccount(Integer usrid) throws SelfServiceException {
 		Integer row = accountsMapper.deleteOneUsrByUsrid(usrid);
 		if (row != 1) {
-			throw new DeleteAccountDefeatException("系统繁忙,请稍后重试");
+			String description = ServiceExceptionEnum.SYSTEM_BUSY.getDescription();
+			throw new SelfServiceException(description);
 		}
 		return row;
 	}
@@ -169,19 +170,22 @@ public class AccountsServiceImpl implements AccountsService {
 		// 前台提交之信息不全
 		Integer m = util.checkCommittedAccounts(a1);
 		if (m != 4) {
-			throw new SubmitDataUnCompletelyException("sorry,您尚未填完信息");
+			String description = ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 用户名不得重复
 		Accounts a = accountsMapper.selectByUname(usrname);
 		if (a != null) {
-			throw new UnameDuplicateConflictExcept("sorry,此名已有人先用,请另换名字");
+			String description = ServiceExceptionEnum.UNAME_DUPLICATE_CONFLICT.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 绑定电话不得超限
 		int i = accountsMapper.countUidByPhone(phone);
 		if (i > 3) {
-			throw new CountPhoneOutRangeException("sorry,1个电话至多只准绑定注册3个账户");
+			String description = ServiceExceptionEnum.COUNT_PHONE_OUT_RANGE.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 执行update
@@ -261,10 +265,11 @@ public class AccountsServiceImpl implements AccountsService {
 	}
 
 	@Override
-	public List<Accounts> findBaseOnLikeName(String name) throws NoResultRecordException {
+	public List<Accounts> findBaseOnLikeName(String name) throws SelfServiceException {
 		List<Accounts> list = accountsMapper.selectLikeUsrname(name);
 		if (list == null) {
-			throw new NoResultRecordException("未寻获有关结果");
+			String description = ServiceExceptionEnum.NO_RESULT_RECORD.getDescription();
+			throw new SelfServiceException(description);
 		}
 		return list;
 	}
@@ -272,7 +277,7 @@ public class AccountsServiceImpl implements AccountsService {
 	@Override
 	public List<String> readSubstanceFromLog() throws IOException {
 		String s = null;
-		
+
 		File file = new File(ControllerToolKit.FILE_URI);
 
 		FileInputStream fis = new FileInputStream(file);
@@ -321,7 +326,8 @@ public class AccountsServiceImpl implements AccountsService {
 		// 检验旧密码与藏中一致
 		boolean verify = util.verify(old, tablePwd);
 		if (!verify) {
-			throw new KeywordErrException("密码与旧不一,请重输");
+			String description = ServiceExceptionEnum.KEYWORD_ERR.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		// 将取盐
@@ -339,7 +345,8 @@ public class AccountsServiceImpl implements AccountsService {
 		// 禁止提交之绑定之电话号码过3
 		var i = accountsMapper.countUidByPhone(phone);
 		if (i > 3) {
-			throw new CountPhoneOutRangeException("sorry,1个电话至多只准绑定注册3个账户");
+			String description = ServiceExceptionEnum.COUNT_PHONE_OUT_RANGE.getDescription();
+			throw new SelfServiceException(description);
 		}
 
 		Integer effect = accountsMapper.updatePartialProfileById(usrname, phone, usrid);

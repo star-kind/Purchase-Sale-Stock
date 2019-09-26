@@ -16,17 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import json.ResponseResult;
 import pojo.Accounts;
-import service.ex.CanceledAccountException;
-import service.ex.CountPhoneOutRangeException;
-import service.ex.DeleteAccountDefeatException;
-import service.ex.KeywordErrException;
-import service.ex.NoResultRecordException;
 import service.ex.SelfServiceException;
 import service.ex.ServiceExceptionEnum;
-import service.ex.SubmitDataUnCompletelyException;
-import service.ex.UnameDuplicateConflictExcept;
-import service.ex.UnameOrKeyIsNullException;
-import service.ex.UsrnameErrException;
 
 /**
  * 控制器会用到的一些方法
@@ -66,10 +57,6 @@ public class ControllerToolKit {
 	 */
 	protected static byte[] buff = null;
 
-	// protected static SimpleDateFormat format = new
-	// SimpleDateFormat("yyyy-MM-dd
-	// HH:mm:ss");
-
 	/**
 	 * 当前时间字符串
 	 */
@@ -79,6 +66,9 @@ public class ControllerToolKit {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		now_time = format.format(new Date());
 	}
+
+	/** 标准日志记录语句初始化 */
+	public static String sentence = "<p>";
 
 	/**
 	 * 统一将异常封入json实体
@@ -91,34 +81,48 @@ public class ControllerToolKit {
 	public ResponseResult<Void> exceptioHandler(Throwable e) {
 		ResponseResult<Void> rr = new ResponseResult<Void>();
 
-		ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
-
 		rr.setMessage(e.getMessage());
 
-		if (e instanceof DeleteAccountDefeatException) {
-			rr.setState(600);
-		} else if (e instanceof UsrnameErrException) {
-			rr.setState(601);
-		} else if (e instanceof KeywordErrException) {
-			rr.setState(602);
-		} else if (e instanceof CanceledAccountException) {
-			rr.setState(603);
-		} else if (e instanceof UnameOrKeyIsNullException) {
-			rr.setState(604);
-		} else if (e instanceof UnameDuplicateConflictExcept) {
-			rr.setState(605);
-		} else if (e instanceof CountPhoneOutRangeException) {
-			rr.setState(606);
-		} else if (e instanceof SubmitDataUnCompletelyException) {
-			rr.setState(607);
-		} else if (e instanceof NoResultRecordException) {
-			rr.setState(608);
-		}
-
-		// 使用switch-case
+		// 根据异常信息设置异常码
 		switch (e.getMessage()) {
 		case "您已下线,请重新登录":
-			rr.setState(instance.OFFLINE_LOGIN.getCode());
+			rr.setState(ServiceExceptionEnum.OFFLINE_LOGIN.getCode());
+			break;
+
+		case "此名已有人先用,请另换名字":
+			rr.setState(ServiceExceptionEnum.UNAME_DUPLICATE_CONFLICT.getCode());
+			break;
+
+		case "1个电话至多只准绑定注册1个账户":
+			rr.setState(ServiceExceptionEnum.COUNT_PHONE_OUT_RANGE.getCode());
+			break;
+
+		case "您尚未填完信息":
+			rr.setState(ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getCode());
+			break;
+
+		case "用户名或密码未输入":
+			rr.setState(ServiceExceptionEnum.UNAME_OR_KWD_NOT_INPUT.getCode());
+			break;
+
+		case "用户名错误,无此用户名":
+			rr.setState(ServiceExceptionEnum.USRNAME_ERR.getCode());
+			break;
+
+		case "密码错误,请检查密码无误后再登录":
+			rr.setState(ServiceExceptionEnum.KEYWORD_ERR.getCode());
+			break;
+
+		case "您的账号已被注销,请联络管理员重新激活":
+			rr.setState(ServiceExceptionEnum.CANCELED_ACCOUNT.getCode());
+			break;
+
+		case "未寻获有关结果":
+			rr.setState(ServiceExceptionEnum.NO_RESULT_RECORD.getCode());
+			break;
+
+		case "系统繁忙,请稍后重试":
+			rr.setState(ServiceExceptionEnum.SYSTEM_BUSY.getCode());
 			break;
 		}
 
@@ -226,17 +230,16 @@ public class ControllerToolKit {
 	 * @param row
 	 */
 	public void inputRegRecordsToTxt(Accounts acc, Integer row, HttpSession session) {
-		String str = "";
 		try {
-			str = "<p>" + acc.getUsrname() + " 于 " + now_time + "注册成功,权限代号为" + acc.getCompetence() + ",地区部门为"
+			sentence += acc.getUsrname() + " 于 " + now_time + "注册成功,权限代号为" + acc.getCompetence() + ",地区部门为"
 					+ acc.getRegionDepartment() + ",执行者:" + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 		} catch (Exception e) {
-			str = "<p>" + acc.getUsrname() + " 于 " + now_time + "注册成功,权限代号为" + acc.getCompetence() + ",地区部门为"
+			sentence += acc.getUsrname() + " 于 " + now_time + "试图注册账号,权限代号为" + acc.getCompetence() + ",地区部门为"
 					+ acc.getRegionDepartment() + LINE_SEPARATOR;
 		}
 
 		if (row == 1) {
-			textWriter(str);
+			textWriter(sentence);
 		}
 
 	}
@@ -247,10 +250,11 @@ public class ControllerToolKit {
 	 * @param usrname
 	 */
 	public void inputAllLoginRecords(String usrname) {
-		String str = "<p>" + usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR;
+
+		sentence += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR;
 
 		if (usrname != null) {
-			textWriter(str);
+			textWriter(sentence);
 		}
 
 	}
@@ -263,11 +267,12 @@ public class ControllerToolKit {
 	 * @param session
 	 */
 	public void inputSuccessLoginRecords(Accounts acc, String usrname, HttpSession session) {
-		String str = "<p>地区部门:" + acc.getRegionDepartment() + ",权限:" + acc.getCompetence() + ",用户 " + usrname + " 登录成功"
+
+		sentence += "地区部门:" + acc.getRegionDepartment() + ",权限:" + acc.getCompetence() + ",用户 " + usrname + " 登录成功"
 				+ ",时间:" + now_time + LINE_SEPARATOR;
 
 		if (session.getAttribute("usrname").toString() != null) {
-			textWriter(str);
+			textWriter(sentence);
 		}
 
 	}
@@ -280,14 +285,13 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleCancelRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		String str = "";
-		for (int i = 0; i < usrids.length; i++) {
-			str += Integer.valueOf(usrids[i]) + ",";
-		}
-		String string = usrids.length + "位用户:ID为{ " + str + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
+		
+		String usridStr = geneateUsridStr(usrids);
+		
+		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
-		textWriter(string);
+		textWriter(sentence);
 
 	}
 
@@ -299,14 +303,13 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleActiveRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		String str = "";
-		for (int i = 0; i < usrids.length; i++) {
-			str += Integer.valueOf(usrids[i]) + ",";
-		}
-		String string = "<p>" + usrids.length + "位用户:ID为{ " + str + "}提交激活请求,其中" + affects + "位用户于" + now_time + "完成激活,"
+		
+		String usridStr = geneateUsridStr(usrids);
+
+		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交激活请求,其中" + affects + "位用户于" + now_time + "完成激活,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
-		textWriter(string);
+		textWriter(sentence);
 	}
 
 	/**
@@ -317,14 +320,13 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleResetRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		String str = "";
-		for (int i = 0; i < usrids.length; i++) {
-			str += Integer.valueOf(usrids[i]) + ",";
-		}
-		String string = "<p>" + usrids.length + "位用户:ID为{ " + str + "}提交重置密码请求,其中" + affects + "位用户于" + now_time
-				+ "完成密码重置," + "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+		
+		String usridStr = geneateUsridStr(usrids);
 
-		textWriter(string);
+		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交重置密码请求,其中" + affects + "位用户于" + now_time + "完成密码重置,"
+				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+
+		textWriter(sentence);
 	}
 
 	/**
@@ -340,12 +342,13 @@ public class ControllerToolKit {
 	 */
 	public void executModifiyRecords(Integer usrid, HttpSession session, Integer affects, String usrname, String phone,
 			Integer competence, Integer regionDepartment) {
-		String str = "<p>ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为" + usrname + ",新电话为" + phone + ",新权限码为"
+
+		sentence += "ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为" + usrname + ",新电话为" + phone + ",新权限码为"
 				+ competence + ",新地区部门为" + regionDepartment + ",执行人:" + session.getAttribute("usrname").toString()
 				+ LINE_SEPARATOR;
 
 		if (affects == 1) {
-			textWriter(str);
+			textWriter(sentence);
 		}
 	}
 
@@ -357,11 +360,12 @@ public class ControllerToolKit {
 	 * @param session
 	 */
 	public void earseAnAccountRecords(Integer usrid, Integer code, HttpSession session) {
-		String string = "<p>ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: "
-				+ session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+
+		sentence += "ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: " + session.getAttribute("usrname").toString()
+				+ LINE_SEPARATOR;
 
 		if (code == 1) {
-			textWriter(string);
+			textWriter(sentence);
 		}
 	}
 
@@ -372,10 +376,13 @@ public class ControllerToolKit {
 	 * @param row
 	 */
 	public void revisePasswordHandlerRecord(Integer uid, Integer row) {
-		String record = "<p>ID为 " + uid + " 的账号于" + now_time + "修改了密码" + LINE_SEPARATOR;
+
+		sentence += "ID为 " + uid + " 的账号于" + now_time + "修改了密码" + LINE_SEPARATOR;
+
 		if (row == 1) {
-			textWriter(record);
+			textWriter(sentence);
 		}
+
 	}
 
 	/**
@@ -387,12 +394,29 @@ public class ControllerToolKit {
 	 * @param affect
 	 */
 	public void reviseBaseProfileHandlerRecord(Integer uid, String uname, String phone, Integer affect) {
-		String record = "<p>ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone
-				+ LINE_SEPARATOR;
+
+		sentence += "ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone + LINE_SEPARATOR;
 
 		if (affect == 1) {
-			textWriter(record);
+			textWriter(sentence);
 		}
 
 	}
+
+	/**
+	 * 返回1到多个ID的字符串
+	 * 
+	 * @param usrids
+	 * @return
+	 */
+	public String geneateUsridStr(Integer[] usrids) {
+		String useridStr = "";
+
+		for (int i = 0; i < usrids.length; i++) {
+			useridStr += Integer.valueOf(usrids[i]) + ",";
+		}
+
+		return useridStr;
+	}
+
 }

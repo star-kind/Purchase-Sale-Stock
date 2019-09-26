@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import controller.kits.ControllerToolKit;
 import json.ResponseResult;
 import pojo.Accounts;
-import service.AccountsService;
+import service.IAccountsService;
 
 @Controller
 @RequestMapping("/account")
 public class AccountsController extends ControllerToolKit {
 	@Autowired
-	private AccountsService accountsService;
+	private IAccountsService iAccountsService;
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class AccountsController extends ControllerToolKit {
 	@RequestMapping(value = "/reg", method = {RequestMethod.POST})
 	@ResponseBody
 	public ResponseResult<Void> regHandler(Accounts accounts, HttpSession session) {
-		Integer row = accountsService.registerRole(accounts);
+		Integer row = iAccountsService.registerRole(accounts);
 
 		inputRegRecordsToTxt(accounts, row, session);
 
@@ -63,7 +63,7 @@ public class AccountsController extends ControllerToolKit {
 
 		inputAllLoginRecords(usrname);
 
-		Accounts account = accountsService.login(usrname, password, session);
+		Accounts account = iAccountsService.login(usrname, password, session);
 
 		inputSuccessLoginRecords(account, usrname, session);
 
@@ -82,14 +82,14 @@ public class AccountsController extends ControllerToolKit {
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 		System.out.println("uid: " + uid);
 
-		String url = accountsService.checkAdminCompetence(uid, modelMap);
+		String url = iAccountsService.checkAdminCompetence(uid, modelMap);
 
 		return url;
 	}
 
 	@RequestMapping(value = "showAllAccount", method = {RequestMethod.GET})
 	public String showAllAccountHandler(ModelMap modelMap) {
-		String r = accountsService.browsersAllAccounts(modelMap);
+		String r = iAccountsService.browsersAllAccounts(modelMap);
 		return r;
 	}
 
@@ -105,7 +105,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<Void> earseHandler(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		Integer usrid = Integer.valueOf(request.getParameter("usrid"));
-		Integer code = accountsService.earseAnAccount(usrid);
+		Integer code = iAccountsService.earseAnAccount(usrid);
 
 		earseAnAccountRecords(usrid, code, session);
 
@@ -122,7 +122,7 @@ public class AccountsController extends ControllerToolKit {
 	 */
 	@RequestMapping(value = "emerge", method = {RequestMethod.GET})
 	public String showModifiyHandler(HttpServletRequest request, ModelMap modelMap) {
-		return accountsService.showingProfileToEditing(request, modelMap);
+		return iAccountsService.showingProfileToEditing(request, modelMap);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class AccountsController extends ControllerToolKit {
 			@RequestParam("regionDepartment") Integer regionDepartment, @RequestParam("usrid") Integer usrid,
 			HttpSession session) {
 		System.out.println(usrname + "," + phone + "," + competence + "," + regionDepartment + "," + usrid);
-		Integer affects = accountsService.alterAccountProfile(usrname, phone, competence, regionDepartment, usrid);
+		Integer affects = iAccountsService.alterAccountProfile(usrname, phone, competence, regionDepartment, usrid);
 
 		executModifiyRecords(usrid, session, affects, usrname, phone, competence, regionDepartment);
 		return new ResponseResult<Void>(SUCCESS);
@@ -155,7 +155,7 @@ public class AccountsController extends ControllerToolKit {
 	@ResponseBody
 	@RequestMapping(value = "multiple_cancel", method = {RequestMethod.POST})
 	public ResponseResult<Integer> multipleCancelHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
-		Integer affects = accountsService.multipleCancel(usrids);
+		Integer affects = iAccountsService.multipleCancel(usrids);
 		multipleCancelRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
@@ -171,7 +171,7 @@ public class AccountsController extends ControllerToolKit {
 	@ResponseBody
 	@RequestMapping(value = "multiple_active", method = {RequestMethod.POST})
 	public ResponseResult<Integer> multipleActiveHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
-		Integer affects = accountsService.multipleActive(usrids);
+		Integer affects = iAccountsService.multipleActive(usrids);
 		multipleActiveRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
@@ -187,7 +187,7 @@ public class AccountsController extends ControllerToolKit {
 	@ResponseBody
 	@RequestMapping(value = "multiple_reset_pwd", method = {RequestMethod.POST})
 	public ResponseResult<Integer> multipleResetPwdHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
-		Integer affects = accountsService.multipleResetPwd(usrids);
+		Integer affects = iAccountsService.multipleResetPwd(usrids);
 
 		multipleResetRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
@@ -208,11 +208,11 @@ public class AccountsController extends ControllerToolKit {
 
 		int p = prospect(str);
 		if (p == 0) {
-			list = accountsService.gainByCompetence(str);
+			list = iAccountsService.gainByCompetence(str);
 		} else if (p == 1) {
-			list = accountsService.gainByActiveStatus(str);
+			list = iAccountsService.gainByActiveStatus(str);
 		} else {
-			list = accountsService.gainByRegionDepartment(str);
+			list = iAccountsService.gainByRegionDepartment(str);
 		}
 
 		return new ResponseResult<List<Accounts>>(SUCCESS, list);
@@ -230,7 +230,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<List<Accounts>> searchByConfuseNameHandler(@RequestParam("uname") String uname) {
 		System.err.println("Uname:" + uname);
 
-		List<Accounts> list = accountsService.findBaseOnLikeName(uname);
+		List<Accounts> list = iAccountsService.findBaseOnLikeName(uname);
 		return new ResponseResult<List<Accounts>>(SUCCESS, list);
 	}
 
@@ -251,7 +251,7 @@ public class AccountsController extends ControllerToolKit {
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
 
-		Integer effects = accountsService.multipleResetPwd(ids);
+		Integer effects = iAccountsService.multipleResetPwd(ids);
 
 		multipleResetRecords(effects, session, ids);
 		return new ResponseResult<Void>(SUCCESS);
@@ -272,7 +272,7 @@ public class AccountsController extends ControllerToolKit {
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
 
-		Integer effects = accountsService.multipleCancel(ids);
+		Integer effects = iAccountsService.multipleCancel(ids);
 
 		multipleCancelRecords(effects, session, ids);
 		return new ResponseResult<Integer>(SUCCESS, effects);
@@ -291,7 +291,7 @@ public class AccountsController extends ControllerToolKit {
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
 
-		Integer effects = accountsService.multipleActive(ids);
+		Integer effects = iAccountsService.multipleActive(ids);
 
 		multipleActiveRecords(effects, session, ids);
 		return new ResponseResult<Integer>(SUCCESS, effects);
@@ -308,7 +308,7 @@ public class AccountsController extends ControllerToolKit {
 	@ResponseBody
 	@RequestMapping(value = "read_substacne", method = RequestMethod.GET)
 	public ResponseResult<List<String>> readAccountRecordHandler() throws IOException {
-		List<String> list = accountsService.readSubstanceFromLog();
+		List<String> list = iAccountsService.readSubstanceFromLog();
 
 		return new ResponseResult<List<String>>(SUCCESS, list);
 	}
@@ -327,7 +327,7 @@ public class AccountsController extends ControllerToolKit {
 			@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 
-		Integer effects = accountsService.revisePassword(oldPassword, newPassword, uid);
+		Integer effects = iAccountsService.revisePassword(oldPassword, newPassword, uid);
 
 		revisePasswordHandlerRecord(uid, effects);
 
@@ -345,7 +345,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<Accounts> exhibitionBaseProfileHandler(HttpSession s) {
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
 
-		Accounts profile = accountsService.exhibitionBaseProfile(uid);
+		Accounts profile = iAccountsService.exhibitionBaseProfile(uid);
 
 		return new ResponseResult<Accounts>(SUCCESS, profile);
 	}
@@ -363,7 +363,7 @@ public class AccountsController extends ControllerToolKit {
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
 		System.out.println(uid + "," + usrname + "," + phone);
 
-		Integer affects = accountsService.reviseBaseProfile(usrname, phone, uid);
+		Integer affects = iAccountsService.reviseBaseProfile(usrname, phone, uid);
 
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
