@@ -71,6 +71,10 @@ function victory(list) {
 
 		tbodyJQ.append(tr);
 
+		if (list[i].isAgree == 0) {// 如若未获批,字体异色
+			$('#pid_' + list[i].purchaseId).css('color', '#eb3871');
+		}
+
 	}
 
 	n = 0;
@@ -199,9 +203,9 @@ function generatePurchaseContent(p) {
 
 	/* 是否获批 */
 	if (p.isAgree == 0) {
-		p.isAgree = '已获批'
-	} else {
 		p.isAgree = '未获批'
+	} else {
+		p.isAgree = '已获批'
 	}
 
 	/* 支付方式 */
