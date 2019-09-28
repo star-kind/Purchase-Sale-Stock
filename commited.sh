@@ -2,7 +2,7 @@ git status
 
 git add *                 
 
-git commit  -m   "update about purchase module"
+git commit  -m   "update README document"
 
 git pull origin master   
 
