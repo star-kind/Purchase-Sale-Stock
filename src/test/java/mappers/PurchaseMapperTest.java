@@ -21,6 +21,15 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void selectByIdTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		Purchase purchase = pm.selectByPrimaryKey(12);
+
+		System.err.println(purchase.toString());
+	}
+
+	@Test
 	public void selectByOperatorTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

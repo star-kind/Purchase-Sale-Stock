@@ -88,4 +88,27 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return list;
 	}
 
+	@Override
+	public Purchase findPurchaseById(Integer purchaseId, Integer usrid) throws SelfServiceException {
+		if (purchaseId == null || "".equals(purchaseId)) {
+			String description = ServiceExceptionEnum.COMMIT_HAS_NULL.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		if (usrid == null || "".equals(usrid)) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		Accounts a = am.selectAccountByUsrid(usrid);
+		if (a.getCompetence() != 2) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		Purchase purchase = pm.selectByPrimaryKey(purchaseId);
+		return purchase;
+
+	}
+
 }

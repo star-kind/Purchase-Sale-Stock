@@ -83,8 +83,13 @@ public class ControllerToolKit {
 
 		rr.setMessage(e.getMessage());
 
-		// 根据异常信息设置异常码
+		/* 根据异常信息设置异常码 */
 		switch (e.getMessage()) {
+
+		case "权限错位,您没有相应权限":
+			rr.setState(ServiceExceptionEnum.COMPETENCE_DISLOCATION.getCode());
+			break;
+
 		case "您已下线,请重新登录":
 			rr.setState(ServiceExceptionEnum.OFFLINE_LOGIN.getCode());
 			break;
@@ -124,6 +129,11 @@ public class ControllerToolKit {
 		case "系统繁忙,请稍后重试":
 			rr.setState(ServiceExceptionEnum.SYSTEM_BUSY.getCode());
 			break;
+
+		case "提交为空":
+			rr.setState(ServiceExceptionEnum.COMMIT_HAS_NULL.getCode());
+			break;
+
 		}
 
 		return rr;
@@ -285,9 +295,9 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleCancelRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		
+
 		String usridStr = geneateUsridStr(usrids);
-		
+
 		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
@@ -303,7 +313,7 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleActiveRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		
+
 		String usridStr = geneateUsridStr(usrids);
 
 		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交激活请求,其中" + affects + "位用户于" + now_time + "完成激活,"
@@ -320,7 +330,7 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleResetRecords(Integer affects, HttpSession session, Integer[] usrids) {
-		
+
 		String usridStr = geneateUsridStr(usrids);
 
 		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交重置密码请求,其中" + affects + "位用户于" + now_time + "完成密码重置,"

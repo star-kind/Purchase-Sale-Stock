@@ -24,16 +24,41 @@
 <!-- 校验表单提交 -->
 <script src="${basePath}/jquery/OwnJavaScript/VerifyInput.js"></script>
 
+<!-- layui javascript -->
+<script src="${basePath}/jquery/layui.js"></script>
+<script src="${basePath}/jquery/layui.all.js"></script>
+<script src="${basePath}/jquery/layer.js"></script>
+
+<!-- layui css -->
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/LayUI/layui.css">
+
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery/css/modules/layer/default/layer.css">
+
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery/css/modules/code.css">
+
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery/css/modules/laydate/default/laydate.css">
+
 </head>
+
+<style type="text/css">
+.page_navigation {
+	margin: 20px;
+}
+</style>
+
 <body>
 	<div style="text-align: center; font-size: 25px; margin-top: 80px;">
 
-		<table id="purchase_table"
+		<table id="blocks"
 			style="width: 80%; margin-left: 10%; text-align: center;"
 			class="table table-striped table-bordered table-hover table-condensed">
-			
+
 			<caption>申请单列表</caption>
-			
+
 			<thead>
 				<tr class="active" style="text-align: center;">
 					<th><input type="checkbox" id="head_check" class="head-box">行序号</th>
@@ -51,11 +76,43 @@
 
 		</table>
 
-		<!--  -->
-		<br> <a href="${basePath}/cross/toTransfer">返回中转页</a> <br>
+		<br>
+		<div id="pagiDiv" style="text-align: center;">
+			<div>
+				<div>
+					<!--  -->
+					<span id="spanFirst" class="page_navigation">First</span>
+					<!--  -->
+					<span id="spanPre" class="page_navigation">Pre</span>
+					<!--  -->
+					<span id="spanNext" class="page_navigation">Next</span>
+					<!--  -->
+					<span id="spanLast" class="page_navigation">Last</span>
+				</div>
+
+				<br>
+				<div>
+					<span> The <!--  --> <span id="spanPageNum"></span> <!--  -->
+						Page/Total <!--  --> <span id="spanTotalPage"></span> Page
+					</span>
+				</div>
+			</div>
+
+		</div>
+
+		<div>
+			<br> <a href="${basePath}/cross/toTransfer">返回中转页</a> <br>
+		</div>
+
+
 	</div>
 </body>
 
 <script
 	src="${basePath}/jquery/OwnJavaScript/ExhibitionPrivatePurchase.js"></script>
+
+<!-- 表格分页函数包 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/pagination.js"></script>
+
 </html>

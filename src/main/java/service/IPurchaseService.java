@@ -15,6 +15,16 @@ import service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 据ID而寻一份申请单数据
+	 * 
+	 * @param purchaseId
+	 * @param usrid      在线人员ID
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Purchase findPurchaseById(Integer purchaseId, Integer usrid) throws SelfServiceException;
+
+	/**
 	 * 根据采购经理暂时其历史办理单子
 	 * 
 	 * @param operator

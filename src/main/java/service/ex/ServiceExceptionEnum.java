@@ -11,7 +11,7 @@ public enum ServiceExceptionEnum {
 	INSTANCE,
 	/** 您已下线,请重新登录 */
 	OFFLINE_LOGIN(410, "您已下线,请重新登录"),
-	/** 用户名冲突重复 */
+	/** 此名已有人先用,请另换名字 */
 	UNAME_DUPLICATE_CONFLICT(411, "此名已有人先用,请另换名字"),
 	/** ("1个电话至多只准绑定注册1个账户") */
 	COUNT_PHONE_OUT_RANGE(412, "1个电话至多只准绑定注册1个账户"),
@@ -27,9 +27,12 @@ public enum ServiceExceptionEnum {
 	CANCELED_ACCOUNT(417, "您的账号已被注销,请联络管理员重新激活"),
 	/** 系统繁忙,请稍后重试 */
 	SYSTEM_BUSY(418, "系统繁忙,请稍后重试"),
-	/**("未寻获有关结果")*/
-	NO_RESULT_RECORD(419,"未寻获有关结果");
-	;
+	/** ("未寻获有关结果") */
+	NO_RESULT_RECORD(419, "未寻获有关结果"),
+	/** 提交为空 */
+	COMMIT_HAS_NULL(420, "提交为空"),
+	/** 权限错位,您没有相应权限 */
+	COMPETENCE_DISLOCATION(421, "权限错位,您没有相应权限"),;
 
 	private Integer code;
 	private String description;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import controller.kits.ControllerToolKit;
@@ -25,6 +26,33 @@ public class PurchaseController extends ControllerToolKit {
 
 	// 工具类
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/findPurchaseByIdHandler?purchaseId=2
+	 * 
+	 * @param purchaseId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findPurchaseByIdHandler", method = RequestMethod.POST)
+	public ResponseResult<Purchase> findPurchaseByIdHandler(@RequestParam("purchaseId") Integer purchaseId,
+			HttpSession session) {
+		
+		Integer usrid = null;
+		
+		try {
+			usrid = Integer.valueOf(session.getAttribute("usrid").toString());
+			
+		} catch (Exception e) {
+			purchaseId = null;
+			
+		}
+		System.err.println("purchaseId:" + purchaseId + ",usrid:" + usrid);
+
+		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
+
+		return new ResponseResult<Purchase>(SUCCESS, purchase);
+	}
 
 	/**
 	 * 提交1份新的采购申请单
