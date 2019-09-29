@@ -2,7 +2,7 @@ git status
 
 git add *                 
 
-git commit  -m   "workout edit purchase"
+git commit  -m   "workout the verifyInput.js"
 
 git pull origin master   
 
