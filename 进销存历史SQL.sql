@@ -168,3 +168,10 @@ ALTER TABLE accounts MODIFY COLUMN `salt` varchar(20) NOT NULL COMMENT '盐值';
 ALTER TABLE accounts MODIFY COLUMN `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号';
 
 select * from purchase where operator ='user333';
+
+-- update
+update purchase set 
+commodity='铁马秋风',supplier='大山芽',quantity='60',amount_money='100.22',
+payment_method='3',is_enter_store='1',purchase_time='2011-12-18 00:15:25' where purchase_id=3;
+
+

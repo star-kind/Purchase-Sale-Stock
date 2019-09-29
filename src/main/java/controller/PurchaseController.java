@@ -28,6 +28,28 @@ public class PurchaseController extends ControllerToolKit {
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
 
 	/**
+	 * 
+	 * @param purchase
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "editOnePurchaseByIdHandler", method = RequestMethod.POST)
+	public ResponseResult<Void> editOnePurchaseByIdHandler(Purchase purchase, HttpSession session) {
+		System.err.println(purchase);
+		
+		String usrname = session.getAttribute("usrname").toString();
+		System.out.println("usrname:" + usrname);
+
+		Integer affect = ips.editOnePurchaseById(usrname, purchase);
+		System.out.println("affect:" + affect);
+
+		instance.editOnePurchaseByIdHandlerLog(affect, usrname, purchase);
+
+		return new ResponseResult<Void>(SUCCESS);
+	}
+
+	/**
 	 * http://localhost:8080/stocker-manager/PurchaseController/findPurchaseByIdHandler?purchaseId=2
 	 * 
 	 * @param purchaseId
@@ -37,15 +59,15 @@ public class PurchaseController extends ControllerToolKit {
 	@RequestMapping(value = "findPurchaseByIdHandler", method = RequestMethod.POST)
 	public ResponseResult<Purchase> findPurchaseByIdHandler(@RequestParam("purchaseId") Integer purchaseId,
 			HttpSession session) {
-		
+
 		Integer usrid = null;
-		
+
 		try {
 			usrid = Integer.valueOf(session.getAttribute("usrid").toString());
-			
+
 		} catch (Exception e) {
 			purchaseId = null;
-			
+
 		}
 		System.err.println("purchaseId:" + purchaseId + ",usrid:" + usrid);
 

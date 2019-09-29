@@ -9,6 +9,8 @@ package service.ex;
 public enum ServiceExceptionEnum {
 	/** 实例成员 */
 	INSTANCE,
+	/** 审批已过截止期,禁止更改 */
+	OVER_DEADLINE(422, "审批已过截止期,禁止更改"),
 	/** 您已下线,请重新登录 */
 	OFFLINE_LOGIN(410, "您已下线,请重新登录"),
 	/** 此名已有人先用,请另换名字 */

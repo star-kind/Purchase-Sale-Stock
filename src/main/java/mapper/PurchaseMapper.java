@@ -1,7 +1,10 @@
 package mapper;
 
+import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 import pojo.Purchase;
 import pojo.PurchaseExample;
 
@@ -12,6 +15,14 @@ import pojo.PurchaseExample;
  *
  */
 public interface PurchaseMapper {
+	/**
+	 * 根据ID修改更新
+	 * 
+	 * @param purchase
+	 * @return
+	 */
+	Integer updatePurchaseByPurchaseId(Purchase purchase);
+
 	/**
 	 * 根据单子实际负责人查询属于他经手的单子
 	 * 

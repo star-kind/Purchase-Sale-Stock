@@ -15,6 +15,16 @@ import service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 修改申购单资料
+	 * 
+	 * @param operator
+	 * @param purchase
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer editOnePurchaseById(String operator, Purchase purchase) throws SelfServiceException;
+
+	/**
 	 * 据ID而寻一份申请单数据
 	 * 
 	 * @param purchaseId

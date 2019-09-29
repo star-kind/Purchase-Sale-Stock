@@ -290,3 +290,205 @@ function generatePurchaseContent(p) {
 
 	return formHtml;
 }
+
+/* ============================ 分隔-修改单份采购申请============================ */
+/**
+ * 显示准备修改的内容
+ * 
+ * @param purchaseId
+ * @returns
+ */
+function revampPrepare(purchaseId) {
+	console.log(arg);
+
+	// 获取原有资料数据
+	var previousData = getPurchaseProfile(arg);
+
+	// 将原数据代入至动态生成表单内容之函数,并获取返回内容
+	var profileHTML = geneateEditFormContent(previousData);
+
+	layer.open({
+		type : 1,
+		title : '修改采买申购单',
+		area : [ '600px', '480px' ],
+		id : [ 'form_area' ],
+		resize : true,
+		closeBtn : true,
+		shade : 0.4,// 遮罩透明度
+		content : profileHTML
+	})
+}
+
+/**
+ * 获取原有申请单
+ * 
+ * @param argument
+ * @returns
+ */
+function getPurchaseProfile(argument) {
+	var uri = '/stocker-manager/PurchaseController/findPurchaseByIdHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'purchaseId' : argument
+		},
+		type : 'POST',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state == 200) {
+
+				var profile = rr.data;
+
+				return profile;
+
+			} else {
+
+				alert(rr.message);
+			}
+		}
+	})
+}
+
+/**
+ * 生成待改之表单内容
+ * 
+ * @param profile
+ * @returns
+ */
+function geneateEditFormContent(profile) {
+	var formContent = '<div style="text-align: left;">';
+	
+	formContent += '<span></span>';
+	formContent += '<form id="own_edit_form" style="font-size: 20px;">';
+
+	formContent += '<div style="margin-top: 5%;margin-left: 18%;">';
+
+	formContent += '<p style="visibility: hidden;">';
+	formContent += '<input type="text" name="purchaseId"  readonly="readonly" value='
+			+ profile.purchaseId + '>';
+	formContent += '</p>';
+
+	formContent += '<p>输入新货品名:';
+	formContent += '<input type="text" name="commodity" value='
+			+ profile.commodity + '>';
+	formContent += '</p>';
+
+	formContent += '<br>';
+
+	formContent += '<p>输入新货商:';
+	formContent += '<input type="text" name="supplier" value='
+			+ profile.supplier + '>';
+	formContent += '</p>';
+
+	formContent += '<br>';
+
+	formContent += '<p>输入新采购数量:';
+	formContent += '<span></span>';
+	formContent += '<input type="text" id="quantity" name="quantity" value='
+			+ profile.quantity + '>';
+	formContent += '</p>';
+
+	formContent += '<br>';
+
+	formContent += '<p>输入新采买金额:';
+	formContent += '<input type="text" id="amountMoney" name="amountMoney" value='
+			+ profile.amountMoney + '>';
+	formContent += '</p>';
+
+	formContent += '<br>';
+
+	formContent += '<p>选择新支付方式:';
+	formContent += '<select name="paymentMethod" value='
+			+ profile.paymentMethod + '>';
+	formContent += '<option value="0">现金</option>';
+	formContent += '<option value="1">网银</option>';
+	formContent += '<option value="2">信用卡</option>';
+	formContent += '<option value="3">其它</option>';
+	formContent += '</select>';
+	formContent += '</p>';
+
+	formContent += '<br>';
+
+	formContent += '<p>选择是否已入库:';
+	formContent += '<select name="isEnterStore" value=' + profile.isEnterStore
+			+ '>';
+	formContent += '<option value="0">未入</option>';
+	formContent += '<option value="1">已入</option>';
+	formContent += '</select>';
+	formContent += '</p>';
+
+	formContent += '</div>';
+	formContent += '<br>';
+
+	formContent += '<div style="text-align: center;">';
+	formContent += '<input type="button" value="提交" onclick="submitPurchaseData()" style="margin:15px;">';
+	formContent += '<input type="reset" value="重置" style="margin:15px;">';
+	formContent += '</div>';
+
+	formContent += '<br>';
+
+	formContent += '</form>';
+	formContent += '</div>';
+
+	console.log(formContent);
+
+	return formContent;
+
+}
+
+/**
+ * 提交新数据
+ * 
+ * @returns
+ */
+function submitPurchaseData() {
+	// 返回开关量
+	var verify = veifyIsInputNull();
+	if (verify === false) {
+		return;
+	}
+
+	var quantity = $('#quantity').val();
+	var amountMoney = $('#amountMoney').val();
+
+	// 检查货品数量是否为正整数
+	var expression = new RegExp(/^\+?[1-9][0-9]*$/);
+	if (expression.test(quantity) == false) {
+		$('#quantity').css('background-color', '#EF9999');
+		$('#quantity').prev('span').text('货品数量必须为正整数');
+		return;
+	}
+
+	// 验证金额与货物数量是否为非零正数
+	var r = judges(quantity, amountMoney, null, null, null, null);
+	if (r == false) {
+		$('#own_edit_form').prev('span').css('color', '#e11d45');
+		$('#own_edit_form').prev('span').text('输入的数字不合规');
+		return;
+	}
+
+	var data = $('#own_edit_form').serialize();
+
+	console.log(data);
+
+	var uri = '/stocker-manager/PurchaseController/editOnePurchaseByIdHandler';
+
+	$.ajax({
+		url : uri,
+		data : data,
+		type : 'POST',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+
+				layer.alert('修改成功', function() {
+					location.reload();
+
+				})
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}

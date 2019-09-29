@@ -27,6 +27,8 @@
 </head>
 <body>
 	<div style="text-align: center; font-size: 28px; margin-top: 10px;">
+		<br>
+		<h4 style="color: #EF9999"></h4>
 
 		<form id="form_purchase" role="form"
 			style="margin-top: 76px; width: 80%; margin-left: 10%;">
@@ -67,7 +69,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="name">请选择是否已经入仓库</label>
+				<label for="name">是否已入库(部分或全部都算已入)</label>
 				<!--  -->
 				<select name="isEnterStore" class="form-control">
 					<option value="0">未入仓库</option>
@@ -93,7 +95,7 @@
 		var quantity = $('.quantity').val();
 		var amountMoney = $('.amountMoney').val();
 
-		//检查物量是否为正整数
+		//检查货品数量是否为正整数
 		var expression = new RegExp(/^\+?[1-9][0-9]*$/);
 		if (expression.test(quantity) == false) {
 			$('.quantity').css('background-color', '#EF9999');
@@ -104,7 +106,7 @@
 		//验证金额与货物数量是否为非零正数
 		var r = judges(quantity, amountMoney, null, null, null, null);
 		if (r == false) {
-			alert('输入的数字不合规');
+			$('#form_purchase').prev('h4').text('输入的数字不合规');
 			return;
 		}
 

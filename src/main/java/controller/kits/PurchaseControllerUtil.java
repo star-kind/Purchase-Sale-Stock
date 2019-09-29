@@ -3,6 +3,8 @@ package controller.kits;
 import java.io.File;
 import java.io.IOException;
 
+import pojo.Purchase;
+
 /**
  * 进购模块控制器工具类
  * 
@@ -59,14 +61,11 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	}
 
 	/**
-	 * 采买申请单新增记录
+	 * 记录写入升级再封装
 	 * 
-	 * @param usrname
 	 * @param affect
 	 */
-	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
-		sentence += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
-
+	public void writeRecordPlus(Integer affect) {
 		try {
 			LOG_URI = createDirAndFile();
 		} catch (IOException e) {
@@ -76,6 +75,36 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 		if (affect == 1) {
 			textWriter(sentence, LOG_URI);
 		}
+
+	}
+
+	/**
+	 * 采买申请单新增记录
+	 * 
+	 * @param usrname
+	 * @param affect
+	 */
+	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
+		sentence += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+
+		writeRecordPlus(affect);
+
+	}
+
+	/**
+	 * 单份修改申购单之记录
+	 * 
+	 * @param affect
+	 * @param usrname
+	 * @param purchase
+	 */
+	public void editOnePurchaseByIdHandlerLog(Integer affect, String usrname, Purchase purchase) {
+		// 采购经理xx于xx时间修改了x份单号id为xx的采购申请单
+		sentence += "采购经理" + usrname + "于" + now_time + "修改了" + affect + "份单号id为" + purchase.getPurchaseId() + "的采购申请单"
+				+ LINE_SEPARATOR;
+
+		writeRecordPlus(affect);
+
 	}
 
 }

@@ -111,4 +111,35 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 	}
 
+	@Override
+	public Integer editOnePurchaseById(String operator, Purchase purchase) throws SelfServiceException {
+		// 经办人不在线
+		if (operator == null || "".equals(operator)) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		// 查询在线者资料
+		Accounts accounts = am.selectByUname(operator);
+
+		// 在线者不是采购专员
+		if (accounts.getCompetence() != 2) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		// 查询原单
+		Purchase p = pm.selectByPrimaryKey(purchase.getPurchaseId());
+
+		// 该申购单已获批,无法再改
+		if (p.getIsAgree() == 1) {
+			String description = ServiceExceptionEnum.OVER_DEADLINE.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		Integer row = pm.updatePurchaseByPurchaseId(purchase);
+
+		return row;
+	}
+
 }

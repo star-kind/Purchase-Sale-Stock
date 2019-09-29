@@ -2,7 +2,7 @@ git status
 
 git add *                 
 
-git commit  -m   "update EPP.js,make the P.JSP complete"
+git commit  -m   "workout edit purchase"
 
 git pull origin master   
 

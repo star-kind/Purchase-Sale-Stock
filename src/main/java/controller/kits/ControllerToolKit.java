@@ -85,6 +85,9 @@ public class ControllerToolKit {
 
 		/* 根据异常信息设置异常码 */
 		switch (e.getMessage()) {
+		case "审批已过截止期,禁止更改":
+			rr.setState(ServiceExceptionEnum.OVER_DEADLINE.getCode());
+			break;
 
 		case "权限错位,您没有相应权限":
 			rr.setState(ServiceExceptionEnum.COMPETENCE_DISLOCATION.getCode());

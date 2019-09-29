@@ -21,6 +21,24 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void updateTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		Purchase p = new Purchase();
+		p.setCommodity("弯矩值长");
+		p.setSupplier("english");
+		p.setQuantity(101);
+		p.setAmountMoney(222.66f);
+		p.setPaymentMethod(1);
+		p.setIsEnterStore(1);
+		p.setPurchaseTime(new Date());
+		p.setPurchaseId(8);
+
+		Integer effect = pm.updatePurchaseByPurchaseId(p);
+		System.out.println("effect-" + effect);
+	}
+
+	@Test
 	public void selectByIdTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

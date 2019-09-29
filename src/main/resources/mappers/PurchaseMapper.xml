@@ -139,7 +139,7 @@
 		FROM
 		purchase
 	</select>
-	
+
 	<select id="selectWholeByOperator" resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List" />
@@ -470,4 +470,18 @@
 		#{purchaseId,jdbcType=INTEGER}
 	</update>
 
+	<update id="updatePurchaseByPurchaseId">
+		UPDATE 
+		purchase 
+		SET
+		commodity=#{commodity},
+		supplier=#{supplier},
+		quantity=#{quantity},
+		amount_money=#{amountMoney},
+		payment_method=#{paymentMethod},
+		is_enter_store=#{isEnterStore},
+		purchase_time=#{purchaseTime}
+		WHERE 
+		purchase_id=#{purchaseId}
+	</update>
 </mapper>
