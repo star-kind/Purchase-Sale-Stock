@@ -117,7 +117,7 @@
 		var selector = $("#form_usr :input[type='text']");
 
 		//校验输入非空, 返回开关量
-		var verify = verifyIsInputNull(selector);
+		var verify = verifyIsInputNullPlus(selector);
 		if (verify == false) {
 			return;
 		}

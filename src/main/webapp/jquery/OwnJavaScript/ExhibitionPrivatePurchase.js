@@ -360,14 +360,14 @@ function geneateEditFormContent(profile) {
 	formContent += '</p>';
 
 	formContent += '<p>输入新货品名:';
-	formContent += '<input type="text" name="commodity" value='
+	formContent += '<input type="text" class="purchase_input" name="commodity" value='
 			+ profile.commodity + '>';
 	formContent += '</p>';
 
 	formContent += '<br>';
 
 	formContent += '<p>输入新货商:';
-	formContent += '<input type="text" name="supplier" value='
+	formContent += '<input type="text" class="purchase_input" name="supplier" value='
 			+ profile.supplier + '>';
 	formContent += '</p>';
 
@@ -375,14 +375,14 @@ function geneateEditFormContent(profile) {
 
 	formContent += '<p>输入新采购数量:';
 	formContent += '<span></span>';
-	formContent += '<input type="text" id="quantity" name="quantity" value='
+	formContent += '<input type="text" class="purchase_input" id="quantity" name="quantity" value='
 			+ profile.quantity + '>';
 	formContent += '</p>';
 
 	formContent += '<br>';
 
 	formContent += '<p>输入新采买金额:';
-	formContent += '<input type="text" id="amountMoney" name="amountMoney" value='
+	formContent += '<input type="text" class="purchase_input" id="amountMoney" name="amountMoney" value='
 			+ profile.amountMoney + '>';
 	formContent += '</p>';
 
@@ -453,11 +453,12 @@ function ejects2(formContent) {
  * @returns
  */
 function submitPurchaseData() {
-	var selector = $('#own_edit_form :input[type="text"]');
+	var selector = $('.purchase_input');
 
-	// 校验输入非空, 返回开关量
-	var verify = verifyIsInputNull(selector);
-	if (verify == false) {
+	// 校验输入非空
+	var verify = verifyIsInputNullPlus(selector);
+	console.log('verify-' + verify);
+	if (verify === false) {
 		return;
 	}
 

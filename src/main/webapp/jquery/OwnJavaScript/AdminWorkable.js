@@ -184,7 +184,7 @@ function earseByUid(usrid) {
  * @return {}
  */
 function optionRDContent() {
-	var content = '<select class="seles_second" style="height: 40px;width: 130px" onchange="seleSec()"><option>常川</option>'
+	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()"><option>常川</option>'
 			+ '<option>滨河</option>'
 			+ '<option>上天院</option>'
 			+ '<option>鸣皋</option>'
@@ -208,7 +208,7 @@ function optionRDContent() {
  * @return {}
  */
 function optionCompetenceContent() {
-	var content = '<select class="seles_second" style="height: 55px;width: 130px" onchange="seleSec()"><option>管理员</option>'
+	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()"><option>管理员</option>'
 			+ '<option>总经理</option>'
 			+ '<option>采购经理</option>'
 			+ '<option>销售经理</option>'
@@ -224,7 +224,7 @@ function optionCompetenceContent() {
  * @return {}
  */
 function optionActiveStatusContent() {
-	var content = '<select class="seles_second" style="height: 55px;width: 130px" onchange="seleSec()"><option>已激活</option>'
+	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()"><option>已激活</option>'
 			+ '<option>已注销</option></select>';
 
 	return content;
@@ -268,11 +268,12 @@ function seleSec() {
 
 						for (var i = 0; i < list.length; i++) {
 							/** 表格中一行 */
-							var tblbody = '<tr> <td>#{usrid}</td> '
+							var tblbody = '<tr id="aid_#{usrid}"> '
+									+ '<td>#{usrid}</td> '
 									+ '<td>#{usrname}</td> '
-									+ '<td class="RegionDepartment">#{regionDepartment}</td> '
-									+ '<td class="Competences">#{competence}</td> '
-									+ '<td class="active_status">#{activeStatus}</td> '
+									+ '<td id="RegionDepartment_#{usrid}">#{regionDepartment}</td> '
+									+ '<td id="Competences_#{usrid}">#{competence}</td> '
+									+ '<td id="active_status_#{usrid}">#{activeStatus}</td> '
 									+ '<td>#{phone}</td> '
 									+ '<td class="timeDate">#{regTime}</td> '
 									+ '<td class="timeDate">#{modifiedTime}</td>'
@@ -302,12 +303,76 @@ function seleSec() {
 
 							$("#tbody_content").append(tblbody);
 
+							/* 代入 */
+							exhibitsTdByCompetence(list[i]);
+							exhibitsByActiveStatus(list[i]);
 						}
 					}
 				}
 			});
 };
 
+/* ============================================================== */
+/**
+ * 据权限码显示职务
+ * 
+ * @param acc
+ * @returns
+ */
+function exhibitsTdByCompetence(acc) {
+
+	switch (acc.competence) {
+
+	case 0:
+		$('#Competences_' + acc.usrid).text('管理员');
+		break;
+
+	case 1:
+		$('#Competences_' + acc.usrid).text('总经理');
+		break;
+
+	case 2:
+		$('#Competences_' + acc.usrid).text('采购经理');
+		break;
+
+	case 3:
+		$('#Competences_' + acc.usrid).text('销售经理');
+		break;
+
+	case 4:
+		$('#Competences_' + acc.usrid).text('仓库主管');
+		break;
+
+	case 5:
+		$('#Competences_' + acc.usrid).text('普通雇员');
+		break;
+
+	}
+}
+
+/**
+ * 根据状态码显示文字状态
+ * 
+ * @param acc
+ * @returns
+ */
+function exhibitsByActiveStatus(acc) {
+
+	switch (acc.activeStatus) {
+
+	case 0:
+		$('#active_status_' + acc.usrid).text('注销');
+		$('#aid_' + acc.usrid).css('background-color', '#db8484');
+		break;
+
+	case 1:
+		$('#active_status_' + acc.usrid).text('激活');
+		break
+
+	}
+}
+
+/* ========================================================================= */
 /**
  * 点击事件,获取文本框中的值,通过阿贾克斯发与控制器
  */
@@ -335,11 +400,12 @@ function getValu() {
 
 						for (var i = 0; i < list.length; i++) {
 							/** 表格中一行 */
-							var tblbody = '<tr> <td>#{usrid}</td> '
+							var tblbody = '<tr id="aid_#{usrid}"> '
+									+ '<td>#{usrid}</td> '
 									+ '<td>#{usrname}</td> '
-									+ '<td class="RegionDepartment">#{regionDepartment}</td> '
-									+ '<td class="Competences">#{competence}</td> '
-									+ '<td class="active_status">#{activeStatus}</td> '
+									+ '<td id="RegionDepartment_#{usrid}">#{regionDepartment}</td> '
+									+ '<td class="Competences_#{usrid}">#{competence}</td> '
+									+ '<td class="active_status_#{usrid}">#{activeStatus}</td> '
 									+ '<td>#{phone}</td> '
 									+ '<td class="timeDate">#{regTime}</td> '
 									+ '<td class="timeDate">#{modifiedTime}</td>'
@@ -368,6 +434,10 @@ function getValu() {
 									list[i].modifiedTime);
 
 							$("#tbody_content").append(tblbody);
+							
+							/* 代入 */
+							exhibitsTdByCompetence(list[i]);
+							exhibitsByActiveStatus(list[i]);
 
 						}
 					}

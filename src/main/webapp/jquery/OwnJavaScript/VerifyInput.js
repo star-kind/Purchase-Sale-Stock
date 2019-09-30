@@ -1,28 +1,43 @@
+
 /**
- * 校验输入是否为空
+ * 验证输入非空之加强
  * 
  * @param selector
- *            选择器
  * @returns
  */
-function verifyIsInputNull(selector) {
-	var check;// 开关量
+function verifyIsInputNullPlus(selector) {
+	var arrays = [];
 
-	$(selector).each(function(i) {
+	var j = 0;
+
+	$(selector).each(function(j) {
 		console.log(this.value);
 
-		if (this.value == '' || null) {
-			alert('第' + (i + 1) + '个空未输入');
-			check = false;
-		} else {
-			check = true;
-		}
-
+		arrays.push(this.value);
 	});
 
-	console.log('check-' + check)
-	return check;
+	console.log(arrays);
 
+	// 把数组代入函数
+	return judgeAtRecurrent(arrays);
+}
+
+/**
+ * 递归中判断非空
+ * 
+ * @param args
+ * @returns
+ */
+function judgeAtRecurrent(args) {
+
+	for (var i = 0; i < args.length; i++) {
+		if (args[i] == null || args[i] === '') {
+			alert('第' + (i + 1) + '个空未填入');
+			return false;
+		}
+	}
+
+	return true;
 }
 
 /**
@@ -44,18 +59,18 @@ function verifyIsInputNull(selector) {
  */
 function judges(arg0, arg1, arg2, arg3, arg4, arg5) {
 	var arr = new Array(arg0, arg1, arg2, arg3, arg4, arg5);
-	var arr000 = [];
+	var arraies = [];
 
 	for (var i = 0; i < arr.length; i++) {
 		if (arr[i] != null) {
-			arr000.push(arr[i]);
+			arraies.push(arr[i]);
 		}
 	}
 
 	var exp = new RegExp(/^(0|[1-9][0-9]*)(\.\d+)?$/);
 
-	for (var i = 0; i < arr000.length; i++) {
-		if (exp.test(arr000[i]) == false || arr000[i] == 0) {
+	for (var i = 0; i < arraies.length; i++) {
+		if (exp.test(arraies[i]) == false || arraies[i] == 0) {
 			return false;
 		}
 	}

@@ -89,7 +89,7 @@
 		var selector = $('#form_purchase :input[type="text"]');
 
 		//检查非空,返回开关量
-		var verify = verifyIsInputNull(selector);
+		var verify = verifyIsInputNullPlus(selector);
 		if (verify == false) {
 			return;
 		}

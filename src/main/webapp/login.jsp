@@ -84,7 +84,7 @@
 							var selector = $('.input_txts');
 
 							//检查非空,返回开关量
-							var booleans = verifyIsInputNull(selector);
+							var booleans = verifyIsInputNullPlus(selector);
 							if (booleans == false) {
 								return;
 							}
