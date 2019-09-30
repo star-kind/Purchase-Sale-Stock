@@ -1,26 +1,27 @@
 /**
- * 验证input是否已全部填完
+ * 校验输入是否为空
+ * 
+ * @param selector
+ *            选择器
+ * @returns
  */
-function veifyIsInputNull() {
-	$('input').each(function() {
-				// trim():除空格
-				switch ($(this).val().trim()) {
-					case "" :
-						alert('数据未填完');
-						return false;
-						break;
+function verifyIsInputNull(selector) {
+	var check;// 开关量
 
-					case null :
-						alert('数据未填完');
-						return false;
-						break;
+	$(selector).each(function(i) {
+		console.log(this.value);
 
-					default :
-						return true;
-						break;
-				}
+		if (this.value == '' || null) {
+			alert('第' + (i + 1) + '个空未输入');
+			check = false;
+		} else {
+			check = true;
+		}
 
-			});
+	});
+
+	console.log('check-' + check)
+	return check;
 
 }
 
@@ -41,23 +42,23 @@ function veifyIsInputNull() {
  *            arg5
  * @return {Boolean}
  */
-	function judges(arg0,arg1,arg2,arg3,arg4,arg5) {
-		var arr=new Array(arg0,arg1,arg2,arg3,arg4,arg5);
-		var arr000=[];
+function judges(arg0, arg1, arg2, arg3, arg4, arg5) {
+	var arr = new Array(arg0, arg1, arg2, arg3, arg4, arg5);
+	var arr000 = [];
 
-		for (var i = 0; i < arr.length; i++) {
-			if ( arr[i] !=null ) {
-				arr000.push(arr[i]);
-			} 
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] != null) {
+			arr000.push(arr[i]);
 		}
-
-		var exp=new RegExp(/^(0|[1-9][0-9]*)(\.\d+)?$/);
-
-		for (var i = 0; i < arr000.length; i++) {
-			if (exp.test(arr000[i])==false||arr000[i]==0) {
-				return false;
-			}
-		}
-
-		return true;
 	}
+
+	var exp = new RegExp(/^(0|[1-9][0-9]*)(\.\d+)?$/);
+
+	for (var i = 0; i < arr000.length; i++) {
+		if (exp.test(arr000[i]) == false || arr000[i] == 0) {
+			return false;
+		}
+	}
+
+	return true;
+}

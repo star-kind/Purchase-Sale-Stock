@@ -292,6 +292,7 @@ function generatePurchaseContent(p) {
 }
 
 /* ============================ 分隔-修改单份采购申请============================ */
+
 /**
  * 显示准备修改的内容
  * 
@@ -299,24 +300,11 @@ function generatePurchaseContent(p) {
  * @returns
  */
 function revampPrepare(purchaseId) {
-	console.log(arg);
+	console.log(purchaseId);
 
 	// 获取原有资料数据
-	var previousData = getPurchaseProfile(arg);
+	getPurchaseProfile(purchaseId);
 
-	// 将原数据代入至动态生成表单内容之函数,并获取返回内容
-	var profileHTML = geneateEditFormContent(previousData);
-
-	layer.open({
-		type : 1,
-		title : '修改采买申购单',
-		area : [ '600px', '480px' ],
-		id : [ 'form_area' ],
-		resize : true,
-		closeBtn : true,
-		shade : 0.4,// 遮罩透明度
-		content : profileHTML
-	})
 }
 
 /**
@@ -337,17 +325,19 @@ function getPurchaseProfile(argument) {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state == 200) {
-
+				console.log(rr.data);
 				var profile = rr.data;
 
-				return profile;
+				// 将原数据传入动态HTML生成函数
+				geneateEditFormContent(profile);
 
 			} else {
-
 				alert(rr.message);
+
 			}
 		}
 	})
+
 }
 
 /**
@@ -358,7 +348,7 @@ function getPurchaseProfile(argument) {
  */
 function geneateEditFormContent(profile) {
 	var formContent = '<div style="text-align: left;">';
-	
+
 	formContent += '<span></span>';
 	formContent += '<form id="own_edit_form" style="font-size: 20px;">';
 
@@ -433,8 +423,28 @@ function geneateEditFormContent(profile) {
 
 	console.log(formContent);
 
-	return formContent;
+	// 代入html内容,并弹出窗体
+	ejects2(formContent);
 
+}
+
+/**
+ * 弹出待编辑之表单
+ * 
+ * @param formContent
+ * @returns
+ */
+function ejects2(formContent) {
+	layer.open({
+		type : 1,
+		title : '修改采买申购单',
+		area : [ '600px', '480px' ],
+		id : [ 'form_area' ],
+		resize : true,
+		closeBtn : true,
+		shade : 0.4,// 遮罩透明度
+		content : formContent
+	})
 }
 
 /**
@@ -443,9 +453,11 @@ function geneateEditFormContent(profile) {
  * @returns
  */
 function submitPurchaseData() {
-	// 返回开关量
-	var verify = veifyIsInputNull();
-	if (verify === false) {
+	var selector = $('#own_edit_form :input[type="text"]');
+
+	// 校验输入非空, 返回开关量
+	var verify = verifyIsInputNull(selector);
+	if (verify == false) {
 		return;
 	}
 

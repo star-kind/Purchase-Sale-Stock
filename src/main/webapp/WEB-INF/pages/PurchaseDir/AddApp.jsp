@@ -86,9 +86,11 @@
 
 <script type="text/javascript">
 	function submits() {
-		//返回开关量
-		var verify = veifyIsInputNull();
-		if (verify === false) {
+		var selector = $('#form_purchase :input[type="text"]');
+
+		//检查非空,返回开关量
+		var verify = verifyIsInputNull(selector);
+		if (verify == false) {
 			return;
 		}
 

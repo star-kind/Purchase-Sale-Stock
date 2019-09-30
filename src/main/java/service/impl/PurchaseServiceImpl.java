@@ -137,6 +137,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			throw new SelfServiceException(description);
 		}
 
+		purchase.setPurchaseTime(new Date());
+		
 		Integer row = pm.updatePurchaseByPurchaseId(purchase);
 
 		return row;

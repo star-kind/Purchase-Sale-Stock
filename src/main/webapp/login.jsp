@@ -17,6 +17,9 @@
 <!-- 自定义css -->
 <link rel="stylesheet" type="text/css" href="PatternStyle/Login.css">
 
+<!-- 校验表单提交 -->
+<script src="jquery/OwnJavaScript/VerifyInput.js"></script>
+
 </head>
 <body>
 	<div class="container" id="content">
@@ -35,29 +38,37 @@
 		<div class="panel panel-default" id="mine_panel">
 			<div class="panel-heading">
 				<div class="row">
+
 					<form id="form_usr_login"
 						class="bs-example bs-example-form col-md-5" role="form"
 						style="margin: 20px 0 10px 0;">
 
 						<div class="input-group">
-							<input id="usrname" class="form-control" placeholder="请输入用户名"
-								type="text" name="usrname" maxlength="28" style="width: 440px;">
-						</div>
-
-						<div class="input-group">
-							<input id="password" class="form-control" placeholder="请输入密码"
-								type="password" name="password" maxlength="22"
+							<input id="usrname" class="form-control input_txts"
+								placeholder="请输入用户名" type="text" name="usrname" maxlength="28"
 								style="width: 440px;">
 						</div>
 
-						<input type="button" id="commit_login" value="登录"
-							style="margin-top: 14px;" class="btn btn-default col-md-2">
+						<div class="input-group">
+							<input id="password" class="form-control input_txts"
+								placeholder="请输入密码" type="password" name="password"
+								maxlength="22" style="width: 440px;">
+						</div>
 
-						<div style="margin-top: 38px;">
-							<a href="Registration.jsp">注册账号</a>
+						<div class="input-group" style="width: 200px; margin-left: 80%;">
+
+							<input type="button" id="commit_login" value="登录"
+								class="btn btn-default btn-lg col-md-2">
+
+							<!--  -->
+							<div style="margin-top: 8%;">
+								<a href="Registration.jsp" style="font-size: 20px;">注册账号</a>
+							</div>
 						</div>
 
 					</form>
+
+					<!--  -->
 				</div>
 			</div>
 		</div>
@@ -69,6 +80,15 @@
 		$('#commit_login')
 				.click(
 						function() {
+							//选中当前表单中,标签input,类型type="text"的节点对象
+							var selector = $('.input_txts');
+
+							//检查非空,返回开关量
+							var booleans = verifyIsInputNull(selector);
+							if (booleans == false) {
+								return;
+							}
+
 							var url = 'account/login';
 							var data = $('#form_usr_login').serialize();
 							$

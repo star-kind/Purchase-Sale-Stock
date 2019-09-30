@@ -25,6 +25,9 @@
 <link rel="stylesheet" type="text/css"
 	href="CssFrame/bootstrap-theme.css">
 
+<!-- 校验表单提交 -->
+<script src="${basePath}/jquery/OwnJavaScript/VerifyInput.js"></script>
+
 </head>
 <body>
 	<!-- reg area -->
@@ -111,6 +114,14 @@
 
 <script type="text/javascript">
 	function commit00() {
+		var selector = $("#form_usr :input[type='text']");
+
+		//校验输入非空, 返回开关量
+		var verify = verifyIsInputNull(selector);
+		if (verify == false) {
+			return;
+		}
+
 		var profile = $('#form_usr').serialize();
 
 		$.ajax({
