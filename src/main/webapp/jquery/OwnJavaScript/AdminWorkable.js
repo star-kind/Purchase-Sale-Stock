@@ -152,12 +152,13 @@ function changingDateFormat() {
 	var j = 0;
 	var strArr = [];
 	var vari = "";
+	
 	for (var i = 1; i <= part; i++) {
 		// 分段截取28字符
 		var sub = arr.substring(j, unit * i);
 		j = unit * i;
 
-		vari = GMTToStr(sub);
+		vari = GreenwichTransToNormalFormat(sub);
 
 		$('.timeDate').eq(i - 1).text(vari);
 	}
@@ -165,17 +166,19 @@ function changingDateFormat() {
 }
 
 /**
- * 格林威治时间转为普通年月日格式
+ * 格林威治时间转为普通年月日时分秒格式
  * 
  * @param greenwich
  * @returns
  */
-function GMTToStr(greenwich) {
+function GreenwichTransToNormalFormat(greenwich) {
 	var date = new Date(greenwich);
 
+	//年月日
 	var gener = date.getFullYear() + '-' + (date.getMonth() + 1) + '-'
 			+ date.getDate();
 
+	//时分秒
 	gener += ' ';
 	gener += date.getHours() + ':';
 	gener += date.getMinutes() + ':';
