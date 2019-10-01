@@ -12,45 +12,75 @@ $(document).ready(function() {
  */
 function regionDeptNoAsTrueName() {
 	var rds = [];
+
 	$('.RegionDepartment').each(function() {
 		var rd = $(this).text();
 		rds.push(rd);
 	});
 
-	for (var index = 0; index < rds.length; index++) {
-		if (rds[index] >= 0 && rds[index] <= 15) {
-			$('.RegionDepartment').eq(index).text('常川分部');
-		} else if (rds[index] >= 16 && rds[index] <= 21) {
-			$('.RegionDepartment').eq(index).text('滨河分部');
-		} else if (rds[index] >= 22 && rds[index] <= 29) {
-			$('.RegionDepartment').eq(index).text('上天院分部');
-		} else if (rds[index] >= 30 && rds[index] <= 39) {
-			$('.RegionDepartment').eq(index).text('鸣皋分部');
-		} else if (rds[index] >= 40 && rds[index] <= 49) {
-			$('.RegionDepartment').eq(index).text('焦王分部');
-		} else if (rds[index] >= 50 && rds[index] <= 59) {
-			$('.RegionDepartment').eq(index).text('申坡分部');
-		} else if (rds[index] >= 60 && rds[index] <= 69) {
-			$('.RegionDepartment').eq(index).text('遵王分部');
-		} else if (rds[index] >= 70 && rds[index] <= 79) {
-			$('.RegionDepartment').eq(index).text('常海山分部');
-		} else if (rds[index] >= 80 && rds[index] <= 89) {
-			$('.RegionDepartment').eq(index).text('海神分部');
-		} else if (rds[index] >= 90 && rds[index] <= 99) {
-			$('.RegionDepartment').eq(index).text('老君堂分部');
-		} else if (rds[index] >= 100 && rds[index] <= 129) {
-			$('.RegionDepartment').eq(index).text('鸦岭分部');
-		} else if (rds[index] >= 130 && rds[index] <= 149) {
-			$('.RegionDepartment').eq(index).text('酒后分部');
-		} else if (rds[index] >= 150 && rds[index] <= 169) {
-			$('.RegionDepartment').eq(index).text('平等分部');
-		} else if (rds[index] >= 170 && rds[index] <= 199) {
-			$('.RegionDepartment').eq(index).text('卷奥分部');
-		} else {
-			$('.RegionDepartment').eq(index).text('富留店分部');
-		}
+	console.log(rds);
 
+	for (var i = 0; i < rds.length; i++) {
+		switch (rds[i]) {
+		case '0':
+			$('.RegionDepartment').eq(i).text('滨河');
+			break;
+
+		case '1':
+			$('.RegionDepartment').eq(i).text('上天院');
+			break;
+
+		case '2':
+			$('.RegionDepartment').eq(i).text('鸣皋');
+			break;
+
+		case '3':
+			$('.RegionDepartment').eq(i).text('焦王');
+			break;
+
+		case '4':
+			$('.RegionDepartment').eq(i).text('申坡');
+			break;
+
+		case '5':
+			$('.RegionDepartment').eq(i).text('遵王');
+			break;
+
+		case '6':
+			$('.RegionDepartment').eq(i).text('常海山');
+			break;
+
+		case '7':
+			$('.RegionDepartment').eq(i).text('老君堂');
+			break;
+
+		case '8':
+			$('.RegionDepartment').eq(i).text('鸦岭');
+			break;
+
+		case '9':
+			$('.RegionDepartment').eq(i).text('酒后');
+			break;
+
+		case '10':
+			$('.RegionDepartment').eq(i).text('平等');
+			break;
+
+		case '11':
+			$('.RegionDepartment').eq(i).text('夏堡');
+			break;
+
+		case '12':
+			$('.RegionDepartment').eq(i).text('富留店');
+			break;
+
+		default:
+			$('.RegionDepartment').eq(i).text('总部');
+			break;
+
+		}
 	}
+
 }
 
 /**
@@ -60,6 +90,7 @@ function regionDeptNoAsTrueName() {
  */
 function competenceNumShowJobName() {
 	var compets = [];
+
 	$('.Competences').each(function() {
 		var compet = $(this).text();
 		compets.push(compet);
@@ -89,6 +120,7 @@ function competenceNumShowJobName() {
  */
 function activeStatusExhibit() {
 	var activeStatus = new Array();
+
 	$('.active_status').each(function() {
 		var activeState = $(this).text();
 		activeStatus.push(activeState);
@@ -110,7 +142,7 @@ function activeStatusExhibit() {
  * @returns
  */
 function changingDateFormat() {
-	// 按classname获取一长串String
+	// 按类选择器获取一长串String
 	var arr = $('.timeDate').text();
 
 	// 每28个字符为一单位日期String
@@ -133,7 +165,7 @@ function changingDateFormat() {
 }
 
 /**
- * 格林威治时间转为普通格式
+ * 格林威治时间转为普通年月日格式
  * 
  * @param greenwich
  * @returns
@@ -143,6 +175,11 @@ function GMTToStr(greenwich) {
 
 	var gener = date.getFullYear() + '-' + (date.getMonth() + 1) + '-'
 			+ date.getDate();
+
+	gener += ' ';
+	gener += date.getHours() + ':';
+	gener += date.getMinutes() + ':';
+	gener += date.getSeconds();
 
 	return gener;
 }
@@ -184,7 +221,7 @@ function earseByUid(usrid) {
  * @return {}
  */
 function optionRDContent() {
-	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()"><option>常川</option>'
+	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()">'
 			+ '<option>滨河</option>'
 			+ '<option>上天院</option>'
 			+ '<option>鸣皋</option>'
@@ -196,7 +233,7 @@ function optionRDContent() {
 			+ '<option>鸦岭</option>'
 			+ '<option>酒后</option>'
 			+ '<option>平等</option>'
-			+ '<option>卷奥</option>'
+			+ '<option>夏堡</option>'
 			+ '<option>富留店</option></select>';
 
 	return content;
@@ -249,7 +286,7 @@ function seleSec() {
 	var str = '';
 	$('#select_second_area select option:selected').each(function() {
 		// 获取下拉框选项之值
-		str = $('#select_second_area select option:selected').text();// data
+		str = $(this).text();// data
 	});
 	console.log(str);
 
@@ -306,6 +343,7 @@ function seleSec() {
 							/* 代入 */
 							exhibitsTdByCompetence(list[i]);
 							exhibitsByActiveStatus(list[i]);
+							exhibitsByDeptNo(list[i]);
 						}
 					}
 				}
@@ -372,6 +410,75 @@ function exhibitsByActiveStatus(acc) {
 	}
 }
 
+/**
+ * 根据部门编号显示文字
+ * 
+ * @param acc
+ * @returns
+ */
+function exhibitsByDeptNo(acc) {
+	switch (acc.regionDepartment) {
+
+	case 0:
+		$('#RegionDepartment_' + acc.usrid).text('滨河');
+		break;
+
+	case 1:
+		$('#RegionDepartment_' + acc.usrid).text('上天院');
+		break;
+
+	case 2:
+		$('#RegionDepartment_' + acc.usrid).text('鸣皋');
+		break;
+
+	case 3:
+		$('#RegionDepartment_' + acc.usrid).text('焦王');
+		break;
+
+	case 4:
+		$('#RegionDepartment_' + acc.usrid).text('申坡');
+		break;
+
+	case 5:
+		$('#RegionDepartment_' + acc.usrid).text('遵王');
+		break;
+
+	case 6:
+		$('#RegionDepartment_' + acc.usrid).text('常海山');
+		break;
+
+	case 7:
+		$('#RegionDepartment_' + acc.usrid).text('老君堂');
+		break;
+
+	case 8:
+		$('#RegionDepartment_' + acc.usrid).text('鸦岭');
+		break;
+
+	case 9:
+		$('#RegionDepartment_' + acc.usrid).text('酒后');
+		break;
+
+	case 10:
+		$('#RegionDepartment_' + acc.usrid).text('平等');
+		break;
+
+	case 11:
+		$('#RegionDepartment_' + acc.usrid).text('夏堡');
+		break;
+
+	case 12:
+		$('#RegionDepartment_' + acc.usrid).text('富留店');
+		break;
+
+	default:
+		$('#RegionDepartment_' + acc.usrid).text('总部');
+		break;
+
+	}
+
+}
+
 /* ========================================================================= */
 /**
  * 点击事件,获取文本框中的值,通过阿贾克斯发与控制器
@@ -380,7 +487,7 @@ function getValu() {
 	var uname = document.getElementById('searching').value;// data
 	console.log(uname);
 
-	if (uname == null || uname == '') {
+	if (uname == null || uname === '') {
 		alert('您还未填写账户名字');
 		return;
 	}
@@ -404,8 +511,8 @@ function getValu() {
 									+ '<td>#{usrid}</td> '
 									+ '<td>#{usrname}</td> '
 									+ '<td id="RegionDepartment_#{usrid}">#{regionDepartment}</td> '
-									+ '<td class="Competences_#{usrid}">#{competence}</td> '
-									+ '<td class="active_status_#{usrid}">#{activeStatus}</td> '
+									+ '<td id="Competences_#{usrid}">#{competence}</td> '
+									+ '<td id="active_status_#{usrid}">#{activeStatus}</td> '
 									+ '<td>#{phone}</td> '
 									+ '<td class="timeDate">#{regTime}</td> '
 									+ '<td class="timeDate">#{modifiedTime}</td>'
@@ -434,10 +541,11 @@ function getValu() {
 									list[i].modifiedTime);
 
 							$("#tbody_content").append(tblbody);
-							
+
 							/* 代入 */
 							exhibitsTdByCompetence(list[i]);
 							exhibitsByActiveStatus(list[i]);
+							exhibitsByDeptNo(list[i]);
 
 						}
 					}

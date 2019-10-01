@@ -194,7 +194,7 @@ public class AccountsController extends ControllerToolKit {
 	}
 
 	/**
-	 * http://localhost:8080/stocker-manager/account/search_by_threeType_scene?str=卷奥
+	 * http://localhost:8080/stocker-manager/account/search_by_threeType_scene?str=长川
 	 * 
 	 * @param str
 	 *            地区部门/职位/是否注销激活

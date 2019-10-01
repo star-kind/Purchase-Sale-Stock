@@ -40,6 +40,10 @@ show full COLUMNs FROM accounts;
 
 alter table accounts change region_department region_department int(5) not null COMMENT '所属区域部门,如11为常川物流部';
 
+-- 修改注释
+ALTER TABLE accounts CHANGE region_department region_department int(3) NOT NULL 
+COMMENT '地区部门,0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦岭,9-酒后,10-平等,11-夏堡,12-富留店';
+
 select count(usrid) from accounts where phone='181524007';
 
 alter table accounts modify COLUMN competence int(1) comment '权限,0技术运维,1总经理,2采购经理,3销售经理,4仓库主管,5普通雇员';

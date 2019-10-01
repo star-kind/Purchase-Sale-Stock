@@ -171,6 +171,25 @@
 		#{end}
 	</select>
 
+	<select id="selectByRegionDepartmentBySingleNum"
+		resultType="pojo.Accounts">
+		SELECT
+		usrid,
+		usrname,
+		region_department
+		AS regionDepartment,
+		phone,
+		competence,
+		active_status AS activeStatus,
+		reg_time AS regTime,
+		modified_time AS
+		modifiedTime
+		FROM
+		accounts
+		WHERE
+		region_department=#{regionDepartment}
+	</select>
+
 	<select id="selectByCompetence" resultType="pojo.Accounts">
 		SELECT
 		usrid,

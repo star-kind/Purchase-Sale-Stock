@@ -16,6 +16,33 @@ import pojo.Accounts;
  *
  */
 public class AccountServiceUtil {
+	private static AccountServiceUtil asu;
+
+	private static final Object LOCK = new Object();
+
+	private AccountServiceUtil() {
+
+	}
+
+	/**
+	 * 懒汉
+	 * 
+	 * @return
+	 */
+	public static AccountServiceUtil getInstance() {
+
+		if (asu == null) {
+			synchronized (LOCK) {// 决定是否需要锁住,并判断
+				if (asu == null) {
+					asu = new AccountServiceUtil();
+				}
+			}
+		}
+
+		return asu;
+
+	}
+
 	/**
 	 * 提取盐
 	 *
@@ -86,10 +113,8 @@ public class AccountServiceUtil {
 	/**
 	 * 校验加盐后是否和原文一致,逆向解密
 	 *
-	 * @param password
-	 *            提交之密码
-	 * @param text
-	 *            原文
+	 * @param password 提交之密码
+	 * @param text     原文
 	 * @return
 	 */
 	public boolean verify(String password, String text) {
@@ -135,8 +160,7 @@ public class AccountServiceUtil {
 			list.add(Integer.toString(a.getCompetence()));
 		}
 
-		if (a.getRegionDepartment() == null
-				|| ("".equals(a.getRegionDepartment()))) {
+		if (a.getRegionDepartment() == null || ("".equals(a.getRegionDepartment()))) {
 			System.out.println("the nerve on him");
 		} else {
 			list.add(Integer.toString(a.getRegionDepartment()));
@@ -155,119 +179,185 @@ public class AccountServiceUtil {
 		Integer[] arr = new Integer[2];
 
 		switch (regionDepartment) {
-			case "常川" :
-				arr[0] = 0;
-				arr[1] = 15;
-				break;
+		case "常川":
+			arr[0] = 0;
+			arr[1] = 15;
+			break;
 
-			case "滨河" :
-				arr[0] = 16;
-				arr[1] = 21;
-				break;
+		case "滨河":
+			arr[0] = 16;
+			arr[1] = 21;
+			break;
 
-			case "上天院" :
-				arr[0] = 22;
-				arr[1] = 29;
-				break;
+		case "上天院":
+			arr[0] = 22;
+			arr[1] = 29;
+			break;
 
-			case "鸣皋" :
-				arr[0] = 30;
-				arr[1] = 39;
-				break;
+		case "鸣皋":
+			arr[0] = 30;
+			arr[1] = 39;
+			break;
 
-			case "焦王" :
-				arr[0] = 40;
-				arr[1] = 49;
-				break;
+		case "焦王":
+			arr[0] = 40;
+			arr[1] = 49;
+			break;
 
-			case "申坡" :
-				arr[0] = 50;
-				arr[1] = 59;
-				break;
+		case "申坡":
+			arr[0] = 50;
+			arr[1] = 59;
+			break;
 
-			case "遵王" :
-				arr[0] = 60;
-				arr[1] = 69;
-				break;
+		case "遵王":
+			arr[0] = 60;
+			arr[1] = 69;
+			break;
 
-			case "常海山" :
-				arr[0] = 70;
-				arr[1] = 79;
-				break;
+		case "常海山":
+			arr[0] = 70;
+			arr[1] = 79;
+			break;
 
-			case "海神" :
-				arr[0] = 80;
-				arr[1] = 89;
-				break;
+		case "海神":
+			arr[0] = 80;
+			arr[1] = 89;
+			break;
 
-			case "老君堂" :
-				arr[0] = 90;
-				arr[1] = 99;
-				break;
+		case "老君堂":
+			arr[0] = 90;
+			arr[1] = 99;
+			break;
 
-			case "鸦岭" :
-				arr[0] = 100;
-				arr[1] = 129;
-				break;
+		case "鸦岭":
+			arr[0] = 100;
+			arr[1] = 129;
+			break;
 
-			case "酒后" :
-				arr[0] = 130;
-				arr[1] = 149;
-				break;
+		case "酒后":
+			arr[0] = 130;
+			arr[1] = 149;
+			break;
 
-			case "平等" :
-				arr[0] = 150;
-				arr[1] = 169;
-				break;
+		case "平等":
+			arr[0] = 150;
+			arr[1] = 169;
+			break;
 
-			case "卷奥" :
-				arr[0] = 170;
-				arr[1] = 199;
-				break;
+		case "夏堡":
+			arr[0] = 170;
+			arr[1] = 199;
+			break;
 
-			default :
-				arr[0] = 200;
-				arr[1] = 999;
-				break;
+		default:
+			arr[0] = 200;
+			arr[1] = 999;
+			break;
 		}
 
 		return arr;
 	}
 
 	/**
+	 * 根据传入的地区部门名返还一个地区代号
+	 * 
+	 * @param regionDepartment
+	 * @return
+	 */
+	public Integer getNumRegionDepartment(String regionDepartment) {
+		Integer number = null;
+
+		switch (regionDepartment) {
+
+		case "滨河":
+			number = 0;
+			break;
+
+		case "上天院":
+			number = 1;
+			break;
+
+		case "鸣皋":
+			number = 2;
+			break;
+
+		case "焦王":
+			number = 3;
+			break;
+
+		case "申坡":
+			number = 4;
+			break;
+
+		case "遵王":
+			number = 5;
+			break;
+
+		case "常海山":
+			number = 6;
+			break;
+
+		case "老君堂":
+			number = 7;
+			break;
+
+		case "鸦岭":
+			number = 8;
+			break;
+
+		case "酒后":
+			number = 9;
+			break;
+
+		case "平等":
+			number = 10;
+			break;
+
+		case "夏堡":
+			number = 11;
+			break;
+
+		case "富留店":
+			number = 12;
+			break;
+		}
+
+		return number;
+	}
+
+	/**
 	 * 据传入的职务权限字符串返回不同权限码
 	 * 
-	 * @param selectCompetence
-	 *            权限码
+	 * @param selectCompetence 权限码
 	 * @return
 	 */
 	public Integer switchBySelectCompetence(String selectCompetence) {
 		Integer competence = 5;
 
 		switch (selectCompetence) {
-			case "管理员" :
-				competence = 0;
-				break;
+		case "管理员":
+			competence = 0;
+			break;
 
-			case "总经理" :
-				competence = 1;
-				break;
+		case "总经理":
+			competence = 1;
+			break;
 
-			case "采购经理" :
-				competence = 2;
-				break;
+		case "采购经理":
+			competence = 2;
+			break;
 
-			case "销售经理" :
-				competence = 3;
-				break;
+		case "销售经理":
+			competence = 3;
+			break;
 
-			case "仓库主管" :
-				competence = 4;
-				break;
+		case "仓库主管":
+			competence = 4;
+			break;
 
-			case "普通雇员" :
-				competence = 5;
-				break;
+		case "普通雇员":
+			competence = 5;
+			break;
 
 		}
 
@@ -277,8 +367,7 @@ public class AccountServiceUtil {
 	/**
 	 * 据传入的账户状态字符串返回不同状态码
 	 * 
-	 * @param selectCompetence
-	 *            状态码
+	 * @param selectCompetence 状态码
 	 * @return
 	 */
 	public Integer statusStringTransToActiveStatus(String status) {

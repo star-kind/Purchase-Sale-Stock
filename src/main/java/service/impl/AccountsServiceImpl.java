@@ -33,9 +33,11 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	public ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
+	protected AccountServiceUtil asu = AccountServiceUtil.getInstance();
+
 	@Override
 	public Integer registerRole(Accounts accounts) throws SelfServiceException {
-		AccountServiceUtil util = new AccountServiceUtil();
+		// AccountServiceUtil util = new AccountServiceUtil();
 
 		System.out.println(accounts.toString());
 
@@ -63,17 +65,17 @@ public class AccountsServiceImpl implements IAccountsService {
 		}
 
 		// 统计注册账号提交之数据个数是否为4
-		Integer m = util.checkCommittedAccounts(accounts);
+		Integer m = asu.checkCommittedAccounts(accounts);
 		if (m != 4) {
 			String description = ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getDescription();
 			throw new SelfServiceException(description);
 		}
 
 		// 生成盐值
-		String salt = util.extractSalt();
+		String salt = asu.extractSalt();
 
 		// 代入常量加盐+MD5混合,生成密文
-		String generate = util.generate(DEFAULT_KEY, salt);
+		String generate = asu.generate(DEFAULT_KEY, salt);
 
 		// 密盐设值
 		accounts.setSalt(salt);
@@ -92,7 +94,7 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Accounts login(String usrname, String password, HttpSession session) throws SelfServiceException {
-		AccountServiceUtil util = new AccountServiceUtil();
+//		AccountServiceUtil util = new AccountServiceUtil();
 
 		// 抛异常:用户名或密码为空
 		if (usrname == null || "".equals(usrname) || "springmvc".equals(usrname) || password == null
@@ -113,7 +115,7 @@ public class AccountsServiceImpl implements IAccountsService {
 		String text = accounts.getPassword();
 
 		// 登录密码与密码原文代入verify中,为假则报异常
-		boolean verify = util.verify(password, text);
+		boolean verify = asu.verify(password, text);
 		if (verify == false) {
 			String description = ServiceExceptionEnum.KEYWORD_ERR.getDescription();
 			throw new SelfServiceException(description);
@@ -159,7 +161,7 @@ public class AccountsServiceImpl implements IAccountsService {
 	@Override
 	public Integer alterAccountProfile(String usrname, String phone, Integer competence, Integer regionDepartment,
 			Integer usrid) throws SelfServiceException {
-		AccountServiceUtil util = new AccountServiceUtil();
+//		AccountServiceUtil util = new AccountServiceUtil();
 
 		Accounts a1 = new Accounts();
 		a1.setUsrname(usrname);
@@ -168,7 +170,7 @@ public class AccountsServiceImpl implements IAccountsService {
 		a1.setRegionDepartment(regionDepartment);
 
 		// 前台提交之信息不全
-		Integer m = util.checkCommittedAccounts(a1);
+		Integer m = asu.checkCommittedAccounts(a1);
 		if (m != 4) {
 			String description = ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getDescription();
 			throw new SelfServiceException(description);
@@ -223,7 +225,7 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Integer multipleResetPwd(Integer[] ids) {
-		AccountServiceUtil util = new AccountServiceUtil();
+//		AccountServiceUtil util = new AccountServiceUtil();
 		Integer effects = 0;
 
 		// 循环取出盐值,循环生成密文,循环执行update
@@ -231,7 +233,7 @@ public class AccountsServiceImpl implements IAccountsService {
 			String salt = accountsMapper.selectAccountByUsrid(ids[i]).getSalt();
 			System.out.println("salt:" + salt);
 
-			String keyContext = util.generate(DEFAULT_KEY, salt);
+			String keyContext = asu.generate(DEFAULT_KEY, salt);
 			System.out.println("keyContext:" + keyContext);
 
 			effects += accountsMapper.updatePasswordByUsrid(keyContext, ids[i]);
@@ -242,25 +244,30 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public List<Accounts> gainByRegionDepartment(String regionDepartment) {
-		AccountServiceUtil util = new AccountServiceUtil();
-		Integer[] arr = util.switchBaseOnRegionDepartment(regionDepartment);
+//		AccountServiceUtil util = new AccountServiceUtil();
 
-		List<Accounts> list = accountsMapper.selectByRegionDepartment(arr[0], arr[1]);
+//		Integer[] arr = asu.switchBaseOnRegionDepartment(regionDepartment);
+
+		Integer dept = asu.getNumRegionDepartment(regionDepartment);
+
+//		List<Accounts> list = accountsMapper.selectByRegionDepartment(arr[0], arr[1]);
+
+		List<Accounts> list = accountsMapper.selectByRegionDepartmentBySingleNum(dept);
 		return list;
 	}
 
 	@Override
 	public List<Accounts> gainByCompetence(String position) {
-		AccountServiceUtil util = new AccountServiceUtil();
-		Integer competence = util.switchBySelectCompetence(position);
+//		AccountServiceUtil util = new AccountServiceUtil();
+		Integer competence = asu.switchBySelectCompetence(position);
 
 		return accountsMapper.selectByCompetence(competence);
 	}
 
 	@Override
 	public List<Accounts> gainByActiveStatus(String status) {
-		AccountServiceUtil util = new AccountServiceUtil();
-		Integer activeStatus = util.statusStringTransToActiveStatus(status);
+//		AccountServiceUtil util = new AccountServiceUtil();
+		Integer activeStatus = asu.statusStringTransToActiveStatus(status);
 		return accountsMapper.selectByActiveStatus(activeStatus);
 	}
 
@@ -299,7 +306,7 @@ public class AccountsServiceImpl implements IAccountsService {
 			s = string;
 
 			// 若果超限,先删除,在创建一个相同的;一个汉字=2byte,1kb=1024byte
-			if (i > 30 * 1024) {
+			if (i > 4 * 1024) {
 				file.delete();
 				file.createNewFile();
 			}
@@ -321,10 +328,10 @@ public class AccountsServiceImpl implements IAccountsService {
 		Accounts accounts = accountsMapper.selectAccountByUsrid(uid);
 		String tablePwd = accounts.getPassword();
 
-		AccountServiceUtil util = new AccountServiceUtil();
+//		AccountServiceUtil util = new AccountServiceUtil();
 
 		// 检验旧密码与藏中一致
-		boolean verify = util.verify(old, tablePwd);
+		boolean verify = asu.verify(old, tablePwd);
 		if (!verify) {
 			String description = ServiceExceptionEnum.KEYWORD_ERR.getDescription();
 			throw new SelfServiceException(description);
@@ -333,7 +340,7 @@ public class AccountsServiceImpl implements IAccountsService {
 		// 将取盐
 		String salt = accounts.getSalt();
 
-		String text = util.generate(trueNew, salt);
+		String text = asu.generate(trueNew, salt);
 
 		Integer affect = accountsMapper.updatePasswordByUsrid(text, uid);
 

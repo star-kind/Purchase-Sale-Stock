@@ -67,7 +67,8 @@ public interface AccountsMapper {
 	 * @return
 	 */
 	Integer updateAccountProfileByUsrid(@Param(value = "usrname") String usrname, @Param(value = "phone") String phone,
-			@Param(value = "competence") Integer competence, @Param(value = "regionDepartment") Integer regionDepartment,
+			@Param(value = "competence") Integer competence,
+			@Param(value = "regionDepartment") Integer regionDepartment,
 			@Param(value = "modifiedTime") Date modifiedTime, @Param(value = "usrid") Integer usrid);
 
 	/**
@@ -105,26 +106,30 @@ public interface AccountsMapper {
 	/**
 	 * 在一个区间内根据部门地区编号查询相应账户
 	 * 
-	 * @param start
-	 *            起始编号
-	 * @param end
-	 *            终末编号
+	 * @param start 起始编号
+	 * @param end   终末编号
 	 * @return
 	 */
 	List<Accounts> selectByRegionDepartment(@Param("start") Integer start, @Param("end") Integer end);
 
 	/**
+	 * 新:根据[1个]地区部门编号查找对应的用户集合
 	 * 
-	 * @param competence
-	 *            权限码
+	 * @param regionDepartment
+	 * @return
+	 */
+	List<Accounts> selectByRegionDepartmentBySingleNum(@Param("regionDepartment") Integer regionDepartment);
+
+	/**
+	 * 
+	 * @param competence 权限码
 	 * @return
 	 */
 	List<Accounts> selectByCompetence(Integer competence);
 
 	/**
 	 * 
-	 * @param activeStatus
-	 *            状态码
+	 * @param activeStatus 状态码
 	 * @return
 	 */
 	List<Accounts> selectByActiveStatus(Integer activeStatus);

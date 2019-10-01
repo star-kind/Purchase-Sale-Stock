@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>账号注册</title>
+
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->
@@ -50,35 +51,53 @@
 					<form id="form_usr" class="bs-example bs-example-form col-md-5"
 						role="form" style="margin-left: 29%;">
 
-						<p class="form_title">Add A New Account</p>
+						<p class="form_title" style="margin-top: 20px;">新用户注册</p>
 
 						<!-- 名字 -->
-						<div class="form-group">
-							<p>plz input uname</p>
-							<input class="input_text form-control"
-								placeholder="plz input uname" type="text" name="usrname"
-								maxlength="12">
+						<div class="form-group" style="margin-top: 30px;">
+							<label class="col-sm-2 control-label"
+								style="width: 48%; text-align: left;">请输入用户名</label> <input
+								class="input_text form-control" placeholder="请输入用户名" type="text"
+								name="usrname" maxlength="12">
 						</div>
 
 						<!-- phone -->
 						<div class="form-group">
-							<p>plz input phone</p>
-							<input class="input_text form-control"
-								placeholder="plz input phone" type="text" name="phone"
-								maxlength="30">
+							<label class="col-sm-2 control-label"
+								style="width: 48%; text-align: left;">请输入电话号码</label> <input
+								class="input_text form-control" placeholder="请输入电话号码"
+								type="text" name="phone" maxlength="30">
 						</div>
 
 						<!-- 部门 -->
-						<div class="form-group">
-							<p>plz input dept number</p>
-							<input class="input_text form-control"
-								placeholder="plz input deptno" type="text"
-								name="regionDepartment" maxlength="3">
+						<div class="form-group" style="margin-top: 30px;">
+							<label class="col-sm-2 control-label"
+								style="width: 48%; text-align: left;">请选择地区部门</label>
+
+							<div class="col-sm-6" style="margin-bottom: 25px;">
+								<select class="form-control" name="regionDepartment">
+									<option value="0">滨河</option>
+									<option value="1">上天院</option>
+									<option value="2">鸣皋</option>
+									<option value="3">焦王</option>
+									<option value="4">申坡</option>
+									<option value="5">遵王</option>
+									<option value="6">常海山</option>
+									<option value="7">老君堂</option>
+									<option value="8">鸦岭</option>
+									<option value="9">酒后</option>
+									<option value="10">平等</option>
+									<option value="11">夏堡</option>
+									<option value="12">富留店</option>
+								</select>
+							</div>
+
 						</div>
 
 						<!-- 职权 -->
 						<div class="form-group">
-							<label for="email" class="col-sm-2 control-label">选择岗位</label>
+							<label class="col-sm-2 control-label"
+								style="width: 48%; text-align: left;">选择岗位</label>
 							<div class="col-sm-6">
 								<select id="competence_select" class="form-control"
 									name="competence">
@@ -95,7 +114,7 @@
 						<div class="form-group">
 							<input type="button" class="commit_admin00 btn-primary"
 								value="Submit" onclick="commit00()"
-								style="width: 68px; margin-top: 0%;">
+								style="width: 68px; margin-top: 8%;">
 						</div>
 					</form>
 

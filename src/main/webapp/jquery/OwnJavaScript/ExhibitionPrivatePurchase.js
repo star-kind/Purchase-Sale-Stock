@@ -164,7 +164,7 @@ function surveyDetail(purchaseId) {
  * @returns
  */
 function eject(detail) {
-	console.log(detail);
+	// console.log(detail);
 
 	layer.open({
 		type : 1,// 若为页面层
@@ -421,7 +421,7 @@ function geneateEditFormContent(profile) {
 	formContent += '</form>';
 	formContent += '</div>';
 
-	console.log(formContent);
+	// console.log(formContent);
 
 	// 代入html内容,并弹出窗体
 	ejects2(formContent);
