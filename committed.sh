@@ -2,7 +2,7 @@ git status
 
 git add *                 
 
-git commit  -m   "refactoring some places of the Accounts module"
+git commit  -m   "delete purchase Application"
 
 git pull origin master   
 

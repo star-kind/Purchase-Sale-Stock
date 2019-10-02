@@ -52,7 +52,7 @@ function victory(list) {
 	for (var i = 0; i < list.length; i++) {
 		var tr = '<tr id="pid_#{purchaseId}" class="active">'
 				+ '<td>'
-				+ '<input type="checkbox" onclick="getNextText()">'
+				+ '<input type="checkbox" class="td_order_number">'
 				+ ++n
 				+ '</td>'
 				+ '<td>#{purchaseId}</td>'
@@ -61,7 +61,7 @@ function victory(list) {
 				+ '<td>#{purchaseTime}</td>'
 				+ '<td><a href="javascript:revampPrepare(#{purchaseId})">修改</a></td>'
 				+ '<td><a href="javascript:surveyDetail(#{purchaseId})">详情</a></td>'
-				+ '<td><a href="javascript:delete(#{purchaseId})">删除</a></td>'
+				+ '<td><a href="javascript:deleteOne(#{purchaseId})">删除</a></td>'
 				+ '</tr>';
 
 		tr = tr.replace(/#{purchaseId}/g, list[i].purchaseId);
@@ -504,4 +504,110 @@ function submitPurchaseData() {
 			}
 		}
 	})
+}
+
+/* =======================DELETE=========================== */
+/**
+ * 删除
+ * 
+ * @param purchaseId
+ * @returns
+ */
+function deleteOne(purchaseId) {
+	var uri = '/stocker-manager/PurchaseController/deleteSinglePurchaseAppByIdHandler';
+
+	layer.confirm('您确定要删除该申请单吗?', {
+		btn : [ '确定', '取消' ],
+		title : "提示"
+	}, function() {
+		$.ajax({
+			url : uri,
+			type : 'POST',
+			data : {
+				'purchaseId' : purchaseId
+			},
+			dataType : 'json',
+			success : function(rr) {
+				if (rr.state === 200) {
+					layer.alert('成功删除' + rr.data + "份采购单", function() {
+						location.reload();
+					});
+				} else {
+					layer.msg(rr.message, {
+						icon : 2
+					});
+				}
+			}
+		});
+	});
+}
+
+/* ===========================批量删除============================= */
+
+/**
+ * 全选/全取消之效果
+ * 
+ * @returns
+ */
+function headInfluence() {
+	if ($('#head_check').prop('checked') == true) {
+		$(':checkbox[class="td_order_number"]').prop('checked', true);
+	} else {
+		$(':checkbox[class="td_order_number"]').prop('checked', false);
+	}
+}
+
+/**
+ * 批量删除
+ * 
+ * @returns
+ */
+function multipleDeleted() {
+	var uri = '/stocker-manager/PurchaseController/deleteMultiplesPurchaseAppByIdsHandler';
+
+	var array = [];
+
+	var items = $('input[type="checkbox"]:checked');// 选中标签节点
+
+	items.each(function() {
+		array.push(this.parent().next('td').text());//TODO 获取父元素的下一个同父级别标签的文本值 
+	});
+
+	console.log(array);
+
+	if (array.length < 1) {
+		layer.msg('还未选中一单', {
+			icon : 6,
+			skin : 'layui-layer-molv',
+			closeBtn : 1
+		});
+		return;
+	}
+
+	top.layer.confirm('确定删除此些单子?', {
+		btn : [ '确定', '取消' ],
+		title : '提示'
+	}, function() {
+		$.ajax({
+			url : uri,
+			data : {
+				'purchaseIds' : array.join(',')
+			},
+			type : 'post',
+			dataType : 'json',
+			success : function(rr) {
+				if (rr.state === 200) {
+					layer.alert('成功删除' + rr.data + "份采购单", function() {
+						location.reload();
+					});
+				} else {
+					layer.msg(rr.message, {
+						icon : 2
+					});
+				}
+			}
+		});
+
+	});
+
 }

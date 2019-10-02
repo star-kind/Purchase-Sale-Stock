@@ -152,7 +152,7 @@
 						<th class="table-head">激活</th>
 					</tr>
 				</thead>
-				
+
 				<tbody id="tbody_content">
 				</tbody>
 			</table>
@@ -164,7 +164,7 @@
 <script type="text/javascript">
 	// 全局变量
 	var checkboxArr = new Array();
-	var isAll = false;
+	//var isAll = false;
 
 	// 全选/全不选
 	$("#select_check").click(function() {
@@ -174,12 +174,12 @@
 			$(":checkbox[name='ids']").prop("checked", true);
 
 			// 获取name=ids的已勾选之复选框的值,压入数组checkArr
-			$("input[name='ids']:checked").each(function() {
+			/* $("input[name='ids']:checked").each(function() {
 				checkboxArr.push(this.value);
-			});
+			}); */
 
 			// 取值结束后重新初始化
-			checkboxArr = [];
+			//checkboxArr = [];
 		} else {
 
 			// 上面的复选框没被选中

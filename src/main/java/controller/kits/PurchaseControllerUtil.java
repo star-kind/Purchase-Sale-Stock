@@ -12,9 +12,7 @@ import pojo.Purchase;
  *
  */
 public class PurchaseControllerUtil extends ControllerToolKit {
-	/**
-	 * 懒汉式
-	 */
+
 	private static PurchaseControllerUtil instance;
 
 	// 锁
@@ -26,6 +24,9 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	// 日志记录文件之路径
 	public static String LOG_URI = null;
 
+	/**
+	 * 懒汉式
+	 */
 	public static PurchaseControllerUtil getInstance() {
 		if (instance == null) {
 			// 决定是否需要锁定
@@ -61,7 +62,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	}
 
 	/**
-	 * 记录写入升级再封装
+	 * 记录写入升级再封装(针对单行操作)
 	 * 
 	 * @param affect
 	 */
@@ -73,6 +74,24 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 		}
 
 		if (affect == 1) {
+			textWriter(sentence, LOG_URI);
+		}
+
+	}
+
+	/**
+	 * 记录写入文件:针对多行操作
+	 * 
+	 * @param affects
+	 */
+	public void writeRecordPlus(Integer[] affects) {
+		try {
+			LOG_URI = createDirAndFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (affects != null) {
 			textWriter(sentence, LOG_URI);
 		}
 
@@ -105,6 +124,37 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 
 		writeRecordPlus(affect);
 
+	}
+
+	/**
+	 * 删除单份采购单
+	 * 
+	 * @param effect
+	 * @param usrname
+	 */
+	public void deleteSinglePurchaseAppByIdLog(Integer effect, String usrname) {
+		sentence += "采购经理" + usrname + "于" + now_time + "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
+
+		writeRecordPlus(effect);
+	}
+
+	/**
+	 * 删除多份采购单记录
+	 * 
+	 * @param usrname
+	 * @param effects
+	 */
+	public void deleteMultiplesPurchaseAppByIdsHandlerLog(String usrname, Integer[] effects) {
+		sentence += "采购经理";
+		sentence += usrname;
+		sentence += "于";
+		sentence += now_time;
+		sentence += "删除了";
+		sentence += effects.length;
+		sentence += "份采购单";
+		sentence += LINE_SEPARATOR;
+		
+		writeRecordPlus(effects);
 	}
 
 }

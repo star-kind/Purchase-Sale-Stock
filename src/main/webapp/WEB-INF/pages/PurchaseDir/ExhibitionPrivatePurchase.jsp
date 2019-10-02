@@ -61,7 +61,8 @@
 
 			<thead>
 				<tr class="active" style="text-align: center;">
-					<th><input type="checkbox" id="head_check" class="head-box">行序号</th>
+					<th><input type="checkbox" id="head_check" class="head-box"
+						onclick="headInfluence()">行序号</th>
 					<th>单号</th>
 					<th>货品名</th>
 					<th>供货商</th>
@@ -92,15 +93,25 @@
 
 				<br>
 				<div>
-					<span> The <!--  --> <span id="spanPageNum"></span> <!--  -->
-						Page/Total <!--  --> <span id="spanTotalPage"></span> Page
+					<span> The <!-- ------------------------------------------------- -->
+						<span id="spanPageNum"></span> <!-- ------------------------------------------------- -->
+						<!-- ------------------------------------------------- -->
+						Page/Total <!-- ------------------------------------------------- -->
+						<!-- -------------------------------------------------------------------------------------------------- -->
+						<span id="spanTotalPage"></span> <!-- -------------------------------------------------------------------------------------------------- -->
+						Page
 					</span>
 				</div>
 			</div>
-
 		</div>
 
-		<div>
+		<!-- 多选按钮 -->
+		<div class="input-group"
+			style="text-align: center; left: 47%; top: 30px;">
+			<button onclick="multipleDeleted()" class="btn btn-lg btn-warning" type="button">批量删除</button>
+		</div>
+
+		<div style="margin-top: 48px;">
 			<br> <a href="${basePath}/cross/toTransfer">返回中转页</a> <br>
 		</div>
 

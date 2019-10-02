@@ -1,6 +1,5 @@
 package mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +14,14 @@ import pojo.PurchaseExample;
  *
  */
 public interface PurchaseMapper {
+	/**
+	 * 多行采购单被删除,据ID们
+	 * 
+	 * @param purchaseIds
+	 * @return
+	 */
+	Integer deleteMultipleRowsByIds(@Param("purchaseIds") Integer[] purchaseIds);
+
 	/**
 	 * 根据ID修改更新
 	 * 

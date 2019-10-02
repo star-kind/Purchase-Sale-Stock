@@ -21,6 +21,24 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void multiplesDeleteTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		Integer[] ids = { 1, 2, 3 };
+
+		Integer effcts = pm.deleteMultipleRowsByIds(ids);
+		System.err.println("effects-" + effcts);
+	}
+
+	@Test
+	public void deleteOneTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		int row = pm.deleteByPrimaryKey(10);
+		System.err.println("delete-" + row);
+	}
+
+	@Test
 	public void updateTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

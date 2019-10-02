@@ -28,6 +28,54 @@ public class PurchaseController extends ControllerToolKit {
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/PurchaseController/deleteMultiplesPurchaseAppByIdsHandler
+	 * 
+	 * @param session
+	 * @param purchaseIds
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteMultiplesPurchaseAppByIdsHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> deleteMultiplesPurchaseAppByIdsHandler(HttpSession session,
+			@RequestParam("purchaseIds") Integer[] purchaseIds) {
+
+		for (int i = 0; i < purchaseIds.length; i++) {
+			System.out.print(purchaseIds[i] + ",");
+		}
+
+		Integer rows = ips.deleteMultiplesPurchaseAppByIds(purchaseIds);
+
+		String usrname = session.getAttribute("usrname").toString();
+
+		instance.deleteMultiplesPurchaseAppByIdsHandlerLog(usrname, purchaseIds);
+
+		return new ResponseResult<Integer>(SUCCESS, rows);
+
+	}
+
+	/**
+	 * /stocker-manager/PurchaseController/deleteSinglePurchaseAppByIdHandler
+	 * 
+	 * @param purchaseId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteSinglePurchaseAppByIdHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> deleteSinglePurchaseAppByIdHandler(HttpSession session,
+			@RequestParam("purchaseId") Integer purchaseId) {
+		System.out.println("delete argument-" + purchaseId);
+
+		Integer effect = ips.deleteSinglePurchaseAppById(purchaseId);
+
+		String usrname = session.getAttribute("usrname").toString();
+
+		instance.deleteSinglePurchaseAppByIdLog(effect, usrname);
+
+		return new ResponseResult<Integer>(SUCCESS, effect);
+
+	}
+
+	/**
 	 * 
 	 * @param purchase
 	 * @param session
@@ -37,7 +85,7 @@ public class PurchaseController extends ControllerToolKit {
 	@RequestMapping(value = "editOnePurchaseByIdHandler", method = RequestMethod.POST)
 	public ResponseResult<Void> editOnePurchaseByIdHandler(Purchase purchase, HttpSession session) {
 		System.err.println(purchase);
-		
+
 		String usrname = session.getAttribute("usrname").toString();
 		System.out.println("usrname:" + usrname);
 

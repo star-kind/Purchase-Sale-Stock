@@ -138,10 +138,34 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		purchase.setPurchaseTime(new Date());
-		
+
 		Integer row = pm.updatePurchaseByPurchaseId(purchase);
 
 		return row;
+	}
+
+	@Override
+	public Integer deleteSinglePurchaseAppById(Integer purchaseId) throws SelfServiceException {
+		Integer affect = pm.deleteByPrimaryKey(purchaseId);
+
+		if (affect != 1) {
+			String description = ServiceExceptionEnum.SYSTEM_BUSY.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		return affect;
+	}
+
+	@Override
+	public Integer deleteMultiplesPurchaseAppByIds(Integer[] purchaseIds) throws SelfServiceException {
+		Integer affects = pm.deleteMultipleRowsByIds(purchaseIds);
+
+		if (affects != purchaseIds.length) {
+			String description = ServiceExceptionEnum.SYSTEM_BUSY.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		return affects;
 	}
 
 }

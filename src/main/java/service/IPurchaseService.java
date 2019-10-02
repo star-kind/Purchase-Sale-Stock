@@ -15,6 +15,24 @@ import service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 删除多份采购申请单,据ID们
+	 * 
+	 * @param purchaseIds
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer deleteMultiplesPurchaseAppByIds(Integer[] purchaseIds) throws SelfServiceException;
+
+	/**
+	 * 删除一份采购申请单
+	 * 
+	 * @param purchaseId
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer deleteSinglePurchaseAppById(Integer purchaseId) throws SelfServiceException;
+
+	/**
 	 * 修改申购单资料
 	 * 
 	 * @param operator
