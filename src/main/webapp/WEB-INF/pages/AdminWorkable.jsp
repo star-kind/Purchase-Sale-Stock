@@ -37,13 +37,13 @@
 <body>
 	<div class="accesses">
 		<ul>
-			<li><a href="showAllAccount" class="a_links" onclick="opens(1)">Roster</a></li>
+			<li><a href="showAllAccount" class="a_links" onclick="opens(1)">账号名单</a></li>
 
 			<li><a href="javascript:opens(2)" class="a_links">按类型查看</a></li>
 
-			<li><a href="${basePath}/cross/toSubstacne" class="a_links">Substance</a></li>
+			<li><a href="${basePath}/cross/toSubstacne" class="a_links">账号活动记录</a></li>
 
-			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回Transfer</a></li>
+			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回导航页</a></li>
 		</ul>
 	</div>
 

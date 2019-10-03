@@ -52,7 +52,7 @@ function victory(list) {
 	for (var i = 0; i < list.length; i++) {
 		var tr = '<tr id="pid_#{purchaseId}" class="active">'
 				+ '<td>'
-				+ '<input type="checkbox" class="td_order_number">'
+				+ '<input type="checkbox" class="td_order_number" value="#{purchaseId}">'
 				+ ++n
 				+ '</td>'
 				+ '<td>#{purchaseId}</td>'
@@ -570,17 +570,13 @@ function multipleDeleted() {
 	var items = $('input[type="checkbox"]:checked');// 选中标签节点
 
 	items.each(function() {
-		array.push(this.parent().next('td').text());//TODO 获取父元素的下一个同父级别标签的文本值 
+		array.push(this.value);
 	});
 
 	console.log(array);
 
 	if (array.length < 1) {
-		layer.msg('还未选中一单', {
-			icon : 6,
-			skin : 'layui-layer-molv',
-			closeBtn : 1
-		});
+		layer.alert('还未选中一单');
 		return;
 	}
 
@@ -601,9 +597,7 @@ function multipleDeleted() {
 						location.reload();
 					});
 				} else {
-					layer.msg(rr.message, {
-						icon : 2
-					});
+					layer.alert(rr.message);
 				}
 			}
 		});

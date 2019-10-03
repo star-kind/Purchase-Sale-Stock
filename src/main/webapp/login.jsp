@@ -55,6 +55,20 @@
 								maxlength="22" style="width: 440px;">
 						</div>
 
+						<!-- 随机验证码 -->
+						<div class="border" id="canvas-container"
+							style="text-align: center; margin-left: 45%;">
+							<p style="font-size: 20px; width: 230px; margin: 0 0 10px 38px;">点击下图可刷新验证码</p>
+							<canvas id="canvas"
+								style="margin-top: 0%; background-color: #80ea9b;border: 1px solid #0f0;">
+							</canvas>
+							<div class="input-group"
+								style="margin: 20px 0 20px 11%; font-size: 18px;">
+								<input type="text" name="validateCode" placeholder="输入图中的验证码"
+									maxlength="5" class="input_txts" style="margin-top: 12px;">
+							</div>
+						</div>
+
 						<div class="input-group" style="width: 200px; margin-left: 80%;">
 
 							<input type="button" id="commit_login" value="登录"
@@ -75,39 +89,7 @@
 	</div>
 </body>
 
-<script type="text/javascript">
-	$(function() {
-		$('#commit_login')
-				.click(
-						function() {
-							//选中当前表单中,标签input,类型type="text"的节点对象
-							var selector = $('.input_txts');
+<!-- 随机验证码和登录 -->
+<script src="jquery/OwnJavaScript/ValidateRandomCode.js"></script>
 
-							//检查非空,返回开关量
-							var booleans = verifyIsInputNullPlus(selector);
-							if (booleans == false) {
-								return;
-							}
-
-							var url = 'account/login';
-							var data = $('#form_usr_login').serialize();
-							$
-									.ajax({
-										type : 'POST',
-										url : url,
-										data : data,
-										dataType : 'json',
-										success : function(rr) {
-											if (rr.state == 200) {
-												alert('登录成功');
-												window.location.href = "cross/toTransfer";
-											} else {
-												document
-														.getElementById('info-tip').innerText = rr.message;
-											}
-										}
-									});
-						});
-	});
-</script>
 </html>

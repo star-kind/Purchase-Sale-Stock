@@ -39,16 +39,16 @@
 				</tr>
 
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">Sale</a></td>
+					<td class="data_cells"><a href="" class="links_dept">销售部</a></td>
 				</tr>
 				<tr class="t_rows">
 					<td class="data_cells"><a href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler" class="links_dept">采购部</a></td>
 				</tr>
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">Store</a></td>
+					<td class="data_cells"><a href="" class="links_dept">仓库管理</a></td>
 				</tr>
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">President</a></td>
+					<td class="data_cells"><a href="" class="links_dept">审批(总经理)</a></td>
 				</tr>
 			</tbody>
 		</table>
