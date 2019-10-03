@@ -1,8 +1,8 @@
 git status   
 
-git add *                 
+git add -A .                 
 
-git commit -m  "multiple delete and canvas code"
+git commit -m  "refactoring the controller util"
 
 git pull origin master   
 

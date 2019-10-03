@@ -1,0 +1,5 @@
+#忽略
+Logs
+*.txt
+*.TXT.*
+*.TXT

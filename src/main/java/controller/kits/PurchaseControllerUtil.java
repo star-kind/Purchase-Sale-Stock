@@ -53,10 +53,10 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 			file.mkdir();
 		}
 
-		File file00 = new File(file, FILE_NAME);
-		file00.createNewFile();
+		File f1 = new File(file, FILE_NAME);
+		f1.createNewFile();
 
-		String path = file00.getAbsolutePath();
+		String path = f1.getAbsolutePath();
 
 		return path;
 	}
@@ -80,6 +80,25 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	}
 
 	/**
+	 * 重载:记录写入升级再封装(针对单行操作)
+	 * 
+	 * @param affect
+	 * @param record
+	 */
+	public void writeRecordPlus(Integer affect, String record) {
+		try {
+			LOG_URI = createDirAndFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (affect == 1) {
+			textWriter(record, LOG_URI);
+		}
+
+	}
+
+	/**
 	 * 记录写入文件:针对多行操作
 	 * 
 	 * @param affects
@@ -98,15 +117,37 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	}
 
 	/**
+	 * overload:记录写入文件:针对多行操作
+	 * 
+	 * @param affects
+	 * @param record
+	 */
+	public void writeRecordPlus(Integer[] affects, String record) {
+		try {
+			LOG_URI = createDirAndFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (affects != null) {
+			textWriter(record, LOG_URI);
+		}
+
+	}
+
+	/**
 	 * 采买申请单新增记录
 	 * 
 	 * @param usrname
 	 * @param affect
 	 */
 	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
-		sentence += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+		String string = "";
+		string += p_tag_prefix;
 
-		writeRecordPlus(affect);
+		string += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+
+		writeRecordPlus(affect, string);
 
 	}
 
@@ -118,11 +159,14 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @param purchase
 	 */
 	public void editOnePurchaseByIdHandlerLog(Integer affect, String usrname, Purchase purchase) {
+		String string = "";
+		string += p_tag_prefix;
+
 		// 采购经理xx于xx时间修改了x份单号id为xx的采购申请单
-		sentence += "采购经理" + usrname + "于" + now_time + "修改了" + affect + "份单号id为" + purchase.getPurchaseId() + "的采购申请单"
+		string += "采购经理" + usrname + "于" + now_time + "修改了" + affect + "份单号id为" + purchase.getPurchaseId() + "的采购申请单"
 				+ LINE_SEPARATOR;
 
-		writeRecordPlus(affect);
+		writeRecordPlus(affect, string);
 
 	}
 
@@ -133,9 +177,12 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @param usrname
 	 */
 	public void deleteSinglePurchaseAppByIdLog(Integer effect, String usrname) {
-		sentence += "采购经理" + usrname + "于" + now_time + "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
+		String string = "";
+		string += p_tag_prefix;
 
-		writeRecordPlus(effect);
+		string += "采购经理" + usrname + "于" + now_time + "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
+
+		writeRecordPlus(effect, string);
 	}
 
 	/**
@@ -145,16 +192,19 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	 * @param effects
 	 */
 	public void deleteMultiplesPurchaseAppByIdsHandlerLog(String usrname, Integer[] effects) {
-		sentence += "采购经理";
-		sentence += usrname;
-		sentence += "于";
-		sentence += now_time;
-		sentence += "删除了";
-		sentence += effects.length;
-		sentence += "份采购单";
-		sentence += LINE_SEPARATOR;
-		
-		writeRecordPlus(effects);
+		String string = "";
+		string += p_tag_prefix;
+
+		string += "采购经理";
+		string += usrname;
+		string += "于";
+		string += now_time;
+		string += "删除了";
+		string += effects.length;
+		string += "份采购单";
+		string += LINE_SEPARATOR;
+
+		writeRecordPlus(effects, string);
 	}
 
 }

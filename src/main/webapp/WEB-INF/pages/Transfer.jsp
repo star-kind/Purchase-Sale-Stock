@@ -10,7 +10,7 @@
 <!-- introduce -->
 <link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TransferClaim.css">
 
-<title>Transfer's Page</title>
+<title>导航页</title>
 
 <style type="text/css">
 .revamp_link {

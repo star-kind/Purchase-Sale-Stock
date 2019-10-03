@@ -67,8 +67,11 @@ public class ControllerToolKit {
 		now_time = format.format(new Date());
 	}
 
-	/** 标准日志记录语句初始化 */
+	/** 日志记录语句 */
 	public static String sentence = "<p>";
+
+	/** p标签前缀 */
+	public static String p_tag_prefix = "<p>";
 
 	/**
 	 * 统一将异常封入json实体
@@ -243,16 +246,19 @@ public class ControllerToolKit {
 	 * @param row
 	 */
 	public void inputRegRecordsToTxt(Accounts acc, Integer row, HttpSession session) {
+		String string = "";
+		string += p_tag_prefix;
+
 		try {
-			sentence += acc.getUsrname() + " 于 " + now_time + "注册成功,权限代号为" + acc.getCompetence() + ",地区部门为"
+			string += acc.getUsrname() + " 于 " + now_time + "注册成功,权限代号为" + acc.getCompetence() + ",地区部门为"
 					+ acc.getRegionDepartment() + ",执行者:" + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 		} catch (Exception e) {
-			sentence += acc.getUsrname() + " 于 " + now_time + "试图注册账号,权限代号为" + acc.getCompetence() + ",地区部门为"
+			string += acc.getUsrname() + " 于 " + now_time + "试图注册账号,权限代号为" + acc.getCompetence() + ",地区部门为"
 					+ acc.getRegionDepartment() + LINE_SEPARATOR;
 		}
 
 		if (row == 1) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 
 	}
@@ -263,11 +269,13 @@ public class ControllerToolKit {
 	 * @param usrname
 	 */
 	public void inputAllLoginRecords(String usrname) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR;
+		string += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR;
 
 		if (usrname != null) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 
 	}
@@ -280,12 +288,14 @@ public class ControllerToolKit {
 	 * @param session
 	 */
 	public void inputSuccessLoginRecords(Accounts acc, String usrname, HttpSession session) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += "地区部门:" + acc.getRegionDepartment() + ",权限:" + acc.getCompetence() + ",用户 " + usrname + " 登录成功"
+		string += "地区部门:" + acc.getRegionDepartment() + ",权限:" + acc.getCompetence() + ",用户 " + usrname + " 登录成功"
 				+ ",时间:" + now_time + LINE_SEPARATOR;
 
 		if (session.getAttribute("usrname").toString() != null) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 
 	}
@@ -298,13 +308,15 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleCancelRecords(Integer affects, HttpSession session, Integer[] usrids) {
+		String string = "";
+		string += p_tag_prefix;
 
 		String usridStr = geneateUsridStr(usrids);
 
-		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
+		string += usrids.length + "位用户:ID为{ " + usridStr + "}提交注销请求,其中" + affects + "位用户于" + now_time + "完成注销,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
-		textWriter(sentence);
+		textWriter(string);
 
 	}
 
@@ -316,13 +328,15 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleActiveRecords(Integer affects, HttpSession session, Integer[] usrids) {
+		String string = "";
+		string += p_tag_prefix;
 
 		String usridStr = geneateUsridStr(usrids);
 
-		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交激活请求,其中" + affects + "位用户于" + now_time + "完成激活,"
+		string += usrids.length + "位用户:ID为{ " + usridStr + "}提交激活请求,其中" + affects + "位用户于" + now_time + "完成激活,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
-		textWriter(sentence);
+		textWriter(string);
 	}
 
 	/**
@@ -333,13 +347,15 @@ public class ControllerToolKit {
 	 * @param usrids
 	 */
 	public void multipleResetRecords(Integer affects, HttpSession session, Integer[] usrids) {
+		String string = "";
+		string += p_tag_prefix;
 
 		String usridStr = geneateUsridStr(usrids);
 
-		sentence += usrids.length + "位用户:ID为{ " + usridStr + "}提交重置密码请求,其中" + affects + "位用户于" + now_time + "完成密码重置,"
+		string += usrids.length + "位用户:ID为{ " + usridStr + "}提交重置密码请求,其中" + affects + "位用户于" + now_time + "完成密码重置,"
 				+ "执行人为: " + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
-		textWriter(sentence);
+		textWriter(string);
 	}
 
 	/**
@@ -355,13 +371,14 @@ public class ControllerToolKit {
 	 */
 	public void executModifiyRecords(Integer usrid, HttpSession session, Integer affects, String usrname, String phone,
 			Integer competence, Integer regionDepartment) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += "ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为" + usrname + ",新电话为" + phone + ",新权限码为"
-				+ competence + ",新地区部门为" + regionDepartment + ",执行人:" + session.getAttribute("usrname").toString()
-				+ LINE_SEPARATOR;
+		string += "ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为" + usrname + ",新电话为" + phone + ",新权限码为" + competence
+				+ ",新地区部门为" + regionDepartment + ",执行人:" + session.getAttribute("usrname").toString() + LINE_SEPARATOR;
 
 		if (affects == 1) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 	}
 
@@ -373,12 +390,14 @@ public class ControllerToolKit {
 	 * @param session
 	 */
 	public void earseAnAccountRecords(Integer usrid, Integer code, HttpSession session) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += "ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: " + session.getAttribute("usrname").toString()
+		string += "ID为 " + usrid + "的账户于 " + now_time + "被删除,执行者为: " + session.getAttribute("usrname").toString()
 				+ LINE_SEPARATOR;
 
 		if (code == 1) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 	}
 
@@ -389,11 +408,13 @@ public class ControllerToolKit {
 	 * @param row
 	 */
 	public void revisePasswordHandlerRecord(Integer uid, Integer row) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += "ID为 " + uid + " 的账号于" + now_time + "修改了密码" + LINE_SEPARATOR;
+		string += "ID为 " + uid + " 的账号于" + now_time + "修改了密码" + LINE_SEPARATOR;
 
 		if (row == 1) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 
 	}
@@ -407,11 +428,13 @@ public class ControllerToolKit {
 	 * @param affect
 	 */
 	public void reviseBaseProfileHandlerRecord(Integer uid, String uname, String phone, Integer affect) {
+		String string = "";
+		string += p_tag_prefix;
 
-		sentence += "ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone + LINE_SEPARATOR;
+		string += "ID为 " + uid + " 的账户于" + now_time + "修改了基本资料,新用户名为:" + uname + ",新电话为:" + phone + LINE_SEPARATOR;
 
 		if (affect == 1) {
-			textWriter(sentence);
+			textWriter(string);
 		}
 
 	}
