@@ -2,7 +2,7 @@ git status
 
 git add *                 
 
-git commit  -m   "delete purchase Application"
+git commit -m  "multiple delete and canvas code"
 
 git pull origin master   
 
