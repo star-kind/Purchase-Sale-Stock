@@ -69,11 +69,11 @@
 			</div>
 
 			<div class="form-group">
-				<label for="name">是否已入库(部分或全部都算已入)</label>
+				<label for="name">是否已取货(部分或全部都算已取)</label>
 				<!--  -->
-				<select name="isEnterStore" class="form-control">
-					<option value="0">未入仓库</option>
-					<option value="1">已入仓库</option>
+				<select name="hasTakeGoods" class="form-control">
+					<option value="0">未取货</option>
+					<option value="1">已取货</option>
 				</select>
 			</div>
 

@@ -33,9 +33,9 @@
 |          |   `amount_money` float NOT NULL COMMENT '耗资金额',                                              |
 |          |   `payment_method` int(1) NOT NULL DEFAULT '0' COMMENT '支付方式:0-现金,1-网银,2-信用卡,3-其它', |
 |          |   `is_pay` int(1) NOT NULL DEFAULT '0' COMMENT '是否已支付:0-未支付,1-已支付',                   |
-|          |   `is_enter_store` int(1) NOT NULL DEFAULT '0' COMMENT '是否已经入库:0-未入库,1-已入库',         |
+|          |   `has_take_goods` int(1) NOT NULL DEFAULT '0' COMMENT '是否已取货:0-未取货,1-已取货',           |
 |          |   `operator` varchar(44) NOT NULL COMMENT '本次采买活动之经办人',                                |
 |          |   `purchase_time` datetime NOT NULL COMMENT '采买活动之时间',                                    |
 |          |   PRIMARY KEY (`purchase_id`)                                                                    |
-|          | ) ENGINE=InnoDB DEFAULT CHARSET=utf8                                                             |
+|          | ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8                                           |
 +----------+--------------------------------------------------------------------------------------------------+

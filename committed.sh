@@ -2,7 +2,7 @@ git status
 
 git add -A .                 
 
-git commit -m  "refactoring the controller util"
+git commit -m  "alter purchase table column name and comment"
 
 git pull origin master   
 

@@ -20,7 +20,7 @@
 		<result column="payment_method" property="paymentMethod"
 			jdbcType="INTEGER" />
 		<result column="is_pay" property="isPay" jdbcType="INTEGER" />
-		<result column="is_enter_store" property="isEnterStore"
+		<result column="has_take_goods" property="hasTakeGoods"
 			jdbcType="INTEGER" />
 		<result column="operator" property="operator"
 			jdbcType="VARCHAR" />
@@ -108,7 +108,7 @@
 			10:00:38 CST 2019. -->
 		purchase_id, commodity, is_agree, supplier, quantity, amount_money,
 		payment_method,
-		is_pay, is_enter_store, operator, purchase_time
+		is_pay, has_take_goods, operator, purchase_time
 	</sql>
 
 	<!-- selectAllPurchase -->
@@ -125,7 +125,7 @@
 		is_pay
 		AS
 		isPay,
-		is_enter_store AS isEnterStore,
+		has_take_goods AS hasTakeGoods,
 		operator,
 		purchase_time AS
 		purchaseTime
@@ -219,7 +219,7 @@
 		insert into purchase (purchase_id, commodity, is_agree,
 		supplier,
 		quantity, amount_money,
-		payment_method, is_pay, is_enter_store,
+		payment_method, is_pay, has_take_goods,
 		operator, purchase_time)
 		values (#{purchaseId,jdbcType=INTEGER},
 		#{commodity,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
 		#{amountMoney,jdbcType=REAL},
 		#{paymentMethod,jdbcType=INTEGER},
 		#{isPay,jdbcType=INTEGER},
-		#{isEnterStore,jdbcType=INTEGER},
+		#{hasTakeGoods,jdbcType=INTEGER},
 		#{operator,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP})
 	</insert>
 
@@ -239,7 +239,7 @@
 		insert into purchase (commodity, is_agree,
 		supplier, quantity,
 		amount_money,
-		payment_method, is_pay, is_enter_store,
+		payment_method, is_pay, has_take_goods,
 		operator,
 		purchase_time)
 		values (#{commodity,jdbcType=VARCHAR},
@@ -248,7 +248,7 @@
 		#{quantity,jdbcType=INTEGER},
 		#{amountMoney,jdbcType=REAL},
 		#{paymentMethod,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER},
-		#{isEnterStore,jdbcType=INTEGER},
+		#{hasTakeGoods,jdbcType=INTEGER},
 		#{operator,jdbcType=VARCHAR},
 		#{purchaseTime,jdbcType=TIMESTAMP})
 	</insert>
@@ -283,8 +283,8 @@
 			<if test="isPay != null">
 				is_pay,
 			</if>
-			<if test="isEnterStore != null">
-				is_enter_store,
+			<if test="hasTakeGoods != null">
+				has_take_goods,
 			</if>
 			<if test="operator != null">
 				operator,
@@ -318,8 +318,8 @@
 			<if test="isPay != null">
 				#{isPay,jdbcType=INTEGER},
 			</if>
-			<if test="isEnterStore != null">
-				#{isEnterStore,jdbcType=INTEGER},
+			<if test="hasTakeGoods != null">
+				#{hasTakeGoods,jdbcType=INTEGER},
 			</if>
 			<if test="operator != null">
 				#{operator,jdbcType=VARCHAR},
@@ -371,8 +371,8 @@
 			<if test="record.isPay != null">
 				is_pay = #{record.isPay,jdbcType=INTEGER},
 			</if>
-			<if test="record.isEnterStore != null">
-				is_enter_store = #{record.isEnterStore,jdbcType=INTEGER},
+			<if test="record.hasTakeGoods != null">
+				has_take_goods = #{record.hasTakeGoods,jdbcType=INTEGER},
 			</if>
 			<if test="record.operator != null">
 				operator = #{record.operator,jdbcType=VARCHAR},
@@ -408,8 +408,8 @@
 		#{record.paymentMethod,jdbcType=INTEGER},
 		is_pay =
 		#{record.isPay,jdbcType=INTEGER},
-		is_enter_store =
-		#{record.isEnterStore,jdbcType=INTEGER},
+		has_take_goods =
+		#{record.hasTakeGoods,jdbcType=INTEGER},
 		operator =
 		#{record.operator,jdbcType=VARCHAR},
 		purchase_time =
@@ -447,8 +447,8 @@
 			<if test="isPay != null">
 				is_pay = #{isPay,jdbcType=INTEGER},
 			</if>
-			<if test="isEnterStore != null">
-				is_enter_store = #{isEnterStore,jdbcType=INTEGER},
+			<if test="hasTakeGoods != null">
+				has_take_goods = #{hasTakeGoods,jdbcType=INTEGER},
 			</if>
 			<if test="operator != null">
 				operator = #{operator,jdbcType=VARCHAR},
@@ -475,7 +475,7 @@
 		payment_method =
 		#{paymentMethod,jdbcType=INTEGER},
 		is_pay = #{isPay,jdbcType=INTEGER},
-		is_enter_store = #{isEnterStore,jdbcType=INTEGER},
+		has_take_goods = #{hasTakeGoods,jdbcType=INTEGER},
 		operator =
 		#{operator,jdbcType=VARCHAR},
 		purchase_time =
@@ -493,7 +493,7 @@
 		quantity=#{quantity},
 		amount_money=#{amountMoney},
 		payment_method=#{paymentMethod},
-		is_enter_store=#{isEnterStore},
+		has_take_goods=#{hasTakeGoods},
 		purchase_time=#{purchaseTime}
 		WHERE
 		purchase_id=#{purchaseId}

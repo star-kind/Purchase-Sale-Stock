@@ -34,7 +34,7 @@ public class PurchaseServiceTest {
 		p.setQuantity(200);
 		p.setAmountMoney(236.54f);
 		p.setPaymentMethod(0);
-		p.setIsEnterStore(0);
+		p.sethasTakeGoods(0);
 		p.setPurchaseTime(new Date());
 
 		try {
@@ -58,7 +58,7 @@ public class PurchaseServiceTest {
 		p.setPaymentMethod(0);
 		p.setSupplier("Deutschland");
 		p.setQuantity(10);
-		p.setIsEnterStore(1);
+		p.sethasTakeGoods(1);
 
 		try {
 			Integer effect = ips.addOnePurchaseApplicationForm(p, "admin33");

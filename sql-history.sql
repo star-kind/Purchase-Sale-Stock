@@ -1,3 +1,7 @@
+-- drop database if exists purchase_sale_stock;
+
+-- create database purchase_sale_stock;
+
 mysql -uroot -proot
 
 USE purchase_sale_stock;
@@ -21,11 +25,7 @@ SELECT * FROM accounts;
 
 DESC accounts;
 
-drop database if exists purchase_sale_stock;
-
-create database purchase_sale_stock;
-
-####
+-- ======================================================
 alter table accounts change reg_time reg_time date not null;
 
 alter table accounts add password varchar(50) not null;
@@ -43,6 +43,14 @@ alter table accounts change region_department region_department int(5) not null 
 -- 修改注释
 ALTER TABLE accounts CHANGE region_department region_department int(3) NOT NULL 
 COMMENT '地区部门,0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦岭,9-酒后,10-平等,11-夏堡,12-富留店';
+
+-- 修改注释
+ALTER TABLE purchase CHANGE is_enter_store is_enter_store int(1) NOT NULL DEFAULT '0' 
+COMMENT '是否已取货:0-未取货,1-已取货';
+
+-- 修改字段名
+ALTER TABLE purchase CHANGE is_enter_store has_take_goods int(1) NOT NULL DEFAULT '0' 
+COMMENT '是否已取货:0-未取货,1-已取货';
 
 select count(usrid) from accounts where phone='181524007';
 

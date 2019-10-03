@@ -48,7 +48,7 @@ public class PurchaseMapperTest {
 		p.setQuantity(101);
 		p.setAmountMoney(222.66f);
 		p.setPaymentMethod(1);
-		p.setIsEnterStore(1);
+		p.sethasTakeGoods(1);
 		p.setPurchaseTime(new Date());
 		p.setPurchaseId(8);
 
@@ -85,7 +85,7 @@ public class PurchaseMapperTest {
 		p.setCommodity("the-real");
 		p.setIsAgree(0);
 		p.setAmountMoney(123.36f);
-		p.setIsEnterStore(0);
+		p.sethasTakeGoods(1);
 		p.setIsPay(1);
 		p.setQuantity(10);
 		p.setPaymentMethod(0);

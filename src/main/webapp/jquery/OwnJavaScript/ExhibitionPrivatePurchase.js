@@ -194,11 +194,11 @@ function generatePurchaseContent(p) {
 		p.isPay = '已支付';
 	}
 
-	/* 是否入库 */
-	if (p.isEnterStore === 0) {
-		p.isEnterStore = '未入仓库'
+	/* 是否已取货 */
+	if (p.hasTakeGoods === 0) {
+		p.hasTakeGoods = '未取货'
 	} else {
-		p.isEnterStore = '已入仓库'
+		p.hasTakeGoods = '已取货'
 	}
 
 	/* 是否获批 */
@@ -270,9 +270,9 @@ function generatePurchaseContent(p) {
 			+ p.isPay + ' ">';
 	formHtml += '</p>';
 
-	formHtml += '<br><p>是否已入库';
+	formHtml += '<br><p>是否已取货';
 	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
-			+ p.isEnterStore + ' ">';
+			+ p.hasTakeGoods + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购经办人';
@@ -400,8 +400,8 @@ function geneateEditFormContent(profile) {
 
 	formContent += '<br>';
 
-	formContent += '<p>选择是否已入库:';
-	formContent += '<select name="isEnterStore" value=' + profile.isEnterStore
+	formContent += '<p>选择是否已取货:';
+	formContent += '<select name="hasTakeGoods" value=' + profile.hasTakeGoods
 			+ '>';
 	formContent += '<option value="0">未入</option>';
 	formContent += '<option value="1">已入</option>';
