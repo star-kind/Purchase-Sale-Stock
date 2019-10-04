@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +9,11 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import controller.kits.PurchaseControllerUtil;
 import pojo.Purchase;
 import service.IPurchaseService;
 import service.ex.SelfServiceException;
+import service.util.PurchaseServiceUtil;
 
 public class PurchaseServiceTest {
 	private ApplicationContext applicationContext;
@@ -20,6 +23,22 @@ public class PurchaseServiceTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void readOutputTest() {
+		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
+
+		try {
+			String[] strArr = ips.readOutputSubstanceLog(54);
+
+			for (int i = 0; i < strArr.length; i++) {
+				System.out.println(strArr[i]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Test

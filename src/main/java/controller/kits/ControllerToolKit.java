@@ -33,14 +33,14 @@ public class ControllerToolKit {
 	public static final Integer SUCCESS = 200;
 
 	/**
-	 * 工程下的日志目录绝对路径
+	 * 工程日志目录绝对之前置根路径
 	 */
 	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/StockerManager/Logs/";
 
 	/**
 	 * 记录账户模块活动记录的TXT文件之完整路径
 	 */
-	public static final String FILE_URI = ENGINE_DAILY_PATH + "Account-Log.txt";
+	public static final String ACCOUNT_FILE_URI = ENGINE_DAILY_PATH + "Account-Log.txt";
 
 	/**
 	 * 系统换行符
@@ -196,7 +196,7 @@ public class ControllerToolKit {
 	 */
 	public void textWriter(String string) {
 		try {
-			fos = new FileOutputStream(FILE_URI, true);
+			fos = new FileOutputStream(ACCOUNT_FILE_URI, true);
 			buff = string.getBytes();
 			fos.write(buff);
 		} catch (FileNotFoundException e) {

@@ -18,8 +18,10 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 	// 锁
 	private static final Object LOCK = new Object();
 
-	// 日志记录文件名
-	private static final String FILE_NAME = "Purchase_Module_Log.txt";
+	/**
+	 * 进购模块日志记录文件名
+	 */
+	public static final String PURCHASE_FILE_NAME = "Purchase_Module_Log.txt";
 
 	// 日志记录文件之路径
 	public static String LOG_URI = null;
@@ -53,7 +55,7 @@ public class PurchaseControllerUtil extends ControllerToolKit {
 			file.mkdir();
 		}
 
-		File f1 = new File(file, FILE_NAME);
+		File f1 = new File(file, PURCHASE_FILE_NAME);
 		f1.createNewFile();
 
 		String path = f1.getAbsolutePath();

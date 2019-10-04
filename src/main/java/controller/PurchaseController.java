@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,24 @@ public class PurchaseController extends ControllerToolKit {
 
 	// 工具类
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/readOutputSubstanceLogHandler
+	 * 
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readOutputSubstanceLogHandler", method = RequestMethod.GET)
+	public ResponseResult<String[]> readOutputSubstanceLogHandler(HttpSession session) throws IOException {
+		Integer usrid = (Integer) session.getAttribute("usrid");
+
+		String[] records = ips.readOutputSubstanceLog(usrid);
+
+		return new ResponseResult<String[]>(SUCCESS, records);
+
+	}
 
 	/**
 	 * /stocker-manager/PurchaseController/deleteMultiplesPurchaseAppByIdsHandler

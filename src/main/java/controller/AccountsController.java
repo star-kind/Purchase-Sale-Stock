@@ -34,7 +34,7 @@ public class AccountsController extends ControllerToolKit {
 	 * @param accounts
 	 * @return
 	 */
-	@RequestMapping(value = "/reg", method = {RequestMethod.POST})
+	@RequestMapping(value = "/reg", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseResult<Void> regHandler(Accounts accounts, HttpSession session) {
 		Integer row = iAccountsService.registerRole(accounts);
@@ -53,7 +53,7 @@ public class AccountsController extends ControllerToolKit {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = {RequestMethod.POST})
+	@RequestMapping(value = "/login", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseResult<Void> loginHandler(
 			@RequestParam(value = "usrname", required = false, defaultValue = "springmvc") String usrname,
@@ -87,7 +87,7 @@ public class AccountsController extends ControllerToolKit {
 		return url;
 	}
 
-	@RequestMapping(value = "showAllAccount", method = {RequestMethod.GET})
+	@RequestMapping(value = "showAllAccount", method = { RequestMethod.GET })
 	public String showAllAccountHandler(ModelMap modelMap) {
 		String r = iAccountsService.browsersAllAccounts(modelMap);
 		return r;
@@ -100,10 +100,10 @@ public class AccountsController extends ControllerToolKit {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "earse", method = {RequestMethod.POST})
+	@RequestMapping(value = "earse", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseResult<Void> earseHandler(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws IOException {
+	public ResponseResult<Void> earseHandler(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) throws IOException {
 		Integer usrid = Integer.valueOf(request.getParameter("usrid"));
 		Integer code = iAccountsService.earseAnAccount(usrid);
 
@@ -120,7 +120,7 @@ public class AccountsController extends ControllerToolKit {
 	 * @param modelMap
 	 * @return
 	 */
-	@RequestMapping(value = "emerge", method = {RequestMethod.GET})
+	@RequestMapping(value = "emerge", method = { RequestMethod.GET })
 	public String showModifiyHandler(HttpServletRequest request, ModelMap modelMap) {
 		return iAccountsService.showingProfileToEditing(request, modelMap);
 	}
@@ -134,7 +134,7 @@ public class AccountsController extends ControllerToolKit {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "execute_revamp", method = {RequestMethod.POST})
+	@RequestMapping(value = "execute_revamp", method = { RequestMethod.POST })
 	public ResponseResult<Void> executModifiyHandler(@RequestParam("usrname") String usrname,
 			@RequestParam("phone") String phone, @RequestParam("competence") Integer competence,
 			@RequestParam("regionDepartment") Integer regionDepartment, @RequestParam("usrid") Integer usrid,
@@ -153,8 +153,9 @@ public class AccountsController extends ControllerToolKit {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "multiple_cancel", method = {RequestMethod.POST})
-	public ResponseResult<Integer> multipleCancelHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
+	@RequestMapping(value = "multiple_cancel", method = { RequestMethod.POST })
+	public ResponseResult<Integer> multipleCancelHandler(@RequestParam("usrids") Integer[] usrids,
+			HttpSession session) {
 		Integer affects = iAccountsService.multipleCancel(usrids);
 		multipleCancelRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
@@ -169,8 +170,9 @@ public class AccountsController extends ControllerToolKit {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "multiple_active", method = {RequestMethod.POST})
-	public ResponseResult<Integer> multipleActiveHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
+	@RequestMapping(value = "multiple_active", method = { RequestMethod.POST })
+	public ResponseResult<Integer> multipleActiveHandler(@RequestParam("usrids") Integer[] usrids,
+			HttpSession session) {
 		Integer affects = iAccountsService.multipleActive(usrids);
 		multipleActiveRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
@@ -185,8 +187,9 @@ public class AccountsController extends ControllerToolKit {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "multiple_reset_pwd", method = {RequestMethod.POST})
-	public ResponseResult<Integer> multipleResetPwdHandler(@RequestParam("usrids") Integer[] usrids, HttpSession session) {
+	@RequestMapping(value = "multiple_reset_pwd", method = { RequestMethod.POST })
+	public ResponseResult<Integer> multipleResetPwdHandler(@RequestParam("usrids") Integer[] usrids,
+			HttpSession session) {
 		Integer affects = iAccountsService.multipleResetPwd(usrids);
 
 		multipleResetRecords(affects, session, usrids);
@@ -196,12 +199,11 @@ public class AccountsController extends ControllerToolKit {
 	/**
 	 * http://localhost:8080/stocker-manager/account/search_by_threeType_scene?str=长川
 	 * 
-	 * @param str
-	 *            地区部门/职位/是否注销激活
+	 * @param str 地区部门/职位/是否注销激活
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "search_by_threeType_scene", method = {RequestMethod.POST})
+	@RequestMapping(value = "search_by_threeType_scene", method = { RequestMethod.POST })
 	public ResponseResult<List<Accounts>> searchByFourTypeSceneHandler(@RequestParam("str") String str) {
 		System.err.println("Str: " + str);
 		List<Accounts> list = null;
@@ -221,12 +223,11 @@ public class AccountsController extends ControllerToolKit {
 	/**
 	 * http://localhost:8080/stocker-manager/account/search_by_confuse_name?uname=ck
 	 * 
-	 * @param uname
-	 *            残缺的只言
+	 * @param uname 残缺的只言
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "search_by_confuse_name", method = {RequestMethod.POST})
+	@RequestMapping(value = "search_by_confuse_name", method = { RequestMethod.POST })
 	public ResponseResult<List<Accounts>> searchByConfuseNameHandler(@RequestParam("uname") String uname) {
 		System.err.println("Uname:" + uname);
 
@@ -266,7 +267,8 @@ public class AccountsController extends ControllerToolKit {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "single/{usrid}/cancel", method = RequestMethod.GET)
-	public ResponseResult<Integer> singleCancelAccountHandler(@PathVariable("usrid") Integer usrid, HttpSession session) {
+	public ResponseResult<Integer> singleCancelAccountHandler(@PathVariable("usrid") Integer usrid,
+			HttpSession session) {
 		System.out.println("cancel-usrid:" + usrid);
 
 		Integer[] ids = new Integer[1];
@@ -287,7 +289,8 @@ public class AccountsController extends ControllerToolKit {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "single/{usrid}/active", method = RequestMethod.GET)
-	public ResponseResult<Integer> singleActiveAccountHandler(@PathVariable("usrid") Integer usrid, HttpSession session) {
+	public ResponseResult<Integer> singleActiveAccountHandler(@PathVariable("usrid") Integer usrid,
+			HttpSession session) {
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
 
@@ -307,8 +310,10 @@ public class AccountsController extends ControllerToolKit {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "read_substacne", method = RequestMethod.GET)
-	public ResponseResult<List<String>> readAccountRecordHandler() throws IOException {
-		List<String> list = iAccountsService.readSubstanceFromLog();
+	public ResponseResult<List<String>> readAccountRecordHandler(HttpSession session) throws IOException {
+		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
+
+		List<String> list = iAccountsService.readSubstanceFromLog(uid);
 
 		return new ResponseResult<List<String>>(SUCCESS, list);
 	}

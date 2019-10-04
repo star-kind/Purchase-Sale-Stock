@@ -110,9 +110,11 @@ public class AccountsServicesTests {
 		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		try {
-			List<String> list = accountsService.readSubstanceFromLog();
+			List<String> list = accountsService.readSubstanceFromLog(null);
 			System.out.println(list.get(0));
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SelfServiceException e) {
 			e.printStackTrace();
 		}
 

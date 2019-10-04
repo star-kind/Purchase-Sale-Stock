@@ -1,5 +1,6 @@
 package service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,15 @@ import service.ex.SelfServiceException;
  *
  */
 public interface IPurchaseService {
+	/**
+	 * 读取记录
+	 * 
+	 * @param usrid 采购经理ID
+	 * @return
+	 * @throws IOException
+	 */
+	String[] readOutputSubstanceLog(Integer usrid) throws IOException, SelfServiceException;
+
 	/**
 	 * 删除多份采购申请单,据ID们
 	 * 

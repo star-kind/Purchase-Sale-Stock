@@ -180,10 +180,12 @@ public interface IAccountsService {
 	List<Accounts> findBaseOnLikeName(String name) throws SelfServiceException;
 
 	/**
-	 * 从log文本内读取内容
+	 * 从文本内读取内容
 	 * 
+	 * @param usrid
 	 * @return
 	 * @throws IOException
+	 * @throws SelfServiceException
 	 */
-	List<String> readSubstanceFromLog() throws IOException;
+	List<String> readSubstanceFromLog(Integer usrid) throws IOException, SelfServiceException;
 }

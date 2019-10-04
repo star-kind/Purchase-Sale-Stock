@@ -37,8 +37,6 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Integer registerRole(Accounts accounts) throws SelfServiceException {
-		// AccountServiceUtil util = new AccountServiceUtil();
-
 		System.out.println(accounts.toString());
 
 		// 提取检查用户名是否唯一
@@ -94,8 +92,6 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Accounts login(String usrname, String password, HttpSession session) throws SelfServiceException {
-//		AccountServiceUtil util = new AccountServiceUtil();
-
 		// 抛异常:用户名或密码为空
 		if (usrname == null || "".equals(usrname) || "springmvc".equals(usrname) || password == null
 				|| "".equals(password) || "springmvc".equals(password)) {
@@ -161,8 +157,6 @@ public class AccountsServiceImpl implements IAccountsService {
 	@Override
 	public Integer alterAccountProfile(String usrname, String phone, Integer competence, Integer regionDepartment,
 			Integer usrid) throws SelfServiceException {
-//		AccountServiceUtil util = new AccountServiceUtil();
-
 		Accounts a1 = new Accounts();
 		a1.setUsrname(usrname);
 		a1.setPhone(phone);
@@ -225,7 +219,6 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Integer multipleResetPwd(Integer[] ids) {
-//		AccountServiceUtil util = new AccountServiceUtil();
 		Integer effects = 0;
 
 		// 循环取出盐值,循环生成密文,循环执行update
@@ -244,13 +237,7 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public List<Accounts> gainByRegionDepartment(String regionDepartment) {
-//		AccountServiceUtil util = new AccountServiceUtil();
-
-//		Integer[] arr = asu.switchBaseOnRegionDepartment(regionDepartment);
-
 		Integer dept = asu.getNumRegionDepartment(regionDepartment);
-
-//		List<Accounts> list = accountsMapper.selectByRegionDepartment(arr[0], arr[1]);
 
 		List<Accounts> list = accountsMapper.selectByRegionDepartmentBySingleNum(dept);
 		return list;
@@ -258,7 +245,6 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public List<Accounts> gainByCompetence(String position) {
-//		AccountServiceUtil util = new AccountServiceUtil();
 		Integer competence = asu.switchBySelectCompetence(position);
 
 		return accountsMapper.selectByCompetence(competence);
@@ -266,7 +252,6 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public List<Accounts> gainByActiveStatus(String status) {
-//		AccountServiceUtil util = new AccountServiceUtil();
 		Integer activeStatus = asu.statusStringTransToActiveStatus(status);
 		return accountsMapper.selectByActiveStatus(activeStatus);
 	}
@@ -282,21 +267,29 @@ public class AccountsServiceImpl implements IAccountsService {
 	}
 
 	@Override
-	public List<String> readSubstanceFromLog() throws IOException {
+	public List<String> readSubstanceFromLog(Integer usrid) throws IOException, SelfServiceException {
+		Accounts accounts = accountsMapper.selectAccountByUsrid(usrid);
+
+		if (usrid == null) {
+			String desc = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(desc);
+
+		} else if (accounts.getCompetence() != 0) {
+			String desc = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(desc);
+
+		}
+
 		String s = null;
 
-		File file = new File(ControllerToolKit.FILE_URI);
-
+		File file = new File(ControllerToolKit.ACCOUNT_FILE_URI);
 		FileInputStream fis = new FileInputStream(file);
-
 		BufferedInputStream bis = new BufferedInputStream(fis);
 
 		// available可获得的,此处获得的是所读取到的字节数
 		int i = bis.available();
-
-		// 物质,基本内容,主旨,要点,实质
-		try {
-			// 创建一个字节数组
+		try {// 物质,基本内容,主旨,要点,实质
+				// 创建一个字节数组
 			byte[] substantce = new byte[i];
 
 			// 把读到的内容载入字节数组
@@ -306,7 +299,7 @@ public class AccountsServiceImpl implements IAccountsService {
 			s = string;
 
 			// 若果超限,先删除,在创建一个相同的;一个汉字=2byte,1kb=1024byte
-			if (i > 4 * 1024) {
+			if (i > 5 * 1024) {
 				file.delete();
 				file.createNewFile();
 			}
@@ -327,8 +320,6 @@ public class AccountsServiceImpl implements IAccountsService {
 		// 检出藏中密码
 		Accounts accounts = accountsMapper.selectAccountByUsrid(uid);
 		String tablePwd = accounts.getPassword();
-
-//		AccountServiceUtil util = new AccountServiceUtil();
 
 		// 检验旧密码与藏中一致
 		boolean verify = asu.verify(old, tablePwd);

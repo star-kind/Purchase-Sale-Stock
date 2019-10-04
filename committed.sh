@@ -2,7 +2,7 @@ git status
 
 git add -A .                 
 
-git commit -m  "alter purchase table column name and comment"
+git commit -m  "add and chang the record logs"
 
 git pull origin master   
 

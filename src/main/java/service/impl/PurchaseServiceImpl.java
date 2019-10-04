@@ -1,5 +1,9 @@
 package service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import controller.kits.ControllerToolKit;
+import controller.kits.PurchaseControllerUtil;
 import mapper.AccountsMapper;
 import mapper.PurchaseMapper;
 import pojo.Accounts;
@@ -14,6 +20,7 @@ import pojo.Purchase;
 import service.IPurchaseService;
 import service.ex.SelfServiceException;
 import service.ex.ServiceExceptionEnum;
+import service.util.PurchaseServiceUtil;
 
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
@@ -24,6 +31,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	private AccountsMapper am;
 
 	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
+
+	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
 
 	@Override
 	public Integer addOnePurchaseApplicationForm(Purchase purchase, String usrname) throws SelfServiceException {
@@ -166,6 +175,45 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		return affects;
+	}
+
+	@Override
+	public String[] readOutputSubstanceLog(Integer usrid) throws IOException, SelfServiceException {
+		if (usrid == null) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		Accounts accounts = am.selectAccountByUsrid(usrid);
+		System.out.println(accounts);
+		if (accounts.getCompetence() != 2) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		String uri = ControllerToolKit.ENGINE_DAILY_PATH;
+		uri += PurchaseControllerUtil.PURCHASE_FILE_NAME;
+
+		Path path = Paths.get(uri);
+
+		String s = new String();
+		try {
+			byte[] bytes = Files.readAllBytes(path);
+			s = new String(bytes);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String[] ss = s.split("\n|\r");
+
+		// 如已超限则排空
+		if (ss.length > 12 * 1024) {
+			System.err.println("如已超限则排空");
+			psu.cleanSubstance(PurchaseControllerUtil.PURCHASE_FILE_NAME);
+		}
+
+		return ss;
 	}
 
 }
