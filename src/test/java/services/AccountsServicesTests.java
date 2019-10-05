@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import pojo.Accounts;
-import service.IAccountsService;
-import service.ex.SelfServiceException;
+import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.service.IAccountsService;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 
 public class AccountsServicesTests {
 	private ApplicationContext applicationContext;

@@ -9,11 +9,11 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import controller.kits.PurchaseControllerUtil;
-import pojo.Purchase;
-import service.IPurchaseService;
-import service.ex.SelfServiceException;
-import service.util.PurchaseServiceUtil;
+import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
+import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.service.IPurchaseService;
+import com.allstargh.ssm.service.ex.SelfServiceException;
+import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 
 public class PurchaseServiceTest {
 	private ApplicationContext applicationContext;

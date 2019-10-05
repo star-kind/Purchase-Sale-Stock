@@ -48,6 +48,6 @@
 		这些对象的名称,默认就是对应接口名称(首字母小写) -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- value:mapper层根包名 -->
-		<property name="basePackage" value="mapper" />
+		<property name="basePackage" value="com.allstargh.ssm.mapper" />
 	</bean>
 </beans>

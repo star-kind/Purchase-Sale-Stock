@@ -1,5 +1,5 @@
 #忽略
-Logs
+/Logs/
 *.txt
 *.TXT.*
 *.TXT

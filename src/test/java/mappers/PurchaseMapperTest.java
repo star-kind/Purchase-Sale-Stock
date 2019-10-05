@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mapper.PurchaseMapper;
-import pojo.Purchase;
+import com.allstargh.ssm.mapper.PurchaseMapper;
+import com.allstargh.ssm.pojo.Purchase;
 
 public class PurchaseMapperTest {
 	private ApplicationContext applicationContext;

@@ -2,7 +2,7 @@ git status
 
 git add -A .                 
 
-git commit -m  "add and chang the record logs"
+git commit -m  "update readme and package path name"
 
 git pull origin master   
 

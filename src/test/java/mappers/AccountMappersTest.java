@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mapper.AccountsMapper;
-import pojo.Accounts;
+import com.allstargh.ssm.mapper.AccountsMapper;
+import com.allstargh.ssm.pojo.Accounts;
 
 public class AccountMappersTest {
 	private ApplicationContext applicationContext;
