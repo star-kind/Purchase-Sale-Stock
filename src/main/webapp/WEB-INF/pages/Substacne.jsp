@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
@@ -10,15 +11,19 @@
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->
-<script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/AdminWorkable.js"></script>
 
 <!-- JavaScript 点击链接切换division  -->
-<script type="text/javascript" src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
 
 <!-- 表单样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/FormCommon.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/FormCommon.css">
 <!-- 表格样式 -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TableCommom.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/TableCommom.css">
 
 </head>
 
@@ -31,7 +36,8 @@ p {
 
 <body>
 	<!-- 账号活动日志记录 -->
-	<div class="detail_zone div_module col-md-10" style="display: block;" id="room4">
+	<div class="detail_zone div_module col-md-10" style="display: block;"
+		id="room4">
 		<div class="col-md-10">
 
 			<!--  -->
@@ -40,7 +46,8 @@ p {
 				<h3 class="col-md-5">账号活动日志记录</h3>
 			</div>
 
-			<br>
+			<hr>
+
 			<div id="log_substance" class="row"></div>
 
 		</div>

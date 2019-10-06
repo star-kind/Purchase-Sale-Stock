@@ -174,7 +174,7 @@ function eject(detail) {
 		id : 'form_detail_purchase',// 为上层div设1个ID,防止重复出现
 		resize : true,// 更改大小,假,禁止
 		moveType : 1,
-		area : [ '800px', '400px' ],// 宽,高
+		area : [ '800px', '480px' ],// 宽,高
 		content : detail
 	});
 
@@ -225,6 +225,35 @@ function generatePurchaseContent(p) {
 	case 3:
 		p.paymentMethod = '其他'
 		break;
+	}
+
+	/* 分类 */
+	switch (p.classify) {
+
+	case 0:
+		p.classify = '电器'
+		break;
+
+	case 1:
+		p.classify = '食品'
+		break;
+
+	case 2:
+		p.classify = '服装'
+		break;
+
+	case 3:
+		p.classify = '日用品'
+		break;
+
+	case 4:
+		p.classify = '饮品'
+		break;
+
+	case 5:
+		p.classify = '其它'
+		break;
+
 	}
 
 	var formHtml = '<div style="text-align:center;font-size:26px;margin-left:0%;">';
@@ -285,8 +314,16 @@ function generatePurchaseContent(p) {
 			+ p.purchaseTime + ' ">';
 	formHtml += '</p>';
 
+	formHtml += '<br><p>商品分类';
+	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+			+ p.classify + ' ">';
+	formHtml += '</p>';
+
 	formHtml += '</form>';
+
+	formHtml += '<br>';
 	formHtml += '</div>';
+	formHtml += '<br>';
 
 	return formHtml;
 }
@@ -408,7 +445,21 @@ function geneateEditFormContent(profile) {
 	formContent += '</select>';
 	formContent += '</p>';
 
+	formContent += '<br>';
+
+	formContent += '<p>选择商品分类:';
+	formContent += '<select name="classify" value=' + profile.classify + '>';
+	formContent += '<option value="0">电器</option>';
+	formContent += '<option value="1">食品</option>';
+	formContent += '<option value="2">服装</option>';
+	formContent += '<option value="3">日用品</option>';
+	formContent += '<option value="4">饮品</option>';
+	formContent += '<option value="5">其它</option>';
+	formContent += '</select>';
+	formContent += '</p>';
+
 	formContent += '</div>';
+
 	formContent += '<br>';
 
 	formContent += '<div style="text-align: center;">';

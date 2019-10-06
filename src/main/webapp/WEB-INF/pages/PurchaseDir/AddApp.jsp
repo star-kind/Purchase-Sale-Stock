@@ -67,6 +67,19 @@
 					<option value="3">其它</option>
 				</select>
 			</div>
+			
+			<div class="form-group">
+				<label for="name">请选择商品分类</label>
+				<!--  -->
+				<select name="classify" class="form-control">
+					<option value="0">电器</option>
+					<option value="1">食品</option>
+					<option value="2">服装</option>
+					<option value="3">日用品</option>
+					<option value="4">饮品</option>
+					<option value="5">其它</option>
+				</select>
+			</div>
 
 			<div class="form-group">
 				<label for="name">是否已取货(部分或全部都算已取)</label>

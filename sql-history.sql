@@ -19,7 +19,7 @@ CREATE TABLE `accounts` (
   `salt` varchar(20) NOT NULL,
   PRIMARY KEY (`usrid`),
   UNIQUE KEY `usrname` (`usrname`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;  
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 SELECT * FROM accounts;
 
@@ -41,15 +41,15 @@ show full COLUMNs FROM accounts;
 alter table accounts change region_department region_department int(5) not null COMMENT '所属区域部门,如11为常川物流部';
 
 -- 修改注释
-ALTER TABLE accounts CHANGE region_department region_department int(3) NOT NULL 
+ALTER TABLE accounts CHANGE region_department region_department int(3) NOT NULL
 COMMENT '地区部门,0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦岭,9-酒后,10-平等,11-夏堡,12-富留店';
 
 -- 修改注释
-ALTER TABLE purchase CHANGE is_enter_store is_enter_store int(1) NOT NULL DEFAULT '0' 
+ALTER TABLE purchase CHANGE is_enter_store is_enter_store int(1) NOT NULL DEFAULT '0'
 COMMENT '是否已取货:0-未取货,1-已取货';
 
 -- 修改字段名
-ALTER TABLE purchase CHANGE is_enter_store has_take_goods int(1) NOT NULL DEFAULT '0' 
+ALTER TABLE purchase CHANGE is_enter_store has_take_goods int(1) NOT NULL DEFAULT '0'
 COMMENT '是否已取货:0-未取货,1-已取货';
 
 select count(usrid) from accounts where phone='181524007';
@@ -57,13 +57,13 @@ select count(usrid) from accounts where phone='181524007';
 alter table accounts modify COLUMN competence int(1) comment '权限,0技术运维,1总经理,2采购经理,3销售经理,4仓库主管,5普通雇员';
 
 update accounts set competence=1 where usrid in (4,9);
- 
+
 alter table accounts change competence competence int(2) not null;
 
 SELECT usrname,competence FROM accounts;
 
 SHOW CREATE TABLE accounts;
- 
+
 CREATE TABLE `accounts` (
   `usrid` int(22) NOT NULL AUTO_INCREMENT,
   `usrname` varchar(30) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE `accounts` (
   `salt` varchar(20) NOT NULL,
   PRIMARY KEY (`usrid`),
   UNIQUE KEY `usrname` (`usrname`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8  
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8
 
 ALTER TABLE accounts MODIFY COLUMN competence int(1) COMMENT '权限,0技术运维,1总经理,2采购经理,3销售经理,4仓库主管,5普通雇员';
 
@@ -154,9 +154,9 @@ SHOW CREATE TABLE accounts;
 
 -- -------------------------------------------------------------------------------------
 
-insert into purchase (commodity, is_agree, 
-      supplier, quantity, amount_money, 
-      payment_method, is_pay, is_enter_store, 
+insert into purchase (commodity, is_agree,
+      supplier, quantity, amount_money,
+      payment_method, is_pay, is_enter_store,
       operator, purchase_time)
 values ('单例设计模式',
     	1,
@@ -168,13 +168,13 @@ values ('单例设计模式',
     	1,
     	'admin',
     	'2011-11-11 11:50:02');
-    	
+
 -- 修改列注释
 ALTER TABLE accounts MODIFY COLUMN `active_status` int(1) DEFAULT '1' COMMENT '激活状态 0-已注销,1-已激活';
 
 ALTER TABLE accounts MODIFY COLUMN `reg_time` date NOT NULL COMMENT '帐号注册时间';
 
-ALTER TABLE accounts MODIFY COLUMN `password` varchar(50) NOT NULL COMMENT '密码';                                                                                        
+ALTER TABLE accounts MODIFY COLUMN `password` varchar(50) NOT NULL COMMENT '密码';
 ALTER TABLE accounts MODIFY COLUMN `salt` varchar(20) NOT NULL COMMENT '盐值';
 
 ALTER TABLE accounts MODIFY COLUMN `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号';
@@ -182,8 +182,9 @@ ALTER TABLE accounts MODIFY COLUMN `phone` char(30) NOT NULL COMMENT '电话号�
 select * from purchase where operator ='user333';
 
 -- update
-update purchase set 
+update purchase set
 commodity='铁马秋风',supplier='大山芽',quantity='60',amount_money='100.22',
 payment_method='3',is_enter_store='1',purchase_time='2011-12-18 00:15:25' where purchase_id=3;
 
-
+-- 新增1列
+alter table purchase add classify int(2) not null comment '货品分类:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它';

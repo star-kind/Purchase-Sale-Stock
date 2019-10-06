@@ -1,6 +1,6 @@
 +----------+----------------------------------------------------------------------------------------------------------------------------
 -------------------------------------+
-| accounts | CREATE TABLE `accounts` (                                                                                                  
+| accounts | CREATE TABLE `accounts` (
                                      |
 |          |   `usrid` int(22) NOT NULL AUTO_INCREMENT COMMENT '主键ID',                                                                                                     |
 |          |   `usrname` varchar(30) NOT NULL COMMENT '账号用户名',                                                                                                          |
@@ -36,6 +36,7 @@
 |          |   `has_take_goods` int(1) NOT NULL DEFAULT '0' COMMENT '是否已取货:0-未取货,1-已取货',           |
 |          |   `operator` varchar(44) NOT NULL COMMENT '本次采买活动之经办人',                                |
 |          |   `purchase_time` datetime NOT NULL COMMENT '采买活动之时间',                                    |
+|          |   `classify` int(2) NOT NULL COMMENT '货品分类:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它',     |
 |          |   PRIMARY KEY (`purchase_id`)                                                                    |
-|          | ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8                                           |
+|          | ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8                                           |
 +----------+--------------------------------------------------------------------------------------------------+

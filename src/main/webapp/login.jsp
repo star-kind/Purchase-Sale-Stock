@@ -28,7 +28,7 @@
 			<h3 class="col-md-5" style="width: 250px;">进销存管理系统登录</h3>
 		</div>
 
-		<div style="width: 320px; margin-bottom: 30px;">
+		<div style="width: 320px;margin-bottom: 30px;margin-left: 53%;margin-top: 25px;">
 			<span id="info-tip"
 				style="font-size: 18px; color: #529725; font-family: Helvetica">
 			</span>

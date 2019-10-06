@@ -29,6 +29,30 @@ public class PurchaseController extends ControllerToolKit {
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
 
 	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "jumpToPurchaseTranceLogHandler")
+	public String jumpToPurchaseTranceLogHandler() {
+		System.err.println("jumpToPurchaseTranceLogHandler");
+
+		return "PurchaseDir/PurchaseTranceLog";
+
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "jumpToPurchaseWorkableHandler")
+	public String jumpToPurchaseWorkableHandler() {
+		System.err.println("jumpToPurchaseWorkableHandler");
+
+		return "PurchaseDir/PurchaseWorkable";
+
+	}
+
+	/**
 	 * http://localhost:8080/stocker-manager/PurchaseController/readOutputSubstanceLogHandler
 	 * 
 	 * @param session

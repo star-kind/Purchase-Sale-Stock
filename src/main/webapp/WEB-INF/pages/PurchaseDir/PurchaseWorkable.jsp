@@ -36,9 +36,11 @@
 
 			<li><a href="javascript:opens(2);" class="a_links">查看全部申请单</a></li>
 
-			<li><a href="#" class="a_links">采买活动记录</a></li>
+			<li><a
+				href="${basePath}/PurchaseController/jumpToPurchaseTranceLogHandler"
+				class="a_links">采买活动记录</a></li>
 
-			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回导航页</a></li>
+			<li><a href="/stocker-manager/cross/toTransfer" class="a_links">返回导航页</a></li>
 		</ul>
 	</div>
 

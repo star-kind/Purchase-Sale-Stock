@@ -82,16 +82,17 @@ public class PurchaseMapperTest {
 
 		Purchase p = new Purchase();
 
-		p.setCommodity("the-real");
+		p.setCommodity("兰之力");
 		p.setIsAgree(0);
-		p.setAmountMoney(123.36f);
+		p.setAmountMoney(1230.36f);
 		p.sethasTakeGoods(1);
 		p.setIsPay(1);
 		p.setQuantity(10);
 		p.setPaymentMethod(0);
 		p.setPurchaseTime(new Date());
-		p.setSupplier("flims");
-		p.setOperator("admin");
+		p.setSupplier("Google");
+		p.setOperator("p666");
+		p.setClassify(5);
 
 		int row = pm.insertIntoNewRow(p);
 		System.out.println("row-" + row);
