@@ -1,12 +1,10 @@
-+----------+----------------------------------------------------------------------------------------------------------------------------
 -------------------------------------+
-| accounts | CREATE TABLE `accounts` (
-                                     |
+| accounts | CREATE TABLE `accounts` (                                                                                                                                       |
 |          |   `usrid` int(22) NOT NULL AUTO_INCREMENT COMMENT '主键ID',                                                                                                     |
 |          |   `usrname` varchar(30) NOT NULL COMMENT '账号用户名',                                                                                                          |
 |          |   `region_department` int(3) NOT NULL COMMENT '地区部门,0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦
 岭,9-酒后,10-平等,11-夏堡,12-富留店', |
-|          |   `competence` int(1) DEFAULT NULL COMMENT '岗位对应之权限,0:管理员,1:总经理,2:采购经理,3:销售经理,4:仓库主管,5普通雇员',                                       |
+|          |   `competence` int(1) NOT NULL COMMENT '岗位类型,0:系统管理,1:总经理,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员',                                              |
 |          |   `active_status` int(1) DEFAULT '1' COMMENT '激活状态 0-已注销,1-已激活',                                                                                      |
 |          |   `phone` char(30) NOT NULL COMMENT '电话号码,1个电话号码至多准许绑定1个账号',                                                                                  |
 |          |   `reg_time` date NOT NULL COMMENT '帐号注册时间',                                                                                                              |
@@ -15,11 +13,12 @@
 |          |   `salt` varchar(20) NOT NULL COMMENT '盐值',                                                                                                                   |
 |          |   PRIMARY KEY (`usrid`),                                                                                                                                        |
 |          |   UNIQUE KEY `usrname` (`usrname`)                                                                                                                              |
-|          | ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8                                                                                                          |
+|          | ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8                                                                                                          |
 +----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 -- =======================================================================================================
+
 
 +----------+--------------------------------------------------------------------------------------------------+
 | Table    | Create Table                                                                                     |

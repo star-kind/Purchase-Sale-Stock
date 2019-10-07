@@ -105,7 +105,7 @@
 									<option value="1">总经理</option>
 									<option value="2">采购经理</option>
 									<option value="3">销售经理</option>
-									<option value="4">仓库主管</option>
+									<option value="4">仓库员</option>
 									<option value="5">普通雇员</option>
 								</select>
 							</div>

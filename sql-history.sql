@@ -48,6 +48,9 @@ COMMENT '地区部门,0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6
 ALTER TABLE purchase CHANGE is_enter_store is_enter_store int(1) NOT NULL DEFAULT '0'
 COMMENT '是否已取货:0-未取货,1-已取货';
 
+-- 修改注释
+ALTER TABLE accounts CHANGE competence competence int(1) NOT NULL COMMENT '岗位类型,0:系统管理,1:总经理,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员';
+
 -- 修改字段名
 ALTER TABLE purchase CHANGE is_enter_store has_take_goods int(1) NOT NULL DEFAULT '0'
 COMMENT '是否已取货:0-未取货,1-已取货';

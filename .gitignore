@@ -1,6 +1,7 @@
 #忽略
-/Logs/
+Logs/
 *.txt
 *.TXT.*
 *.TXT
-Record-Standard.txt
+Logs/LOG4J/Record-Standard.txt
+
