@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--映射接口包 -->
 <mapper namespace="com.allstargh.ssm.mapper.AccountsMapper">
+
+	<!-- 统计权限为parameter的人数 -->
+	<select id="selectCountCompetence"
+		resultType="java.lang.Integer">
+
+		SELECT
+		COUNT(competence)
+		FROM
+		accounts
+		WHERE
+		competence=#{competence}
+
+	</select>
+
 	<update id="updatePartialProfileById">
 		UPDATE
 		accounts
@@ -40,7 +54,8 @@
 		#{salt})
 	</insert>
 
-	<select id="selectByUname" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectByUname"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -68,7 +83,8 @@
 		phone=#{phone}
 	</select>
 
-	<select id="selectAllFromAccounts" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectAllFromAccounts"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -102,7 +118,8 @@
 		usrid=#{usrid}
 	</update>
 
-	<select id="selectAccountByUsrid" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectAccountByUsrid"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -149,7 +166,8 @@
 		usrid=#{usrid}
 	</update>
 
-	<select id="selectByRegionDepartment" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectByRegionDepartment"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -190,7 +208,8 @@
 		region_department=#{regionDepartment}
 	</select>
 
-	<select id="selectByCompetence" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectByCompetence"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -209,7 +228,8 @@
 		competence=#{competence}
 	</select>
 
-	<select id="selectByActiveStatus" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectByActiveStatus"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,
@@ -227,7 +247,8 @@
 		active_status=#{activeStatus}
 	</select>
 
-	<select id="selectLikeUsrname" resultType="com.allstargh.ssm.pojo.Accounts">
+	<select id="selectLikeUsrname"
+		resultType="com.allstargh.ssm.pojo.Accounts">
 		SELECT
 		usrid,
 		usrname,

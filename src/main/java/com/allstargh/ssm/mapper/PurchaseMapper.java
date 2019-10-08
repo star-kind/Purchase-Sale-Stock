@@ -15,6 +15,16 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 根据是否取货和是否获批查询集合
+	 * 
+	 * @param hasTakeGoods
+	 * @param isAgree
+	 * @return
+	 */
+	List<Purchase> selectByHasTakeAndAgree(@Param("hasTakeGoods") Integer hasTakeGoods,
+			@Param("isAgree") Integer isAgree);
+
+	/**
 	 * 多行采购单被删除,据ID们
 	 * 
 	 * @param purchaseIds

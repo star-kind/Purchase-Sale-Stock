@@ -2,7 +2,7 @@ git status
 
 git add -A .                 
 
-git commit -m  "add an column 'design datatables"
+git commit -m  "new module:stock"
 
 git pull origin master   
 

@@ -457,4 +457,20 @@
 		purchase_id=#{purchaseId}
 	</update>
 
+	<select id="selectByHasTakeAndAgree" resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT purchase_id AS purchaseId,
+		commodity, is_agree AS
+		isAgree, supplier, quantity, amount_money AS
+		amountMoney ,
+		payment_method AS paymentMethod, is_pay AS isPay,
+		has_take_goods AS
+		hasTakeGoods, operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		has_take_goods=#{hasTakeGoods}
+		AND
+		is_agree=#{isAgree}
+	</select>
 </mapper>

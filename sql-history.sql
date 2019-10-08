@@ -26,6 +26,10 @@ SELECT * FROM accounts;
 DESC accounts;
 
 -- ======================================================
+
+#修改
+ update purchase set is_agree=1,has_take_goods=1  where purchase_id<10;    
+
 alter table accounts change reg_time reg_time date not null;
 
 alter table accounts add password varchar(50) not null;
@@ -191,3 +195,20 @@ payment_method='3',is_enter_store='1',purchase_time='2011-12-18 00:15:25' where 
 
 -- 新增1列
 alter table purchase add classify int(2) not null comment '货品分类:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它';
+
+-- 创表
+CREATE TABLE `t_stock`(
+  id BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  purchase_id INT(13) NOT NULL COMMENT '采购申请单ID',
+  store_commodity varchar(45) NOT NULL COMMENT '存储货物之名',
+  store_quantity MEDIUMINT NOT NULL comment '存储数量',
+  unit_price DECIMAL NOT NULL comment '单价',
+  stock_type_area TINYINT(2) NOT NULL comment '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区',
+  stock_operator VARCHAR(30) NOT NULL comment '入库经办仓管',
+  enter_stock_time TIMESTAMP NOT NULL comment '入库时间',
+  remark CHAR(70) DEFAULT NULL comment '备注',
+  agree_enter_stock TINYINT(1) comment '同意入库与否:0-否,1-可',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_pid` (`purchase_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 comment '货仓存储表';
+

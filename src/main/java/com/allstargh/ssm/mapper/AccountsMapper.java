@@ -9,6 +9,14 @@ import com.allstargh.ssm.pojo.Accounts;
 
 public interface AccountsMapper {
 	/**
+	 * 统计权限为param的人数
+	 * 
+	 * @param competence
+	 * @return
+	 */
+	Integer selectCountCompetence(Integer competence);
+
+	/**
 	 * 修改部分资料:名字和电话,据ID
 	 * 
 	 * @param usrname

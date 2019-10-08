@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allstargh.ssm.mapper.TStockDAO">
+  <resultMap id="BaseResultMap" type="com.allstargh.ssm.pojo.TStock">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="purchase_id" jdbcType="INTEGER" property="purchaseId" />
+    <result column="store_commodity" jdbcType="VARCHAR" property="storeCommodity" />
+    <result column="store_quantity" jdbcType="INTEGER" property="storeQuantity" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="stock_type_area" jdbcType="TINYINT" property="stockTypeArea" />
+    <result column="stock_operator" jdbcType="VARCHAR" property="stockOperator" />
+    <result column="enter_stock_time" jdbcType="TIMESTAMP" property="enterStockTime" />
+    <result column="remark" jdbcType="CHAR" property="remark" />
+    <result column="agree_enter_stock" jdbcType="BIT" property="agreeEnterStock" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, purchase_id, store_commodity, store_quantity, unit_price, stock_type_area, stock_operator, 
+    enter_stock_time, remark, agree_enter_stock
+  </sql>
+  <select id="selectByExample" parameterType="com.allstargh.ssm.pojo.TStockExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_stock
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_stock
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allstargh.ssm.pojo.TStockExample">
+    delete from t_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allstargh.ssm.pojo.TStock">
+    insert into t_stock (id, purchase_id, store_commodity, 
+      store_quantity, unit_price, stock_type_area, 
+      stock_operator, enter_stock_time, remark, 
+      agree_enter_stock)
+    values (#{id,jdbcType=BIGINT}, #{purchaseId,jdbcType=INTEGER}, #{storeCommodity,jdbcType=VARCHAR}, 
+      #{storeQuantity,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{stockTypeArea,jdbcType=TINYINT}, 
+      #{stockOperator,jdbcType=VARCHAR}, #{enterStockTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=CHAR}, 
+      #{agreeEnterStock,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allstargh.ssm.pojo.TStock">
+    insert into t_stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="purchaseId != null">
+        purchase_id,
+      </if>
+      <if test="storeCommodity != null">
+        store_commodity,
+      </if>
+      <if test="storeQuantity != null">
+        store_quantity,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+      <if test="stockTypeArea != null">
+        stock_type_area,
+      </if>
+      <if test="stockOperator != null">
+        stock_operator,
+      </if>
+      <if test="enterStockTime != null">
+        enter_stock_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="agreeEnterStock != null">
+        agree_enter_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseId != null">
+        #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="storeCommodity != null">
+        #{storeCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="storeQuantity != null">
+        #{storeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stockTypeArea != null">
+        #{stockTypeArea,jdbcType=TINYINT},
+      </if>
+      <if test="stockOperator != null">
+        #{stockOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="enterStockTime != null">
+        #{enterStockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=CHAR},
+      </if>
+      <if test="agreeEnterStock != null">
+        #{agreeEnterStock,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into t_stock (id, purchase_id, store_commodity, 
+      store_quantity, unit_price, stock_type_area, 
+      stock_operator, enter_stock_time, 
+      remark, agree_enter_stock)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.purchaseId,jdbcType=INTEGER}, #{item.storeCommodity,jdbcType=VARCHAR}, 
+        #{item.storeQuantity,jdbcType=INTEGER}, #{item.unitPrice,jdbcType=DECIMAL}, #{item.stockTypeArea,jdbcType=TINYINT}, 
+        #{item.stockOperator,jdbcType=VARCHAR}, #{item.enterStockTime,jdbcType=TIMESTAMP}, 
+        #{item.remark,jdbcType=CHAR}, #{item.agreeEnterStock,jdbcType=BIT})
+    </foreach>
+  </insert>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into t_stock
+    (id, purchase_id, store_commodity, store_quantity, unit_price, stock_type_area, stock_operator, 
+      enter_stock_time, remark, agree_enter_stock)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="item.id != null">
+          #{item.id,jdbcType=BIGINT},
+        </if>
+        <if test="item.id == null">
+          NULL,
+        </if>
+        <if test="item.purchaseId != null">
+          #{item.purchaseId,jdbcType=INTEGER},
+        </if>
+        <if test="item.purchaseId == null">
+          NULL,
+        </if>
+        <if test="item.storeCommodity != null">
+          #{item.storeCommodity,jdbcType=VARCHAR},
+        </if>
+        <if test="item.storeCommodity == null">
+          NULL,
+        </if>
+        <if test="item.storeQuantity != null">
+          #{item.storeQuantity,jdbcType=INTEGER},
+        </if>
+        <if test="item.storeQuantity == null">
+          NULL,
+        </if>
+        <if test="item.unitPrice != null">
+          #{item.unitPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.unitPrice == null">
+          NULL,
+        </if>
+        <if test="item.stockTypeArea != null">
+          #{item.stockTypeArea,jdbcType=TINYINT},
+        </if>
+        <if test="item.stockTypeArea == null">
+          NULL,
+        </if>
+        <if test="item.stockOperator != null">
+          #{item.stockOperator,jdbcType=VARCHAR},
+        </if>
+        <if test="item.stockOperator == null">
+          NULL,
+        </if>
+        <if test="item.enterStockTime != null">
+          #{item.enterStockTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.enterStockTime == null">
+          NULL,
+        </if>
+        <if test="item.remark != null">
+          #{item.remark,jdbcType=CHAR},
+        </if>
+        <if test="item.remark == null">
+          NULL,
+        </if>
+        <if test="item.agreeEnterStock != null">
+          #{item.agreeEnterStock,jdbcType=BIT},
+        </if>
+        <if test="item.agreeEnterStock == null">
+          NULL,
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <select id="countByExample" parameterType="com.allstargh.ssm.pojo.TStockExample" resultType="java.lang.Long">
+    select count(*) from t_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_stock
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaseId != null">
+        purchase_id = #{record.purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeCommodity != null">
+        store_commodity = #{record.storeCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeQuantity != null">
+        store_quantity = #{record.storeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitPrice != null">
+        unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stockTypeArea != null">
+        stock_type_area = #{record.stockTypeArea,jdbcType=TINYINT},
+      </if>
+      <if test="record.stockOperator != null">
+        stock_operator = #{record.stockOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterStockTime != null">
+        enter_stock_time = #{record.enterStockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=CHAR},
+      </if>
+      <if test="record.agreeEnterStock != null">
+        agree_enter_stock = #{record.agreeEnterStock,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_stock
+    set id = #{record.id,jdbcType=BIGINT},
+      purchase_id = #{record.purchaseId,jdbcType=INTEGER},
+      store_commodity = #{record.storeCommodity,jdbcType=VARCHAR},
+      store_quantity = #{record.storeQuantity,jdbcType=INTEGER},
+      unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      stock_type_area = #{record.stockTypeArea,jdbcType=TINYINT},
+      stock_operator = #{record.stockOperator,jdbcType=VARCHAR},
+      enter_stock_time = #{record.enterStockTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=CHAR},
+      agree_enter_stock = #{record.agreeEnterStock,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allstargh.ssm.pojo.TStock">
+    update t_stock
+    <set>
+      <if test="purchaseId != null">
+        purchase_id = #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="storeCommodity != null">
+        store_commodity = #{storeCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="storeQuantity != null">
+        store_quantity = #{storeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stockTypeArea != null">
+        stock_type_area = #{stockTypeArea,jdbcType=TINYINT},
+      </if>
+      <if test="stockOperator != null">
+        stock_operator = #{stockOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="enterStockTime != null">
+        enter_stock_time = #{enterStockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+      <if test="agreeEnterStock != null">
+        agree_enter_stock = #{agreeEnterStock,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allstargh.ssm.pojo.TStock">
+    update t_stock
+    set purchase_id = #{purchaseId,jdbcType=INTEGER},
+      store_commodity = #{storeCommodity,jdbcType=VARCHAR},
+      store_quantity = #{storeQuantity,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      stock_type_area = #{stockTypeArea,jdbcType=TINYINT},
+      stock_operator = #{stockOperator,jdbcType=VARCHAR},
+      enter_stock_time = #{enterStockTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=CHAR},
+      agree_enter_stock = #{agreeEnterStock,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatchByPrimaryKey" parameterType="java.util.List">
+    update t_stock
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="purchase_id =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.purchaseId}
+        </foreach>
+      </trim>
+      <trim prefix="store_commodity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.storeCommodity}
+        </foreach>
+      </trim>
+      <trim prefix="store_quantity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.storeQuantity}
+        </foreach>
+      </trim>
+      <trim prefix="unit_price =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.unitPrice}
+        </foreach>
+      </trim>
+      <trim prefix="stock_type_area =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.stockTypeArea}
+        </foreach>
+      </trim>
+      <trim prefix="stock_operator =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.stockOperator}
+        </foreach>
+      </trim>
+      <trim prefix="enter_stock_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.enterStockTime}
+        </foreach>
+      </trim>
+      <trim prefix="remark =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.remark}
+        </foreach>
+      </trim>
+      <trim prefix="agree_enter_stock =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.agreeEnterStock}
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    update t_stock
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="purchase_id =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.purchaseId != null ">
+            when  #{item.id} then #{item.purchaseId}
+          </if>
+          <if test="item.purchaseId == null ">
+            when  #{item.id} then t_stock.purchase_id
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="store_commodity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.storeCommodity != null ">
+            when  #{item.id} then #{item.storeCommodity}
+          </if>
+          <if test="item.storeCommodity == null ">
+            when  #{item.id} then t_stock.store_commodity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="store_quantity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.storeQuantity != null ">
+            when  #{item.id} then #{item.storeQuantity}
+          </if>
+          <if test="item.storeQuantity == null ">
+            when  #{item.id} then t_stock.store_quantity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="unit_price =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.unitPrice != null ">
+            when  #{item.id} then #{item.unitPrice}
+          </if>
+          <if test="item.unitPrice == null ">
+            when  #{item.id} then t_stock.unit_price
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="stock_type_area =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.stockTypeArea != null ">
+            when  #{item.id} then #{item.stockTypeArea}
+          </if>
+          <if test="item.stockTypeArea == null ">
+            when  #{item.id} then t_stock.stock_type_area
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="stock_operator =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.stockOperator != null ">
+            when  #{item.id} then #{item.stockOperator}
+          </if>
+          <if test="item.stockOperator == null ">
+            when  #{item.id} then t_stock.stock_operator
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="enter_stock_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.enterStockTime != null ">
+            when  #{item.id} then #{item.enterStockTime}
+          </if>
+          <if test="item.enterStockTime == null ">
+            when  #{item.id} then t_stock.enter_stock_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.remark != null ">
+            when  #{item.id} then #{item.remark}
+          </if>
+          <if test="item.remark == null ">
+            when  #{item.id} then t_stock.remark
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="agree_enter_stock =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.agreeEnterStock != null ">
+            when  #{item.id} then #{item.agreeEnterStock}
+          </if>
+          <if test="item.agreeEnterStock == null ">
+            when  #{item.id} then t_stock.agree_enter_stock
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByExample" parameterType="map">
+    update t_stock
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="purchase_id =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.purchaseId}
+        </foreach>
+      </trim>
+      <trim prefix="store_commodity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.storeCommodity}
+        </foreach>
+      </trim>
+      <trim prefix="store_quantity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.storeQuantity}
+        </foreach>
+      </trim>
+      <trim prefix="unit_price =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.unitPrice}
+        </foreach>
+      </trim>
+      <trim prefix="stock_type_area =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.stockTypeArea}
+        </foreach>
+      </trim>
+      <trim prefix="stock_operator =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.stockOperator}
+        </foreach>
+      </trim>
+      <trim prefix="enter_stock_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.enterStockTime}
+        </foreach>
+      </trim>
+      <trim prefix="remark =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.remark}
+        </foreach>
+      </trim>
+      <trim prefix="agree_enter_stock =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.agreeEnterStock}
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateBatchByExampleSelective" parameterType="map">
+    update t_stock
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="purchase_id =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.purchaseId != null ">
+            when  #{item.id} then #{item.purchaseId}
+          </if>
+          <if test="item.purchaseId == null ">
+            when  #{item.id} then t_stock.purchase_id
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="store_commodity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.storeCommodity != null ">
+            when  #{item.id} then #{item.storeCommodity}
+          </if>
+          <if test="item.storeCommodity == null ">
+            when  #{item.id} then t_stock.store_commodity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="store_quantity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.storeQuantity != null ">
+            when  #{item.id} then #{item.storeQuantity}
+          </if>
+          <if test="item.storeQuantity == null ">
+            when  #{item.id} then t_stock.store_quantity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="unit_price =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.unitPrice != null ">
+            when  #{item.id} then #{item.unitPrice}
+          </if>
+          <if test="item.unitPrice == null ">
+            when  #{item.id} then t_stock.unit_price
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="stock_type_area =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.stockTypeArea != null ">
+            when  #{item.id} then #{item.stockTypeArea}
+          </if>
+          <if test="item.stockTypeArea == null ">
+            when  #{item.id} then t_stock.stock_type_area
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="stock_operator =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.stockOperator != null ">
+            when  #{item.id} then #{item.stockOperator}
+          </if>
+          <if test="item.stockOperator == null ">
+            when  #{item.id} then t_stock.stock_operator
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="enter_stock_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.enterStockTime != null ">
+            when  #{item.id} then #{item.enterStockTime}
+          </if>
+          <if test="item.enterStockTime == null ">
+            when  #{item.id} then t_stock.enter_stock_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.remark != null ">
+            when  #{item.id} then #{item.remark}
+          </if>
+          <if test="item.remark == null ">
+            when  #{item.id} then t_stock.remark
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="agree_enter_stock =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.agreeEnterStock != null ">
+            when  #{item.id} then #{item.agreeEnterStock}
+          </if>
+          <if test="item.agreeEnterStock == null ">
+            when  #{item.id} then t_stock.agree_enter_stock
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

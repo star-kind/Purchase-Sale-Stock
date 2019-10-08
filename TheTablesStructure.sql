@@ -39,3 +39,23 @@
 |          |   PRIMARY KEY (`purchase_id`)                                                                    |
 |          | ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8                                           |
 +----------+--------------------------------------------------------------------------------------------------+
+
+
++---------+-------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                            |
++---------+-------------------------------------------------------------------------------------------------------------------------+
+| t_stock | CREATE TABLE `t_stock` (                                                                                                |
+|         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                      |
+|         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                |
+|         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                        |
+|         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                            |
+|         |   `unit_price` decimal(10,0) NOT NULL COMMENT '单价',                                                                   |
+|         |   `stock_type_area` tinyint(2) NOT NULL COMMENT '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区', |
+|         |   `stock_operator` varchar(30) NOT NULL COMMENT '入库经办仓管',                                                         |
+|         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                             |
+|         |   `remark` char(70) DEFAULT NULL COMMENT '备注',                                                                        |
+|         |   `agree_enter_stock` tinyint(1) DEFAULT NULL COMMENT '同意入库与否:0-否,1-可',                                         |
+|         |   PRIMARY KEY (`id`),                                                                                                   |
+|         |   UNIQUE KEY `uk_pid` (`purchase_id`)                                                                                   |
+|         | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                 |
++---------+-------------------------------------------------------------------------------------------------------------------------+

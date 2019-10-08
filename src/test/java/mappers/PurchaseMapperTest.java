@@ -21,6 +21,17 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void selectDoubleExampleTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> list = pm.selectByHasTakeAndAgree(1, 1);
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+	}
+
+	@Test
 	public void multiplesDeleteTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 
