@@ -16,8 +16,9 @@ public interface IStcokSevice {
 	 * 
 	 * @param purchase
 	 * @param stock
+	 * @param stockOperator
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	Integer regEntry(Purchase purchase, TStock stock) throws SelfServiceException;
+	Integer regEntry(Purchase purchase, TStock stock, String stockOperator) throws SelfServiceException;
 }

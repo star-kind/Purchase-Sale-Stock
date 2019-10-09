@@ -3,6 +3,8 @@ package com.allstargh.ssm.pojo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TStock {
 	/**
 	 * 主键
@@ -185,6 +187,7 @@ public class TStock {
 	 * 
 	 * @return 入库时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getEnterStockTime() {
 		return enterStockTime;
 	}

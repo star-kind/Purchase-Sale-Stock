@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.allstargh.ssm.controller.kits.ControllerToolKit;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Purchase;
@@ -21,12 +21,29 @@ import com.allstargh.ssm.service.IPurchaseService;
 
 @Controller
 @RequestMapping("/PurchaseController")
-public class PurchaseController extends ControllerToolKit {
+public class PurchaseController extends ControllerUtils {
 	@Autowired
 	private IPurchaseService ips;
 
 	// 工具类
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/getPurchaseListByTakedAndAgreedHandler
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getPurchaseListByTakedAndAgreedHandler", method = RequestMethod.GET)
+	public ResponseResult<List<Purchase>> getPurchaseListByTakedAndAgreedHandler(HttpSession session) {
+		Integer usrid = (Integer) session.getAttribute("usrid");
+
+		List<Purchase> list = ips.getPurchaseListByTakedAndAgreed(1, usrid, 1);
+
+		return new ResponseResult<List<Purchase>>(SUCCESS, list);
+
+	}
 
 	/**
 	 * 

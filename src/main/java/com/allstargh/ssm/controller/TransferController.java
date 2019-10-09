@@ -3,7 +3,7 @@ package com.allstargh.ssm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.allstargh.ssm.controller.kits.ControllerToolKit;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 
 /**
  * 中转控制器,模块选择进入
@@ -13,7 +13,7 @@ import com.allstargh.ssm.controller.kits.ControllerToolKit;
  */
 @Controller
 @RequestMapping("/cross")
-public class TransferController extends ControllerToolKit {
+public class TransferController extends ControllerUtils {
 	/**
 	 * 
 	 * @return

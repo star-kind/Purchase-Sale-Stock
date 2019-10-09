@@ -11,7 +11,7 @@ import com.allstargh.ssm.pojo.Purchase;
  * @author gzh
  *
  */
-public class PurchaseControllerUtil extends ControllerToolKit {
+public class PurchaseControllerUtil extends ControllerUtils {
 
 	private static PurchaseControllerUtil instance;
 

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>采购事务模块</title>
+
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 
 <!-- JavaScript 点击链接切换division  -->

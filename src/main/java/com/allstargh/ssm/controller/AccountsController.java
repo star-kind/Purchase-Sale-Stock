@@ -18,16 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.allstargh.ssm.controller.kits.ControllerToolKit;
+import com.allstargh.ssm.controller.kits.AccountControllerUtil;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
+import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.service.IAccountsService;
 
 @Controller
 @RequestMapping("/account")
-public class AccountsController extends ControllerToolKit {
+public class AccountsController extends ControllerUtils {
 	@Autowired
 	private IAccountsService iAccountsService;
+
+	protected AccountControllerUtil instance = AccountControllerUtil.getInstance();
 
 	/**
 	 * 
@@ -39,7 +43,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<Void> regHandler(Accounts accounts, HttpSession session) {
 		Integer row = iAccountsService.registerRole(accounts);
 
-		inputRegRecordsToTxt(accounts, row, session);
+		instance.inputRegRecordsToTxt(accounts, row, session);
 
 		return new ResponseResult<Void>(SUCCESS);
 	}
@@ -61,11 +65,11 @@ public class AccountsController extends ControllerToolKit {
 			HttpSession session) {
 		System.out.println("username=" + usrname + ",password=" + password);
 
-		inputAllLoginRecords(usrname);
+		instance.inputAllLoginRecords(usrname);
 
 		Accounts account = iAccountsService.login(usrname, password, session);
 
-		inputSuccessLoginRecords(account, usrname, session);
+		instance.inputSuccessLoginRecords(account, usrname, session);
 
 		return new ResponseResult<Void>(SUCCESS);
 	}
@@ -107,7 +111,7 @@ public class AccountsController extends ControllerToolKit {
 		Integer usrid = Integer.valueOf(request.getParameter("usrid"));
 		Integer code = iAccountsService.earseAnAccount(usrid);
 
-		earseAnAccountRecords(usrid, code, session);
+		instance.earseAnAccountRecords(usrid, code, session);
 
 		return new ResponseResult<Void>(SUCCESS);
 	}
@@ -142,7 +146,7 @@ public class AccountsController extends ControllerToolKit {
 		System.out.println(usrname + "," + phone + "," + competence + "," + regionDepartment + "," + usrid);
 		Integer affects = iAccountsService.alterAccountProfile(usrname, phone, competence, regionDepartment, usrid);
 
-		executModifiyRecords(usrid, session, affects, usrname, phone, competence, regionDepartment);
+		instance.executModifiyRecords(usrid, session, affects, usrname, phone, competence, regionDepartment);
 		return new ResponseResult<Void>(SUCCESS);
 	}
 
@@ -157,7 +161,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<Integer> multipleCancelHandler(@RequestParam("usrids") Integer[] usrids,
 			HttpSession session) {
 		Integer affects = iAccountsService.multipleCancel(usrids);
-		multipleCancelRecords(affects, session, usrids);
+		instance.multipleCancelRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
@@ -174,7 +178,7 @@ public class AccountsController extends ControllerToolKit {
 	public ResponseResult<Integer> multipleActiveHandler(@RequestParam("usrids") Integer[] usrids,
 			HttpSession session) {
 		Integer affects = iAccountsService.multipleActive(usrids);
-		multipleActiveRecords(affects, session, usrids);
+		instance.multipleActiveRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
@@ -192,7 +196,7 @@ public class AccountsController extends ControllerToolKit {
 			HttpSession session) {
 		Integer affects = iAccountsService.multipleResetPwd(usrids);
 
-		multipleResetRecords(affects, session, usrids);
+		instance.multipleResetRecords(affects, session, usrids);
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
@@ -254,7 +258,7 @@ public class AccountsController extends ControllerToolKit {
 
 		Integer effects = iAccountsService.multipleResetPwd(ids);
 
-		multipleResetRecords(effects, session, ids);
+		instance.multipleResetRecords(effects, session, ids);
 		return new ResponseResult<Void>(SUCCESS);
 	}
 
@@ -276,7 +280,7 @@ public class AccountsController extends ControllerToolKit {
 
 		Integer effects = iAccountsService.multipleCancel(ids);
 
-		multipleCancelRecords(effects, session, ids);
+		instance.multipleCancelRecords(effects, session, ids);
 		return new ResponseResult<Integer>(SUCCESS, effects);
 	}
 
@@ -296,7 +300,7 @@ public class AccountsController extends ControllerToolKit {
 
 		Integer effects = iAccountsService.multipleActive(ids);
 
-		multipleActiveRecords(effects, session, ids);
+		instance.multipleActiveRecords(effects, session, ids);
 		return new ResponseResult<Integer>(SUCCESS, effects);
 	}
 
@@ -334,7 +338,7 @@ public class AccountsController extends ControllerToolKit {
 
 		Integer effects = iAccountsService.revisePassword(oldPassword, newPassword, uid);
 
-		revisePasswordHandlerRecord(uid, effects);
+		instance.revisePasswordHandlerRecord(uid, effects);
 
 		return new ResponseResult<Integer>(SUCCESS, effects);
 	}

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
@@ -8,7 +9,8 @@
 <head>
 
 <!-- introduce -->
-<link rel="stylesheet" type="text/css" href="${basePath}/PatternStyle/TransferClaim.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/TransferClaim.css">
 
 <title>导航页</title>
 
@@ -23,7 +25,8 @@
 <body>
 	<div id="total_area">
 
-		<div style="text-align: center; margin-top: 30px; margin-bottom: 25px;">
+		<div
+			style="text-align: center; margin-top: 30px; margin-bottom: 25px;">
 			<!--  -->
 			<a href="${basePath}/cross/toRevisePassword" class="revamp_link">修改密码</a>
 			<!--  -->
@@ -32,31 +35,42 @@
 
 		<table>
 			<h4 style="text-align: center;">选择模块</h4>
+			
 			<tbody>
 
 				<tr class="t_rows">
-					<td class="data_cells"><a href="${basePath}/account/toAdminWorkable" class="links_dept">账户管理</a></td>
+					<td class="data_cells"><a
+						href="${basePath}/account/toAdminWorkable" class="links_dept">账户管理</a></td>
 				</tr>
 
 				<tr class="t_rows">
 					<td class="data_cells"><a href="" class="links_dept">销售部</a></td>
 				</tr>
+				
 				<tr class="t_rows">
-					<td class="data_cells"><a href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler" class="links_dept">采购部</a></td>
+					<td class="data_cells"><a
+						href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler"
+						class="links_dept">采购部</a></td>
 				</tr>
+				
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">仓库管理</a></td>
+					<td class="data_cells"><a
+						href="/stocker-manager/StockController/checkEnterCompetenceHandler"
+						class="links_dept">仓库管理</a></td>
 				</tr>
+				
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">审批(总经理)</a></td>
+					<td class="data_cells"><a href="" class="links_dept">审核部</a></td>
 				</tr>
+				
 			</tbody>
 		</table>
 	</div>
 
-	<div style="text-align: center; font-size: 18px; color: #d01d24;" class="into-info">
+	<div style="text-align: center; font-size: 18px; color: #d01d24;"
+		class="into-info">
 		<p>${info}</p>
-		<p>${info00}</p>
+		<p>${information}</p>
 	</div>
 
 	<div class="back_to" style="text-align: center;">

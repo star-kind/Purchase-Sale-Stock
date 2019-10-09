@@ -2,7 +2,7 @@ git status
 
 git add -A .                 
 
-git commit -m  "new module:stock"
+git commit -m  "refactoring and start works at stocker"
 
 git pull origin master   
 

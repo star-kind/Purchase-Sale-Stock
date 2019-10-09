@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
-import com.allstargh.ssm.controller.kits.ControllerToolKit;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
@@ -72,12 +72,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		Integer status = acc.getActiveStatus();
 
 		if (competence != 2) {
-			model.addAttribute("info", "您非采购执事,无权入此模块");
+			model.addAttribute("info", "您没有相应权限,不是该部门人员,无权入此模块");
 			return "Transfer";
 		}
 
 		if (status == 0) {
-			model.addAttribute("info00", "您已被注销,无权入此模块");
+			model.addAttribute("information", "您的账号已被注销,请联系系统管理员处理");
 			return "Transfer";
 		}
 
@@ -191,7 +191,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			throw new SelfServiceException(description);
 		}
 
-		String uri = ControllerToolKit.ENGINE_DAILY_PATH;
+		String uri = ControllerUtils.ENGINE_DAILY_PATH;
 		uri += PurchaseControllerUtil.PURCHASE_FILE_NAME;
 
 		Path path = Paths.get(uri);
@@ -214,6 +214,25 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		return ss;
+	}
+
+	@Override
+	public List<Purchase> getPurchaseListByTakedAndAgreed(Integer hasTakeGoods, Integer usrid, Integer isAgree)
+			throws SelfServiceException {
+		Accounts accounts = am.selectAccountByUsrid(usrid);
+
+		if (accounts == null) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		if (accounts.getCompetence() != 2) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		List<Purchase> list = pm.selectByHasTakeAndAgree(hasTakeGoods, isAgree);
+		return list;
 	}
 
 }

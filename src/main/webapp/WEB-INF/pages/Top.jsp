@@ -9,8 +9,9 @@
 			<!--加入导航条标题-->
 			<div class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
-					<a href="${basePath}/cross/toTransfer" class="navbar-brand">公司进销存管理系统</a>
+					<a href="${basePath}/cross/toTransfer" class="navbar-brand">进销存管理系统</a>
 				</div>
+				
 				<form action="##" class="navbar-form navbar-right" rol="search">
 
 					<%-- <div class="dropdown">
@@ -38,8 +39,8 @@
                     </div> --%>
 
 				</form>
+				
 			</div>
-
 		</div>
 	</div>
 </div>
