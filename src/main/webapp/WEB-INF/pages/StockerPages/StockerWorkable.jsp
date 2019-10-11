@@ -1007,4 +1007,8 @@
 	src="${basePath}/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${basePath}/AdminLTE/dist/js/adminlte.min.js"></script>
+
+<!-- 本页面封装之JavaScript函数 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
 </html>
