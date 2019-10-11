@@ -17,6 +17,8 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	public String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName) {
 		Accounts acc = am.selectAccountByUsrid(usrid);
 		Integer code = acc.getCompetence();
+		System.err.println("code==" + code);
+
 		Integer status = acc.getActiveStatus();
 
 		if (code != competence) {

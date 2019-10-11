@@ -1,7 +1,15 @@
-#忽略
+##忽略
+/target/
 Logs/
+
 *.txt
 *.TXT.*
 *.TXT
+
+Logs/Account-Log.txt
 Logs/LOG4J/Record-Standard.txt
+
+src/main/webapp/AdminLTE/
+src/main/webapp/WEB-INF/pages/StockerPages/StockerWorkable-Test.html
+
 
