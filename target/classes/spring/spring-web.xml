@@ -49,7 +49,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<!-- HTML文件位置 -->
-		<property name="templateLoaderPath" value="/HtmlFile/" />
+		<property name="templateLoaderPath" value="/WEB-INF/pages/" />
 
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="freemarkerSettings">

@@ -91,6 +91,11 @@ public class AccountsController extends ControllerUtils {
 		return url;
 	}
 
+	/**
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(value = "showAllAccount", method = { RequestMethod.GET })
 	public String showAllAccountHandler(ModelMap modelMap) {
 		String r = iAccountsService.browsersAllAccounts(modelMap);
@@ -345,6 +350,8 @@ public class AccountsController extends ControllerUtils {
 
 	/**
 	 * 展示用户资料
+	 * 
+	 * /stocker-manager/account/exhibitionBaseProfileHandler
 	 * 
 	 * @param s
 	 * @return

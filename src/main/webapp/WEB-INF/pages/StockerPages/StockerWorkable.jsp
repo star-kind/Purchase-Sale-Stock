@@ -30,35 +30,20 @@
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="../../index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>返回</b>导航页</span>
+			<a href="/stocker-manager/cross/toTransfer" class="logo"> <span
+				class="logo-mini"><b>A</b>LT</span> <span class="logo-lg"><b>返回</b>导航页</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
-				<!-- Sidebar toggle button-->
-				<!-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a> -->
 
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
-						<!-- Messages: style can be found in dropdown.less-->
-
-						<!-- Notifications: style can be found in dropdown.less -->
-
-						<!-- Tasks: style can be found in dropdown.less -->
-
-						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
 							style="padding-right: 66px;"> <img
 								src="${basePath}/AdminLTE/dist/img/user2-160x160.jpg"
 								class="user-image" alt="User Image"> <span
-								class="hidden-xs current_username">xxx</span>
+								class="hidden-xs current_username"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -114,10 +99,10 @@
 							class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p class="current_username">xxx</p>
-						<a href="#">
-						<!-- <i class="fa fa-circle text-success"></i> -->
-						 Online</a>
+						<p class="current_username"></p>
+						<a href="#"> <!-- <i class="fa fa-circle text-success"></i> -->
+							Online
+						</a>
 					</div>
 				</div>
 				<!-- search form -->
@@ -136,180 +121,21 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
 					<li class="header">MAIN NAVIGATION</li>
-					<!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../AdminLTE/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="../../AdminLTE/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../AdminLTE/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../../AdminLTE/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../../AdminLTE/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../../AdminLTE/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="../widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../AdminLTE/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="../../AdminLTE/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="../../AdminLTE/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="../../AdminLTE/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>UI Elements</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li> -->
-					<li class="treeview active menu-open"><a href="#"> 
-					<!-- <i class="fa fa-envelope"></i> -->
-					 <span>入库申请队列</span> 
-					 <!-- <span class="pull-right-container"> 
+
+					<li class="treeview active menu-open"><a href="#"> <!-- <i class="fa fa-envelope"></i> -->
+							<span>入库申请队列</span> <!-- <span class="pull-right-container"> 
 						<i class="fa">+</i>
 					 </span> -->
 					</a>
 						<ul class="treeview-menu">
-							<li class="active"><a href="mailbox.html">Inbox <span
-									class="pull-right-container"> <span
-										class="label label-primary pull-right">??</span>
+							<li class="active"><a href="javascript:switchStatus(0);">Inbox
+									<span class="pull-right-container"> <span
+										class="label label-primary pull-right len_amount"></span>
 								</span>
 							</a></li>
 							<!-- <li><a href="compose.html">Compose</a></li>
             <li><a href="read-mail.html">Read</a></li> -->
 						</ul></li>
-					<!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Examples</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="../examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="../examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="../examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="../examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="../examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="../examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="../examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="../examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
-        </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -320,66 +146,21 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					队列 <small>?? 份未处理申请单</small>
+					队列 <small class=""><small class="len_amount"></small>
+						份未处理申请单</small>
 				</h1>
 				<ol class="breadcrumb" style="font-size: small;">
-					<li><a href="#">
-					<!-- <i class="fa fa-dashboard"></i> -->
-					 首页</a></li>
-					<li class="active">队列</li>
+					<li><a href="/stocker-manager/login.jsp"> <!-- <i class="fa fa-dashboard"></i> -->
+							首页
+					</a></li>
+					<li class="active">仓管部</li>
 				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<!-- <div class="col-md-3">
-          <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
-        
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Folders</h3>
-        
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding" style="">
-              <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-                  <span class="label label-primary pull-right">12</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-              </ul>
-            </div>
-            /.box-body
-          </div>
-          /. box
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Labels</h3>
-        
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding" style="">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-              </ul>
-            </div>
-            /.box-body
-          </div>
-          /.box
-        </div> -->
-					<!-- /.col -->
+
 					<div class="col-md-9" style="width: 100%;">
 						<div class="box box-primary">
 							<div class="box-header with-border">
@@ -388,25 +169,16 @@
 								<div class="box-tools pull-right">
 									<div class="has-feedback">
 										<input type="text" class="form-control input-sm"
-											placeholder="Search for"> 
-											<!-- <span class="glyphicon glyphicon-search form-control-feedback"></span> -->
+											placeholder="Search for">
+										<!-- <span class="glyphicon glyphicon-search form-control-feedback"></span> -->
 									</div>
 								</div>
 								<!-- /.box-tools -->
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body no-padding">
-								<div class="mailbox-controls">
-									<!-- Check all button -->
-									<!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button> -->
-									<div class="btn-group">
-										<!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button> -->
-									</div>
-									<!-- /.btn-group -->
-									<!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button> -->
+								<div class="mailbox-controls" style="padding-bottom: 20px;">
+									<div class="btn-group"></div>
 									<div class="pull-right">
 										1-50/200
 										<div class="btn-group">
@@ -420,44 +192,12 @@
 										<!-- /.btn-group -->
 									</div>
 									<!-- /.pull-right -->
-
-									<div style="margin-left: 33px;">
-										<input type="checkbox" name="" id="total_check">
-										<!--  -->
-										<span class="p_cols" style="margin-left: 40px;">申请单ID</span>
-										<!--  -->
-										<span class="p_cols" style="margin-left: 215px;">货物名称</span>
-										<!--  -->
-										<span class="p_cols" style="margin-left: 500px;">采购时间</span>
-									</div>
 								</div>
 
 								<div class="table-responsive mailbox-messages">
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-striped tag_select"
+										id="tag0" style="display: none;">
 										<tbody>
-											<tr>
-												<td><div class="icheckbox_flat-blue"
-														aria-checked="false" aria-disabled="false"
-														style="position: relative;">
-														<input type="checkbox"
-															style="position: absolute; opacity: 0;">
-														<ins class="iCheck-helper"
-															style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-													</div></td>
-												<td class="checkboys">
-													<!--  --> <input type="checkbox" name="" id="check_0000">
-												</td>
-												<td class="mailbox-name"><a href="javascript:void(0);">[采购申请单ID]</a></td>
-												<td class="mailbox-subject" style="text-align: center;">
-													<b>[货物名]</b> - 尼罗河尼龙
-												</td>
-												<td class="mailbox-attachment"></td>
-												<td class="mailbox-date" style="text-align: right;"><script
-														type="text/javascript">
-													var t = new Date();
-													document.write(t);
-												</script></td>
-											</tr>
 
 										</tbody>
 									</table>
@@ -468,16 +208,7 @@
 							<!-- /.box-body -->
 							<div class="box-footer no-padding">
 								<div class="mailbox-controls">
-									<!-- Check all button -->
-									<!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button> -->
-									<div class="btn-group">
-										<!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button> -->
-									</div>
-									<!-- /.btn-group -->
-									<!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button> -->
+									<div class="btn-group"></div>
 									<div class="pull-right">
 										1-50/200
 										<div class="btn-group">
@@ -1008,7 +739,27 @@
 <!-- AdminLTE App -->
 <script src="${basePath}/AdminLTE/dist/js/adminlte.min.js"></script>
 
+<!-- layui javascript -->
+<script src="${basePath}/CssFrame/layui/layui.js"></script>
+<script src="${basePath}/CssFrame/layui/layui.all.js"></script>
+<script src="${basePath}/CssFrame/layui/lay/modules/layer.js"></script>
+
+<!-- layui css -->
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/layui/css/layui.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/layui/css/modules/layer/default/layer.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/layui/css/modules/code.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css">
+
 <!-- 本页面封装之JavaScript函数 -->
 <script type="text/javascript"
 	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
+
+<!-- 切换显隐 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
+
 </html>

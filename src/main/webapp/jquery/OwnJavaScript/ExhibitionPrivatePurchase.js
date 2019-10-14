@@ -146,7 +146,6 @@ function surveyDetail(purchaseId) {
 				var detail = generatePurchaseContent(p);
 
 				eject(detail);
-
 			} else {
 				alert(rr.message);
 
@@ -229,7 +228,6 @@ function generatePurchaseContent(p) {
 
 	/* 分类 */
 	switch (p.classify) {
-
 	case 0:
 		p.classify = '电器'
 		break;

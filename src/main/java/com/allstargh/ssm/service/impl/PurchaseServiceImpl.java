@@ -110,7 +110,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		Accounts a = am.selectAccountByUsrid(usrid);
-		if (a.getCompetence() != 2) {
+		if (a.getCompetence() != 2 && a.getCompetence() != 4) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
 		}
@@ -226,7 +226,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			throw new SelfServiceException(description);
 		}
 
-		if (accounts.getCompetence() != 2) {
+		if (accounts.getCompetence() != 4) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
 		}

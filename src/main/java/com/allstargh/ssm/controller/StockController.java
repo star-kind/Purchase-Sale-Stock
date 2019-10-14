@@ -1,5 +1,7 @@
 package com.allstargh.ssm.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,32 @@ public class StockController extends ControllerUtils {
 
 	@Autowired
 	private ICommonReplenishService iCommonReplenishService;
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/getStockerNameHandler
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getStockerNameHandler", method = RequestMethod.GET)
+	public ResponseResult<HashMap<Integer, String>> getStockerNameHandler(HttpSession session) {
+		String uname = "";
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+
+		try {
+			uname = session.getAttribute("usrname").toString();
+
+			if (uname != null || !"".equals(uname)) {
+				map.put(0, uname);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put(0, "");
+		}
+
+		return new ResponseResult<HashMap<Integer, String>>(SUCCESS, map);
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/StockController/regEntryHandler

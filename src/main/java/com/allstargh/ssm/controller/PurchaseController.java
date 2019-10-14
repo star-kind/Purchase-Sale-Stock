@@ -32,14 +32,18 @@ public class PurchaseController extends ControllerUtils {
 	 * http://localhost:8080/stocker-manager/PurchaseController/getPurchaseListByTakedAndAgreedHandler
 	 * 
 	 * @param session
+	 * @param agree
+	 * @param hasTaked
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getPurchaseListByTakedAndAgreedHandler", method = RequestMethod.GET)
-	public ResponseResult<List<Purchase>> getPurchaseListByTakedAndAgreedHandler(HttpSession session) {
+	public ResponseResult<List<Purchase>> getPurchaseListByTakedAndAgreedHandler(HttpSession session,
+			@RequestParam(value = "agree", defaultValue = "1") Integer agree,
+			@RequestParam(value = "hasTaked", defaultValue = "1") Integer hasTaked) {
 		Integer usrid = (Integer) session.getAttribute("usrid");
 
-		List<Purchase> list = ips.getPurchaseListByTakedAndAgreed(1, usrid, 1);
+		List<Purchase> list = ips.getPurchaseListByTakedAndAgreed(hasTaked, usrid, agree);
 
 		return new ResponseResult<List<Purchase>>(SUCCESS, list);
 
@@ -172,11 +176,10 @@ public class PurchaseController extends ControllerUtils {
 
 		try {
 			usrid = Integer.valueOf(session.getAttribute("usrid").toString());
-
 		} catch (Exception e) {
 			purchaseId = null;
-
 		}
+		
 		System.err.println("purchaseId:" + purchaseId + ",usrid:" + usrid);
 
 		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
