@@ -1,6 +1,6 @@
 git status   
 
-#git add -A .
+git add -A .
 
 git commit -m  "refactoring and start works at stocker"
 
