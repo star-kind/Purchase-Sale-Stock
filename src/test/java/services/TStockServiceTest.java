@@ -27,11 +27,6 @@ public class TStockServiceTest {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
 
-//		List<Purchase> list = ips.getPurchaseListByTakedAndAgreed(1, 1);
-//		for (Purchase purchase : list) {
-//			System.err.println(purchase);
-//		}
-
 		Purchase p = ips.findPurchaseById(6, 52);
 		System.err.println(p);
 
@@ -39,7 +34,7 @@ public class TStockServiceTest {
 		stock.setRemark("666*666");
 
 		try {
-			Integer row = iss.regEntry(p, stock, "yier123");
+			Integer row = iss.regEntry(p, "yier123");
 			System.err.println("row-" + row);
 		} catch (SelfServiceException e) {
 			e.printStackTrace();

@@ -28,7 +28,7 @@ public class TransferController extends ControllerUtils {
 	 * @return
 	 */
 	@RequestMapping(value = "toSubstacne")
-	private String toSubstacneHandler() {
+	public String toSubstacneHandler() {
 		return "Substacne";
 	}
 
@@ -37,7 +37,7 @@ public class TransferController extends ControllerUtils {
 	 * @return
 	 */
 	@RequestMapping(value = "toRevisePassword")
-	private String toRevisePassword() {
+	public String toRevisePassword() {
 		return "RevisePassword";
 	}
 
@@ -46,8 +46,18 @@ public class TransferController extends ControllerUtils {
 	 * @return
 	 */
 	@RequestMapping(value = "toReviseBaseProfile")
-	private String toReviseBaseProfile() {
+	public String toReviseBaseProfile() {
 		return "ReviseBaseProfile";
+	}
+
+	/**
+	 * /stocker-manager/cross/gotoStockerPagesRejectReply
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "gotoStockerPagesRejectReply")
+	public String gotoStockerPagesRejectReply() {
+		return "StockerPages/RejectReply";
 	}
 
 }

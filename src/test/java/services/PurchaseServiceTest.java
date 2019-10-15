@@ -26,6 +26,22 @@ public class PurchaseServiceTest {
 	}
 
 	@Test
+	public void selectEnterTest() {
+		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
+
+		try {
+			List<Purchase> list = ips.getPrepareEnterQueue(1, 54, 1);
+
+			for (Purchase purchase : list) {
+				System.err.println(purchase);
+			}
+		} catch (SelfServiceException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
 	public void readOutputTest() {
 		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
 
@@ -38,7 +54,7 @@ public class PurchaseServiceTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Test

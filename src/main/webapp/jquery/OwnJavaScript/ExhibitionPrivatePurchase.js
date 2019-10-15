@@ -252,6 +252,18 @@ function generatePurchaseContent(p) {
 		p.classify = '其它'
 		break;
 
+	case 6:
+		p.classify = '家具'
+		break;
+
+	case 7:
+		p.classify = '玩具'
+		break;
+
+	case 8:
+		p.classify = '药品'
+		break;
+
 	}
 
 	var formHtml = '<div style="text-align:center;font-size:26px;margin-left:0%;">';

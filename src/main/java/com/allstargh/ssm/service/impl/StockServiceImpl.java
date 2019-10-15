@@ -22,10 +22,12 @@ public class StockServiceImpl implements IStcokSevice {
 	private TStockDAO tsd;
 
 	@Override
-	public Integer regEntry(Purchase purchase, TStock stock, String stockOperator) throws SelfServiceException {
+	public Integer regEntry(Purchase purchase, String stockOperator) throws SelfServiceException {
 		/*
 		 * 装配仓储实体对象
 		 */
+		TStock stock = new TStock();
+
 		stock.setPurchaseId(purchase.getPurchaseId());
 
 		String classify = purchase.getClassify().toString();
@@ -50,7 +52,7 @@ public class StockServiceImpl implements IStcokSevice {
 			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
 			throw new SelfServiceException(description);
 		}
-		
+
 		stock.setEnterStockTime(new Date());
 
 		// 执行添入

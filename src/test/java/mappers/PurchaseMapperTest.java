@@ -21,6 +21,17 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void eneterQueueTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> queue = pm.selectEnterQueue(1, 1);
+
+		for (Purchase purchase : queue) {
+			System.err.println(purchase.toString());
+		}
+	}
+
+	@Test
 	public void selectDoubleExampleTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

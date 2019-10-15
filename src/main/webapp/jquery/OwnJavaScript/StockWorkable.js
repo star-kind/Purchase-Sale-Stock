@@ -62,7 +62,7 @@ function exhibitTableList() {
 
 					executes(list);// 执行赋予表格内容
 
-					exhibitLenAmount(list.length);// .len_amount
+					exhibitLenAmount();// .len_amount
 				}
 			} else {
 				layer.alert(rr.message);
@@ -73,13 +73,16 @@ function exhibitTableList() {
 
 /**
  * 
- * @param len
  * @returns
  */
-function exhibitLenAmount(len) {
+function exhibitLenAmount() {
 	var lensTag = $('.len_amount');
 	lensTag.empty();
-	lensTag.text(len + 1);
+
+	var length = $('.table_row_purchase').length;
+	console.log('queue length:' + length);
+
+	lensTag.text(length);
 }
 
 /**
@@ -89,7 +92,7 @@ function exhibitLenAmount(len) {
  */
 function executes(list) {
 	for (var i = 0; i < list.length; i++) {
-		var tr = '<tr id="table_row_#{purchaseId}">';
+		var tr = '<tr id="table_row_#{purchaseId}" class="table_row_purchase">';
 		tr += '<td>';
 		tr += '<div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false"	style="position: relative;">';
 		tr += '<input type="checkbox" style="position: absolute; opacity: 0;">';
@@ -161,7 +164,6 @@ function surveyByPk(purchaseId) {
  */
 function generateApplicationForm(p) {
 	/* 是否已取货 */
-	console.log('hasTakeGoods.typeof:' + typeof (p.hasTakeGoods));
 	var hasTakeGoods = '';
 	if (p.hasTakeGoods === 0) {
 		hasTakeGoods = '未取货';
@@ -170,7 +172,6 @@ function generateApplicationForm(p) {
 	}
 
 	/* 是否获批 */
-	console.log('isagree.typeof:' + typeof (p.isAgree))
 	var isAgree = '';
 	if (p.isAgree === 0) {
 		isAgree = '未获批';
@@ -179,7 +180,6 @@ function generateApplicationForm(p) {
 	}
 
 	/* 商品分类 */
-	console.log('classify.typeof:' + typeof (p.classify))
 	var classify = '';
 	switch (p.classify) {
 	case 0:
@@ -205,6 +205,19 @@ function generateApplicationForm(p) {
 	case 5:
 		classify = '其它';
 		break;
+
+	case 6:
+		classify = '家具'
+		break;
+
+	case 7:
+		classify = '玩具'
+		break;
+
+	case 8:
+		classify = '药品'
+		break;
+
 	}
 
 	var formHtml = '<div style="text-align:center;font-size:18px;margin-left:0%;">';
@@ -224,8 +237,7 @@ function generateApplicationForm(p) {
 	// 专门显示,不提交
 	formHtml += '<input type="text" readonly="readonly" value="' + isAgree
 			+ '"><br>';
-	formHtml += '<input type="text" style="visibility:hidden;" name="isAgree" readonly="readonly" value="'
-			+ p.isAgree + '">';
+
 	formHtml += '</p>';
 
 	formHtml += '<br><p>供应商';
@@ -247,8 +259,7 @@ function generateApplicationForm(p) {
 	// 专门显示,不提交
 	formHtml += '<input type="text" readonly="readonly"  value=" '
 			+ hasTakeGoods + '"><br>';
-	formHtml += '<input type="text" style="visibility:hidden;" name="hasTakeGoods" readonly="readonly"  value="'
-			+ p.hasTakeGoods + '">';
+
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购经办人';
@@ -256,18 +267,17 @@ function generateApplicationForm(p) {
 			+ p.operator + '">';
 	formHtml += '</p>';
 
-	// TODO
+	// no name="purchaseTime"
 	formHtml += '<br><p>采购时间';
-	formHtml += '<br><input type="text" name="purchaseTime" readonly="readonly"  value="'
-			+ p.purchaseTime + '">';
+	formHtml += '<br><input type="text" readonly="readonly" id="purchaseTime_'
+			+ p.purchaseId + '" value="' + p.purchaseTime + '">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>商品分类<br>';
 	// 专门显示而不提交
 	formHtml += '<input type="text" readonly="readonly"  value="' + classify
 			+ '"><br>';
-	formHtml += '<input type="text" style="visibility:hidden;" name="classify" readonly="readonly"  value=" '
-			+ p.classify + '">';
+
 	formHtml += '</p>';
 
 	formHtml += '<div style="margin-top:5px;">';
@@ -275,8 +285,17 @@ function generateApplicationForm(p) {
 	formHtml += '<input type="button" onclick="permit(' + p.purchaseId
 			+ ');" value="同意" class="btn btn-primary" style="margin:15px;">';
 
-	formHtml += '<input type="button" id="reject" value="不同意" class="btn btn-warning" style="margin:15px;">';
+	formHtml += '<input type="button" onclick="reject(' + p.purchaseId
+			+ ')" value="不同意" class="btn btn-warning" style="margin:15px;">';
 	formHtml += '</div>';
+
+	// style="visibility:hidden;"
+	formHtml += '<input type="text" style="visibility:hidden;" name="isAgree" readonly="readonly" value="'
+			+ p.isAgree + '">';
+	formHtml += '<input type="text" style="visibility:hidden;" name="hasTakeGoods" readonly="readonly"  value="'
+			+ p.hasTakeGoods + '">';
+	formHtml += '<input type="text" style="visibility:hidden;" name="classify" readonly="readonly"  value="'
+			+ p.classify + '">';
 
 	formHtml += '</form>';
 
@@ -316,14 +335,17 @@ function popUp(detail) {
 
 }
 
+/* =========================================================================== */
+
 /**
  * 
  * @param purchaseId
  * @returns
  */
 function permit(purchaseId) {
-	var purchase = $('#purchase_app').serialize();
 	var url = '/stocker-manager/StockController/regEntryHandler';
+
+	var purchase = $('#purchase_app').serialize();
 	console.log('purchase data:' + purchase);
 
 	$.ajax({
@@ -333,10 +355,36 @@ function permit(purchaseId) {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
-				layer.alert('该申请单成功进入仓库');
-				$('#table_row_' + purchaseId).remove();
+				layer.msg('该申请单成功进入仓库', function() {
+					$('#table_row_' + purchaseId).remove();
+					layer.closeAll();
+					exhibitLenAmount();
+				});
 			} else {
 				layer.alert(rr.message);
+			}
+		}
+	})
+}
+
+/**
+ * 
+ * @param purchaseId
+ * @returns
+ */
+function reject(purchaseId) {
+	var url = 'stocker-manager/StockController/rejectHandler';
+
+	$.ajax({
+		url : url,
+		type : 'post',
+		data : purchaseId,
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+
+			} else {
+
 			}
 		}
 	})

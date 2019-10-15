@@ -24,6 +24,7 @@
 <!-- AdminLTE Skins -->
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/dist/css/skins/skin-blue.min.css">
+	
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%;">
 	<div class="wrapper" style="height: auto; min-height: 100%;">
@@ -729,10 +730,10 @@
 
 </body>
 
-
 <!-- jQuery 3 -->
 <script
 	src="${basePath}/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+	
 <!-- Bootstrap 3.3.7 -->
 <script
 	src="${basePath}/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

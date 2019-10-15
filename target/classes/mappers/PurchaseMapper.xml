@@ -457,11 +457,12 @@
 		purchase_id=#{purchaseId}
 	</update>
 
-	<select id="selectByHasTakeAndAgree" resultType="com.allstargh.ssm.pojo.Purchase">
+	<select id="selectByHasTakeAndAgree"
+		resultType="com.allstargh.ssm.pojo.Purchase">
 		SELECT purchase_id AS purchaseId,
 		commodity, is_agree AS
 		isAgree, supplier, quantity, amount_money AS
-		amountMoney ,
+		amountMoney,
 		payment_method AS paymentMethod, is_pay AS isPay,
 		has_take_goods AS
 		hasTakeGoods, operator, purchase_time AS
@@ -472,5 +473,30 @@
 		has_take_goods=#{hasTakeGoods}
 		AND
 		is_agree=#{isAgree}
+	</select>
+
+	<select id="selectEnterQueue"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods, operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		purchase.purchase_id
+		NOT IN
+		(SELECT purchase_id FROM t_stock)
+		AND
+		purchase.has_take_goods=#{hasTakeGoods}
+		AND
+		purchase.is_agree=#{isAgree}
 	</select>
 </mapper>

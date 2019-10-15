@@ -28,23 +28,29 @@
 <body>
 	<div style="text-align: center; font-size: 28px; margin-top: 10px;">
 		<br>
-		<h4 style="color: #EF9999"></h4>
+		<h4 style="color: #EF9999; margin-top: 36px;"></h4>
 
 		<form id="form_purchase" role="form"
-			style="margin-top: 76px; width: 80%; margin-left: 10%;">
+			style="margin-top: 36px; width: 80%; margin-left: 10%; margin-bottom: 150px;">
 			<label>采购申请单</label>
 
 			<div class="form-group">
+				<label for="name" style="font-size: medium;">请输入货品名称</label>
+				<!--  -->
 				<input type="text" class="form-control" name="commodity"
 					placeholder="采购之货品名" maxlength="42">
 			</div>
 
 			<div class="form-group">
+				<label for="name" style="font-size: medium;">请输入供货商</label>
+				<!--  -->
 				<input class="form-control" maxlength="42" type="text"
 					name="supplier" placeholder="供应商">
 			</div>
 
 			<div class="form-group">
+				<label for="name" style="font-size: medium;">请输入采购数量</label>
+				<!--  -->
 				<span></span>
 				<!--  -->
 				<input maxlength="10" class="form-control quantity" type="text"
@@ -52,13 +58,13 @@
 			</div>
 
 			<div class="form-group">
-				<input type="text" name="amountMoney"
-					class="form-control amountMoney" maxlength="26"
-					placeholder="采购金额(单位:元,精确至小数点后2位)">
+				<label for="name" style="font-size: medium;">请输入采购金额</label> <input
+					type="text" name="amountMoney" class="form-control amountMoney"
+					maxlength="26" placeholder="采购金额(单位:元,精确至小数点后2位)">
 			</div>
 
 			<div class="form-group">
-				<label for="name">请选择支付方式</label>
+				<label for="name" style="font-size: medium;">请选择支付方式</label>
 				<!--  -->
 				<select name="paymentMethod" class="form-control">
 					<option value="0">现金</option>
@@ -67,9 +73,9 @@
 					<option value="3">其它</option>
 				</select>
 			</div>
-			
+
 			<div class="form-group">
-				<label for="name">请选择商品分类</label>
+				<label for="name" style="font-size: medium;">请选择商品分类</label>
 				<!--  -->
 				<select name="classify" class="form-control">
 					<option value="0">电器</option>
@@ -78,11 +84,14 @@
 					<option value="3">日用品</option>
 					<option value="4">饮品</option>
 					<option value="5">其它</option>
+					<option value="6">家具</option>
+					<option value="7">玩具</option>
+					<option value="8">药品</option>
 				</select>
 			</div>
 
 			<div class="form-group">
-				<label for="name">是否已取货(部分或全部都算已取)</label>
+				<label for="name" style="font-size: medium;">是否已取货(部分或全部都算已取)</label>
 				<!--  -->
 				<select name="hasTakeGoods" class="form-control">
 					<option value="0">未取货</option>

@@ -16,6 +16,18 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 获取待处理的入库队列
+	 * 
+	 * @param hasTakeGoods
+	 * @param usrid
+	 * @param isAgree
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract List<Purchase> getPrepareEnterQueue(Integer hasTakeGoods, Integer usrid, Integer isAgree)
+			throws SelfServiceException;
+
+	/**
 	 * 仓管员获取已取货和已获批的审单们
 	 * 
 	 * @param hasTakeGoods

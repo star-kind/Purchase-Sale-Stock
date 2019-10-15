@@ -43,7 +43,7 @@ public class PurchaseController extends ControllerUtils {
 			@RequestParam(value = "hasTaked", defaultValue = "1") Integer hasTaked) {
 		Integer usrid = (Integer) session.getAttribute("usrid");
 
-		List<Purchase> list = ips.getPurchaseListByTakedAndAgreed(hasTaked, usrid, agree);
+		List<Purchase> list = ips.getPrepareEnterQueue(hasTaked, usrid, agree);
 
 		return new ResponseResult<List<Purchase>>(SUCCESS, list);
 
@@ -179,7 +179,7 @@ public class PurchaseController extends ControllerUtils {
 		} catch (Exception e) {
 			purchaseId = null;
 		}
-		
+
 		System.err.println("purchaseId:" + purchaseId + ",usrid:" + usrid);
 
 		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);

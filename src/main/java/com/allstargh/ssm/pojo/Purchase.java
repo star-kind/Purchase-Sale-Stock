@@ -3,6 +3,8 @@ package com.allstargh.ssm.pojo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Purchase {
@@ -94,6 +96,7 @@ public class Purchase {
 	 *
 	 * @mbggenerated Tue Sep 10 10:00:38 CST 2019
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date purchaseTime;
 
 	/**

@@ -235,4 +235,24 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return list;
 	}
 
+	@Override
+	public List<Purchase> getPrepareEnterQueue(Integer hasTakeGoods, Integer usrid, Integer isAgree)
+			throws SelfServiceException {
+		Accounts accounts = am.selectAccountByUsrid(usrid);
+
+		if (accounts == null) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		if (accounts.getCompetence() != 4) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		List<Purchase> list = pm.selectEnterQueue(hasTakeGoods, isAgree);
+
+		return list;
+	}
+
 }

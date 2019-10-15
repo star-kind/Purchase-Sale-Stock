@@ -15,6 +15,15 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 查询待入库队列
+	 * 
+	 * @param hasTakeGoods
+	 * @param isAgree
+	 * @return
+	 */
+	List<Purchase> selectEnterQueue(@Param("hasTakeGoods") Integer hasTakeGoods, @Param("isAgree") Integer isAgree);
+
+	/**
 	 * 根据是否取货和是否获批查询集合
 	 * 
 	 * @param hasTakeGoods

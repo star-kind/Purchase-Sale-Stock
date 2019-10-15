@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Purchase;
-import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IStcokSevice;
 
@@ -32,6 +31,12 @@ public class StockController extends ControllerUtils {
 
 	@Autowired
 	private ICommonReplenishService iCommonReplenishService;
+
+	/// stocker-manager/StockController/rejectHandler
+	@RequestMapping(value = "rejectHandler", method = RequestMethod.POST)
+	public void rejectHandler(HttpSession session, Integer pid) {
+		System.err.println("PID==" + pid);
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/StockController/getStockerNameHandler
@@ -64,18 +69,16 @@ public class StockController extends ControllerUtils {
 	 * 
 	 * @param session
 	 * @param purchase
-	 * @param stock
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "regEntryHandler", method = RequestMethod.POST)
-	public ResponseResult<Integer> regEntryHandler(HttpSession session, Purchase purchase, TStock stock) {
+	public ResponseResult<Integer> regEntryHandler(HttpSession session, Purchase purchase) {
 		String operator = session.getAttribute("usrname").toString();
 		System.err.println("stcoker-" + operator);
 		System.err.println(purchase);
-		System.err.println(stock);
 
-		Integer affect = iss.regEntry(purchase, stock, operator);
+		Integer affect = iss.regEntry(purchase, operator);
 		System.err.println("affect=" + affect);
 
 		return new ResponseResult<Integer>(SUCCESS, affect);

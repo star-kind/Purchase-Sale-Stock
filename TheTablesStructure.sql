@@ -20,42 +20,50 @@
 -- =======================================================================================================
 
 
-+----------+--------------------------------------------------------------------------------------------------+
-| Table    | Create Table                                                                                     |
-+----------+--------------------------------------------------------------------------------------------------+
-| purchase | CREATE TABLE `purchase` (                                                                        |
-|          |   `purchase_id` int(13) NOT NULL AUTO_INCREMENT COMMENT '主键ID',                                |
-|          |   `commodity` varchar(44) NOT NULL COMMENT '所购之货物',                                         |
-|          |   `is_agree` int(1) NOT NULL DEFAULT '0' COMMENT '是否已获批:0-未获批,1-已获批',                 |
-|          |   `supplier` varchar(44) NOT NULL COMMENT '供货商',                                              |
-|          |   `quantity` int(11) NOT NULL COMMENT '所购货物之数量',                                          |
-|          |   `amount_money` float NOT NULL COMMENT '耗资金额',                                              |
-|          |   `payment_method` int(1) NOT NULL DEFAULT '0' COMMENT '支付方式:0-现金,1-网银,2-信用卡,3-其它', |
-|          |   `is_pay` int(1) NOT NULL DEFAULT '0' COMMENT '是否已支付:0-未支付,1-已支付',                   |
-|          |   `has_take_goods` int(1) NOT NULL DEFAULT '0' COMMENT '是否已取货:0-未取货,1-已取货',           |
-|          |   `operator` varchar(44) NOT NULL COMMENT '本次采买活动之经办人',                                |
-|          |   `purchase_time` datetime NOT NULL COMMENT '采买活动之时间',                                    |
-|          |   `classify` int(2) NOT NULL COMMENT '货品分类:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它',     |
-|          |   PRIMARY KEY (`purchase_id`)                                                                    |
-|          | ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8                                           |
-+----------+--------------------------------------------------------------------------------------------------+
++----------+-------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                      |
++----------+-------------------------------------------------------------------------------------------------------------------+
+| purchase | CREATE TABLE `purchase` (                                                                                         |
+|          |   `purchase_id` int(13) NOT NULL AUTO_INCREMENT COMMENT '主键ID',                                                 |
+|          |   `commodity` varchar(44) NOT NULL COMMENT '所购之货物',                                                          |
+|          |   `is_agree` int(1) NOT NULL DEFAULT '0' COMMENT '是否已获批:0-未获批,1-已获批',                                  |
+|          |   `supplier` varchar(44) NOT NULL COMMENT '供货商',                                                               |
+|          |   `quantity` int(11) NOT NULL COMMENT '所购货物之数量',                                                           |
+|          |   `amount_money` float NOT NULL COMMENT '耗资金额',                                                               |
+|          |   `payment_method` int(1) NOT NULL DEFAULT '0' COMMENT '支付方式:0-现金,1-网银,2-信用卡,3-其它',                  |
+|          |   `is_pay` int(1) NOT NULL DEFAULT '0' COMMENT '是否已支付:0-未支付,1-已支付',                                    |
+|          |   `has_take_goods` int(1) NOT NULL DEFAULT '0' COMMENT '是否已取货:0-未取货,1-已取货',                            |
+|          |   `operator` varchar(44) NOT NULL COMMENT '本次采买活动之经办人',                                                 |
+|          |   `purchase_time` datetime NOT NULL COMMENT '采买活动之时间',                                                     |
+|          |   `classify` int(2) NOT NULL COMMENT '货品分类:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它,6-玩具,7-家具,8-药品', |
+|          |   PRIMARY KEY (`purchase_id`)                                                                                     |
+|          | ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8                                                            |
++----------+-------------------------------------------------------------------------------------------------------------------+
 
 
-+---------+-------------------------------------------------------------------------------------------------------------------------+
-| Table   | Create Table                                                                                                            |
-+---------+-------------------------------------------------------------------------------------------------------------------------+
-| t_stock | CREATE TABLE `t_stock` (                                                                                                |
-|         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                      |
-|         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                |
-|         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                        |
-|         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                            |
-|         |   `unit_price` decimal(10,0) NOT NULL COMMENT '单价',                                                                   |
-|         |   `stock_type_area` tinyint(2) NOT NULL COMMENT '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区', |
-|         |   `stock_operator` varchar(30) NOT NULL COMMENT '入库经办仓管',                                                         |
-|         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                             |
-|         |   `remark` char(70) DEFAULT NULL COMMENT '备注',                                                                        |
-|         |   `agree_enter_stock` tinyint(1) DEFAULT NULL COMMENT '同意入库与否:0-否,1-可',                                         |
-|         |   PRIMARY KEY (`id`),                                                                                                   |
-|         |   UNIQUE KEY `uk_pid` (`purchase_id`)                                                                                   |
-|         | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                 |
-+---------+-------------------------------------------------------------------------------------------------------------------------+
+-- #########################################################################################################
+
+
++---------+-----------------------------------------------------------------------------------------------------------------------------
+--------------------------------------+
+| t_stock | CREATE TABLE `t_stock` (                                                                                                                                          |
+|         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                                                                |
+|         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                                                          |
+|         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                                                                  |
+|         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                                                                      |
+|         |   `unit_price` decimal(10,0) NOT NULL COMMENT '单价',                                                                                                             |
+|         |   `stock_type_area` tinyint(2) NOT NULL COMMENT '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区,6-家具区,7-玩具区,8-药品区,9-仓库外临时区', |
+|         |   `stock_operator` varchar(30) NOT NULL COMMENT '入库经办仓管',                                                                                                   |
+|         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                                                                       |
+|         |   `remark` char(70) DEFAULT NULL COMMENT '备注',                                                                                                                  |
+|         |   `agree_enter_stock` tinyint(1) DEFAULT NULL COMMENT '同意入库与否:0-否,1-可',                                                                                   |
+|         |   PRIMARY KEY (`id`),                                                                                                                                             |
+|         |   UNIQUE KEY `uk_pid` (`purchase_id`)                                                                                                                             |
+|         | ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                                         |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+
+
+
