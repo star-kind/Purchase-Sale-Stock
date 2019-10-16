@@ -375,20 +375,21 @@ function permit(purchaseId) {
 function reject(purchaseId) {
 	var url = '/stocker-manager/StockController/rejectHandler';
 
-	$
-			.ajax({
-				url : url,
-				type : 'get',
-				data : {
-					'purchaseId' : purchaseId
-				},
-				dataType : 'json',
-				success : function(rr) {
-					if (rr.state === 200) {
-						location.href = '/stocker-manager/StockController/gotoStockerPagesRejectReply';
-					} else {
-						layer.alert('msg:' + rr.message);
-					}
-				}
-			})
+	$.ajax({
+		url : url,
+		type : 'get',
+		data : {
+			'purchaseId' : purchaseId,
+			'j' : 0
+		},
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				location.href = '/stocker-manager/StockController/'
+						+ purchaseId + '/gotoStockerPagesRejectReply';
+			} else {
+				layer.alert('msg:' + rr.message);
+			}
+		}
+	})
 }

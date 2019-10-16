@@ -34,16 +34,11 @@ public class StockControllerUtil extends ControllerUtils {
 	/**
 	 * 
 	 * @param purchase
-	 * @param contextPath
+	 * @param j
 	 * @return
 	 */
-	public Purchase judgeByPath(Purchase purchase, String contextPath) {
-		String path = "/stocker-manager/StockController/rejectHandler";
-
-		// contextPath:/stocker-manager
-		contextPath += "/StockController/rejectHandler";
-
-		if (path.equals(contextPath)) {
+	public Purchase judgeByPath(Purchase purchase, Integer j) {
+		if (j != 1) {
 			purchase = null;
 		}
 
@@ -97,5 +92,5 @@ public class StockControllerUtil extends ControllerUtils {
 			writeRecordLog(DAILY_FILE_NAME, sentence.toString());
 		}
 	}
-	
+
 }

@@ -85,13 +85,101 @@
 	href="${basePath}/jquery-ui-1.12.1/jquery-ui.theme.min.css">
 
 <meta charset="UTF-8">
-<title>回绝入库回应</title>
+<title>回绝入库回复报告</title>
 </head>
-<body>
-	<main></main>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Main Header -->
+	<header class="main-header"> ... </header>
+
+	<main>
+
+		<div class="box box-primary"
+			style="margin: 8rem 8rem 8rem 19rem; width: 70%; background: #a3ead1;">
+			<div class="box-header with-border" style="text-align: center;">
+				<h3 class="box-title">回绝入库报告单</h3>
+			</div>
+			<!-- /.box-header -->
+			<!-- form start -->
+			<form role="form">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="exampleInputEmail1">申单号</label>
+						<!--  -->
+						<input type="text" value="" readonly="readonly" name="purchaseId"
+							class="form-control" placeholder="申单序号">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">货物称谓</label>
+						<!--  -->
+						<input type="text" value="" readonly="readonly" name="commodity"
+							class="form-control" placeholder="货物称谓">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">供货商</label>
+						<!--  -->
+						<input type="text" value="" name="supplier" readonly="readonly"
+							class="form-control" placeholder="供应商">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">数量</label>
+						<!--  -->
+						<input type="text" value="" name="quantity" class="form-control"
+							readonly="readonly" placeholder="数量">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">金额</label>
+						<!--  -->
+						<input type="text" value="" name="amountMoney" readonly="readonly"
+							class="form-control" placeholder="金额">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">采买负责人</label>
+						<!--  -->
+						<input type="text" value="" class="form-control" name="operator"
+							readonly="readonly" placeholder="采买负责人">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">采进时间</label>
+						<!--  -->
+						<input type="datetime" value="" class="form-control"
+							readonly="readonly" name="purchaseTime" placeholder="采进时间">
+					</div>
+
+					<div class="form-group" style="display: none;">
+						<label for="exampleInputPassword1">货品类型</label>
+						<!-- no name -->
+						<input type="text" class="form-control" name="classify" value=""
+							readonly="readonly">
+					</div>
+
+					<div class="form-group">
+						<label>回复理由</label>
+						<!-- no name -->
+						<textarea class="form-control" rows="3" placeholder="Enter ..."
+							maxlength="70"></textarea>
+					</div>
+
+				</div>
+				<!-- /.box-body -->
+
+				<div class="box-footer"
+					style="background: #a3ead1; text-align: center;">
+					<button type="button" class="btn btn-primary" id="submits">Submit</button>
+				</div>
+			</form>
+		</div>
+
+	</main>
 </body>
 
 <!-- 本页面封装之JavaScript函数 -->
 <script type="text/javascript"
-	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
+	src="${basePath}/MineJavaScript/StockModule/RejectReply.js"></script>
 </html>

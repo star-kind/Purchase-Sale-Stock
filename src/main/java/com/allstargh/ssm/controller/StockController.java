@@ -5,8 +5,10 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,17 +46,31 @@ public class StockController extends ControllerUtils {
 	StockControllerUtil inst = StockControllerUtil.getInstance();
 
 	/**
-	 * /stocker-manager/StockController/gotoStockerPagesRejectReply
+	 * http://localhost:8080/stocker-manager/StockController/24/gotoStockerPagesRejectReply
 	 * 
+	 * @param model
+	 * @param purchaseId
+	 * @param session
 	 * @return
 	 */
-	@RequestMapping("gotoStockerPagesRejectReply")
-	public String gotoStockerPagesRejectReply() {
+	@RequestMapping(value = "{purchaseId}/gotoStockerPagesRejectReply", method = RequestMethod.GET)
+	public String gotoStockerPagesRejectReply(ModelMap model, @PathVariable(value = "purchaseId") Integer purchaseId,
+			HttpSession session) {
+		System.err.println("Pid==" + purchaseId);
+
+		Integer usrid = getUsridFromSession(session);
+		System.err.println("uid===" + usrid);
+
+		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
+		Purchase purchase2 = inst.judgeByPath(purchase, 1);
+
+		model.addAttribute("p", purchase2);
+
 		return "StockerPages/RejectReply";
 	}
 
 	/**
-	 * http://localhost:8080/stocker-manager/StockController/rejectHandler?purchaseId=28
+	 * http://localhost:8080/stocker-manager/StockController/rejectHandler?purchaseId=28&j=1
 	 * 
 	 * @param session
 	 * @param pid
@@ -63,18 +79,17 @@ public class StockController extends ControllerUtils {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "rejectHandler", method = RequestMethod.GET)
-	public ResponseResult<Purchase> rejectHandler(HttpSession session, @RequestParam("purchaseId") Integer pid) {
+	public ResponseResult<Purchase> rejectHandler(HttpSession session, @RequestParam("purchaseId") Integer pid,
+			@RequestParam("j") Integer j) {
 		System.err.println("PID===" + pid);
-
-		String contextPath = session.getServletContext().getContextPath();
-		System.err.println("contextPath:" + contextPath);
+		System.err.println("J===" + j);
 
 		Integer usrid = getUsridFromSession(session);
 		System.err.println("uid===" + usrid);
 
 		Purchase purchase = ips.findPurchaseById(pid, usrid);
 
-		Purchase purchase2 = inst.judgeByPath(purchase, contextPath);
+		Purchase purchase2 = inst.judgeByPath(purchase, j);
 
 		return new ResponseResult<Purchase>(SUCCESS, purchase2);
 
