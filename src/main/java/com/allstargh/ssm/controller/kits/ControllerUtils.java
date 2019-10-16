@@ -1,5 +1,6 @@
 package com.allstargh.ssm.controller.kits;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,9 +62,6 @@ public class ControllerUtils {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		now_time = format.format(new Date());
 	}
-
-	/** 日志记录语句 */
-	public static String sentence = "<p>";
 
 	/** p标签前缀 */
 	public static String p_tag_prefix = "<p>";
@@ -141,59 +139,130 @@ public class ControllerUtils {
 	}
 
 	/**
-	 * 将两组"条件"字符串数组压入HashMap,再添入list中
 	 * 
+	 * @param session
 	 * @return
+	 * @throws SelfServiceException
 	 */
-	public ArrayList<HashMap<Integer, String[]>> addScopeArray() {
-		String[] competence = { "管理员", "总经理", "采购经理", "销售经理", "仓库主管", "普通雇员" };
-		String[] activeStatus = { "已注销", "已激活" };
+	public Integer getUsridFromSession(HttpSession session) throws SelfServiceException {
+		Integer usrid = null;
+		int anchor = 0;
 
-		HashMap<Integer, String[]> hashMap = new HashMap<Integer, String[]>();
-
-		hashMap.put(0, competence);
-		hashMap.put(1, activeStatus);
-
-		ArrayList<HashMap<Integer, String[]>> list = new ArrayList<HashMap<Integer, String[]>>();
-
-		list.add(hashMap);
-
-		return list;
-
-	}
-
-	/**
-	 * 勘察收到的字符串应属于哪种搜寻情景
-	 * 
-	 * @param receiv
-	 * @return
-	 */
-	public int prospect(String receiv) {
-		int num = 2;// 缺省码,按地区部门查询
-
-		ArrayList<HashMap<Integer, String[]>> list = addScopeArray();
-
-		for (int i = 0; i < list.get(0).size(); i++) {
-			for (String s : list.get(0).get(i)) {
-				if (s.equals(receiv)) {
-					num = i;
-				}
-			}
+		try {
+			usrid = Integer.parseInt(session.getAttribute("usrid").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			anchor = 1;
 		}
 
-		return num;
+		if (anchor == 1) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		return usrid;
+
 	}
 
 	/**
-	 * 将String写入文本中
 	 * 
-	 * @param string  记录
-	 * @param logPath 路径
+	 * @param session
+	 * @return
+	 * @throws SelfServiceException
 	 */
-	public void textWriter(String string, String logPath) {
+	public String getUsrnameFromSession(HttpSession session) throws SelfServiceException {
+		int anchor = 0;
+		String usrname = null;
+
 		try {
-			fos = new FileOutputStream(logPath, true);
-			buff = string.getBytes();
+			usrname = session.getAttribute("usrname").toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			anchor = 1;
+		}
+
+		if (anchor == 1) {
+			String description = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		return usrname;
+
+	}
+
+	/**
+	 * 创建文件夹和文件
+	 * 
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
+	public static String createDirectoryAndFile(String fileName) throws IOException {
+		File file = new File(ENGINE_DAILY_PATH);
+
+		if (!file.exists()) {
+			file.mkdir();
+		}
+
+		File fi = new File(file, fileName);
+		fi.createNewFile();
+
+		String path = fi.getAbsolutePath();
+
+		return path;
+	}
+
+	/**
+	 * 把记录写入日志文件(针对单行操作)
+	 * 
+	 * @param affect
+	 * @param fileName
+	 * @param sentence
+	 */
+	public void writeRecordLog(Integer affect, String fileName, String sentence) {
+		String filePath = null;
+
+		try {
+			filePath = createDirectoryAndFile(fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (affect == 1) {
+			textWriter(sentence, filePath);
+		}
+
+	}
+
+	/**
+	 * 把记录写入日志文件(针对单行操作) <b>overload</b>
+	 * 
+	 * @param fileName
+	 * @param sentence
+	 */
+	public void writeRecordLog(String fileName, String sentence) {
+		String filePath = null;
+
+		try {
+			filePath = createDirectoryAndFile(fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		textWriter(sentence, filePath);
+
+	}
+
+	/**
+	 * 将内容写入文件中
+	 * 
+	 * @param record
+	 * @param filePath
+	 */
+	public void textWriter(String record, String filePath) {
+		try {
+			fos = new FileOutputStream(filePath, true);
+			buff = record.getBytes();
 			fos.write(buff);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

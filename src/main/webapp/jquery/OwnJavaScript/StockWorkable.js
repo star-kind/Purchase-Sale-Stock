@@ -373,19 +373,22 @@ function permit(purchaseId) {
  * @returns
  */
 function reject(purchaseId) {
-	var url = 'stocker-manager/StockController/rejectHandler';
+	var url = '/stocker-manager/StockController/rejectHandler';
 
-	$.ajax({
-		url : url,
-		type : 'post',
-		data : purchaseId,
-		dataType : 'json',
-		success : function(rr) {
-			if (rr.state === 200) {
-
-			} else {
-
-			}
-		}
-	})
+	$
+			.ajax({
+				url : url,
+				type : 'get',
+				data : {
+					'purchaseId' : purchaseId
+				},
+				dataType : 'json',
+				success : function(rr) {
+					if (rr.state === 200) {
+						location.href = '/stocker-manager/StockController/gotoStockerPagesRejectReply';
+					} else {
+						layer.alert('msg:' + rr.message);
+					}
+				}
+			})
 }

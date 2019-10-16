@@ -50,14 +50,4 @@ public class TransferController extends ControllerUtils {
 		return "ReviseBaseProfile";
 	}
 
-	/**
-	 * /stocker-manager/cross/gotoStockerPagesRejectReply
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "gotoStockerPagesRejectReply")
-	public String gotoStockerPagesRejectReply() {
-		return "StockerPages/RejectReply";
-	}
-
 }

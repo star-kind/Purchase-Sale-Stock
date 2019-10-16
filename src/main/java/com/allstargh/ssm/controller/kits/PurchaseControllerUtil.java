@@ -55,10 +55,10 @@ public class PurchaseControllerUtil extends ControllerUtils {
 			file.mkdir();
 		}
 
-		File f1 = new File(file, PURCHASE_FILE_NAME);
-		f1.createNewFile();
+		File f = new File(file, PURCHASE_FILE_NAME);
+		f.createNewFile();
 
-		String path = f1.getAbsolutePath();
+		String path = f.getAbsolutePath();
 
 		return path;
 	}
@@ -76,7 +76,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 		}
 
 		if (affect == 1) {
-			textWriter(sentence, LOG_URI);
+			textWriter(p_tag_prefix, LOG_URI);
 		}
 
 	}
@@ -113,7 +113,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 		}
 
 		if (affects != null) {
-			textWriter(sentence, LOG_URI);
+			textWriter(p_tag_prefix, LOG_URI);
 		}
 
 	}
@@ -145,9 +145,10 @@ public class PurchaseControllerUtil extends ControllerUtils {
 	 */
 	public void addNewPurchaseAppFormHandlerLog(String usrname, Integer affect) {
 		String string = "";
-		string += p_tag_prefix;
 
-		string += "采购专员" + usrname + "于" + now_time + "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+		string += p_tag_prefix;
+		string += "采购专员" + usrname + "于" + now_time;
+		string += "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
 
 		writeRecordPlus(affect, string);
 
@@ -162,11 +163,12 @@ public class PurchaseControllerUtil extends ControllerUtils {
 	 */
 	public void editOnePurchaseByIdHandlerLog(Integer affect, String usrname, Purchase purchase) {
 		String string = "";
-		string += p_tag_prefix;
 
-		// 采购经理xx于xx时间修改了x份单号id为xx的采购申请单
-		string += "采购经理" + usrname + "于" + now_time + "修改了" + affect + "份单号id为" + purchase.getPurchaseId() + "的采购申请单"
-				+ LINE_SEPARATOR;
+		string += p_tag_prefix;
+		string += "采购经理";
+		string += usrname + "于" + now_time + "修改了";
+		string += affect + "份申单单号为" + purchase.getPurchaseId();
+		string += "的采购申请单" + LINE_SEPARATOR;
 
 		writeRecordPlus(affect, string);
 
@@ -180,9 +182,10 @@ public class PurchaseControllerUtil extends ControllerUtils {
 	 */
 	public void deleteSinglePurchaseAppByIdLog(Integer effect, String usrname) {
 		String string = "";
-		string += p_tag_prefix;
 
-		string += "采购经理" + usrname + "于" + now_time + "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
+		string += p_tag_prefix;
+		string += "采购经理" + usrname + "于" + now_time;
+		string += "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
 
 		writeRecordPlus(effect, string);
 	}

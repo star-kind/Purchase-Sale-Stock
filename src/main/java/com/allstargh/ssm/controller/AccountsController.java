@@ -217,7 +217,7 @@ public class AccountsController extends ControllerUtils {
 		System.err.println("Str: " + str);
 		List<Accounts> list = null;
 
-		int p = prospect(str);
+		int p = instance.prospect(str);
 		if (p == 0) {
 			list = iAccountsService.gainByCompetence(str);
 		} else if (p == 1) {

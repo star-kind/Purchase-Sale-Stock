@@ -65,10 +65,33 @@
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css">
 
+<!-- jquery ui js -->
+<script src="${basePath}/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script src="${basePath}/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="${basePath}/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+
+<!-- jquery ui css -->
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.structure.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.structure.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.theme.css">
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/jquery-ui-1.12.1/jquery-ui.theme.min.css">
+
 <meta charset="UTF-8">
 <title>回绝入库回应</title>
 </head>
 <body>
 	<main></main>
 </body>
+
+<!-- 本页面封装之JavaScript函数 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
 </html>
