@@ -378,10 +378,7 @@ function reject(purchaseId) {
 	$.ajax({
 		url : url,
 		type : 'get',
-		data : {
-			'purchaseId' : purchaseId,
-			'j' : 0
-		},
+		data : purchaseId,
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {

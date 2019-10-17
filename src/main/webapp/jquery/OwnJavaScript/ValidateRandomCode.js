@@ -43,7 +43,7 @@ $(function() {
                 var x=10+index*36;// 字符在canvas上的x坐标
                 var y=20+Math.random()*8;// 字符在canvas上的y坐标
                 
-                context.font="bold 33px 微软雅黑";
+                context.font="bold 33px Consolas";
                 context.translate(x+5,y+5);
                 context.rotate(deg);
                 context.fillStyle=randomColor();

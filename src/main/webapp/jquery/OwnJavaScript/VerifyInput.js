@@ -1,4 +1,3 @@
-
 /**
  * 验证输入非空之加强
  * 
@@ -31,7 +30,7 @@ function verifyIsInputNullPlus(selector) {
 function judgeAtRecurrent(args) {
 
 	for (var i = 0; i < args.length; i++) {
-		if (args[i] == null || args[i] === '') {
+		if (args[i] == null || args[i] === '' || $.trim(args[i]) == '') {
 			alert('第' + (i + 1) + '个空未填入');
 			return false;
 		}

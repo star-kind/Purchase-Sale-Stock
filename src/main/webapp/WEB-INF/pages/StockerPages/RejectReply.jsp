@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>回绝入库回复报告</title>
 
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/dist/css/AdminLTE.min.css">
@@ -84,8 +86,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/jquery-ui-1.12.1/jquery-ui.theme.min.css">
 
-<meta charset="UTF-8">
-<title>回绝入库回复报告</title>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -106,57 +106,58 @@
 					<div class="form-group">
 						<label for="exampleInputEmail1">申单号</label>
 						<!--  -->
-						<input type="text" value="" readonly="readonly" name="purchaseId"
-							class="form-control" placeholder="申单序号">
+						<input type="text" value="${p.purchaseId}" readonly="readonly"
+							name="purchaseId" class="form-control" placeholder="申单序号">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">货物称谓</label>
 						<!--  -->
-						<input type="text" value="" readonly="readonly" name="commodity"
-							class="form-control" placeholder="货物称谓">
+						<input type="text" value="${p.commodity}" readonly="readonly"
+							name="commodity" class="form-control" placeholder="货物称谓">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">供货商</label>
 						<!--  -->
-						<input type="text" value="" name="supplier" readonly="readonly"
-							class="form-control" placeholder="供应商">
+						<input type="text" value="${p.supplier}" name="supplier"
+							readonly="readonly" class="form-control" placeholder="供应商">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">数量</label>
 						<!--  -->
-						<input type="text" value="" name="quantity" class="form-control"
-							readonly="readonly" placeholder="数量">
+						<input type="text" value="${p.quantity}" name="quantity"
+							class="form-control" readonly="readonly" placeholder="数量">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">金额</label>
 						<!--  -->
-						<input type="text" value="" name="amountMoney" readonly="readonly"
-							class="form-control" placeholder="金额">
+						<input type="text" value="${p.amountMoney}" name="amountMoney"
+							readonly="readonly" class="form-control" placeholder="金额">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">采买负责人</label>
 						<!--  -->
-						<input type="text" value="" class="form-control" name="operator"
-							readonly="readonly" placeholder="采买负责人">
+						<input type="text" value="${p.operator}" class="form-control"
+							name="operator" readonly="readonly" placeholder="采买负责人">
 					</div>
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">采进时间</label>
 						<!--  -->
-						<input type="datetime" value="" class="form-control"
-							readonly="readonly" name="purchaseTime" placeholder="采进时间">
+						<input type="datetime" value="${p.purchaseTime}"
+							class="form-control" readonly="readonly" name="purchaseTime"
+							placeholder="采进时间">
 					</div>
 
 					<div class="form-group" style="display: none;">
 						<label for="exampleInputPassword1">货品类型</label>
 						<!-- no name -->
-						<input type="text" class="form-control" name="classify" value=""
-							readonly="readonly">
+						<input type="text" class="form-control" name="classify"
+							value="${p.classify}" readonly="readonly">
 					</div>
 
 					<div class="form-group">

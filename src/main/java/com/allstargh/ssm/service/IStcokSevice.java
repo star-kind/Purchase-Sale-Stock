@@ -1,7 +1,6 @@
 package com.allstargh.ssm.service;
 
 import com.allstargh.ssm.pojo.Purchase;
-import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
 /**

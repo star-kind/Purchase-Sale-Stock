@@ -2,6 +2,7 @@ package com.allstargh.ssm.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,20 @@ public class StockController extends ControllerUtils {
 	 * 
 	 * @param model
 	 * @param purchaseId
+	 * @param request
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "{purchaseId}/gotoStockerPagesRejectReply", method = RequestMethod.GET)
 	public String gotoStockerPagesRejectReply(ModelMap model, @PathVariable(value = "purchaseId") Integer purchaseId,
-			HttpSession session) {
+			HttpServletRequest request, HttpSession session) {
 		System.err.println("Pid==" + purchaseId);
 
 		Integer usrid = getUsridFromSession(session);
 		System.err.println("uid===" + usrid);
 
 		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
-		Purchase purchase2 = inst.judgeByPath(purchase, 1);
+		Purchase purchase2 = inst.judgeByPath(purchase, request.getServletPath());
 
 		model.addAttribute("p", purchase2);
 
@@ -70,26 +72,26 @@ public class StockController extends ControllerUtils {
 	}
 
 	/**
-	 * http://localhost:8080/stocker-manager/StockController/rejectHandler?purchaseId=28&j=1
+	 * http://localhost:8080/stocker-manager/StockController/rejectHandler?purchaseId=28
 	 * 
 	 * @param session
-	 * @param pid
 	 * @param req
+	 * @param purchaseId
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "rejectHandler", method = RequestMethod.GET)
-	public ResponseResult<Purchase> rejectHandler(HttpSession session, @RequestParam("purchaseId") Integer pid,
-			@RequestParam("j") Integer j) {
-		System.err.println("PID===" + pid);
-		System.err.println("J===" + j);
+	public ResponseResult<Purchase> rejectHandler(HttpSession session, HttpServletRequest req, Integer purchaseId) {
+		System.err.println("PID===" + purchaseId);
+
+		System.err.println("req==" + req.getServletPath());
 
 		Integer usrid = getUsridFromSession(session);
 		System.err.println("uid===" + usrid);
 
-		Purchase purchase = ips.findPurchaseById(pid, usrid);
+		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
 
-		Purchase purchase2 = inst.judgeByPath(purchase, j);
+		Purchase purchase2 = inst.judgeByPath(purchase, req.getServletPath());
 
 		return new ResponseResult<Purchase>(SUCCESS, purchase2);
 

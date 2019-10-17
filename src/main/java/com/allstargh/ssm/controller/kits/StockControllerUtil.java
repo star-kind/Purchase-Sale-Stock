@@ -34,11 +34,19 @@ public class StockControllerUtil extends ControllerUtils {
 	/**
 	 * 
 	 * @param purchase
-	 * @param j
+	 * @param path
 	 * @return
 	 */
-	public Purchase judgeByPath(Purchase purchase, Integer j) {
-		if (j != 1) {
+	public Purchase judgeByPath(Purchase purchase, String path) {
+		StringBuilder builder = new StringBuilder(path);
+
+		int last = builder.lastIndexOf("/");
+		System.out.println("last-" + last);
+
+		String controllerName = builder.substring(last + 1, path.length());
+		System.out.println(controllerName);
+
+		if (!"gotoStockerPagesRejectReply".equals(controllerName)) {
 			purchase = null;
 		}
 
