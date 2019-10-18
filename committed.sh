@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m  "be an stocker working"
+git commit -m  "should be move"
 
 git pull origin master   
 

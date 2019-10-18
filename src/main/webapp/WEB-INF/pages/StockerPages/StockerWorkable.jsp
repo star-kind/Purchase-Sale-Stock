@@ -24,7 +24,6 @@
 <!-- AdminLTE Skins -->
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/dist/css/skins/skin-blue.min.css">
-	
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%;">
 	<div class="wrapper" style="height: auto; min-height: 100%;">
@@ -128,7 +127,7 @@
 						<i class="fa">+</i>
 					 </span> -->
 					</a>
-						<ul class="treeview-menu">
+						<ul class="treeview-menu" style="display: none;">
 							<li class="active"><a href="javascript:switchStatus(0);">Inbox
 									<span class="pull-right-container"> <span
 										class="label label-primary pull-right len_amount"></span>
@@ -733,7 +732,7 @@
 <!-- jQuery 3 -->
 <script
 	src="${basePath}/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
-	
+
 <!-- Bootstrap 3.3.7 -->
 <script
 	src="${basePath}/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
