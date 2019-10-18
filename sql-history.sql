@@ -268,4 +268,7 @@ ALTER TABLE t_stock MODIFY `stock_type_area` tinyint(2) NOT NULL COMMENT
 ALTER TABLE t_stock MODIFY `stock_type_area` tinyint(2) NOT NULL COMMENT 
 '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区,6-家具区,7-玩具区,8-药品区,9-仓库外临时区';
 
+-- 修改字段注释
+ALTER TABLE t_stock MODIFY `agree_enter_stock` tinyint(1) NOT NULL COMMENT '同意入库与否:0-否,1-可';
 
+update t_stock set agree_enter_stock=1 WHERE id<30;

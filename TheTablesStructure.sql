@@ -44,7 +44,6 @@
 -- #########################################################################################################
 
 
-+---------+-----------------------------------------------------------------------------------------------------------------------------
 --------------------------------------+
 | t_stock | CREATE TABLE `t_stock` (                                                                                                                                          |
 |         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                                                                |
@@ -56,14 +55,10 @@
 |         |   `stock_operator` varchar(30) NOT NULL COMMENT '入库经办仓管',                                                                                                   |
 |         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                                                                       |
 |         |   `remark` char(70) DEFAULT NULL COMMENT '备注',                                                                                                                  |
-|         |   `agree_enter_stock` tinyint(1) DEFAULT NULL COMMENT '同意入库与否:0-否,1-可',                                                                                   |
+|         |   `agree_enter_stock` tinyint(1) NOT NULL COMMENT '同意入库与否:0-否,1-可',                                                                                       |
 |         |   PRIMARY KEY (`id`),                                                                                                                                             |
 |         |   UNIQUE KEY `uk_pid` (`purchase_id`)                                                                                                                             |
-|         | ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                                         |
+|         | ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                                         |
 +---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
-
 
 

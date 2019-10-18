@@ -19,4 +19,15 @@ public interface IStcokSevice {
 	 * @throws SelfServiceException
 	 */
 	Integer regEntry(Purchase purchase, String stockOperator) throws SelfServiceException;
+
+	/**
+	 * 接口中的方法亦可重载
+	 * 
+	 * @param purchase
+	 * @param stockOperator
+	 * @param remark
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Integer regToExternal(String purchase, String stockOperator, String remark) throws SelfServiceException;
 }

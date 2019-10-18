@@ -12,3 +12,4 @@ Logs/LOG4J/Record-Standard.txt
 
 src/main/webapp/AdminLTE/
 src/main/webapp/WEB-INF/pages/StockerPages/StockerWorkable-Test.html
+/bin/

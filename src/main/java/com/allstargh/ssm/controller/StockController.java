@@ -1,18 +1,18 @@
 package com.allstargh.ssm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.allstargh.ssm.controller.kits.ControllerUtils;
@@ -47,6 +47,32 @@ public class StockController extends ControllerUtils {
 	StockControllerUtil inst = StockControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/StockController/regToExternalHandler
+	 * 
+	 * @param session
+	 * @param formData
+	 * @param textArea
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "regToExternalHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> regToExternalHandler(HttpSession session, HttpServletRequest req)
+			throws UnsupportedEncodingException {
+		String operator = getUsrnameFromSession(session);
+		System.err.println("stcoker:" + operator);
+
+		String formData = URLDecoder.decode(req.getParameter("formData"), "UTF-8");
+		String textArea = req.getParameter("textArea");
+		System.err.println(textArea);
+		System.err.println(formData);
+
+		Integer effect = iss.regToExternal(formData, operator, textArea);
+
+		return new ResponseResult<Integer>(SUCCESS, effect);
+	}
+
+	/**
 	 * http://localhost:8080/stocker-manager/StockController/24/gotoStockerPagesRejectReply
 	 * 
 	 * @param model
@@ -65,6 +91,7 @@ public class StockController extends ControllerUtils {
 
 		Purchase purchase = ips.findPurchaseById(purchaseId, usrid);
 		Purchase purchase2 = inst.judgeByPath(purchase, request.getServletPath());
+		System.err.println("purchase2:" + purchase2);
 
 		model.addAttribute("p", purchase2);
 
@@ -72,16 +99,16 @@ public class StockController extends ControllerUtils {
 	}
 
 	/**
-	 * http://localhost:8080/stocker-manager/StockController/rejectHandler?purchaseId=28
+	 * http://localhost:8080/stocker-manager/StockController/rejectHandler
 	 * 
 	 * @param session
 	 * @param req
-	 * @param purchaseId
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "rejectHandler", method = RequestMethod.GET)
-	public ResponseResult<Purchase> rejectHandler(HttpSession session, HttpServletRequest req, Integer purchaseId) {
+	@RequestMapping(value = "rejectHandler", method = RequestMethod.POST)
+	public ResponseResult<Purchase> rejectHandler(HttpSession session, HttpServletRequest req) {
+		Integer purchaseId = Integer.valueOf(req.getParameter("purchaseId"));
 		System.err.println("PID===" + purchaseId);
 
 		System.err.println("req==" + req.getServletPath());

@@ -377,9 +377,12 @@ function reject(purchaseId) {
 
 	$.ajax({
 		url : url,
-		type : 'get',
-		data : purchaseId,
+		type : 'POST',
+		data : {
+			purchaseId : purchaseId
+		},
 		dataType : 'json',
+		contentType : "application/x-www-form-urlencoded",
 		success : function(rr) {
 			if (rr.state === 200) {
 				location.href = '/stocker-manager/StockController/'

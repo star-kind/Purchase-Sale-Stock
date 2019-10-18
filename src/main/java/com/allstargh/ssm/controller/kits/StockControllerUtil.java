@@ -101,4 +101,28 @@ public class StockControllerUtil extends ControllerUtils {
 		}
 	}
 
+	/**
+	 * 
+	 * @param operator
+	 * @param formData
+	 */
+	public void regToExternalHandlerRecord(String operator, Purchase formData) {
+		/**
+		 * 使用StirngBuilder比使用StringBuffer能获得10%~15%左右的性能提升,<br>
+		 * 但却要冒多线程不安全的风险
+		 */
+		StringBuilder s = new StringBuilder(p_tag_prefix);
+
+		s.append("仓管员");
+		s.append(operator);
+		s.append("于当地时间");
+		s.append(now_time);
+		s.append("将次序号为");
+		s.append(formData.getPurchaseId());
+		s.append("的货品移往外部临时区域.");
+		s.append(LINE_SEPARATOR);
+
+		writeRecordLog(DAILY_FILE_NAME, s.toString());
+	}
+
 }

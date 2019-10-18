@@ -1,6 +1,7 @@
 package com.allstargh.ssm.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.IStcokSevice;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
+import com.allstargh.ssm.service.util.StockServiceUtil;
 
 @Service
 public class StockServiceImpl implements IStcokSevice {
@@ -20,6 +22,8 @@ public class StockServiceImpl implements IStcokSevice {
 
 	@Autowired
 	private TStockDAO tsd;
+
+	StockServiceUtil ins = StockServiceUtil.getInstance();
 
 	@Override
 	public Integer regEntry(Purchase purchase, String stockOperator) throws SelfServiceException {
@@ -55,7 +59,17 @@ public class StockServiceImpl implements IStcokSevice {
 
 		stock.setEnterStockTime(new Date());
 
-		// 执行添入
+		int row = tsd.insert(stock);
+
+		return row;
+	}
+
+	@Override
+	public Integer regToExternal(String purchase, String stockOperator, String remark) throws SelfServiceException {
+		HashMap<String, String> hashMap = ins.generateMap(purchase);
+		TStock stock = ins.arrangement(hashMap, stockOperator, remark);
+		System.err.println(stock);
+
 		int row = tsd.insert(stock);
 
 		return row;

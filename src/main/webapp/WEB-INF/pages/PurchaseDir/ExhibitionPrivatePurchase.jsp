@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-	
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
@@ -96,9 +96,8 @@
 				<div>
 					<span> The <!-- ------------------------------------------------- -->
 						<span id="spanPageNum"></span> <!-- ------------------------------------------------- -->
-						<!-- ------------------------------------------------- -->
-						Page / Total <!-- ------------------------------------------------- -->
-						<!-- -------------------------------------------------------------------------------------------------- -->
+						<!-- ------------------------------------------------- --> Page /
+						Total <!-- ------------------------------------------------- --> <!-- -------------------------------------------------------------------------------------------------- -->
 						<span id="spanTotalPage"></span> <!-- -------------------------------------------------------------------------------------------------- -->
 						Page
 					</span>
@@ -109,11 +108,13 @@
 		<!-- 多选按钮 -->
 		<div class="input-group"
 			style="text-align: center; left: 47%; top: 30px;">
-			<button onclick="multipleDeleted()" class="btn btn-lg btn-warning" type="button">批量删除</button>
+			<button onclick="multipleDeleted()" class="btn btn-lg btn-warning"
+				type="button">批量删除</button>
 		</div>
 
 		<div style="margin-top: 48px;">
-			<br> <a href="${basePath}/cross/toTransfer">返回中转页</a> <br>
+			<br> <a href="${basePath}/cross/toTransfer"
+				style="text-decoration: underline;">返回中转页</a> <br>
 		</div>
 
 

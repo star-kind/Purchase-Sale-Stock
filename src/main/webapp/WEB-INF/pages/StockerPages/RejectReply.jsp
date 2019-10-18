@@ -90,12 +90,17 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 	<!-- Main Header -->
-	<header class="main-header"> ... </header>
+	<header class="main-header">
+		<div style="text-align: center; margin-top: 35px;">
+			<a style="text-decoration: underline; font-size: 24px;"
+				href="/stocker-manager/StockController/checkEnterCompetenceHandler">返回仓库主页</a>
+		</div>
+	</header>
 
 	<main>
 
 		<div class="box box-primary"
-			style="margin: 8rem 8rem 8rem 19rem; width: 70%; background: #a3ead1;">
+			style="margin: 4rem 8rem 8rem 21rem; width: 70%; background: #a3ead1;">
 			<div class="box-header with-border" style="text-align: center;">
 				<h3 class="box-title">回绝入库报告单</h3>
 			</div>
