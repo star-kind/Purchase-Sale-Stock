@@ -1,0 +1,8 @@
+##ignore
+.html
+.txt
+.TXT
+.TXT*
+.gitignore
+
+src/main/webapp/AdminLTE/
