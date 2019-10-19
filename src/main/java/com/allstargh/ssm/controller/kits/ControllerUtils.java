@@ -36,7 +36,7 @@ public class ControllerUtils {
 	/**
 	 * 工程日志目录绝对之前置根路径
 	 */
-	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Purchase-Sale-Stock/Logs/";
+	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Logs/";
 
 	/**
 	 * 系统换行符

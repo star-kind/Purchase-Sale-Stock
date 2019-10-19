@@ -1,6 +1,8 @@
 ##忽略
 /target/
+target/
 Logs/
+/Logs/
 
 *.html
 *.txt
@@ -11,5 +13,18 @@ Logs/Account-Log.txt
 Logs/LOG4J/Record-Standard.txt
 
 src/main/webapp/AdminLTE/
-src/main/webapp/WEB-INF/pages/StockerPages/StockerWorkable-Test.html
 /bin/
+
+.project
+.gitignore
+.classpath
+
+/.settings/
+.settings
+
+.git
+/.git/
+
+.gitignore
+.settings/org.eclipse.core.resources.prefs
+
