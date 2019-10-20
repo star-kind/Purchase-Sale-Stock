@@ -20,4 +20,13 @@ public interface ICommonReplenishService {
 	 */
 	abstract String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName);
 
+	/**
+	 * <b>overload</b>
+	 * 
+	 * @param usrid
+	 * @param competence
+	 * @param pageUrl
+	 * @return
+	 */
+	abstract String checkEnterCompetence(Integer usrid, Integer competence, String pageUrl);
 }

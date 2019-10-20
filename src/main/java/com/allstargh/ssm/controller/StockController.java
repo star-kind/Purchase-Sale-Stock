@@ -3,6 +3,7 @@ package com.allstargh.ssm.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.StockControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.IStcokSevice;
@@ -45,6 +47,23 @@ public class StockController extends ControllerUtils {
 	 * 工具类单例对象
 	 */
 	StockControllerUtil inst = StockControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/getAllStoreHandler
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getAllStoreHandler", method = RequestMethod.GET)
+	public ResponseResult<List<TStock>> getAllStoreHandler(HttpSession session) {
+		Integer usrid = getUsridFromSession(session);
+
+		List<TStock> list = iss.findAll(usrid);
+
+		return new ResponseResult<List<TStock>>(SUCCESS, list);
+
+	}
 
 	/**
 	 * /stocker-manager/StockController/regToExternalHandler
@@ -193,4 +212,73 @@ public class StockController extends ControllerUtils {
 		return path;
 
 	}
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/SubQueue
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("SubQueue")
+	public String wentToSubQueue(HttpServletRequest request, HttpSession session) {
+		Integer id = getUsridFromSession(session);
+
+		String uri = inst.getSuffixByServletPath(request.getServletPath());
+
+		String string = "StockerPages/";
+		string += iCommonReplenishService.checkEnterCompetence(id, 4, uri);
+
+		return string;
+
+	}
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/DataTables
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("DataTables")
+	public String toDataTables(HttpServletRequest request, HttpSession session) {
+		Integer id = getUsridFromSession(session);
+
+		String uri = inst.getSuffixByServletPath(request.getServletPath());
+
+		String string = "StockerPages/";
+		string += iCommonReplenishService.checkEnterCompetence(id, 4, uri);
+
+		return string;
+
+	}
+
+	/**
+	 * 通用访问跳转
+	 * 
+	 * http://localhost:8080/stocker-manager/StockController/{cipher}/commonInterviewHandler
+	 * http://localhost:8080/stocker-manager/StockController/38-10-4-10-30-10-23-18-2-11/commonInterviewHandler
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("{cipher}/commonInterviewHandler")
+	public String commonInterviewHandler(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "cipher") String cipher) {
+		Integer id = getUsridFromSession(session);
+
+		// String uri = inst.getSuffixByServletPath(request.getServletPath());
+
+		System.err.println("cipher===" + cipher);
+		String tail = inst.reduceByCharIndex(cipher);
+
+		String str = "StockerPages/";
+		str += iCommonReplenishService.checkEnterCompetence(id, 4, tail);
+		System.err.println("return uri str: " + str);
+
+		return str;
+
+	}
+
 }

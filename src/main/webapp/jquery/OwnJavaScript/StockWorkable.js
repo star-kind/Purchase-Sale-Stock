@@ -62,25 +62,27 @@ function exhibitTableList() {
 
 					executes(list);// 执行赋予表格内容
 
-					exhibitLenAmount();// .len_amount
+					exhibitLenAmount(list);// .len_amount
 				}
 			} else {
 				layer.alert(rr.message);
 			}
 		}
 	})
+
 }
 
 /**
  * 
+ * @param list
  * @returns
  */
-function exhibitLenAmount() {
+function exhibitLenAmount(list) {
 	var lensTag = $('.len_amount');
 	lensTag.empty();
 
-	var length = $('.table_row_purchase').length;
-	console.log('queue length:' + length);
+	var length = list.length + 1;
+	console.log('applications.length:' + length);
 
 	lensTag.text(length);
 }

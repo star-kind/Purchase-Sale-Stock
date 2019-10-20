@@ -16,6 +16,7 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	@Override
 	public String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName) {
 		Accounts acc = am.selectAccountByUsrid(usrid);
+		
 		Integer code = acc.getCompetence();
 		System.err.println("code==" + code);
 
@@ -32,6 +33,27 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 		}
 
 		return moduleName;
+	}
+
+	@Override
+	public String checkEnterCompetence(Integer usrid, Integer competence, String pageUrl) {
+		Accounts acc = am.selectAccountByUsrid(usrid);
+		
+		Integer code = acc.getCompetence();
+		System.err.println("competence code==" + code);
+
+		Integer status = acc.getActiveStatus();
+
+		if (code != competence) {
+			return "#";
+		}
+
+		if (status == 0) {
+			return "#";
+		}
+
+		return pageUrl;
+
 	}
 
 }

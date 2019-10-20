@@ -2,12 +2,15 @@ package com.allstargh.ssm.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TStockDAO;
+import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.IStcokSevice;
@@ -17,6 +20,9 @@ import com.allstargh.ssm.service.util.StockServiceUtil;
 
 @Service
 public class StockServiceImpl implements IStcokSevice {
+	@Autowired
+	private AccountsMapper amp;
+
 	@Autowired
 	private PurchaseMapper pm;
 
@@ -73,6 +79,36 @@ public class StockServiceImpl implements IStcokSevice {
 		int row = tsd.insert(stock);
 
 		return row;
+	}
+
+	@Override
+	public List<TStock> findAll(Integer uid) throws SelfServiceException {
+		Accounts acc = amp.selectAccountByUsrid(uid);
+
+		List<TStock> list = tsd.selectAllRows();
+
+		try {
+			if (acc == null || "".equals(acc)) {
+				System.err.println("是谁?");
+				list = null;
+
+			} else if (acc.getActiveStatus() == 0) {
+				String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
+				System.err.println(description);
+				list = null;
+
+			} else if (acc.getCompetence() != 4) {
+				String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+				System.err.println(description);
+				list = null;
+
+			}
+			
+		} catch (SelfServiceException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 }

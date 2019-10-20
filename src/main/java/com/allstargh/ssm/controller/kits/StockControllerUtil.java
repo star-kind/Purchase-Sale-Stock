@@ -16,6 +16,13 @@ public class StockControllerUtil extends ControllerUtils {
 	public static final String DAILY_FILE_NAME = "Daily_of_Stocker.txt";
 
 	/**
+	 * letters char
+	 */
+	static char[] chars = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k',
+			'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D',
+			'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M' };
+
+	/**
 	 * 懒汉式
 	 */
 	public static StockControllerUtil getInstance() {
@@ -32,6 +39,32 @@ public class StockControllerUtil extends ControllerUtils {
 	}
 
 	/**
+	 * 将build字符串还原为原输入之字符串
+	 * 
+	 * @param build
+	 * @return
+	 */
+	public String reduceByCharIndex(String build) {
+		System.out.println("\n");
+
+		StringBuilder b2 = new StringBuilder();
+
+		String[] split = build.split("-");
+		
+		for (int i = 0; i < split.length; i++) {
+			Integer place = Integer.valueOf(split[i]);
+			// System.out.print(chars[place]);
+			b2.append(chars[place]);
+		}
+
+		String input = b2.toString();
+		System.out.println("复原结果: " + input);
+
+		return input;
+	}
+
+	/**
+	 * 据ServletPath进行判断
 	 * 
 	 * @param purchase
 	 * @param path
@@ -51,6 +84,29 @@ public class StockControllerUtil extends ControllerUtils {
 		}
 
 		return purchase;
+	}
+
+	/**
+	 * 获取当前控制器映射路径据ServletPath
+	 * 
+	 * @param servletPath
+	 * @return
+	 */
+	public String getSuffixByServletPath(String servletPath) {
+		System.err.println("servletPath--" + servletPath);
+
+		if (servletPath != null) {
+			StringBuilder builder = new StringBuilder(servletPath);
+
+			int last = builder.lastIndexOf("/");
+			System.err.println("last-" + last);
+
+			String suffix = builder.substring(last + 1, servletPath.length());
+			System.err.println("suffix--" + suffix);
+			return suffix;
+		}
+
+		return "";
 	}
 
 	/**

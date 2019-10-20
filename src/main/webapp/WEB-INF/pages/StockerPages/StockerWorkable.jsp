@@ -60,9 +60,9 @@
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="/stocker-manager/cross/toTransfer" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>Admin</b>LTE</span>
+				<span class="logo-lg"><b>返回</b>导航</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -330,8 +330,10 @@
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="active treeview"><a href="#"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span> <span
-							class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
+							class="pull-right-container"> 
+							<i class="pull-right">+</i>
+							<!-- <i
+								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -362,8 +364,10 @@
 					</a></li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-pie-chart"></i> <span>Charts</span> <span
-							class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
+							class="pull-right-container"> 
+							<i class="pull-right">+</i>
+							<!-- <i
+								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -378,7 +382,8 @@
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 							<span>UI Elements</span> <span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
+								<i class="pull-right">+</i>
+								<!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -396,8 +401,10 @@
 									class="fa fa-circle-o"></i> Modals</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-							<span>Forms</span> <span class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
+							<span>Forms</span> <span class="pull-right-container"> 
+							<i class="pull-right">+</i>
+							<!-- <i
+								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -408,35 +415,45 @@
 							<li><a href="pages/forms/editors.html"><i
 									class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
-							<span>Tables</span> <span class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
+					<li class="treeview">
+							<a href="#"> 
+							<i class="fa fa-table"></i>
+							<span>Tables</span> <span class="pull-right-container"> 
+							<i class="pull-right">+</i>
+							<!-- <i
+								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="pages/tables/simple.html"><i
+							<li><a href="#"><i
 									class="fa fa-circle-o"></i> Simple tables</a></li>
-							<li><a href="pages/tables/data.html"><i
+									
+							<li><a href="/stocker-manager/StockController/DataTables"><i
 									class="fa fa-circle-o"></i> Data tables</a></li>
-						</ul></li>
-					<li><a href="pages/calendar.html"> <i
+						</ul>
+					</li>
+						
+					<li><a href="#"> <i
 							class="fa fa-calendar"></i> <span>Calendar</span> <span
 							class="pull-right-container"> <small
 								class="label pull-right bg-red">3</small> <small
 								class="label pull-right bg-blue">17</small>
 						</span>
 					</a></li>
-					<li><a href="pages/mailbox/mailbox.html"> <i
-							class="fa fa-envelope"></i> <span>Mailbox</span> <span
-							class="pull-right-container"> <small
-								class="label pull-right bg-yellow">12</small> <small
-								class="label pull-right bg-green">16</small> <small
-								class="label pull-right bg-red">5</small>
+					<li><a href="/stocker-manager/StockController/SubQueue"> 
+					<!-- ----------------------------------------------------------- -->
+							<i class="fa fa-envelope"></i> <span>入库申请队列</span> <span
+							class="pull-right-container"> <!--  --> <small
+								class="label pull-right bg-yellow len_amount"></small> <!--  -->
+								<!-- <small class="label pull-right bg-green">16</small> --> <!--  -->
+								<!-- <small class="label pull-right bg-red">5</small> -->
 						</span>
 					</a></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
 							<span>Examples</span> <span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
+								
+								<i class="pull-right">+</i>
+								<!-- <!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -461,23 +478,28 @@
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 							<span>Multilevel</span> <span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
+								<i class="pull-right">+</i>
+								<!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 							<li class="treeview"><a href="#"><i
 									class="fa fa-circle-o"></i> Level One <span
-									class="pull-right-container"> <i
-										class="fa fa-angle-left pull-right"></i>
+									class="pull-right-container"> 
+									<i class="pull-right">+</i>
+									<!-- <i
+										class="fa fa-angle-left pull-right"></i> -->
 								</span> </a>
 								<ul class="treeview-menu">
 									<li><a href="#"><i class="fa fa-circle-o"></i> Level
 											Two</a></li>
 									<li class="treeview"><a href="#"><i
 											class="fa fa-circle-o"></i> Level Two <span
-											class="pull-right-container"> <i
-												class="fa fa-angle-left pull-right"></i>
+											class="pull-right-container">
+											<i class="pull-right">+</i> 
+											<!-- <i
+												class="fa fa-angle-left pull-right"></i> -->
 										</span> </a>
 										<ul class="treeview-menu">
 											<li><a href="#"><i class="fa fa-circle-o"></i> Level
@@ -508,7 +530,9 @@
 					Dashboard <small>Control panel</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="/stocker-manager/login.jsp"> <i
+							class="fa fa-dashboard"></i> Home
+					</a></li>
 					<li class="active">Dashboard</li>
 				</ol>
 			</section>

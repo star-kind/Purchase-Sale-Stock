@@ -1,6 +1,9 @@
 package com.allstargh.ssm.service;
 
+import java.util.List;
+
 import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
 /**
@@ -10,6 +13,14 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IStcokSevice {
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract List<TStock> findAll(Integer uid) throws SelfServiceException;
+
 	/**
 	 * 登记入库
 	 * 

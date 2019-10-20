@@ -6,3 +6,4 @@
 .gitignore
 
 src/main/webapp/AdminLTE/
+/target/
