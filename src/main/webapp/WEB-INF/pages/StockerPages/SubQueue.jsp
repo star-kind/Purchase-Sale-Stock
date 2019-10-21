@@ -328,7 +328,7 @@
 								</span>
 							</a></li>
 							<li><a href="#">Compose</a></li>
-							<li><a href="read-mail.html">Read</a></li>
+							<li><a href="#">Read</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
 							<span>Examples</span> <span class="pull-right-container">

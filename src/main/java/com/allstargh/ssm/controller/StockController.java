@@ -259,16 +259,12 @@ public class StockController extends ControllerUtils {
 	 * http://localhost:8080/stocker-manager/StockController/{cipher}/commonInterviewHandler
 	 * http://localhost:8080/stocker-manager/StockController/38-10-4-10-30-10-23-18-2-11/commonInterviewHandler
 	 * 
-	 * @param request
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("{cipher}/commonInterviewHandler")
-	public String commonInterviewHandler(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "cipher") String cipher) {
+	public String commonInterviewHandler(HttpSession session, @PathVariable(value = "cipher") String cipher) {
 		Integer id = getUsridFromSession(session);
-
-		// String uri = inst.getSuffixByServletPath(request.getServletPath());
 
 		System.err.println("cipher===" + cipher);
 		String tail = inst.reduceByCharIndex(cipher);

@@ -53,7 +53,6 @@ public class StockControllerUtil extends ControllerUtils {
 		
 		for (int i = 0; i < split.length; i++) {
 			Integer place = Integer.valueOf(split[i]);
-			// System.out.print(chars[place]);
 			b2.append(chars[place]);
 		}
 

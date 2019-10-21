@@ -124,10 +124,12 @@ intelligentJava idea javaweb项目导入外部jar包报错:ClassNotFoundExceptio
 再:<br>
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
 -----------------------------
-```````
+
 
 每次发送请求,上一次请求的路径依旧残留在URL后尾,频报400;<br>
 resolve:尽量使用JavaScript脚本负责前后数据往返,使前后端解耦相持.<br>
+
+
 -----------------------------
 
 -叙:明明前后两端均是确定POST请求方法,但于前端提交时却莫名变成GET方法,数据直接在地址栏中显现而出.<br>
@@ -168,5 +170,5 @@ resolve:尽量使用JavaScript脚本负责前后数据往返,使前后端解耦�
 click只能为页面现有的元素绑定点击事件,对于动态生成之元素,是不会起效的.
 
 
-
 ----------------------------------
+

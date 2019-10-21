@@ -322,7 +322,8 @@
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span> <span
-							class="pull-right-container"> <i class="pull-right"> + </i>
+							class="pull-right-container"> <i class="pull-right"> +
+							</i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -353,7 +354,8 @@
 					</a></li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-pie-chart"></i> <span>Charts</span> <span
-							class="pull-right-container"> <i class="pull-right"> + </i>
+							class="pull-right-container"> <i class="pull-right"> +
+							</i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -386,7 +388,8 @@
 									class="fa fa-circle-o"></i> Modals</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-							<span>Forms</span> <span class="pull-right-container"> <i class="pull-right"> + </i>
+							<span>Forms</span> <span class="pull-right-container"> <i
+								class="pull-right"> + </i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -399,17 +402,16 @@
 						</ul></li>
 					<li class="treeview active"><a href="#"> <i
 							class="fa fa-table"></i> <span>Tables</span> <span
-							class="pull-right-container"> <i class="pull-right"> + </i>
+							class="pull-right-container"> <i class="pull-right"> +
+							</i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i>
-									Simple tables</a></li>
-							<li class="active"><a href="#"><i
-									class="fa fa-circle-o"></i> Data tables
-									<!--  -->
-									<small class="label pull-right bg-green exhibits-amount"></small>
-									</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Simple
+									tables</a></li>
+							<li class="active"><a href="#"><i class="fa fa-circle-o"></i>
+									Data tables <!--  --> <small
+									class="label pull-right bg-green exhibits-amount"></small> </a></li>
 						</ul></li>
 					<li><a href="../calendar.html"> <i class="fa fa-calendar"></i>
 							<span>Calendar</span> <span class="pull-right-container">
@@ -519,14 +521,15 @@
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<th><input type="checkbox"></th>
-											<th>名称</th>
-											<th>数量</th>
-											<th>存储区域</th>
-											<th>查看</th>
+											<th style="cursor: not-allowed; pointer-events: none;">选择</th>
+											<th style="cursor: not-allowed; pointer-events: none;">名称</th>
+											<th style="cursor: not-allowed; pointer-events: none;">数量</th>
+											<th style="cursor: not-allowed; pointer-events: none;">存储域</th>
+											<th style="cursor: not-allowed; pointer-events: none;">查看</th>
 										</tr>
 									</thead>
 									<tbody>
+
 									</tbody>
 									<tfoot>
 										<tr>
@@ -1227,5 +1230,5 @@
 <!-- 本页面封装之JavaScript函数 -->
 <script type="text/javascript"
 	src="${basePath}/MineJavaScript/StockModule/DataTable.js"></script>
-	
+
 </html>

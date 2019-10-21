@@ -32,7 +32,7 @@ public class TStock {
 	private Long unitPrice;
 
 	/**
-	 * 存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区
+	 * 存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区...etc
 	 */
 	private Byte stockTypeArea;
 
