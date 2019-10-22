@@ -103,12 +103,21 @@ public class StockServiceImpl implements IStcokSevice {
 				list = null;
 
 			}
-			
+
 		} catch (SelfServiceException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
+	}
+
+	@Override
+	public TStock findTStockByPurchaseId(Integer purchaseId, Integer usrid) throws SelfServiceException {
+		Accounts accounts = amp.selectAccountByUsrid(usrid);
+		ins.checkStockerState(accounts);
+
+		TStock tStock = tsd.selectByPurchaseId(purchaseId);
+		return tStock;
 	}
 
 }

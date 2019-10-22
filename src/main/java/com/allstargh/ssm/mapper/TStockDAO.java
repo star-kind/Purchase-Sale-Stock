@@ -15,6 +15,13 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TStockDAO {
 	/**
+	 * 
+	 * @param purchaseId
+	 * @return
+	 */
+	abstract TStock selectByPurchaseId(Integer purchaseId);
+
+	/**
 	 * 查询全部
 	 * 
 	 * @return

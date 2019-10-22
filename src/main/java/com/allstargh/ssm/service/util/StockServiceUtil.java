@@ -3,6 +3,7 @@ package com.allstargh.ssm.service.util;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
@@ -33,6 +34,28 @@ public class StockServiceUtil {
 			}
 		}
 		return ssu;
+
+	}
+
+	/**
+	 * 主要检验是否已注销和职务权限
+	 * 
+	 * @param ac
+	 */
+	public void checkStockerState(Accounts ac) {
+		if (ac.getActiveStatus() == 0) {
+			String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
+			System.err.println(description);
+			throw new SelfServiceException(description);
+
+		} else if (ac.getCompetence() != 4) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			System.err.println(description);
+			throw new SelfServiceException(description);
+
+		} else {
+			System.err.println("通过仓管员常规检验");
+		}
 
 	}
 

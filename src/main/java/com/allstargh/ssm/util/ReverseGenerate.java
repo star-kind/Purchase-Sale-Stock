@@ -1,4 +1,4 @@
-package com.allstargh.ssm.generate;
+package com.allstargh.ssm.util;
 
 import java.io.InputStream;
 import java.util.ArrayList;

@@ -809,4 +809,28 @@
 		FROM
 		t_stock
 	</select>
+
+	<select id="selectByPurchaseId"
+		resultType="com.allstargh.ssm.pojo.TStock">
+		SELECT
+		id,
+		purchase_id AS purchaseId,
+		store_commodity
+		AS
+		storeCommodity,
+		store_quantity AS storeQuantity,
+		unit_price AS
+		unitPrice,
+		stock_type_area AS stockTypeArea,
+		stock_operator AS
+		stockOperator,
+		enter_stock_time AS enterStockTime,
+		remark,
+		agree_enter_stock AS
+		agreeEnterStock
+		FROM
+		t_stock
+		WHERE
+		purchase_id=#{purchaseId}
+	</select>
 </mapper>

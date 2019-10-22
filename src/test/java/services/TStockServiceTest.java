@@ -27,6 +27,21 @@ public class TStockServiceTest {
 	}
 
 	@Test
+	public void selectTest01() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		try {
+			TStock stock = iss.findTStockByPurchaseId(19, 54);
+			System.err.println(stock.toString());
+
+		} catch (SelfServiceException e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void insertOneTest() {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");

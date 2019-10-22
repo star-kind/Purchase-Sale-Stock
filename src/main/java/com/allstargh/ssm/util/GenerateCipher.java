@@ -1,6 +1,8 @@
-package com.allstargh.ssm.mechanism;
+package com.allstargh.ssm.util;
 
 import java.util.Scanner;
+
+import com.allstargh.ssm.controller.kits.StockControllerUtil;
 
 /**
  * 字符串生成暗号,暗号又还原为字符串
@@ -9,9 +11,7 @@ import java.util.Scanner;
  *
  */
 public class GenerateCipher {
-	static char[] chars = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k',
-			'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D',
-			'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M' };
+	StockControllerUtil scUtil = StockControllerUtil.getInstance();
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class GenerateCipher {
 
 		GenerateCipher cipher = new GenerateCipher();
 
-		String string = cipher.recurringCompare(chars, line.toCharArray());
+		String string = cipher.recurringCompare(StockControllerUtil.chars, line.toCharArray());
 
 		String string2 = cipher.reduceByCharIndex(string);
 
@@ -72,11 +72,11 @@ public class GenerateCipher {
 		StringBuilder b2 = new StringBuilder();
 
 		String[] split = build.split("-");
-		
+
 		for (int i = 0; i < split.length; i++) {
 			Integer place = Integer.valueOf(split[i]);
 			// System.out.print(chars[place]);
-			b2.append(chars[place]);
+			b2.append(scUtil.chars[place]);
 		}
 
 		System.out.println("\n");

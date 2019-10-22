@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.allstargh.ssm.controller.kits.ControllerUtils;
@@ -47,6 +48,36 @@ public class StockController extends ControllerUtils {
 	 * 工具类单例对象
 	 */
 	StockControllerUtil inst = StockControllerUtil.getInstance();
+
+	/**
+	 * division<br>
+	 * division<br>
+	 * division<br>
+	 * division<br>
+	 * division<br>
+	 * division<br>
+	 * division<br>
+	 */
+
+	/**
+	 * /stocker-manager/StockController/findTStockByPurchaseIdHandler
+	 * 
+	 * @param session
+	 * @param purchaseId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findTStockByPurchaseIdHandler", method = RequestMethod.GET)
+	public ResponseResult<TStock> findTStockByPurchaseIdHandler(HttpSession session,
+			@RequestParam("purchaseId") Integer purchaseId) {
+		Integer usrid = getUsridFromSession(session);
+		System.err.println("PID==" + purchaseId);
+
+		TStock tStock = iss.findTStockByPurchaseId(purchaseId, usrid);
+
+		return new ResponseResult<TStock>(SUCCESS, tStock);
+
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/StockController/getAllStoreHandler

@@ -15,6 +15,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
 public interface IStcokSevice {
 	/**
 	 * 
+	 * @param purchaseId
+	 * @param usrid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract TStock findTStockByPurchaseId(Integer purchaseId, Integer usrid) throws SelfServiceException;
+
+	/**
+	 * 
 	 * @param uid
 	 * @return
 	 * @throws SelfServiceException

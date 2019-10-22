@@ -48,7 +48,7 @@ function generateTableRows(list) {
 		tr += '<td>#{storeCommodity}</td>';
 		tr += '<td>#{storeQuantity}</td>';
 		tr += '<td id="stockTypeArea-#{purchaseId}"></td>';
-		tr += '<td><a style="text-decoration: underline;" href="#{purchaseId}">点击查看</a></td>';
+		tr += '<td><a style="text-decoration: underline;" href="javascript:detailByItem(#{purchaseId});">点击查看</a></td>';
 		tr += '</tr>';
 
 		tr = tr.replace(/#{id}/g, list[i].id);
@@ -56,7 +56,6 @@ function generateTableRows(list) {
 		tr = tr.replace(/#{storeQuantity}/g, list[i].storeQuantity);
 		tr = tr.replace(/#{purchaseId}/g, list[i].purchaseId);
 
-		// tr = tr.replace(/#{stockTypeArea}/g, list[i].stockTypeArea);
 		console.log('typeof(list[i].stockTypeArea):'
 				+ typeof (list[i].stockTypeArea));
 
@@ -64,6 +63,185 @@ function generateTableRows(list) {
 
 		exhibitsByTypeNum(list[i]);
 	}
+}
+
+/**
+ * 
+ * @param purchaseId
+ * @returns
+ */
+function detailByItem(purchaseId) {
+	var uri = '/stocker-manager/StockController/findTStockByPurchaseIdHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'purchaseId' : purchaseId
+		},
+		type : 'GET',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				layerOpenEject(rr.data);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+
+}
+
+/**
+ * 
+ * @param ts
+ * @returns
+ */
+function layerOpenEject(ts) {
+	var form = manufactureContent(ts);
+
+	layer.open({
+		type : 1,
+		title : '仓储货物资料简介',
+		area : [ '600px', '480px' ],
+		id : [ 'store_div' ],
+		resize : true,
+		closeBtn : true,
+		shade : 0.4,// 遮罩透明度
+		moveType : 1,
+		content : form
+	});
+
+}
+
+/**
+ * 
+ * @param ts
+ * @returns
+ */
+function manufactureContent(ts) {
+	/*	 */
+	var typeArea = null;
+	switch (ts.stockTypeArea) {
+	case 0:
+		typeArea = '电器区';
+		break;
+
+	case 1:
+		typeArea = '食品区';
+		break;
+
+	case 2:
+		typeArea = '服装区';
+		break;
+
+	case 3:
+		typeArea = '日用品区';
+		break;
+
+	case 4:
+		typeArea = '饮品区';
+		break;
+
+	case 5:
+		typeArea = '混装区';
+		break;
+
+	case 6:
+		typeArea = '家具区';
+		break;
+
+	case 7:
+		typeArea = '玩具区';
+		break;
+
+	case 8:
+		typeArea = '药品区';
+		break;
+
+	case 9:
+		typeArea = '仓外临时区';
+		break;
+	}
+
+	/*	 */
+	var agree = null;
+	if (ts.agreeEnterStock == 0) {
+		agree = '尚未同意';
+	} else if (ts.agreeEnterStock == 1) {
+		agree = '已经同意';
+	}
+
+	/*	 */
+	var f = '<div style="text-align:center;font-size:18px;margin-left:0%;">';
+
+	f += '<form>';
+	f += '<input type="text" value="' + ts.id
+			+ '" readonly="readonly" style="visibility:hidden;">';
+
+	f += '<input type="text" value="' + ts.purchaseId
+			+ '" readonly="readonly" style="visibility:hidden;">';
+
+	f += '<p>名称</p>';
+	f += '<input type="text" value="' + ts.storeCommodity
+			+ '" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<p>数量</p>';
+	f += '<input type="text" value="' + ts.storeQuantity
+			+ '" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<p>单价</p>';
+	f += '<input type="text" value="' + ts.unitPrice + '" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<p>分区</p>';
+	f += '<input type="text" value="' + typeArea + '" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<p>本批次登记人</p>';
+	f += '<input type="text" value="' + ts.stockOperator
+			+ '" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<p>入库时间</p>';
+	f += '<input type="datetime" value="' + ts.enterStockTime
+			+ '" readonly="readonly">';
+	f += '<br>';
+
+	f += '<p>备注</p>';
+	f += '<textarea rows="3" value="' + ts.remark
+			+ '" readonly="readonly"></textarea>';
+
+	f += '<br>';
+
+	f += '<p>是否已同意入库</p>';
+	f += '<p>' + agree + '</p>';
+
+	f += '<input type="text" value="' + ts.agreeEnterStock
+			+ '" readonly="readonly" style="visibility:hidden;">';
+
+	f += '<input type="button" class"btn btn-lg btn-primary" value="点击修改" onclick="modifyProfile();">';
+
+	f += '<br>';
+	f += '</form>';
+	f += '</div>';
+
+	return f;
+}
+
+/**
+ * TODO
+ * 
+ * @returns
+ */
+function modifyProfile() {
+
 }
 
 /**
@@ -115,5 +293,5 @@ function exhibitsByTypeNum(element) {
 		tdArea.text('仓外临时区');
 		break;
 	}
-	
+
 }

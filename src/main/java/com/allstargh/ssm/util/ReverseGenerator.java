@@ -1,4 +1,4 @@
-package com.allstargh.ssm.mechanism;
+package com.allstargh.ssm.util;
 
 import java.io.IOException;
 import java.io.InputStream;
