@@ -401,7 +401,7 @@
 									class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
 					<li class="treeview active"><a href="#"> <i
-							class="fa fa-table"></i> <span>Tables</span> <span
+							class="fa fa-table"></i> <span>表格</span> <span
 							class="pull-right-container"> <i class="pull-right"> +
 							</i>
 						</span>

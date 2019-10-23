@@ -272,3 +272,14 @@ ALTER TABLE t_stock MODIFY `stock_type_area` tinyint(2) NOT NULL COMMENT
 ALTER TABLE t_stock MODIFY `agree_enter_stock` tinyint(1) NOT NULL COMMENT '同意入库与否:0-否,1-可';
 
 update t_stock set agree_enter_stock=1 WHERE id<30;
+
+-- 新增1列,再修改
+ALTER TABLE t_stock ADD lastest_modifier varchar(30) DEFAULT null comment '上次修改者';
+
+ALTER TABLE t_stock MODIFY lastest_modifier varchar(30) comment '上次修改者';
+
+-- 
+ALTER TABLE t_stock ADD lastest_modified_time timestamp DEFAULT null comment '上次修改时间';
+
+ALTER TABLE t_stock MODIFY lastest_modified_time timestamp comment '上次修改时间';
+

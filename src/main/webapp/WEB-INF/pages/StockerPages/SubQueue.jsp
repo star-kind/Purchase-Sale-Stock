@@ -296,7 +296,7 @@
 									class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
-							<span>Tables</span> <span class="pull-right-container"> 
+							<span>表格</span> <span class="pull-right-container"> 
 							<i class="pull-right">+</i>
 								<!-- <i
 								class="fa fa-angle-left pull-right"></i> -->

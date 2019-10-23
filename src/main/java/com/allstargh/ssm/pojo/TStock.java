@@ -7,6 +7,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class TStock {
 	/**
+	 * 上次更改时间
+	 */
+	private Date lastestModifiedTime;
+	
+	/**
+	 * 上次修改人
+	 */
+	private String lastestModifier;
+	
+	/**
 	 * 主键
 	 */
 	private Long id;
@@ -237,12 +247,30 @@ public class TStock {
 		this.agreeEnterStock = agreeEnterStock;
 	}
 
-	@Override
-	public String toString() {
-		return "TStock [id=" + id + ", purchaseId=" + purchaseId + ", storeCommodity=" + storeCommodity
-				+ ", storeQuantity=" + storeQuantity + ", unitPrice=" + unitPrice + ", stockTypeArea=" + stockTypeArea
-				+ ", stockOperator=" + stockOperator + ", enterStockTime=" + enterStockTime + ", remark=" + remark
-				+ ", agreeEnterStock=" + agreeEnterStock + "]";
+	public Date getLastestModifiedTime() {
+		return lastestModifiedTime;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public void setLastestModifiedTime(Date lastestModifiedTime) {
+		this.lastestModifiedTime = lastestModifiedTime;
+	}
+
+	public String getLastestModifier() {
+		return lastestModifier;
+	}
+
+	public void setLastestModifier(String lastestModifier) {
+		this.lastestModifier = lastestModifier;
+	}
+
+	@Override
+	public String toString() {
+		return "TStock [lastestModifiedTime=" + lastestModifiedTime + ", lastestModifier=" + lastestModifier + ", id="
+				+ id + ", purchaseId=" + purchaseId + ", storeCommodity=" + storeCommodity + ", storeQuantity="
+				+ storeQuantity + ", unitPrice=" + unitPrice + ", stockTypeArea=" + stockTypeArea + ", stockOperator="
+				+ stockOperator + ", enterStockTime=" + enterStockTime + ", remark=" + remark + ", agreeEnterStock="
+				+ agreeEnterStock + "]";
+	}
+	
 }

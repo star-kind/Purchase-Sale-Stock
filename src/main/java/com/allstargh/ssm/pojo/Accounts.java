@@ -2,6 +2,8 @@ package com.allstargh.ssm.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
@@ -10,12 +12,35 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Accounts {
 	private Integer usrid;
 	private String usrname;
-	private Integer regionDepartment;// 区域部门
-	private Integer competence;// 权限
-	private Integer activeStatus;// 激活态
+
+	/**
+	 * 区域部门
+	 */
+	private Integer regionDepartment;
+
+	/**
+	 * 权限
+	 */
+	private Integer competence;
+
+	/**
+	 * 激活态
+	 */
+	private Integer activeStatus;
 	private String phone;
-	private Date regTime;// 注册时间
-	private Date modifiedTime;// 改动时间
+
+	/**
+	 * 注册时间
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date regTime;
+
+	/**
+	 * 改动时间
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date modifiedTime;
+	
 	private String password;
 	private String salt;
 
@@ -103,11 +128,9 @@ public class Accounts {
 
 	@Override
 	public String toString() {
-		return "Accounts{" + "usrid=" + usrid + ", usrname='" + usrname + '\''
-				+ ", regionDepartment=" + regionDepartment + ", competence="
-				+ competence + ", activeStatus=" + activeStatus + ", phone='"
-				+ phone + '\'' + ", regTime=" + regTime + ", modifiedTime="
-				+ modifiedTime + ", password='" + password + '\'' + ", salt='"
-				+ salt + '\'' + '}';
+		return "Accounts{" + "usrid=" + usrid + ", usrname='" + usrname + '\'' + ", regionDepartment="
+				+ regionDepartment + ", competence=" + competence + ", activeStatus=" + activeStatus + ", phone='"
+				+ phone + '\'' + ", regTime=" + regTime + ", modifiedTime=" + modifiedTime + ", password='" + password
+				+ '\'' + ", salt='" + salt + '\'' + '}';
 	}
 }

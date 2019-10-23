@@ -270,62 +270,62 @@ function generatePurchaseContent(p) {
 	formHtml += '<form>';
 
 	formHtml += '<p>采购申请单单号';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.purchaseId + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购货物名';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.commodity + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>是否已批准';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.isAgree + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>供应商';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.supplier + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购数量';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.quantity + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购金额';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.amountMoney + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>支付方式';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.paymentMethod + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>是否已支付';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.isPay + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>是否已取货';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.hasTakeGoods + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购经办人';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.operator + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>采购时间';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.purchaseTime + ' ">';
 	formHtml += '</p>';
 
 	formHtml += '<br><p>商品分类';
-	formHtml += '<br><input type="text"  readonly="readonly"  value=" '
+	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ p.classify + ' ">';
 	formHtml += '</p>';
 

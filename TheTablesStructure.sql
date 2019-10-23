@@ -44,9 +44,16 @@
 -- #########################################################################################################
 
 
++---------+-----------------------------------------------------------------------------------------------------------------------------
 --------------------------------------+
-| t_stock | CREATE TABLE `t_stock` (                                                                                                                                          |
-|         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                                                                |
+| Table   | Create Table                                                                                                                
+                                      |
++---------+-----------------------------------------------------------------------------------------------------------------------------
+--------------------------------------+
+| t_stock | CREATE TABLE `t_stock` (                                                                                                    
+                                      |
+|         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                          
+                                      |
 |         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                                                          |
 |         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                                                                  |
 |         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                                                                      |
@@ -56,9 +63,10 @@
 |         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                                                                       |
 |         |   `remark` char(70) DEFAULT NULL COMMENT '备注',                                                                                                                  |
 |         |   `agree_enter_stock` tinyint(1) NOT NULL COMMENT '同意入库与否:0-否,1-可',                                                                                       |
+|         |   `lastest_modified_time` timestamp NULL DEFAULT NULL COMMENT '上次修改时间',                                                                                     |
+|         |   `lastest_modifier` varchar(30) DEFAULT NULL COMMENT '上次修改者',                                                                                               |                                                                  |
 |         |   PRIMARY KEY (`id`),                                                                                                                                             |
 |         |   UNIQUE KEY `uk_pid` (`purchase_id`)                                                                                                                             |
-|         | ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                                         |
+|         | ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='货仓存储表'                                                         |
 +---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 

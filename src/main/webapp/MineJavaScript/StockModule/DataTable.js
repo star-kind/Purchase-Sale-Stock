@@ -25,7 +25,7 @@ function exhibitDataList() {
 
 					generateTableRows(list);// 产生并赋予表格内容
 
-					exhibitsAmount(list);// .exhibits-amount
+					// exhibitsAmount(list);// .exhibits-amount
 				}
 			} else {
 				layer.alert(rr.message);
@@ -102,7 +102,7 @@ function layerOpenEject(ts) {
 	layer.open({
 		type : 1,
 		title : '仓储货物资料简介',
-		area : [ '600px', '480px' ],
+		area : [ '600px', '510px' ],
 		id : [ 'store_div' ],
 		resize : true,
 		closeBtn : true,
@@ -176,30 +176,47 @@ function manufactureContent(ts) {
 
 	f += '<form>';
 	f += '<input type="text" value="' + ts.id
-			+ '" readonly="readonly" style="visibility:hidden;">';
+			+ '" readonly="readonly" style="visibility:hidden;" name="id">';
 
-	f += '<input type="text" value="' + ts.purchaseId
-			+ '" readonly="readonly" style="visibility:hidden;">';
+	f += '<input type="text" value="'
+			+ ts.purchaseId
+			+ '" readonly="readonly" style="visibility:hidden;" name="purchaseId">';
 
 	f += '<p>名称</p>';
 	f += '<input type="text" value="' + ts.storeCommodity
-			+ '" readonly="readonly">';
+			+ '" readonly="readonly" name="storeCommodity" class="update_set">';
 
 	f += '<br>';
 
 	f += '<p>数量</p>';
 	f += '<input type="text" value="' + ts.storeQuantity
-			+ '" readonly="readonly">';
+			+ '" readonly="readonly" name="storeQuantity" class="update_set">';
 
 	f += '<br>';
 
 	f += '<p>单价</p>';
-	f += '<input type="text" value="' + ts.unitPrice + '" readonly="readonly">';
+	f += '<input type="text" value="' + ts.unitPrice
+			+ '" readonly="readonly" name="unitPrice" class="update_set">';
 
 	f += '<br>';
 
 	f += '<p>分区</p>';
 	f += '<input type="text" value="' + typeArea + '" readonly="readonly">';
+
+	f += '<select value="'
+			+ ts.stockTypeArea
+			+ '" name="stockTypeArea" style="display:none;margin-left: 24rem;" id="ts_stockTypeArea" class="update_set" readonly="readonly">';
+	f += '<option value="0">电器区</option>';
+	f += '<option value="1">食品区</option>';
+	f += '<option value="2">服装区</option>';
+	f += '<option value="3">日用品区</option>';
+	f += '<option value="4">饮品区</option>';
+	f += '<option value="5">混装区</option>';
+	f += '<option value="6">家具区</option>';
+	f += '<option value="7">玩具区</option>';
+	f += '<option value="8">药品区</option>';
+	f += '<option value="9">外围临时区</option>';
+	f += '</select>';
 
 	f += '<br>';
 
@@ -215,33 +232,73 @@ function manufactureContent(ts) {
 	f += '<br>';
 
 	f += '<p>备注</p>';
-	f += '<textarea rows="3" value="' + ts.remark
-			+ '" readonly="readonly"></textarea>';
+	f += '<textarea rows="3" value="'
+			+ ts.remark
+			+ '" readonly="readonly" class="update_set" name="remark"></textarea>';
 
 	f += '<br>';
 
-	f += '<p>是否已同意入库</p>';
-	f += '<p>' + agree + '</p>';
+	f += '<p style="margin-top:20px;color:#ac0eba;">是否已同意入库:';
+	f += agree + '</p>';
 
-	f += '<input type="text" value="' + ts.agreeEnterStock
-			+ '" readonly="readonly" style="visibility:hidden;">';
+	f += '<input type="text" value="'
+			+ ts.agreeEnterStock
+			+ '" readonly="readonly" style="visibility:hidden;" name="agreeEnterStock">';
 
-	f += '<input type="button" class"btn btn-lg btn-primary" value="点击修改" onclick="modifyProfile();">';
+	f += '<br>';
+
+	f += '<input type="button" id="click_modify" class"btn btn-lg btn-primary" value="点击修改" onclick="modifyProfile();">';
+	f += '<div id="inpu"></div>';
+
+	f += '<input type="button" class"btn btn-lg btn-default btn_modify" value="确认修改" style="display:none;margin:15px;">';
+	f += '<input type="button" class"btn btn-lg btn-default btn_modify" value="取消修改" style="display:none;margin:15px;">';
 
 	f += '<br>';
 	f += '</form>';
+	f += '<br>';
+	f += '<br>';
 	f += '</div>';
 
 	return f;
 }
 
 /**
- * TODO
+ * [modifyProfile description]
  * 
- * @returns
+ * @return {[type]} [description]
  */
 function modifyProfile() {
+	// 隐藏#click_modify
+	$('#click_modify').css('display', 'none');
 
+	// 设置(.update_set).readonly为可读写
+	$('.update_set').removeAttr('readonly');
+
+	// 有颜色的为可更改之选项
+	$('.update_set').css('background', '#d3ead3');
+
+	// #store_div > div:nth-child(1) > form:nth-child(1) > input:nth-child(13)
+	$('#store_div > div:nth-child(1) > form:nth-child(1) > input:nth-child(13)')
+			.css('display', 'none');
+
+	// #ts_stockTypeArea=block
+	$('#ts_stockTypeArea').css('display', 'block');
+
+	var f = '<input type="button" onclick="submitData()" class"btn btn-lg btn-default" value="确认修改" style="margin:15px;">';
+	f += '<input type="reset" class"btn btn-lg btn-default" value="复位" style="margin:15px;">';
+
+	$('#inpu').append(f);
+}
+
+/**
+ * [submitData description]
+ * 
+ * @return {[type]} [description]
+ */
+function submitData() {
+	var data = $('#store_div > div:nth-child(1) > form:nth-child(1)')
+			.serialize();
+	console.log(data);
 }
 
 /**
