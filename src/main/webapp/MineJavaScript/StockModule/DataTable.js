@@ -205,7 +205,7 @@ function manufactureContent(ts) {
 
 	f += '<select value="'
 			+ ts.stockTypeArea
-			+ '" name="stockTypeArea" style="display:none;margin-left: 24rem;" id="ts_stockTypeArea" class="update_set" readonly="readonly">';
+			+ '" name="stockTypeArea" style="display:none;margin-left: 17rem;width: 14em;" id="ts_stockTypeArea" class="update_set" readonly="readonly">';
 	f += '<option value="0">电器区</option>';
 	f += '<option value="1">食品区</option>';
 	f += '<option value="2">服装区</option>';
@@ -228,13 +228,13 @@ function manufactureContent(ts) {
 
 	f += '<p>入库时间</p>';
 	f += '<input type="datetime" value="' + ts.enterStockTime
-			+ '" readonly="readonly">';
+			+ '" readonly="readonly" name="enterStockTime">';
 	f += '<br>';
 
 	f += '<p>备注</p>';
-	f += '<textarea rows="3" value="'
-			+ ts.remark
-			+ '" readonly="readonly" class="update_set" name="remark"></textarea>';
+	f += '<textarea rows="3" value="' + ts.remark
+			+ '" readonly="readonly" class="update_set" name="remark" maxlength="70">'
+			+ ts.remark + '</textarea>';
 
 	f += '<br>';
 
@@ -299,6 +299,27 @@ function submitData() {
 	var data = $('#store_div > div:nth-child(1) > form:nth-child(1)')
 			.serialize();
 	console.log(data);
+
+	var uri = '/stocker-manager/StockController/modifiedStoreGoodHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'tStock' : data
+		},
+		type : 'POST',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				layer.msg('成功修改' + rr.data + '件储存货物资料', function() {
+					layer.closeAll();
+					location.reload();
+				});
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
 }
 
 /**

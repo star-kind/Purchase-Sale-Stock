@@ -112,7 +112,7 @@ function tablePaging() {
 	console.log('numCount:' + numCount);
 
 	columnsCounts = blockTable.rows[0].cells.length;
-	pageCount = 3;
+	pageCount = 5;
 
 	pageNum = parseInt(numCount / pageCount);
 	if (0 != numCount % pageCount) {

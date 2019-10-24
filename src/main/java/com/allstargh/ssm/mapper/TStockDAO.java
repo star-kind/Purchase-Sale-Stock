@@ -15,6 +15,14 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TStockDAO {
 	/**
+	 * 更新储藏物品资料
+	 * 
+	 * @param tStock
+	 * @return
+	 */
+	Integer updateStoreGoodByPurchase(TStock tStock);
+
+	/**
 	 * 
 	 * @param purchaseId
 	 * @return

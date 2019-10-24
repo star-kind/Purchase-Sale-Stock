@@ -25,6 +25,7 @@ import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.IStcokSevice;
+import com.allstargh.ssm.service.util.StockServiceUtil;
 
 /**
  * 仓储控制器
@@ -45,9 +46,14 @@ public class StockController extends ControllerUtils {
 	private ICommonReplenishService iCommonReplenishService;
 
 	/**
-	 * 工具类单例对象
+	 * 工具类单例对象:控制器层
 	 */
 	StockControllerUtil inst = StockControllerUtil.getInstance();
+
+	/**
+	 * 工具类单例对象:服务层
+	 */
+	StockServiceUtil serviceUtil = StockServiceUtil.getInstance();
 
 	/**
 	 * division<br>
@@ -58,6 +64,34 @@ public class StockController extends ControllerUtils {
 	 * division<br>
 	 * division<br>
 	 */
+
+	/**
+	 * /stocker-manager/StockController/modifiedStoreGoodHandler
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "modifiedStoreGoodHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> modifiedStoreGoodHandler(HttpSession session, HttpServletRequest request)
+			throws UnsupportedEncodingException {
+		Integer usrid = getUsridFromSession(session);
+
+		String dataStr = URLDecoder.decode(request.getParameter("tStock"), "UTF-8");
+		System.err.println(dataStr);
+
+		Integer affected = iss.modifiedStoreGood(usrid, dataStr);
+
+		String usrname = getUsrnameFromSession(session);
+
+		HashMap<String, String> map = serviceUtil.generateMapImprove(dataStr);
+
+		inst.modifiedStoreGoodHandlerRecord(usrname, affected, map);
+
+		return new ResponseResult<Integer>(SUCCESS, affected);
+	}
 
 	/**
 	 * /stocker-manager/StockController/findTStockByPurchaseIdHandler

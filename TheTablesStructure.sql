@@ -57,7 +57,7 @@
 |         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                                                          |
 |         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                                                                  |
 |         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                                                                      |
-|         |   `unit_price` decimal(10,0) NOT NULL COMMENT '单价',                                                                                                             |
+|         |   `unit_price` decimal(13,2) NOT NULL COMMENT '单价',                                                                                                             |
 |         |   `stock_type_area` tinyint(2) NOT NULL COMMENT '存储类型区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区,6-家具区,7-玩具区,8-药品区,9-仓库外临时区', |
 |         |   `stock_operator` varchar(30) NOT NULL COMMENT '入库经办仓管',                                                                                                   |
 |         |   `enter_stock_time` timestamp NOT NULL COMMENT '入库时间',                                                                                                       |

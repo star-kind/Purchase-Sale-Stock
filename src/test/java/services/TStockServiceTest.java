@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -24,6 +25,32 @@ public class TStockServiceTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void modifyTest() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		TStock t = new TStock();
+
+		t.setStoreCommodity("答复二滕");
+		t.setStoreQuantity(91);
+		t.setUnitPrice((long) 23.33);
+		t.setStockTypeArea((byte) 6);
+		t.setRemark("起初,为了世界的呼唤或召唤了大量蛮王皮杰克,我起了一枪秒了");
+		t.setLastestModifier("stock");
+		t.setLastestModifiedTime(new Date());
+		t.setPurchaseId(11);
+
+		try {
+			// Integer affect = iss.modifiedStoreGood(54, t);
+			System.err.println("affect--" + t.toString());
+
+		} catch (SelfServiceException e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
 	}
 
 	@Test

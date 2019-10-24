@@ -2,8 +2,12 @@ git status
 
 git add -A .
 
-git commit -m  "should be move"
+git commit -m  "commits"
 
-git pull origin master   
+#github
+git pull github master
+git push github master   
 
-git push origin master 
+#gitlab
+git pull gitlab master
+git push gitlab master 

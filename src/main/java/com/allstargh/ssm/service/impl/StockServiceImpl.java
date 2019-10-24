@@ -72,6 +72,7 @@ public class StockServiceImpl implements IStcokSevice {
 
 	@Override
 	public Integer regToExternal(String purchase, String stockOperator, String remark) throws SelfServiceException {
+
 		HashMap<String, String> hashMap = ins.generateMap(purchase);
 		TStock stock = ins.arrangement(hashMap, stockOperator, remark);
 		System.err.println(stock);
@@ -118,6 +119,22 @@ public class StockServiceImpl implements IStcokSevice {
 
 		TStock tStock = tsd.selectByPurchaseId(purchaseId);
 		return tStock;
+	}
+
+	@Override
+	public Integer modifiedStoreGood(Integer usrid, String tStock) throws SelfServiceException {
+		Accounts accounts = amp.selectAccountByUsrid(usrid);
+		ins.checkStockerState(accounts);
+
+		HashMap<String, String> map = ins.generateMapImprove(tStock);
+		TStock tStock2 = ins.arrangement(map);
+
+		tStock2.setLastestModifier(accounts.getUsrname());
+		tStock2.setLastestModifiedTime(new Date());
+
+		Integer affect = tsd.updateStoreGoodByPurchase(tStock2);
+
+		return affect;
 	}
 
 }

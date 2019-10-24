@@ -833,4 +833,19 @@
 		WHERE
 		purchase_id=#{purchaseId}
 	</select>
+
+	<update id="updateStoreGoodByPurchase">
+		UPDATE
+		t_stock
+		SET
+		store_commodity=#{storeCommodity},
+		store_quantity=#{storeQuantity},
+		unit_price=#{unitPrice},
+		stock_type_area=#{stockTypeArea},
+		lastest_modified_time=#{lastestModifiedTime},
+		lastest_modifier=#{lastestModifier},
+		remark=#{remark}
+		WHERE
+		purchase_id=#{purchaseId}
+	</update>
 </mapper>

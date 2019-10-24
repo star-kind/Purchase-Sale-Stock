@@ -139,6 +139,7 @@ public class ControllerUtils {
 	}
 
 	/**
+	 * 获取session.attribute(usrid),充当切面
 	 * 
 	 * @param session
 	 * @return
@@ -165,6 +166,7 @@ public class ControllerUtils {
 	}
 
 	/**
+	 * 获取session.attribute(usrname),充当切面
 	 * 
 	 * @param session
 	 * @return
@@ -215,7 +217,7 @@ public class ControllerUtils {
 	/**
 	 * 把记录写入日志文件(针对单行操作)
 	 * 
-	 * @param affect
+	 * @param affect   受影响行数
 	 * @param fileName
 	 * @param sentence
 	 */
@@ -240,7 +242,7 @@ public class ControllerUtils {
 	 * @param fileName
 	 * @param sentence
 	 */
-	public void writeRecordLog(String fileName, String sentence) {
+	protected void writeRecordLog(String fileName, String sentence) {
 		String filePath = null;
 
 		try {

@@ -1,8 +1,11 @@
 package com.allstargh.ssm.controller.kits;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.pojo.TStock;
 
 public class StockControllerUtil extends ControllerUtils {
 	private static StockControllerUtil instance;
@@ -18,9 +21,9 @@ public class StockControllerUtil extends ControllerUtils {
 	/**
 	 * letters char
 	 */
-	public static char[] chars = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k',
-			'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D',
-			'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M' };
+	public static char[] chars = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j',
+			'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S',
+			'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M' };
 
 	/**
 	 * 懒汉式
@@ -50,7 +53,7 @@ public class StockControllerUtil extends ControllerUtils {
 		StringBuilder b2 = new StringBuilder();
 
 		String[] split = build.split("-");
-		
+
 		for (int i = 0; i < split.length; i++) {
 			Integer place = Integer.valueOf(split[i]);
 			b2.append(chars[place]);
@@ -178,6 +181,31 @@ public class StockControllerUtil extends ControllerUtils {
 		s.append(LINE_SEPARATOR);
 
 		writeRecordLog(DAILY_FILE_NAME, s.toString());
+	}
+
+	/**
+	 * 
+	 * @param usrname
+	 * @param affected
+	 * @param map
+	 */
+	public void modifiedStoreGoodHandlerRecord(String usrname, Integer affected, HashMap<String, String> map) {
+		/**
+		 * 使用StirngBuilder比使用StringBuffer能获得10%~15%左右的性能提升,<br>
+		 * 但却要冒多线程不安全的风险
+		 */
+		StringBuilder s = new StringBuilder(p_tag_prefix);
+
+		s.append("仓管员");
+		s.append(usrname);
+		s.append("于当地时间");
+		s.append(now_time);
+		s.append("对申购次序号为");
+		s.append(map.get("purchaseId"));
+		s.append("的货品资料进行了改动.");
+		s.append(LINE_SEPARATOR);
+
+		writeRecordLog(affected, DAILY_FILE_NAME, s.toString());
 	}
 
 }

@@ -15,6 +15,23 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 据IDS多行更新 purchase.is_agree set 1
+	 * 
+	 * @param pids
+	 * @param isAgree
+	 * @return
+	 */
+	abstract Integer updateMultipleRowByPids(@Param("pids") Integer[] pids, @Param("isAgree") Integer isAgree);
+
+	/**
+	 * 查询 purchase.is_agree=0 的记录行们
+	 * 
+	 * @param isAgree
+	 * @return
+	 */
+	abstract List<Purchase> selectByPurchasesIsAgree(Integer isAgree);
+
+	/**
 	 * 查询待入库队列
 	 * 
 	 * @param hasTakeGoods

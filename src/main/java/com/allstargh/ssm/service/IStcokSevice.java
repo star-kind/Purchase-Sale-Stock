@@ -14,6 +14,16 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IStcokSevice {
 	/**
+	 * 更改仓储货物资料
+	 * 
+	 * @param usrid
+	 * @param tStock
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer modifiedStoreGood(Integer usrid, String tStock) throws SelfServiceException;
+
+	/**
 	 * 
 	 * @param purchaseId
 	 * @param usrid

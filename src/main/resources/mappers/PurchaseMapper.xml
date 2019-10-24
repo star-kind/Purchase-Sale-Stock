@@ -483,10 +483,12 @@
 		isAgree, supplier, quantity,
 		amount_money AS
 		amountMoney,
-		payment_method AS paymentMethod, is_pay AS
+		payment_method
+		AS paymentMethod, is_pay AS
 		isPay,
 		has_take_goods AS
-		hasTakeGoods, operator, purchase_time AS
+		hasTakeGoods,
+		operator, purchase_time AS
 		purchaseTime,classify
 		FROM
 		purchase
@@ -499,4 +501,41 @@
 		AND
 		purchase.is_agree=#{isAgree}
 	</select>
+
+	<select id="selectByPurchasesIsAgree"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		is_agree=#{isAgree}
+	</select>
+
+	<update id="updateMultipleRowByPids">
+		UPDATE purchase SET
+		is_agree=#{isAgree}
+		WHERE
+		purchase_id
+		IN
+		<foreach collection="pids" index="index" item="purchaseId"
+			separator="," open="(" close=")">
+
+			#{purchaseId}
+
+		</foreach>
+	</update>
+	
 </mapper>

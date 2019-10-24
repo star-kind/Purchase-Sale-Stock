@@ -283,3 +283,6 @@ ALTER TABLE t_stock ADD lastest_modified_time timestamp DEFAULT null comment '�
 
 ALTER TABLE t_stock MODIFY lastest_modified_time timestamp comment '上次修改时间';
 
+-- MODIFY修改字段类型和约束
+ALTER TABLE t_stock MODIFY unit_price decimal(13,2) NOT NULL COMMENT '单价';
+

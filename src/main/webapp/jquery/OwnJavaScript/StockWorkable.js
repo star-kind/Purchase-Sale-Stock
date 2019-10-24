@@ -108,7 +108,7 @@ function executes(list) {
 		tr += '</td>';
 
 		tr += '<td class="mailbox-name">';
-		tr += '<a href="javascript:surveyByPk(#{purchaseId});">[#{purchaseId}]</a>';
+		tr += '<a href="javascript:surveyByPk(#{purchaseId});" style="text-decoration: underline;">[#{purchaseId}]</a>';
 		tr += '</td>';
 
 		tr += '<td class="mailbox-subject" style="text-align: left;padding-left: 170px;">';

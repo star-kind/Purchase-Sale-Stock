@@ -21,6 +21,34 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void updatedDatasTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		Integer[] pids = new Integer[10];
+
+		pids[0] = 53;
+//		pids[1] = 0;
+//		pids[2] = 48;
+//		pids[3] = 49;
+
+		Integer affecteds = pm.updateMultipleRowByPids(pids, 1);
+
+		System.err.println("affecteds--" + affecteds);
+	}
+
+	@Test
+	public void findDatasTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> list = pm.selectByPurchasesIsAgree(0);
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+
+	}
+
+	@Test
 	public void eneterQueueTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 
