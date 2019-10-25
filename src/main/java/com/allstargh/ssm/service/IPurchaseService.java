@@ -15,6 +15,8 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IPurchaseService {
+	
+	
 	/**
 	 * 获取待处理的入库队列
 	 * 

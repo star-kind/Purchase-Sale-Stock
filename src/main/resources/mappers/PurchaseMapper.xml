@@ -537,5 +537,169 @@
 
 		</foreach>
 	</update>
-	
+
+	<select id="selectByVagueCommodityAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		commodity
+		LIKE CONCAT
+		(
+		'%',#{commodity},'%'
+		)
+		AND
+		operator=#{operator}
+	</select>
+
+	<select id="selectByVagueSupplierAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		supplier
+		LIKE CONCAT
+		(
+		'%',#{supplier},'%'
+		)
+		AND
+		operator=#{operator}
+	</select>
+
+	<select id="selectByClassifyAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		classify=#{classify}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
+	<select id="selectByHasTakeGoodsAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		has_take_goods=#{hasTakeGoods}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
+	<select id="selectByPaymentMethodAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		payment_method=#{paymentMethod}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
+	<select id="selectByIsPayAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		is_pay=#{isPay}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
 </mapper>

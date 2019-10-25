@@ -15,6 +15,61 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 
+	 * @param operator
+	 * @param classify
+	 * @return
+	 */
+	abstract List<Purchase> selectByClassifyAndOperator(@Param("operator") String operator,
+			@Param("classify") Integer classify);
+
+	/**
+	 * 
+	 * @param operator
+	 * @param hasTakeGoods
+	 * @return
+	 */
+	abstract List<Purchase> selectByHasTakeGoodsAndOperator(@Param("operator") String operator,
+			@Param("hasTakeGoods") Integer hasTakeGoods);
+
+	/**
+	 * 
+	 * @param operator
+	 * @param paymentMethod
+	 * @return
+	 */
+	abstract List<Purchase> selectByPaymentMethodAndOperator(@Param("operator") String operator,
+			@Param("paymentMethod") Integer paymentMethod);
+
+	/**
+	 * 
+	 * @param operator
+	 * @param isPay
+	 * @return
+	 */
+	abstract List<Purchase> selectByIsPayAndOperator(@Param("operator") String operator, @Param("isPay") Integer isPay);
+
+	/**
+	 * vague模糊的,供应商
+	 * 
+	 * @param supplier
+	 * @param operator
+	 * @return
+	 */
+	abstract List<Purchase> selectByVagueSupplierAndOperator(@Param("supplier") String supplier,
+			@Param("operator") String operator);
+
+	/**
+	 * vague模糊的,货物名称
+	 * 
+	 * @param commodity
+	 * @param operator
+	 * @return
+	 */
+	abstract List<Purchase> selectByVagueCommodityAndOperator(@Param("commodity") String commodity,
+			@Param("operator") String operator);
+
+	/**
 	 * 据IDS多行更新 purchase.is_agree set 1
 	 * 
 	 * @param pids

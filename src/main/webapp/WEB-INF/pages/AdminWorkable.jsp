@@ -174,13 +174,6 @@
 			// 上面的复选框已被选中
 			$(":checkbox[name='ids']").prop("checked", true);
 
-			// 获取name=ids的已勾选之复选框的值,压入数组checkArr
-			/* $("input[name='ids']:checked").each(function() {
-				checkboxArr.push(this.value);
-			}); */
-
-			// 取值结束后重新初始化
-			//checkboxArr = [];
 		} else {
 
 			// 上面的复选框没被选中

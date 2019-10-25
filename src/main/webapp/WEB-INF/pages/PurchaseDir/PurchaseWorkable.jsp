@@ -35,13 +35,16 @@
 		<ul>
 			<li><a href="#" class="a_links" onclick="opens(1)">申请采购货品</a></li>
 
-			<li><a href="javascript:opens(2);" class="a_links">查看全部申请单</a></li>
+			<li><a href="javascript:opens(2);" class="a_links">查看申请单(本人)</a></li>
+
+			<li><a href="javascript:opens(3);" class="a_links">按类型查询</a></li>
 
 			<li><a
 				href="${basePath}/PurchaseController/jumpToPurchaseTranceLogHandler"
 				class="a_links">采买活动记录</a></li>
 
 			<li><a href="/stocker-manager/cross/toTransfer" class="a_links">返回导航页</a></li>
+			
 		</ul>
 	</div>
 
@@ -51,6 +54,10 @@
 
 	<div class="detail_zone div_module" style="display: none;" id="room2">
 		<jsp:include page="ExhibitionPrivatePurchase.jsp"></jsp:include>
+	</div>
+	
+	<div class="detail_zone div_module" style="display: none;" id="room3">
+		<jsp:include page="SearchPurchasesByCondition.jsp"></jsp:include>
 	</div>
 
 </body>

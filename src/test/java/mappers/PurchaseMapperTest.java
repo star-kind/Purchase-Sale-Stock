@@ -21,6 +21,22 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void selectConditionTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+//		List<Purchase> list = pm.selectByClassifyAndOperator("p666", 1);
+//		List<Purchase> list = pm.selectByHasTakeGoodsAndOperator("p666", 1);
+//		List<Purchase> list = pm.selectByPaymentMethodAndOperator("p666", 1);
+//		List<Purchase> list = pm.selectByIsPayAndOperator("p666", 1);
+//		List<Purchase> list = pm.selectByVagueCommodityAndOperator("之", "p666");
+		List<Purchase> list = pm.selectByVagueSupplierAndOperator("公司", "p666");
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+	}
+
+	@Test
 	public void updatedDatasTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

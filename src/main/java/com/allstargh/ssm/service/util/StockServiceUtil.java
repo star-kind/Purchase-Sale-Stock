@@ -191,7 +191,7 @@ public class StockServiceUtil {
 		}
 
 		for (Map.Entry<String, String> entry : m1.entrySet()) {
-			System.out.print(" " + entry.getKey() + ":" + entry.getValue());
+			System.out.println(entry.getKey() + " : " + entry.getValue());
 		}
 
 		System.out.println("\n");
@@ -200,6 +200,7 @@ public class StockServiceUtil {
 	}
 
 	/**
+	 * 分隔string压入哈希表
 	 * 
 	 * @param str
 	 * @return
@@ -208,7 +209,7 @@ public class StockServiceUtil {
 		String[] strs = str.split("=");
 
 		if (strs.length < 2) {
-			map.put(strs[0], "有问题;");
+			map.put(strs[0], null);
 			return map;
 		}
 
@@ -221,7 +222,7 @@ public class StockServiceUtil {
 //		String string = "id=19&purchaseId=26&enterStockTime=2011-10-11 12:25:01&storeCommodity=月影蛋糕油&storeQuantity=60&unitPrice=10.01&stockTypeArea=0&remark=必火,暗藏就上起来安保九亭之外&agreeEnterStock=true";
 //		HashMap<String, String> map2 = util.generateMapImprove(string);
 //		for (Map.Entry<String, String> entry : map2.entrySet()) {
-//			System.out.print(" " + entry.getKey() + "=" + entry.getValue());
+//			System.out.println(entry.getKey() + " = " + entry.getValue());
 //		}
 //		TStock stock = util.arrangement(map2);
 //		System.out.println();
