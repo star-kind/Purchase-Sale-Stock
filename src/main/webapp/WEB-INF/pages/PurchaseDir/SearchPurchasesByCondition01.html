@@ -11,9 +11,9 @@
 
 <!-- bootstrap CSS -->
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/bootstrap.css">
+	href="../../../CssFrame/bootstrap.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/bootstrap-theme.css">
+	href="../../../CssFrame/bootstrap-theme.css"></link>
 
 <!-- jquery ui js -->
 <script src="../../../jquery-ui-1.12.1/jquery-ui.js"></script>
@@ -22,17 +22,17 @@
 
 <!-- jquery ui css -->
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.min.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.min.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.structure.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.structure.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.structure.min.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.structure.min.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.theme.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.theme.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../jquery-ui-1.12.1/jquery-ui.theme.min.css">
+	href="../../../jquery-ui-1.12.1/jquery-ui.theme.min.css"></link>
 
 <!-- layui javascript -->
 <script src="../../../CssFrame/layui/layui.js"></script>
@@ -41,15 +41,15 @@
 
 <!-- layui css -->
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/layui/css/layui.css">
+	href="../../../CssFrame/layui/css/layui.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/layui/css/modules/layer/default/layer.css">
+	href="../../../CssFrame/layui/css/modules/layer/default/layer.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/layui/css/modules/code.css">
+	href="../../../CssFrame/layui/css/modules/code.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="../../../CssFrame/layui/css/modules/laydate/default/laydate.css">
+	href="../../../CssFrame/layui/css/modules/laydate/default/laydate.css"></link>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8"></meta>
 <title>按各种条件查找html</title>
 </head>
 <body>
@@ -63,15 +63,15 @@
 				class="btn-lg btn btn-default dropdown-toggle"
 				style="height: 55px; margin-right: 82%; margin-top: 6%;">
 				<!-- 输入 -->
-				<option>按名称搜索</option>
-				<option>按ID搜索</option>
-				<option>按供应商搜索</option>
+				<option value="0">按名称搜索</option>
+				<option value="1">按ID搜索</option>
+				<option value="2">按供应商搜索</option>
 				<!-- 无需输入 -->
-				<option>按是否支付搜索</option>
-				<option>按支付方式</option>
-				<option>按是否已取货搜索</option>
-				<option>按货品类型搜索</option>
-				<option>按是否获批搜索</option>
+				<option value="3">按是否支付搜索</option>
+				<option value="4">按支付方式</option>
+				<option value="5">按是否已取货搜索</option>
+				<option value="6">按货品类型搜索</option>
+				<option value="7">按是否获批搜索</option>
 			</select>
 			<!--  -->
 		</div>
@@ -95,8 +95,9 @@
 				<div class="input-group input-group-lg"
 					style="margin: 0 0 35px 40%; width: 350px;">
 
-					<input type="text" class="form-control" placeholder="请输入...">
-					<span class="input-group-addon btn btn-default"> 确定 </span>
+					<input type="text" class="form-control" placeholder="请输入..."></input>
+					<span class="input-group-addon btn btn-default"
+						id="submitCondition"> 确定 </span>
 
 				</div>
 			</div>
@@ -111,7 +112,7 @@
 				<caption>Account List</caption>
 				<thead>
 					<tr class="active">
-						<th><input type="checkbox">行序号</th>
+						<th><input type="checkbox" onclick="headInfluence()">行序号</input></th>
 						<th>单号</th>
 						<th>货品名</th>
 						<th>供货商</th>
@@ -122,7 +123,7 @@
 					</tr>
 				</thead>
 
-				<tbody id="tbody_content"></tbody>
+				<tbody id="table_body"></tbody>
 			</table>
 		</div>
 

@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
+import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -23,6 +24,24 @@ public class PurchaseServiceTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void sevenSelectTest() {
+		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
+
+		try {
+			List<Purchase> list = ips.searchPurchasesByCondition("0", "之", "p666");
+
+			for (Purchase purchase : list) {
+				System.err.println(purchase.toString());
+			}
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+
+		}
+
 	}
 
 	@Test

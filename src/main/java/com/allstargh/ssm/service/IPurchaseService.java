@@ -15,8 +15,18 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IPurchaseService {
-	
-	
+	/**
+	 * SearchPurchasesByCondition
+	 * 
+	 * @param condition
+	 * @param parameter
+	 * @param usrname
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract List<Purchase> searchPurchasesByCondition(String condition, String parameter, String usrname)
+			throws SelfServiceException;
+
 	/**
 	 * 获取待处理的入库队列
 	 * 

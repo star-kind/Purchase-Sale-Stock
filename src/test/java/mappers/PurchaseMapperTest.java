@@ -1,5 +1,6 @@
 package mappers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class PurchaseMapperTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
 	}
-
+	
 	@Test
 	public void selectConditionTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
@@ -29,11 +30,17 @@ public class PurchaseMapperTest {
 //		List<Purchase> list = pm.selectByPaymentMethodAndOperator("p666", 1);
 //		List<Purchase> list = pm.selectByIsPayAndOperator("p666", 1);
 //		List<Purchase> list = pm.selectByVagueCommodityAndOperator("之", "p666");
-		List<Purchase> list = pm.selectByVagueSupplierAndOperator("公司", "p666");
+//		List<Purchase> list = pm.selectByVagueSupplierAndOperator("公司", "p666");
+//		List<Purchase> list = pm.selectByIsAgreeAndOperator("user333", 1);
+		Purchase purchase = pm.selectByPurchaseIdAndOperator("user333", 23);
 
-		for (Purchase purchase : list) {
-			System.err.println(purchase.toString());
+		List<Purchase> list = new ArrayList<Purchase>();
+		list.add(purchase);
+
+		for (Purchase purchase1 : list) {
+			System.err.println(purchase1.toString());
 		}
+		
 	}
 
 	@Test

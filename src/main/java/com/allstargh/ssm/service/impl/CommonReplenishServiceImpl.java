@@ -7,6 +7,8 @@ import org.springframework.ui.ModelMap;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.service.ICommonReplenishService;
+import com.allstargh.ssm.service.ex.SelfServiceException;
+import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 
 @Service
 public class CommonReplenishServiceImpl implements ICommonReplenishService {
@@ -16,7 +18,7 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	@Override
 	public String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName) {
 		Accounts acc = am.selectAccountByUsrid(usrid);
-		
+
 		Integer code = acc.getCompetence();
 		System.err.println("code==" + code);
 
@@ -38,7 +40,7 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	@Override
 	public String checkEnterCompetence(Integer usrid, Integer competence, String pageUrl) {
 		Accounts acc = am.selectAccountByUsrid(usrid);
-		
+
 		Integer code = acc.getCompetence();
 		System.err.println("competence code==" + code);
 
@@ -54,6 +56,21 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 
 		return pageUrl;
 
+	}
+
+	@Override
+	public boolean checkForAccount(Accounts account, Integer competence) throws SelfServiceException {
+		if (account.getActiveStatus() == 0) {
+			String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
+			throw new SelfServiceException(description);
+			
+		} else if (account.getCompetence() != competence) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+			
+		}
+
+		return true;
 	}
 
 }

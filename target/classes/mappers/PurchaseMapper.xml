@@ -702,4 +702,58 @@
 		operator=#{operator}
 	</select>
 
+	<select id="selectByPurchaseIdAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		purchase_id=#{purchaseId}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
+	<select id="selectByIsAgreeAndOperator"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+
+		is_agree=#{isAgree}
+
+		AND
+
+		operator=#{operator}
+	</select>
+
 </mapper>

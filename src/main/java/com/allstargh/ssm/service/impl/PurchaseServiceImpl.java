@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
@@ -29,6 +31,9 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 	@Autowired
 	private AccountsMapper am;
+
+	@Autowired
+	private ICommonReplenishService ics;
 
 	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
@@ -253,6 +258,70 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		List<Purchase> list = pm.selectEnterQueue(hasTakeGoods, isAgree);
 
 		return list;
+	}
+
+	@Override
+	public List<Purchase> searchPurchasesByCondition(String condition, String parameter, String usrname)
+			throws SelfServiceException {
+		// 查找账号
+		Accounts account = am.selectByUname(usrname);
+
+		boolean checkAccount = ics.checkForAccount(account, 2);
+
+		List<Purchase> list = new ArrayList<Purchase>();
+
+		Integer parseInt = null;
+
+		/*
+		 * 如果Condition==1或处于3~7,parameter便需要解析为integer
+		 */
+		switch (condition) {
+		case 0 + "":
+			list = pm.selectByVagueCommodityAndOperator(parameter, usrname);
+			break;
+
+		case 1 + "":
+			parseInt = Integer.parseInt(parameter);
+			Purchase purchase = pm.selectByPurchaseIdAndOperator(usrname, parseInt);
+			list.add(purchase);
+			break;
+
+		case 2 + "":
+			list = pm.selectByVagueSupplierAndOperator(parameter, usrname);
+			break;
+
+		case 3 + "":
+			parseInt = Integer.parseInt(parameter);
+			list = pm.selectByIsPayAndOperator(usrname, parseInt);
+			break;
+
+		case 4 + "":
+			parseInt = Integer.parseInt(parameter);
+			list = pm.selectByPaymentMethodAndOperator(usrname, parseInt);
+			break;
+
+		case 5 + "":
+			parseInt = Integer.parseInt(parameter);
+			list = pm.selectByHasTakeGoodsAndOperator(usrname, parseInt);
+			break;
+
+		case 6 + "":
+			parseInt = Integer.parseInt(parameter);
+			list = pm.selectByClassifyAndOperator(usrname, parseInt);
+			break;
+
+		case 7 + "":
+			parseInt = Integer.parseInt(parameter);
+			list = pm.selectByIsAgreeAndOperator(usrname, parseInt);
+			break;
+
+		}
+
+		if (list != null && checkAccount == true) {
+			return list;
+		}
+
+		return null;
 	}
 
 }

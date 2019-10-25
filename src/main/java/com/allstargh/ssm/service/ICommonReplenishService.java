@@ -2,6 +2,9 @@ package com.allstargh.ssm.service;
 
 import org.springframework.ui.ModelMap;
 
+import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.service.ex.SelfServiceException;
+
 /**
  * 通用补充业务
  * 
@@ -29,4 +32,14 @@ public interface ICommonReplenishService {
 	 * @return
 	 */
 	abstract String checkEnterCompetence(Integer usrid, Integer competence, String pageUrl);
+
+	/**
+	 * 对账号的校验
+	 * 
+	 * @param account
+	 * @param competence
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract boolean checkForAccount(Accounts account, Integer competence) throws SelfServiceException;
 }

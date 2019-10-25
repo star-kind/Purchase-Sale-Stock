@@ -29,6 +29,26 @@ public class PurchaseController extends ControllerUtils {
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
 
 	/**
+	 * 
+	 * @param session
+	 * @param condition
+	 * @param parameter
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "submitToBackstageHandler", method = RequestMethod.POST)
+	public ResponseResult<List<Purchase>> submitToBackstageHandler(HttpSession session,
+			@RequestParam("condition") String condition, @RequestParam("parameter") String parameter) {
+		System.err.println("condition:" + condition + ",parameter:" + parameter);
+
+		String usrname = getUsrnameFromSession(session);
+
+		List<Purchase> list = ips.searchPurchasesByCondition(condition, parameter, usrname);
+
+		return new ResponseResult<List<Purchase>>(SUCCESS, list);
+	}
+
+	/**
 	 * http://localhost:8080/stocker-manager/PurchaseController/getPurchaseListByTakedAndAgreedHandler
 	 * 
 	 * @param session

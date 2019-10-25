@@ -84,8 +84,8 @@
 					<option value="3">日用品</option>
 					<option value="4">饮品</option>
 					<option value="5">其它</option>
-					<option value="6">家具</option>
-					<option value="7">玩具</option>
+					<option value="6">玩具</option>
+					<option value="7">家具</option>
 					<option value="8">药品</option>
 				</select>
 			</div>

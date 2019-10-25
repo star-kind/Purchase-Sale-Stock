@@ -17,6 +17,23 @@ public interface PurchaseMapper {
 	/**
 	 * 
 	 * @param operator
+	 * @param IsAgree
+	 * @return
+	 */
+	abstract List<Purchase> selectByIsAgreeAndOperator(@Param("operator") String operator, @Param("isAgree") Integer IsAgree);
+
+	/**
+	 * 
+	 * @param operator
+	 * @param purchaseId
+	 * @return
+	 */
+	abstract Purchase selectByPurchaseIdAndOperator(@Param("operator") String operator,
+			@Param("purchaseId") Integer purchaseId);
+
+	/**
+	 * 
+	 * @param operator
 	 * @param classify
 	 * @return
 	 */
@@ -79,7 +96,7 @@ public interface PurchaseMapper {
 	abstract Integer updateMultipleRowByPids(@Param("pids") Integer[] pids, @Param("isAgree") Integer isAgree);
 
 	/**
-	 * 查询 purchase.is_agree=0 的记录行们
+	 * 查询 purchase.is_agree=? 的记录行们
 	 * 
 	 * @param isAgree
 	 * @return
