@@ -450,8 +450,8 @@ function geneateEditFormContent(profile) {
 	formContent += '<p>选择是否已取货:';
 	formContent += '<select name="hasTakeGoods" value=' + profile.hasTakeGoods
 			+ '>';
-	formContent += '<option value="0">未入</option>';
-	formContent += '<option value="1">已入</option>';
+	formContent += '<option value="0">未取</option>';
+	formContent += '<option value="1">已取</option>';
 	formContent += '</select>';
 	formContent += '</p>';
 
@@ -465,6 +465,11 @@ function geneateEditFormContent(profile) {
 	formContent += '<option value="3">日用品</option>';
 	formContent += '<option value="4">饮品</option>';
 	formContent += '<option value="5">其它</option>';
+	
+	formContent += '<option value="6">玩具</option>';
+	formContent += '<option value="7">家具</option>';
+	formContent += '<option value="8">药品</option>';
+	
 	formContent += '</select>';
 	formContent += '</p>';
 

@@ -2,6 +2,7 @@ package com.allstargh.ssm.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,6 +65,33 @@ public class StockController extends ControllerUtils {
 	 * division<br>
 	 * division<br>
 	 */
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/foundByTypeAreaHandler?areaOrder=0
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "foundByTypeAreaHandler", method = RequestMethod.GET)
+	public ResponseResult<List<TStock>> foundByTypeAreaHandler(HttpSession session,
+			@RequestParam("areaOrder") Byte areaOrder) throws UnsupportedEncodingException {
+		Integer usrid = getUsridFromSession(session);
+
+		List<TStock> list = new ArrayList<TStock>();
+
+		if ((areaOrder != null || !"".equals(areaOrder)) && areaOrder != 10) {
+			list = iss.foundByTypeArea(usrid, areaOrder);
+
+		} else if (areaOrder == 10) {
+			list = iss.findAll(usrid);
+
+		}
+
+		return new ResponseResult<List<TStock>>(SUCCESS, list);
+	}
 
 	/**
 	 * /stocker-manager/StockController/modifiedStoreGoodHandler

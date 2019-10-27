@@ -28,6 +28,22 @@ public class TStockServiceTest {
 	}
 
 	@Test
+	public void selectByAreaTest() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		try {
+			List<TStock> list = iss.foundByTypeArea(54, (byte) 0);
+
+			for (TStock tStock : list) {
+				System.err.println(tStock.toString());
+			}
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void modifyTest() {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 

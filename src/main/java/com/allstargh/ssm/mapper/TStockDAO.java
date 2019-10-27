@@ -15,6 +15,14 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TStockDAO {
 	/**
+	 * 据储藏区查找
+	 * 
+	 * @param stockTypeArea
+	 * @return
+	 */
+	abstract List<TStock> selectByPurchaseStockTypeArea(Byte stockTypeArea);
+
+	/**
 	 * 更新储藏物品资料
 	 * 
 	 * @param tStock

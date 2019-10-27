@@ -60,14 +60,18 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 
 	@Override
 	public boolean checkForAccount(Accounts account, Integer competence) throws SelfServiceException {
-		if (account.getActiveStatus() == 0) {
+		if (account == null) {
+			String description = ServiceExceptionEnum.USRNAME_ERR.getDescription();
+			throw new SelfServiceException(description);
+
+		} else if (account.getActiveStatus() == 0) {
 			String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
 			throw new SelfServiceException(description);
-			
+
 		} else if (account.getCompetence() != competence) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
-			
+
 		}
 
 		return true;

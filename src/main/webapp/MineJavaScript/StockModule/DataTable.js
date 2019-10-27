@@ -37,6 +37,48 @@ function exhibitDataList() {
 
 /**
  * 
+ * @returns
+ */
+$('#select_type_area').change(function() {
+	var areaOrder = $('#select_type_area').val();
+	console.log('分类查询显示开始.areaOrder=' + areaOrder);
+
+	foundByTypeAreaHandler(areaOrder);
+});
+
+/**
+ * 
+ * @param areaOrder
+ * @returns
+ */
+function foundByTypeAreaHandler(areaOrder) {
+	var url = "/stocker-manager/StockController/foundByTypeAreaHandler";
+
+	$.ajax({
+		url : url,
+		data : {
+			'areaOrder' : areaOrder
+		},
+		type : 'GET',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state == 200 && rr.data != null) {
+				var list = rr.data;
+
+				$('#example2 tbody').empty();
+
+				generateTableRows(list);// 产生并赋予表格内容
+
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+
+}
+
+/**
+ * 
  * @param list
  * @returns
  */
@@ -44,7 +86,11 @@ function generateTableRows(list) {
 	for (var i = 0; i < list.length; i++) {
 
 		var tr = '<tr role="row">';
-		tr += '<td class="sorting_1"><input type="checkbox" value="#{id}"></td>';
+		
+		tr += '<td class="sorting_1">';
+		tr += '<input type="checkbox" value="#{id}" class="td_order_number">';
+		tr += '</td>';
+		
 		tr += '<td>#{storeCommodity}</td>';
 		tr += '<td>#{storeQuantity}</td>';
 		tr += '<td id="stockTypeArea-#{purchaseId}"></td>';
@@ -232,7 +278,8 @@ function manufactureContent(ts) {
 	f += '<br>';
 
 	f += '<p>备注</p>';
-	f += '<textarea rows="3" value="' + ts.remark
+	f += '<textarea rows="3" value="'
+			+ ts.remark
 			+ '" readonly="readonly" class="update_set" name="remark" maxlength="70">'
 			+ ts.remark + '</textarea>';
 

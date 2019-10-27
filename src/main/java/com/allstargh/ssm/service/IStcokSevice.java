@@ -14,6 +14,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IStcokSevice {
 	/**
+	 * 
+	 * @param usrid
+	 * @param areaOrder 储藏区序号
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract List<TStock> foundByTypeArea(Integer usrid, Byte areaOrder) throws SelfServiceException;
+
+	/**
 	 * 更改仓储货物资料
 	 * 
 	 * @param usrid

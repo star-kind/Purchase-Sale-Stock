@@ -21,6 +21,17 @@ public class TStockMapper {
 	}
 
 	@Test
+	public void selectAreaTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		List<TStock> list = dao.selectByPurchaseStockTypeArea((byte) 0);
+		for (TStock tStock : list) {
+			System.err.println(tStock);
+		}
+
+	}
+
+	@Test
 	public void selectWholeTest() {
 		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
 

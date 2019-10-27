@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allstargh.ssm.mapper.TStockDAO">
-
+	<!-- 字段及其对应之类型 -->
 	<resultMap id="BaseResultMap"
 		type="com.allstargh.ssm.pojo.TStock">
 		<id column="id" jdbcType="BIGINT" property="id" />
@@ -90,6 +90,8 @@
 			</foreach>
 		</where>
 	</sql>
+
+	<!-- SQL语句:本数据表字段集合 -->
 	<sql id="Base_Column_List">
 		id, purchase_id, store_commodity, store_quantity,
 		unit_price,
@@ -97,6 +99,7 @@
 		enter_stock_time, remark,
 		agree_enter_stock
 	</sql>
+
 	<select id="selectByExample"
 		parameterType="com.allstargh.ssm.pojo.TStockExample"
 		resultMap="BaseResultMap">
@@ -848,4 +851,14 @@
 		WHERE
 		purchase_id=#{purchaseId}
 	</update>
+
+	<select id="selectByPurchaseStockTypeArea"
+		resultMap="BaseResultMap" parameterType="java.lang.Byte">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_stock
+		WHERE
+		stock_type_area=#{stockTypeArea}
+	</select>
 </mapper>

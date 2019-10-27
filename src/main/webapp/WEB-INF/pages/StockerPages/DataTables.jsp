@@ -33,13 +33,6 @@
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/dist/css/skins/_all-skins.min.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
 <!-- Google Font -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -338,14 +331,12 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Top Navigation</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Boxed</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Fixed</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Top
+									Navigation</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Collapsed
+									Sidebar</a></li>
 						</ul></li>
 					<li><a href="#"> <i class="fa fa-th"></i> <span>Widgets</span>
 							<span class="pull-right-container"> <small
@@ -359,14 +350,11 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> ChartJS</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Morris</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Flot</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Inline charts</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Inline
+									charts</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 							<span>UI Elements</span> <span class="pull-right-container">
@@ -374,18 +362,12 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> General</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i>
-									Icons</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Buttons</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Sliders</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Timeline</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Modals</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Icons</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
 							<span>Forms</span> <span class="pull-right-container"> <i
@@ -393,29 +375,29 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> General Elements</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Advanced Elements</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Editors</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> General
+									Elements</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Advanced
+									Elements</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
 					<li class="treeview active"><a href="#"> <i
-							class="fa fa-table"></i> <span>表格</span> <span
+							class="fa fa-table"></i> <span>仓库表格</span> <span
 							class="pull-right-container"> <i class="pull-right"> +
 							</i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Simple
-									tables</a></li>
+							<li><a href="#"> <!-- 00000000000000000000001000000000000000000000010000000000000000000000100000000000000000000001 -->
+									<i class="fa fa-circle-o"></i> 提货申请队列
+							</a></li>
 							<li class="active"><a href="#"><i class="fa fa-circle-o"></i>
-									Data tables <!--  --> <small
+									全部仓储货物 <!--  --> <small
 									class="label pull-right bg-green exhibits-amount"></small> </a></li>
 						</ul></li>
-					<li><a href="#"> <i class="fa fa-calendar"></i>
-							<span>Calendar</span> <span class="pull-right-container">
-								<small class="label pull-right bg-red">3</small> <small
+					<li><a href="#"> <i class="fa fa-calendar"></i> <span>Calendar</span>
+							<span class="pull-right-container"> <small
+								class="label pull-right bg-red">3</small> <small
 								class="label pull-right bg-blue">17</small>
 						</span>
 					</a></li>
@@ -433,24 +415,17 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Invoice</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Profile</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Login</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Register</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Lockscreen</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> 404 Error</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> 500 Error</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Blank Page</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Pace Page</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Invoice</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Profile</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Login</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Register</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i>
+									Lockscreen</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Blank
+									Page</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Pace Page</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 							<span>Multilevel</span> <span class="pull-right-container">
@@ -515,6 +490,24 @@
 						<div class="box">
 							<div class="box-header">
 								<h3 class="box-title">Hover Data Table</h3>
+
+								<!-- 新增内容 -->
+								<select id="select_type_area" class="btn btn-primary"
+									style="margin: 0 0 0 30px;">
+									<option value="10">-- 全部 --</option>
+
+									<option value="0">电器区</option>
+									<option value="1">食品区</option>
+									<option value="2">服装区</option>
+									<option value="3">日用品区</option>
+									<option value="4">饮品区</option>
+									<option value="5">混装区</option>
+									<option value="6">家具区</option>
+									<option value="7">玩具区</option>
+									<option value="8">药品区</option>
+									<option value="9">外临时区</option>
+								</select>
+
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -533,7 +526,11 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<th><input type="checkbox"></th>
+											<th>
+												<!-- 808080808080808080808080808080808080808080808080808080808080 -->
+												<input type="checkbox" id="head_check"
+												onclick="headInfluence();">
+											</th>
 											<th>名称</th>
 											<th>数量</th>
 											<th>存储区域</th>
@@ -1223,9 +1220,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css">
 
-<!-- 本页面封装之JavaScript函数 -->
 <script type="text/javascript"
 	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
+
+<!-- 复选框全选效果 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
 
 <!-- 本页面封装之JavaScript函数 -->
 <script type="text/javascript"

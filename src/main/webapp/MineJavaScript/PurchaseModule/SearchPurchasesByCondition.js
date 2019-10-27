@@ -672,6 +672,11 @@ function geneateEditFormContent(profile) {
 	formContent += '<option value="3">日用品</option>';
 	formContent += '<option value="4">饮品</option>';
 	formContent += '<option value="5">其它</option>';
+	
+	formContent += '<option value="6">玩具</option>';
+	formContent += '<option value="7">家具</option>';
+	formContent += '<option value="8">药品</option>';
+	
 	formContent += '</select>';
 	formContent += '</p>';
 

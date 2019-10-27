@@ -13,6 +13,7 @@ import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
+import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IStcokSevice;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
@@ -25,6 +26,9 @@ public class StockServiceImpl implements IStcokSevice {
 
 	@Autowired
 	private PurchaseMapper pm;
+
+	@Autowired
+	private ICommonReplenishService ics;
 
 	@Autowired
 	private TStockDAO tsd;
@@ -135,6 +139,20 @@ public class StockServiceImpl implements IStcokSevice {
 		Integer affect = tsd.updateStoreGoodByPurchase(tStock2);
 
 		return affect;
+	}
+
+	@Override
+	public List<TStock> foundByTypeArea(Integer usrid, Byte areaOrder) throws SelfServiceException {
+		Accounts ac = amp.selectAccountByUsrid(usrid);
+
+		boolean b = ics.checkForAccount(ac, 4);
+
+		if (b) {
+			List<TStock> list = tsd.selectByPurchaseStockTypeArea(areaOrder);
+			return list;
+		}
+
+		return null;
 	}
 
 }
