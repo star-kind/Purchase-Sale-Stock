@@ -135,7 +135,6 @@ SELECT usrid,usrname FROM accounts ORDER BY usrid ASC;
 
 SELECT usrname,password FROM accounts WHERE usrid=7;
 
-
 --  按地区部门搜索
 SELECT usrid,usrname,region_department,phone,competence,active_status,reg_time,modified_time FROM accounts WHERE region_department='111';
 
@@ -286,3 +285,9 @@ ALTER TABLE t_stock MODIFY lastest_modified_time timestamp comment '上次修改
 -- MODIFY修改字段类型和约束
 ALTER TABLE t_stock MODIFY unit_price decimal(13,2) NOT NULL COMMENT '单价';
 
+-- 修改字段类型和约束和注释
+ALTER TABLE purchase MODIFY `is_agree` int(1) NOT NULL COMMENT '是否已获批:0-未获批,1-已获批,2-已阅被驳回';
+
+ALTER TABLE accounts MODIFY `competence` int(1) NOT NULL COMMENT '岗位类型,0:技术管理,1:总经理,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员';
+
+ALTER TABLE accounts MODIFY `competence` int(1) NOT NULL COMMENT '岗位类型,0:技术管理,1:审查员,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员';

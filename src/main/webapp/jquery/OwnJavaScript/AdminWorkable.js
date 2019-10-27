@@ -100,7 +100,7 @@ function competenceNumShowJobName() {
 		if (compets[i] == 0) {
 			$('.Competences').eq(i).text('管理员');
 		} else if (compets[i] == 1) {
-			$('.Competences').eq(i).text('总经理');
+			$('.Competences').eq(i).text('审查员');
 		} else if (compets[i] == 2) {
 			$('.Competences').eq(i).text('采购经理');
 		} else if (compets[i] == 3) {
@@ -249,7 +249,7 @@ function optionRDContent() {
  */
 function optionCompetenceContent() {
 	var content = '<select class="seles_second" style="height: 40px;width: 166px" onchange="seleSec()"><option>管理员</option>'
-			+ '<option>总经理</option>'
+			+ '<option>审查员</option>'
 			+ '<option>采购经理</option>'
 			+ '<option>销售经理</option>'
 			+ '<option>仓库主管</option>'
@@ -369,7 +369,7 @@ function exhibitsTdByCompetence(acc) {
 		break;
 
 	case 1:
-		$('#Competences_' + acc.usrid).text('总经理');
+		$('#Competences_' + acc.usrid).text('审查员');
 		break;
 
 	case 2:

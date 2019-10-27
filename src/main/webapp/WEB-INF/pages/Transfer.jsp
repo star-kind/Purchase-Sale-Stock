@@ -35,34 +35,36 @@
 
 		<table>
 			<h4 style="text-align: center;">选择模块</h4>
-			
+
 			<tbody>
 
 				<tr class="t_rows">
 					<td class="data_cells"><a
-						href="${basePath}/account/toAdminWorkable" class="links_dept">账户管理</a></td>
+						href="${basePath}/account/toAdminWorkable" class="links_dept">信息技术部</a></td>
 				</tr>
 
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">销售部</a></td>
+					<td class="data_cells"><a href="#" class="links_dept">销售部</a></td>
 				</tr>
-				
+
 				<tr class="t_rows">
 					<td class="data_cells"><a
 						href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler"
 						class="links_dept">采购部</a></td>
 				</tr>
-				
+
 				<tr class="t_rows">
 					<td class="data_cells"><a
 						href="/stocker-manager/StockController/checkEnterCompetenceHandler"
 						class="links_dept">仓库管理</a></td>
 				</tr>
-				
+
 				<tr class="t_rows">
-					<td class="data_cells"><a href="" class="links_dept">审核部</a></td>
+					<td class="data_cells"><a
+						href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1"
+						class="links_dept">审核部</a></td>
 				</tr>
-				
+
 			</tbody>
 		</table>
 	</div>

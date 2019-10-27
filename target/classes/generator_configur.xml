@@ -46,7 +46,8 @@
 
 		<!-- 指定数据库表 -->
 		<!-- <table tableName="purchase" /> -->
-		<table tableName="t_stock" />
+		<!-- <table tableName="t_stock" /> -->
+		<table tableName="t_approval" />
 
 	</context>
 

@@ -53,35 +53,48 @@
 <title>审批模块主页</title>
 
 <style type="text/css">
-body>header:nth-child(1)>div:nth-child(1)>ul:nth-child(1)>li {
-	margin: 14px 0 0 0;
+
+.header_div01{
+	border-bottom: 3px solid #1d7c70;
+	padding: 40px 20px 20px 20px;
 }
 
-body>header:nth-child(1)>div:nth-child(1)>ul:nth-child(1)>li>a {
-	text-decoration: underline;
+
+.header_span01{
+	font-size: x-large; 
+	margin: 4rem 0 0 4rem;
+	
 }
+
+.header_span01 > a{
+	margin: 20px;
+	text-decoration: underline;
+
+}
+
 </style>
 
 </head>
 <body>
+	
 	<header>
-
-		<div style="width: 240px; font-size: x-large; margin: 4rem 0 0 4rem;">
-			<ul>
-				<li><a href="javascript:opens(1)"> 待批之采购请申请单 </a></li>
-				<li><a> 等待 </a></li>
-				<li><a> 等待 </a></li>
-				<li><a> 等待 </a></li>
-			</ul>
+		<div class="header_div01">
+			<span class="header_span01">
+				<a href="javascript:opens(1)">采购申请</a>
+				<a> 等待 </a>
+				<a> 等待 </a>
+				<a> 等待 </a>
+				<a> 等待 </a>
+			</span>
 		</div>
-
 	</header>
 
-	<main>
+	<div>
+		
 		<div class="detail_zone div_module"
 			style="display: block; text-align: center;" id="room1"></div>
 			
-	</main>
+	</div>
 
 </body>
 </html>

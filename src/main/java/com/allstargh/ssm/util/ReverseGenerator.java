@@ -40,7 +40,7 @@ public class ReverseGenerator {
 
 		inputStream.close();
 
-		System.out.println("inputStream.getClass().getCanonicalName()");
+		System.out.println("successful.");
 	}
 
 }

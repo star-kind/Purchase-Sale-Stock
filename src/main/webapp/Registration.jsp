@@ -102,7 +102,7 @@
 								<select id="competence_select" class="form-control"
 									name="competence">
 									<option value="0">管理员</option>
-									<option value="1">总经理</option>
+									<option value="1">审查员</option>
 									<option value="2">采购经理</option>
 									<option value="3">销售经理</option>
 									<option value="4">仓库员</option>
