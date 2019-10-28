@@ -85,7 +85,7 @@
 |            |   `reply_opinion` char(80) DEFAULT NULL COMMENT '批复意见',                                                        |
 |            |   `original_order` int(22) NOT NULL COMMENT '申单原序号',                                                          |
 |            |   `auditor` int(22) NOT NULL COMMENT '审核者,对应账号表usrid',                                                     |
-|            |   `approve_operates` tinyint(1) NOT NULL COMMENT '审批操作:0.已同意;1.不同意',                                     |
+|            |   `approve_operates` tinyint(1) NOT NULL COMMENT '审批操作:0.不同意;1.已同意',                                     |
 |            |   PRIMARY KEY (`id`)                                                                                               |
 |            | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='申请单审核处理表'                      |
 +------------+--------------------------------------------------------------------------------------------------------------------+

@@ -17,12 +17,17 @@ public interface IApprovalService {
 	/**
 	 * 不管批准与否都要备份
 	 * 
-	 * @param tApproval
 	 * @param usrid
+	 * @param replyOpinion
+	 * @param decide           0:disagree<br>
+	 *                         1:agree
+	 * @param appId
+	 * @param departmentNumber
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	abstract Integer backupAdd(TApproval tApproval, Integer usrid) throws SelfServiceException;
+	abstract Integer backupAdd(Integer usrid, String replyOpinion, Integer decide, Integer appId,
+			Integer departmentNumber) throws SelfServiceException;
 
 	/**
 	 * 

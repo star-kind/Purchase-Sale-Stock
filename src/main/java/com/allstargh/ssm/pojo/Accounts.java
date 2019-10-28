@@ -92,7 +92,7 @@ public class Accounts {
 		this.phone = phone;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getRegTime() {
 		return regTime;
 	}
@@ -101,7 +101,7 @@ public class Accounts {
 		this.regTime = regTime;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getModifiedTime() {
 		return modifiedTime;
 	}

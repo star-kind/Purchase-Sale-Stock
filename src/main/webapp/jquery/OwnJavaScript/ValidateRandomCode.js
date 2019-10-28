@@ -119,7 +119,7 @@ function verifyValidateCode() {
           console.log('验证码正确')
           return true;
      }else{
-          alert('输入的验证码错误');
+          alert('输入的验证码有误');
           return false;
      }
 }   

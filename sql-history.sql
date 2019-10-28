@@ -291,3 +291,6 @@ ALTER TABLE purchase MODIFY `is_agree` int(1) NOT NULL COMMENT '是否已获批:
 ALTER TABLE accounts MODIFY `competence` int(1) NOT NULL COMMENT '岗位类型,0:技术管理,1:总经理,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员';
 
 ALTER TABLE accounts MODIFY `competence` int(1) NOT NULL COMMENT '岗位类型,0:技术管理,1:审查员,2:采购经理,3:销售经理,4:仓库管理,5:普通雇员';
+
+ALTER TABLE t_approval MODIFY `approve_operates` tinyint(1) NOT NULL COMMENT '审批操作:0.不同意;1.已同意';
+

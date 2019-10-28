@@ -79,8 +79,12 @@
 	<header>
 		<div class="header_div01">
 			<span class="header_span01"> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-				<a href="javascript:opens(1)">待审批申请队列</a> <a> 等待 </a> <a> 等待 </a> <a>
-					等待 </a> <a> 等待 </a>
+				<a href="javascript:opens(1)"> <b> 待审批申请队列 </b>
+			</a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
+				<a> 等待 </a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
+				<a> 等待 </a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
+				<a> 等待 </a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
+				<a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b></a>
 			</span>
 		</div>
 	</header>
@@ -91,7 +95,7 @@
 			style="display: none; text-align: center;" id="room1">
 			<jsp:include page="WaitingApproved.jsp"></jsp:include>
 		</div>
-		
+
 
 	</div>
 </body>

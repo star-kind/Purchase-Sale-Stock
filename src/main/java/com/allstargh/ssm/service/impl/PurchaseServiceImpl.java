@@ -115,7 +115,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		Accounts a = am.selectAccountByUsrid(usrid);
-		if (a.getCompetence() != 2 && a.getCompetence() != 4) {
+		Integer competence = a.getCompetence();
+		if (competence != 2 && competence != 4 && competence != 1) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
 		}
@@ -322,6 +323,23 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public Integer decidedPurchaseIsAgree(Integer usrid, Integer pid, Integer decide) throws SelfServiceException {
+		Integer affects = null;
+
+		boolean b = ics.checkForAccount(usrid, 1);
+
+		Integer[] pids = { pid };
+
+		if (decide == 0) {
+			affects = pm.updateMultipleRowByPids(pids, 2);
+		} else if (decide == 1) {
+			affects = pm.updateMultipleRowByPids(pids, 1);
+		}
+
+		return affects;
 	}
 
 }

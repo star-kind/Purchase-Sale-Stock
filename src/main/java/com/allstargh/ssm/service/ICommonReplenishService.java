@@ -24,7 +24,7 @@ public interface ICommonReplenishService {
 	abstract String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName);
 
 	/**
-	 * <b>overload</b>
+	 * <b>Overload,检查进入模块的资格</b>
 	 * 
 	 * @param usrid
 	 * @param competence
@@ -42,4 +42,14 @@ public interface ICommonReplenishService {
 	 * @throws SelfServiceException
 	 */
 	abstract boolean checkForAccount(Accounts account, Integer competence) throws SelfServiceException;
+
+	/**
+	 * <b>Overload,校验账号权限</b>
+	 * 
+	 * @param accountId
+	 * @param competence
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract boolean checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;
 }

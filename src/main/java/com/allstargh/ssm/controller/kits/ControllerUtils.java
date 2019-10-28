@@ -226,6 +226,8 @@ public class ControllerUtils {
 
 		try {
 			filePath = createDirectoryAndFile(fileName);
+			System.err.println("File path:" + filePath);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

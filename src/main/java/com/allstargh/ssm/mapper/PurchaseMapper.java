@@ -87,7 +87,7 @@ public interface PurchaseMapper {
 			@Param("operator") String operator);
 
 	/**
-	 * 据IDS多行更新 purchase.is_agree set 1
+	 * 据IDS多行更新 purchase.is_agree set ?
 	 * 
 	 * @param pids
 	 * @param isAgree

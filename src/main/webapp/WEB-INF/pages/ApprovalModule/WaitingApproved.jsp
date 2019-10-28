@@ -60,16 +60,16 @@
 <style type="text/css">
 .hor_minimalist_a {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 12px;
+	font-size: 22px;
 	background: #fff;
 	margin: 45px;
-	width: 480px;
+	width: 1480px;
 	border-collapse: collapse;
 	text-align: left;
 }
 
 .hor_minimalist_a th {
-	font-size: 14px;
+	font-size: 22px;
 	font-weight: normal;
 	color: #039;
 	padding: 10px 8px;
@@ -77,7 +77,7 @@
 }
 
 .hor_minimalist_a td {
-	color: #669;
+	color: #1313b8;
 	padding: 9px 8px 0px 8px;
 }
 
@@ -92,14 +92,15 @@
 		<table class="hor_minimalist_a">
 			<thead>
 				<tr>
-					<th scope="col"><input type="checkbox">序号</th>
+					<th scope="col"><input type="checkbox" id="head_check"
+						onclick="headInfluence()">多选</th>
 					<th scope="col">申请单类型</th>
 					<th scope="col">原部门</th>
 					<th scope="col">查看</th>
 				</tr>
 			</thead>
 
-			<tbody>
+			<tbody class="tbl_body_a">
 			</tbody>
 
 		</table>
@@ -108,4 +109,7 @@
 
 <script
 	src="${basePath}/MineJavaScript/ApprovalDepartment/WaitingApproved.js"></script>
+
+<script src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
+
 </html>

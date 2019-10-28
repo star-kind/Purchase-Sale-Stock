@@ -16,6 +16,17 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 审核员决定是否批准采购
+	 * 
+	 * @param usrid
+	 * @param pid
+	 * @param decide
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Integer decidedPurchaseIsAgree(Integer usrid, Integer pid, Integer decide) throws SelfServiceException;
+
+	/**
 	 * SearchPurchasesByCondition
 	 * 
 	 * @param condition

@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m  "commits"
+git commit -m date
 
 #github
 git pull github master

@@ -357,7 +357,10 @@ function permit(purchaseId) {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
-				layer.msg('该申请单成功进入仓库', function() {
+				layer.msg('该申请单成功进入仓库', {
+					offset : [ '50%' ],
+					time : 5000
+				}, function() {
 					$('#table_row_' + purchaseId).remove();
 					layer.closeAll();
 					exhibitLenAmount();
