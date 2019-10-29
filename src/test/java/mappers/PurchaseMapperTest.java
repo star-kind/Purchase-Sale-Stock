@@ -2,7 +2,9 @@ package mappers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +22,29 @@ public class PurchaseMapperTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
 	}
-	
+
+	@Test
+	public void countTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		Map<Integer, Integer> hashMap = pm.countPurchaseIdGroupByClassify();
+
+		for (Map.Entry<Integer, Integer> element : hashMap.entrySet()) {
+			System.err.println(element.getKey() + ", " + element.getValue());
+		}
+	}
+
+	@Test
+	public void selectTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> list = pm.selectByClassifyAndIsAgree(0, 1);
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+	}
+
 	@Test
 	public void selectConditionTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
@@ -40,7 +64,7 @@ public class PurchaseMapperTest {
 		for (Purchase purchase1 : list) {
 			System.err.println(purchase1.toString());
 		}
-		
+
 	}
 
 	@Test

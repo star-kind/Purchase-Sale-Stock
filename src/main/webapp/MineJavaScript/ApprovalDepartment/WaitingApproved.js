@@ -339,7 +339,7 @@ function agreeOrAgainst(deptNumber, id, decide) {
 
 				layer.msg('已成功处理该申请', {
 					offset : [ '50%' ],
-					time : 5000
+					time : 4000
 				}, function() {
 					$('#app_purchase_' + id).remove();
 					layer.closeAll();

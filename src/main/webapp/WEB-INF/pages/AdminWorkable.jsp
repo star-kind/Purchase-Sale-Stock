@@ -45,6 +45,9 @@
 			<li><a href="${basePath}/cross/toSubstacne" class="a_links">账号活动记录</a></li>
 
 			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回导航页</a></li>
+
+			<li><a href="/stocker-manager/login.jsp" class="a_links"> <b>
+						返回主页 </b></a></li>
 		</ul>
 	</div>
 

@@ -69,6 +69,8 @@ public class StockServiceImpl implements IStcokSevice {
 
 		stock.setEnterStockTime(new Date());
 
+		stock.setAgreeEnterStock(true);
+
 		int row = tsd.insert(stock);
 
 		return row;

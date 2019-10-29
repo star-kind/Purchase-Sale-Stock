@@ -4,7 +4,110 @@
 $(function() {
 	exhibitTableList();
 	exhibitCurrentUsrname();
+	appendDynamicContent();
 })
+
+/**
+ * 
+ * @returns
+ */
+function appendDynamicContent() {
+	var html = getDynamicContent();
+
+	var selector = $('body > div > div.content-wrapper > section.content > div > div.col-md-3 > div:nth-child(3) > div.box-body.no-padding > ul');
+
+	selector.append(html);
+}
+
+/**
+ * 
+ * @returns
+ */
+function getDynamicContent() {
+	var content = '<li class="active">';
+	content += '<a href="javascript:exhibitByClassify(0)">';
+	content += '<i class="fa fa-inbox"></i>电器 ';
+	content += '<span class="label label-primary pull-right classify_length">??</span></a>';
+	content += '</li>';
+
+	content += '<li class="active">';
+	content += '<a href="javascript:exhibitByClassify(1)">';
+	content += '<i class="fa fa-inbox"></i>食品 ';
+	content += '<span class="label label-primary pull-right classify_length">??</span></a>';
+	content += '</li>';
+
+	content += '<li class="active">';
+	content += '<a href="javascript:exhibitByClassify(2)">';
+	content += '<i class="fa fa-inbox"></i>服装';
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">';
+	content += '<a href="javascript:exhibitByClassify(3)">';
+	content += '<i class="fa fa-inbox"></i>日用品 ';
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(4)">'
+	content += '<i class="fa fa-inbox"></i>饮品 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(5)">'
+	content += '<i class="fa fa-inbox"></i>其它 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(6)">'
+	content += '<i class="fa fa-inbox"></i>玩具 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(7)">'
+	content += '<i class="fa fa-inbox"></i>家具 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(8)">'
+	content += '<i class="fa fa-inbox"></i>药品 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	content += '<li class="active">'
+	content += '<a href="javascript:exhibitByClassify(-1)">'
+	content += '<i class="fa fa-inbox"></i>恢复全部展示 '
+	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+
+	return content;
+}
+
+/**
+ * 
+ * @param classify
+ * @returns
+ */
+function exhibitByClassify(classify) {
+	var uri = "/stocker-manager/PurchaseController/exhibitsListByClassifyAndIsAgreeHandler";
+
+	$.ajax({
+		url : uri,
+		data : {
+			'classify' : classify
+		},
+		type : 'POST',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				var list = rr.data;
+
+				$('#tag0 tbody').empty();
+
+				executes(list);// 执行赋予表格内容
+
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
 
 /**
  * 
@@ -31,7 +134,7 @@ function exhibitCurrentUsrname() {
 					layer.alert("您尚未登录")
 				}
 			} else {
-				layer.alert("抱歉,服务器检修中,给您带来不便非常抱歉")
+				layer.alert("抱歉,服务器检修中,给您带来不便非常抱歉");
 			}
 		}
 	})
@@ -393,7 +496,7 @@ function reject(purchaseId) {
 				location.href = '/stocker-manager/StockController/'
 						+ purchaseId + '/gotoStockerPagesRejectReply';
 			} else {
-				layer.alert('msg:' + rr.message);
+				layer.alert('Tips:' + rr.message);
 			}
 		}
 	})

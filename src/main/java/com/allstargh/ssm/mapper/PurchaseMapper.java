@@ -1,6 +1,8 @@
 package com.allstargh.ssm.mapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -15,12 +17,30 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 统计每个商品分类所属的数量 TODO
+	 * 
+	 * @return
+	 */
+	abstract Map<Integer, Integer> countPurchaseIdGroupByClassify();
+
+	/**
+	 * selectByClassifyAndIsAgree
+	 * 
+	 * @param classify
+	 * @param isAgree
+	 * @return
+	 */
+	abstract List<Purchase> selectByClassifyAndIsAgree(@Param("classify") Integer classify,
+			@Param("isAgree") Integer isAgree);
+
+	/**
 	 * 
 	 * @param operator
 	 * @param IsAgree
 	 * @return
 	 */
-	abstract List<Purchase> selectByIsAgreeAndOperator(@Param("operator") String operator, @Param("isAgree") Integer IsAgree);
+	abstract List<Purchase> selectByIsAgreeAndOperator(@Param("operator") String operator,
+			@Param("isAgree") Integer IsAgree);
 
 	/**
 	 * 

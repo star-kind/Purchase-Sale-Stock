@@ -329,7 +329,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Integer decidedPurchaseIsAgree(Integer usrid, Integer pid, Integer decide) throws SelfServiceException {
 		Integer affects = null;
 
-		boolean b = ics.checkForAccount(usrid, 1);
+		Accounts account = ics.checkForAccount(usrid, 1);
 
 		Integer[] pids = { pid };
 
@@ -340,6 +340,16 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 
 		return affects;
+	}
+
+	@Override
+	public List<Purchase> exhibitsListByClassifyAndIsAgree(Integer usrid, Integer classify, Integer isAgree)
+			throws SelfServiceException {
+		Accounts account = ics.checkForAccount(usrid, 4);
+
+		List<Purchase> list = pm.selectByClassifyAndIsAgree(classify, isAgree);
+
+		return list;
 	}
 
 }

@@ -78,7 +78,7 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	}
 
 	@Override
-	public boolean checkForAccount(Integer accountId, Integer competence) throws SelfServiceException {
+	public Accounts checkForAccount(Integer accountId, Integer competence) throws SelfServiceException {
 		Accounts account = am.selectAccountByUsrid(accountId);
 
 		if (account == null) {
@@ -95,7 +95,7 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 
 		}
 
-		return true;
+		return account;
 	}
 
 }

@@ -16,6 +16,18 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IPurchaseService {
 	/**
+	 * 在已批准的采购货物中按分类展示
+	 * 
+	 * @param usrid
+	 * @param classify
+	 * @param isAgree
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract List<Purchase> exhibitsListByClassifyAndIsAgree(Integer usrid, Integer classify, Integer isAgree)
+			throws SelfServiceException;
+
+	/**
 	 * 审核员决定是否批准采购
 	 * 
 	 * @param usrid

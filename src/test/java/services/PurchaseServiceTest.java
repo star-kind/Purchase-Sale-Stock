@@ -27,6 +27,23 @@ public class PurchaseServiceTest {
 	}
 
 	@Test
+	public void exhibitionTest() {
+		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
+
+		try {
+			List<Purchase> list = ips.exhibitsListByClassifyAndIsAgree(55, 2, 1);
+
+			for (Purchase purchase : list) {
+				System.err.println(purchase.toString());
+			}
+
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
 	public void sevenSelectTest() {
 		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
 

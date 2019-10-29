@@ -317,7 +317,7 @@ function appendToTableBody(list) {
 
 		$('#table_body').append(tr);
 
-		if (list[i].isAgree == 0) {// 如若未获批,字体异色
+		if (list[i].isAgree != 1) {// 如若未获批,字体异色
 			$('#pid_' + list[i].purchaseId).css('color', '#eb3871');
 		}
 
@@ -410,8 +410,10 @@ function generatePurchaseContent(p) {
 	/* 是否获批 */
 	if (p.isAgree == 0) {
 		p.isAgree = '未获批'
-	} else {
+	} else if (p.isAgree == 1) {
 		p.isAgree = '已获批'
+	} else {
+		p.isAgree = '被驳回'
 	}
 
 	/* 支付方式 */
@@ -474,7 +476,7 @@ function generatePurchaseContent(p) {
 	}
 
 	var formHtml = '<div style="text-align:center;font-size:26px;margin-left:0%;">';
-	formHtml += '<form>';
+	formHtml += '<form class="form-tag">';
 
 	formHtml += '<p>采购申请单单号';
 	formHtml += '<br><input type="text" readonly="readonly"  value=" '
@@ -672,11 +674,11 @@ function geneateEditFormContent(profile) {
 	formContent += '<option value="3">日用品</option>';
 	formContent += '<option value="4">饮品</option>';
 	formContent += '<option value="5">其它</option>';
-	
+
 	formContent += '<option value="6">玩具</option>';
 	formContent += '<option value="7">家具</option>';
 	formContent += '<option value="8">药品</option>';
-	
+
 	formContent += '</select>';
 	formContent += '</p>';
 

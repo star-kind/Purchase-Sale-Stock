@@ -51,5 +51,6 @@ public interface ICommonReplenishService {
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	abstract boolean checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;
+	abstract Accounts checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;
+
 }

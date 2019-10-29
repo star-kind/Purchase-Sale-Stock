@@ -1,6 +1,7 @@
 package com.allstargh.ssm.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,35 @@ public class PurchaseController extends ControllerUtils {
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
 
 	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/exhibitsListByClassifyAndIsAgreeHandler?classify=0
+	 * 
+	 * @param session
+	 * @param classify
+	 * @param isAgree
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitsListByClassifyAndIsAgreeHandler", method = RequestMethod.POST)
+	public ResponseResult<List<Purchase>> exhibitsListByClassifyAndIsAgreeHandler(HttpSession session,
+			@RequestParam("classify") Integer classify,
+			@RequestParam(value = "isAgree", defaultValue = "1") Integer isAgree) {
+		System.err.println("classify: " + classify + ",is agree: " + isAgree);
+
+		Integer uid = getUsridFromSession(session);
+
+		List<Purchase> arrayList = new ArrayList<Purchase>();
+
+		if (classify == -1) {
+			arrayList = ips.getPrepareEnterQueue(1, uid, 1);
+		} else {
+			arrayList = ips.exhibitsListByClassifyAndIsAgree(uid, classify, isAgree);
+		}
+
+		return new ResponseResult<List<Purchase>>(SUCCESS, arrayList);
+	}
+
+	/**
+	 * 
 	 * 
 	 * @param session
 	 * @param condition

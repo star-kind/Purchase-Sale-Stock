@@ -84,6 +84,16 @@
 .hor_minimalist_a tbody tr:hover td {
 	color: #009;
 }
+
+/*奇数行*/
+.tbl_body_a tr:nth-of-type(odd) {
+	background: #bfe6c2;
+}
+
+/*偶数行*/
+.tbl_body_a tr:nth-of-type(even) {
+	background: #95ecf1;
+}
 </style>
 
 </head>

@@ -33,9 +33,6 @@
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/plugins/iCheck/flat/blue.css">
 
-<!-- Google Font -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -393,7 +390,7 @@
 						<a href="compose.html"
 							class="btn btn-primary btn-block margin-bottom">Compose</a>
 
-						<div class="box box-solid">
+						<div class="box box-solid" style="display: none;">
 							<div class="box-header with-border">
 								<h3 class="box-title">Folders</h3>
 
@@ -419,8 +416,77 @@
 							</div>
 							<!-- /.box-body -->
 						</div>
-						<!-- /. box -->
+
+						<!-- 按商品分类classify查询 -->
 						<div class="box box-solid">
+							<div class="box-header with-border">
+								<h3 class="box-title">按分类查看</h3>
+
+								<div class="box-tools">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"> <b>+</b>
+										</i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body no-padding">
+								<ul class="nav nav-pills nav-stacked">
+								
+									<!-- <li class="active"><a
+										href="javascript:exhibitByClassify(0)"><i
+											class="fa fa-inbox"></i>电器 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(1)"><i
+											class="fa fa-inbox"></i>食品 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(2)"><i
+											class="fa fa-inbox"></i>服装 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(3)"><i
+											class="fa fa-inbox"></i>日用品 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(4)"><i
+											class="fa fa-inbox"></i>饮品 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(5)"><i
+											class="fa fa-inbox"></i>其它 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(6)"><i
+											class="fa fa-inbox"></i>玩具 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(7)"><i
+											class="fa fa-inbox"></i>家具 <span
+											class="label label-primary pull-right classify_length">??</span></a></li>
+
+									<li class="active"><a
+										href="javascript:exhibitByClassify(8)"><i
+											class="fa fa-inbox"></i>药品 <span
+											class="label label-primary pull-right classify_length">??</span></a></li> -->
+
+								</ul>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!--  -->
+
+						<!-- /. box -->
+						<div class="box box-solid" style="display: none;">
 							<div class="box-header with-border">
 								<h3 class="box-title">Labels</h3>
 
@@ -445,6 +511,8 @@
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->
+
+
 					</div>
 					<!-- /.col -->
 					<div class="col-md-9">
@@ -455,8 +523,8 @@
 								<div class="box-tools pull-right">
 									<div class="has-feedback">
 										<input type="text" class="form-control input-sm"
-											placeholder="Search Mail"> <span
-											class="glyphicon glyphicon-search form-control-feedback"></span>
+											placeholder="回车按名称(部分或全部)搜索">
+										<!-- <span class="glyphicon glyphicon-search form-control-feedback"></span> -->
 									</div>
 								</div>
 								<!-- /.box-tools -->
@@ -817,6 +885,7 @@
 	<script src="${basePath}/AdminLTE/dist/js/demo.js"></script>
 </body>
 
+<!-- import -->
 <!-- layui javascript -->
 <script src="${basePath}/CssFrame/layui/layui.js"></script>
 <script src="${basePath}/CssFrame/layui/layui.all.js"></script>
@@ -834,5 +903,5 @@
 
 <script type="text/javascript"
 	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
-
+	
 </html>

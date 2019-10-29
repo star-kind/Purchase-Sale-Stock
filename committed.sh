@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m date
+git commit -m "stock module"
 
 #github
 git pull github master

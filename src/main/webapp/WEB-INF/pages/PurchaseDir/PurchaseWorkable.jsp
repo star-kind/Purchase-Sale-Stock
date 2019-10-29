@@ -44,7 +44,10 @@
 				class="a_links">采买活动记录</a></li>
 
 			<li><a href="/stocker-manager/cross/toTransfer" class="a_links">返回导航页</a></li>
-			
+
+			<li><a href="/stocker-manager/login.jsp" class="a_links"> <b>
+						返回首页 </b></a></li>
+
 		</ul>
 	</div>
 
@@ -55,7 +58,7 @@
 	<div class="detail_zone div_module" style="display: none;" id="room2">
 		<jsp:include page="ExhibitionPrivatePurchase.jsp"></jsp:include>
 	</div>
-	
+
 	<div class="detail_zone div_module" style="display: none;" id="room3">
 		<jsp:include page="SearchPurchasesByCondition.jsp"></jsp:include>
 	</div>

@@ -53,11 +53,13 @@ public class ApprovalControllerUtil extends ControllerUtils {
 	public boolean isVaildInstance() {
 		if (this != PLACEHOLDER) {
 			System.err.println("占位符/默认值不能执行");
-		}else {
-			System.err.println("占位符/默认值能够执行");
+			return false;
+			
 		}
-
-		return this != PLACEHOLDER;
+		
+		System.err.println("占位符/默认值能够执行");
+		return true;
+		
 	}
 
 	/**

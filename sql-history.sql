@@ -294,3 +294,34 @@ ALTER TABLE accounts MODIFY `competence` int(1) NOT NULL COMMENT '岗位类型,0
 
 ALTER TABLE t_approval MODIFY `approve_operates` tinyint(1) NOT NULL COMMENT '审批操作:0.不同意;1.已同意';
 
+-- ..............
+
+select classify,
+
+count(purchase_id) as 数量
+
+from purchase
+
+group by classify order by classify asc;
+
+
++----------+------+
+| classify | 数量 |
++----------+------+
+| 0        | 8    |
+| 1        | 9    |
+| 2        | 3    |
+| 3        | 8    |
+| 4        | 7    |
+| 5        | 6    |
+| 6        | 5    |
+| 7        | 4    |
+| 8        | 2    |
++----------+------+
+
+
+-- ..............
+
+
+
+
