@@ -12,6 +12,12 @@ import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 
+/**
+ * 仓储模块控制器工具类
+ * 
+ * @author admin
+ *
+ */
 public class StockServiceUtil {
 	private static StockServiceUtil ssu;
 

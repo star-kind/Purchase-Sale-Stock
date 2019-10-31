@@ -2,6 +2,7 @@ package com.allstargh.ssm.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 
@@ -15,6 +16,14 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IPurchaseService {
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Map<Integer, Integer> getNumsByClassify(Integer uid) throws SelfServiceException;
+
 	/**
 	 * 在已批准的采购货物中按分类展示
 	 * 

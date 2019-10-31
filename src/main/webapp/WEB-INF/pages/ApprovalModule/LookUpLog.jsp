@@ -55,58 +55,39 @@
 	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css"></link>
 
 <meta charset="UTF-8">
-<title>审核部</title>
+<title>审核部记录</title>
 
 <style type="text/css">
-.header_div01 {
-	border-bottom: 3px solid #1d7c70;
-	padding: 40px 20px 20px 20px;
+.address_previous {
+	margin-top: 4rem;
+	border-bottom: 2px solid #b84848;
 }
 
-.header_span01 {
-	font-size: x-large;
-	margin: 4rem 0 0 4rem;
+body>main>div {
+	font-size: 22px;
+	margin-top: 1rem;
 }
 
-.header_span01>a {
-	margin: 20px;
-	text-decoration: underline;
+body>main>div>p {
+	margin: 12px;
 }
 </style>
 
 </head>
 <body>
-	<header>
-		<div class="header_div01">
-			<span class="header_span01"> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-				<a href="javascript:opens(1)"> <b> 待审批申请队列 </b>
-			</a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-				<a> 等待 </a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-				<a> 等待 </a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-
-				<a
-				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
-					<b>查看记录</b>
-			</a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-
-				<a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
-			</a> <!-- 00000000000000000000000000000000000000000000000000000000000 -->
-				<a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>
-			</a>
-			</span>
-		</div>
+	<header style="text-align: center;">
+		<h2 class="address_previous">
+			<a
+				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1">返回审核部主页</a>
+		</h2>
 	</header>
-
-	<div>
-		<!-- 待批队列 -->
-		<div class="detail_zone div_module"
-			style="display: none; text-align: center;" id="room1">
-			<jsp:include page="WaitingApproved.jsp"></jsp:include>
-		</div>
-
-
-	</div>
+	<main>
+		<div></div>
+	</main>
 </body>
 
+<script type="text/javascript"
+	src="${basePath}/MineJavaScript/ApprovalDepartment/LookUpLog.js">
+	
+</script>
 </html>
-

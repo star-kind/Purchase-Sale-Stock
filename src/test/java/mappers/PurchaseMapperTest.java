@@ -27,9 +27,9 @@ public class PurchaseMapperTest {
 	public void countTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 
-		Map<Integer, Integer> hashMap = pm.countPurchaseIdGroupByClassify();
+		Map<Integer, Integer> map = pm.countPurchaseIdGroupByClassify();
 
-		for (Map.Entry<Integer, Integer> element : hashMap.entrySet()) {
+		for (Map.Entry<Integer, Integer> element : map.entrySet()) {
 			System.err.println(element.getKey() + ", " + element.getValue());
 		}
 	}

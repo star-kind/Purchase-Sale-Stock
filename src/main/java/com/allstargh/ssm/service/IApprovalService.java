@@ -3,6 +3,7 @@
  */
 package com.allstargh.ssm.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -14,6 +15,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IApprovalService {
+	/**
+	 * 读取记录
+	 * 
+	 * @param usrid 用户ID
+	 * @return
+	 * @throws IOException
+	 */
+	abstract String[] readOutputSubstanceLog(Integer usrid) throws IOException, SelfServiceException;
+
 	/**
 	 * 不管批准与否都要备份
 	 * 

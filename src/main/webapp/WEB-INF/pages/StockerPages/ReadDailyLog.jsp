@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>排队入库队列</title>
+<title>AdminLTE 2 | Read Record Log</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -32,7 +32,16 @@
 <!-- iCheck -->
 <link rel="stylesheet"
 	href="${basePath}/AdminLTE/plugins/iCheck/flat/blue.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
+<!-- Google Font -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -41,7 +50,7 @@
 			<!-- Logo -->
 			<a href="/stocker-manager/cross/toTransfer" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>返回</b>中转页</span>
+				<span class="logo-lg"><b>返回</b>导航页</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -133,7 +142,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="${basePath}/AdminLTE/dist/img/user2-160x160.jpg"
 								class="user-image" alt="User Image"> <span
-								class="hidden-xs current_username"></span>
+								class="hidden-xs">Alexander Pierce</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -187,7 +196,7 @@
 							class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p class="current_username"></p>
+						<p>Alexander Pierce</p>
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
 				</div>
@@ -209,8 +218,8 @@
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span> <span
-							class="pull-right-container"> <i class="pull-right">+</i>
-								<!-- <i class="fa fa-angle-left pull-right"></i> -->
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
@@ -225,128 +234,144 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Top
-									Navigation</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
-							<li><a href=""><i class="fa fa-circle-o"></i> Collapsed
-									Sidebar</a></li>
+							<li><a href="../layout/top-nav.html"><i
+									class="fa fa-circle-o"></i> Top Navigation</a></li>
+							<li><a href="../layout/boxed.html"><i
+									class="fa fa-circle-o"></i> Boxed</a></li>
+							<li><a href="../layout/fixed.html"><i
+									class="fa fa-circle-o"></i> Fixed</a></li>
+							<li><a href="../layout/collapsed-sidebar.html"><i
+									class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
 						</ul></li>
-					<li><a href="#"> <i class="fa fa-th"></i> <span>Widgets</span>
+					<li><a href="../widgets.html"> <i class="fa fa-th"></i> <span>Widgets</span>
 							<span class="pull-right-container"> <small
 								class="label pull-right bg-green">new</small>
 						</span>
 					</a></li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-pie-chart"></i> <span>Charts</span> <span
-							class="pull-right-container"> <i class="pull-right">+</i>
-								<!-- <i class="fa fa-angle-left pull-right"></i> -->
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Inline
-									charts</a></li>
+							<li><a href="../charts/chartjs.html"><i
+									class="fa fa-circle-o"></i> ChartJS</a></li>
+							<li><a href="../charts/morris.html"><i
+									class="fa fa-circle-o"></i> Morris</a></li>
+							<li><a href="../charts/flot.html"><i
+									class="fa fa-circle-o"></i> Flot</a></li>
+							<li><a href="../charts/inline.html"><i
+									class="fa fa-circle-o"></i> Inline charts</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 							<span>UI Elements</span> <span class="pull-right-container">
-								<i class="pull-right">+</i> <!-- <i class="fa fa-angle-left pull-right"></i> -->
+								<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Icons</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
+							<li><a href="../UI/general.html"><i
+									class="fa fa-circle-o"></i> General</a></li>
+							<li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i>
+									Icons</a></li>
+							<li><a href="../UI/buttons.html"><i
+									class="fa fa-circle-o"></i> Buttons</a></li>
+							<li><a href="../UI/sliders.html"><i
+									class="fa fa-circle-o"></i> Sliders</a></li>
+							<li><a href="../UI/timeline.html"><i
+									class="fa fa-circle-o"></i> Timeline</a></li>
+							<li><a href="../UI/modals.html"><i
+									class="fa fa-circle-o"></i> Modals</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
 							<span>Forms</span> <span class="pull-right-container"> <i
-								class="pull-right">+</i> <!-- <i
-								class="fa fa-angle-left pull-right"></i> -->
+								class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> General
-									Elements</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Advanced
-									Elements</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
+							<li><a href="../forms/general.html"><i
+									class="fa fa-circle-o"></i> General Elements</a></li>
+							<li><a href="../forms/advanced.html"><i
+									class="fa fa-circle-o"></i> Advanced Elements</a></li>
+							<li><a href="../forms/editors.html"><i
+									class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
 							<span>仓库表格</span> <span class="pull-right-container"> <i
-								class="pull-right">+</i> <!-- <i
-								class="fa fa-angle-left pull-right"></i> -->
+								class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"> <i class="fa fa-circle-o"></i> 提货申请队列
-							</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> 提货申请队列</a></li>
 							<li><a href="/stocker-manager/StockController/DataTables"><i
 									class="fa fa-circle-o"></i> 全部仓储物资</a></li>
 						</ul></li>
-					<li><a href="#"> <i class="fa fa-calendar"></i> <span>Calendar</span>
-							<span class="pull-right-container"> <small
-								class="label pull-right bg-red">3</small> <small
+					<li><a href="../calendar.html"> <i class="fa fa-calendar"></i>
+							<span>Calendar</span> <span class="pull-right-container">
+								<small class="label pull-right bg-red">3</small> <small
 								class="label pull-right bg-blue">17</small>
 						</span>
 					</a></li>
-					<li class="treeview active"><a href="#"> <i
-							class="fa fa-envelope"></i> <span>入库申请队列</span> <!-- ------------------------------------------------------------------------ -->
-							<span class="pull-right-container"> <i class="pull-right">+</i>
-								<!-- <i class="fa fa-angle-left pull-right"></i> -->
+					<li class="treeview active"><a href="#">入库申请队列 <i
+							class="fa fa-envelope"></i> <span>Mailbox</span> <span
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li class="active"><a href="#">待入库采购批次 <span
-									class="pull-right-container"> <span
-										class="label label-primary pull-right len_amount"></span>
+							<li><a
+								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/SubQueue&competence=4">
+									申请入库之采购批次 <span class="pull-right-container"> <span
+										class="label label-primary pull-right">13</span>
 								</span>
 							</a></li>
 							<li><a href="#">Compose</a></li>
-							<li><a
-								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/ReadDailyLog&competence=4">查看记录日志</a></li>
+							<li class="active"><a href="read-mail.html">查看日志记录</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
 							<span>Examples</span> <span class="pull-right-container">
-								<i class="pull-right">+</i> <!-- <i class="fa fa-angle-left pull-right"></i> -->
+								<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Invoice</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Profile</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Login</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Register</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i>
-									Lockscreen</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Blank
-									Page</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+							<li><a href="../examples/invoice.html"><i
+									class="fa fa-circle-o"></i> Invoice</a></li>
+							<li><a href="../examples/profile.html"><i
+									class="fa fa-circle-o"></i> Profile</a></li>
+							<li><a href="../examples/login.html"><i
+									class="fa fa-circle-o"></i> Login</a></li>
+							<li><a href="../examples/register.html"><i
+									class="fa fa-circle-o"></i> Register</a></li>
+							<li><a href="../examples/lockscreen.html"><i
+									class="fa fa-circle-o"></i> Lockscreen</a></li>
+							<li><a href="../examples/404.html"><i
+									class="fa fa-circle-o"></i> 404 Error</a></li>
+							<li><a href="../examples/500.html"><i
+									class="fa fa-circle-o"></i> 500 Error</a></li>
+							<li><a href="../examples/blank.html"><i
+									class="fa fa-circle-o"></i> Blank Page</a></li>
+							<li><a href="../examples/pace.html"><i
+									class="fa fa-circle-o"></i> Pace Page</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 							<span>Multilevel</span> <span class="pull-right-container">
-								<i class="pull-right">+</i> <!-- <i class="fa fa-angle-left pull-right"></i> -->
+								<i class="fa fa-angle-left pull-right"></i>
 						</span>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 							<li class="treeview"><a href="#"><i
 									class="fa fa-circle-o"></i> Level One <span
-									class="pull-right-container"> <i class="pull-right">+</i>
-										<!-- <i class="fa fa-angle-left pull-right"></i> -->
+									class="pull-right-container"> <i
+										class="fa fa-angle-left pull-right"></i>
 								</span> </a>
 								<ul class="treeview-menu">
 									<li><a href="#"><i class="fa fa-circle-o"></i> Level
 											Two</a></li>
 									<li class="treeview"><a href="#"><i
 											class="fa fa-circle-o"></i> Level Two <span
-											class="pull-right-container"> <i class="pull-right">+</i>
-												<!-- <i class="fa fa-angle-left pull-right"></i> -->
+											class="pull-right-container"> <i
+												class="fa fa-angle-left pull-right"></i>
 										</span> </a>
 										<ul class="treeview-menu">
 											<li><a href="#"><i class="fa fa-circle-o"></i> Level
@@ -373,14 +398,11 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>
-					待处理 <small> <small class="len_amount"></small> new messages
-					</small>
-				</h1>
+				<h1>Read Log</h1>
 				<ol class="breadcrumb">
 					<li><a href="/stocker-manager/login.jsp"><i
 							class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">队列</li>
+					<li class="active">日志记录</li>
 				</ol>
 			</section>
 
@@ -388,26 +410,21 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-3">
-						<a href="#"
-							class="btn btn-primary btn-block margin-bottom">Compose</a>
-
-						<div class="box box-solid" style="display: none;">
+						<a href="#" class="btn btn-primary btn-block margin-bottom">Compose</a>
+						<div class="box box-solid">
 							<div class="box-header with-border">
 								<h3 class="box-title">Folders</h3>
-
 								<div class="box-tools">
 									<button type="button" class="btn btn-box-tool"
 										data-widget="collapse">
-										+
-										<!-- <i class="fa fa-minus"></i> -->
+										<i class="fa fa-minus"></i>
 									</button>
 								</div>
 							</div>
 							<div class="box-body no-padding">
 								<ul class="nav nav-pills nav-stacked">
-									<li class="active"><a href="#"><i class="fa fa-inbox"></i>
-											待入库采购批次 <span
-											class="label label-primary pull-right len_amount"></span></a></li>
+									<li><a href="mailbox.html"><i class="fa fa-inbox"></i>
+											Inbox <span class="label label-primary pull-right">12</span></a></li>
 									<li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
 									<li><a href="#"><i class="fa fa-file-text-o"></i>
 											Drafts</a></li>
@@ -418,41 +435,15 @@
 							</div>
 							<!-- /.box-body -->
 						</div>
-
-						<!-- 按商品分类classify查询 -->
-						<div class="box box-solid">
-							<div class="box-header with-border">
-								<h3 class="box-title">按分类查看</h3>
-
-								<div class="box-tools">
-									<button type="button" class="btn btn-box-tool"
-										data-widget="collapse">
-										<i class="fa fa-minus"> <b>+</b>
-										</i>
-									</button>
-								</div>
-							</div>
-							<div class="box-body no-padding">
-
-								<ul class="nav nav-pills nav-stacked">
-
-								</ul>
-
-							</div>
-							<!-- /.box-body -->
-						</div>
-						<!--  -->
-
 						<!-- /. box -->
-						<div class="box box-solid" style="display: none;">
+						<div class="box box-solid">
 							<div class="box-header with-border">
 								<h3 class="box-title">Labels</h3>
 
 								<div class="box-tools">
 									<button type="button" class="btn btn-box-tool"
 										data-widget="collapse">
-										+
-										<!-- <i class="fa fa-minus"></i> -->
+										<i class="fa fa-minus"></i>
 									</button>
 								</div>
 							</div>
@@ -469,113 +460,217 @@
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->
-
-
 					</div>
 					<!-- /.col -->
 					<div class="col-md-9">
 						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">待入库采购批次</h3>
+								<h3 class="box-title">Read Daily Log</h3>
 
 								<div class="box-tools pull-right">
-									<div class="has-feedback">
-										<input type="text" class="form-control input-sm"
-											placeholder="回车按名称(部分或全部)搜索">
-										<!-- <span class="glyphicon glyphicon-search form-control-feedback"></span> -->
-									</div>
+									<a href="#" class="btn btn-box-tool" data-toggle="tooltip"
+										title="Previous"><i class="fa fa-chevron-left"></i></a> <a
+										href="#" class="btn btn-box-tool" data-toggle="tooltip"
+										title="Next"><i class="fa fa-chevron-right"></i></a>
 								</div>
-								<!-- /.box-tools -->
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
-								<div class="mailbox-controls">
-									<!-- Check all button -->
-									<button type="button"
-										class="btn btn-default btn-sm checkbox-toggle">
-										√
-										<!-- <i class="fa fa-square-o"></i> -->
-									</button>
-									<div class="btn-group">
-										<button type="button" class="btn btn-default btn-sm">
-											X
-											<!-- <i class="fa fa-trash-o"></i> -->
-										</button>
-										<button type="button" class="btn btn-default btn-sm">
-											<i class="fa fa-reply"></i>
-										</button>
-										<button type="button" class="btn btn-default btn-sm">
-											<i class="fa fa-share"></i>
-										</button>
-									</div>
-									<!-- /.btn-group -->
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-refresh"></i>
-									</button>
-									<div class="pull-right">
-										1-50/200
-										<div class="btn-group">
-											<button type="button" class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-left"></i>
-											</button>
-											<button type="button" class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-right"></i>
-											</button>
-										</div>
-										<!-- /.btn-group -->
-									</div>
-									<!-- /.pull-right -->
-								</div>
-								<div class="table-responsive mailbox-messages">
-									<table class="table table-hover table-striped" id="tag0">
-										<tbody>
 
-										</tbody>
-									</table>
-									<!-- /.table -->
+							<!-- æ¿æ¢ -->
+							<div class="box-body no-padding" style="display: none;">
+								<div class="mailbox-read-info">
+									<h3>Message Subject Is Placed Here</h3>
+									<h5>
+										From: help@example.com <span
+											class="mailbox-read-time pull-right">15 Feb. 2016
+											11:03 PM</span>
+									</h5>
 								</div>
-								<!-- /.mail-box-messages -->
-							</div>
-							<!-- /.box-body -->
-							<div class="box-footer no-padding">
-								<div class="mailbox-controls">
-									<!-- Check all button -->
-									<button type="button"
-										class="btn btn-default btn-sm checkbox-toggle">
-										√
-										<!-- <i class="fa fa-square-o"></i> -->
-									</button>
+								<!-- /.mailbox-read-info -->
+								<div class="mailbox-controls with-border text-center">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default btn-sm">
-											X
-											<!-- <i class="fa fa-trash-o"></i> -->
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Delete">
+											<i class="fa fa-trash-o"></i>
 										</button>
-										<button type="button" class="btn btn-default btn-sm">
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Reply">
 											<i class="fa fa-reply"></i>
 										</button>
-										<button type="button" class="btn btn-default btn-sm">
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Forward">
 											<i class="fa fa-share"></i>
 										</button>
 									</div>
 									<!-- /.btn-group -->
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-refresh"></i>
+									<button type="button" class="btn btn-default btn-sm"
+										data-toggle="tooltip" title="Print">
+										<i class="fa fa-print"></i>
 									</button>
-									<div class="pull-right">
-										1-50/200
-										<div class="btn-group">
-											<button type="button" class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-left"></i>
-											</button>
-											<button type="button" class="btn btn-default btn-sm">
-												<i class="fa fa-chevron-right"></i>
-											</button>
-										</div>
-										<!-- /.btn-group -->
-									</div>
-									<!-- /.pull-right -->
 								</div>
+								<!-- /.mailbox-controls -->
+								<div class="mailbox-read-message">
+									<p>Hello John,</p>
+
+									<p>Keffiyeh blog actually fashion axe vegan, irony
+										biodiesel. Cold-pressed hoodie chillwave put a bird on it
+										aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher
+										vegan scenester mlkshk. Ethical master cleanse Bushwick,
+										occupy Thundercats banjo cliche ennui farm-to-table mlkshk
+										fanny pack gluten-free. Marfa butcher vegan quinoa, bicycle
+										rights disrupt tofu scenester chillwave 3 wolf moon
+										asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe,
+										Godard disrupt migas church-key tofu blog locavore.
+										Thundercats cronut polaroid Neutra tousled, meh food truck
+										selfies narwhal American Apparel.</p>
+
+									<p>Raw denim McSweeney's bicycle rights, iPhone trust fund
+										quinoa Neutra VHS kale chips vegan PBR&amp;B literally
+										Thundercats +1. Forage tilde four dollar toast, banjo health
+										goth paleo butcher. Four dollar toast Brooklyn pour-over
+										American Apparel sustainable, lumbersexual listicle
+										gluten-free health goth umami hoodie. Synth Echo Park bicycle
+										rights DIY farm-to-table, retro kogi sriracha dreamcatcher
+										PBR&amp;B flannel hashtag irony Wes Anderson. Lumbersexual
+										Williamsburg Helvetica next level. Cold-pressed slow-carb
+										pop-up normcore Thundercats Portland, cardigan literally
+										meditation lumbersexual crucifix. Wayfarers raw denim paleo
+										Bushwick, keytar Helvetica scenester keffiyeh 8-bit irony
+										mumblecore whatever viral Truffaut.</p>
+
+									<p>Post-ironic shabby chic VHS, Marfa keytar flannel lomo
+										try-hard keffiyeh cray. Actually fap fanny pack yr artisan
+										trust fund. High Life dreamcatcher church-key gentrify. Tumblr
+										stumptown four dollar toast vinyl, cold-pressed try-hard blog
+										authentic keffiyeh Helvetica lo-fi tilde Intelligentsia. Lomo
+										locavore salvia bespoke, twee fixie paleo cliche brunch
+										Schlitz blog McSweeney's messenger bag swag slow-carb. Odd
+										Future photo booth pork belly, you probably haven't heard of
+										them actually tofu ennui keffiyeh lo-fi Truffaut health goth.
+										Narwhal sustainable retro disrupt.</p>
+
+									<p>Skateboard artisan letterpress before they sold out High
+										Life messenger bag. Bitters chambray leggings listicle,
+										drinking vinegar chillwave synth. Fanny pack hoodie American
+										Apparel twee. American Apparel PBR listicle, salvia aesthetic
+										occupy sustainable Neutra kogi. Organic synth Tumblr viral
+										plaid, shabby chic single-origin coffee Etsy 3 wolf moon
+										slow-carb Schlitz roof party tousled squid vinyl. Readymade
+										next level literally trust fund. Distillery master cleanse
+										migas, Vice sriracha flannel chambray chia cronut.</p>
+
+									<p>
+										Thanks,<br>Jane
+									</p>
+								</div>
+								<!-- /.mailbox-read-message -->
 							</div>
+
+							<div class="box-body no-padding">
+								<div class="mailbox-read-info">
+									<!-- <h3>Message Subject Is Placed Here</h3> -->
+									<!-- <h5>
+										From: help@example.com <span
+											class="mailbox-read-time pull-right">15 Feb. 2016
+											11:03 PM</span>
+									</h5> -->
+								</div>
+								<!-- /.mailbox-read-info -->
+								<div class="mailbox-controls with-border text-center">
+									<div class="btn-group">
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Delete">
+											<i class="fa fa-trash-o"></i>
+										</button>
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Reply">
+											<i class="fa fa-reply"></i>
+										</button>
+										<button type="button" class="btn btn-default btn-sm"
+											data-toggle="tooltip" data-container="body" title="Forward">
+											<i class="fa fa-share"></i>
+										</button>
+									</div>
+									<!-- /.btn-group -->
+									<button type="button" class="btn btn-default btn-sm"
+										data-toggle="tooltip" title="Print">
+										<i class="fa fa-print"></i>
+									</button>
+								</div>
+								<!-- /.mailbox-controls -->
+								<div class="mailbox-read-message"></div>
+								<!-- /.mailbox-read-message -->
+							</div>
+
+							<!-- /.box-body -->
+							<div class="box-footer" style="display: none;">
+								<ul class="mailbox-attachments clearfix">
+									<li><span class="mailbox-attachment-icon"><i
+											class="fa fa-file-pdf-o"></i></span>
+
+										<div class="mailbox-attachment-info">
+											<a href="#" class="mailbox-attachment-name"><i
+												class="fa fa-paperclip"></i> Sep2014-report.pdf</a> <span
+												class="mailbox-attachment-size"> 1,245 KB <a href="#"
+												class="btn btn-default btn-xs pull-right"><i
+													class="fa fa-cloud-download"></i></a>
+											</span>
+										</div></li>
+									<li><span class="mailbox-attachment-icon"><i
+											class="fa fa-file-word-o"></i></span>
+
+										<div class="mailbox-attachment-info">
+											<a href="#" class="mailbox-attachment-name"><i
+												class="fa fa-paperclip"></i> App Description.docx</a> <span
+												class="mailbox-attachment-size"> 1,245 KB <a href="#"
+												class="btn btn-default btn-xs pull-right"><i
+													class="fa fa-cloud-download"></i></a>
+											</span>
+										</div></li>
+									<li><span class="mailbox-attachment-icon has-img"><img
+											src="${basePath}/AdminLTE/dist/img/photo1.png"
+											alt="Attachment"></span>
+
+										<div class="mailbox-attachment-info">
+											<a href="#" class="mailbox-attachment-name"><i
+												class="fa fa-camera"></i> photo1.png</a> <span
+												class="mailbox-attachment-size"> 2.67 MB <a href="#"
+												class="btn btn-default btn-xs pull-right"><i
+													class="fa fa-cloud-download"></i></a>
+											</span>
+										</div></li>
+									<li><span class="mailbox-attachment-icon has-img"><img
+											src="${basePath}/AdminLTE/dist/img/photo2.png"
+											alt="Attachment"></span>
+
+										<div class="mailbox-attachment-info">
+											<a href="#" class="mailbox-attachment-name"><i
+												class="fa fa-camera"></i> photo2.png</a> <span
+												class="mailbox-attachment-size"> 1.9 MB <a href="#"
+												class="btn btn-default btn-xs pull-right"><i
+													class="fa fa-cloud-download"></i></a>
+											</span>
+										</div></li>
+								</ul>
+							</div>
+							<!-- /.box-footer -->
+							<div class="box-footer">
+								<div class="pull-right">
+									<button type="button" class="btn btn-default">
+										<i class="fa fa-reply"></i> Reply
+									</button>
+									<button type="button" class="btn btn-default">
+										<i class="fa fa-share"></i> Forward
+									</button>
+								</div>
+								<button type="button" class="btn btn-default">
+									<i class="fa fa-trash-o"></i> Delete
+								</button>
+								<button type="button" class="btn btn-default">
+									<i class="fa fa-print"></i> Print
+								</button>
+							</div>
+							<!-- /.box-footer -->
 						</div>
 						<!-- /. box -->
 					</div>
@@ -594,7 +689,6 @@
 				href="https://adminlte.io">AdminLTE</a>.
 			</strong> All rights reserved.
 		</footer>
-
 		<!-- Control Sidebar -->
 		<aside class="control-sidebar control-sidebar-dark">
 			<!-- Create the tabs -->
@@ -786,80 +880,11 @@
 		src="${basePath}/AdminLTE/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="${basePath}/AdminLTE/dist/js/adminlte.min.js"></script>
-	<!-- iCheck -->
-	<script src="${basePath}/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-	<!-- Page Script -->
-	<script>
-		$(function() {
-			//Enable iCheck plugin for checkboxes
-			//iCheck for checkbox and radio inputs
-			$('.mailbox-messages input[type="checkbox"]').iCheck({
-				checkboxClass : 'icheckbox_flat-blue',
-				radioClass : 'iradio_flat-blue'
-			});
-
-			//Enable check and uncheck all functionality
-			$(".checkbox-toggle").click(
-					function() {
-						var clicks = $(this).data('clicks');
-						if (clicks) {
-							//Uncheck all checkboxes
-							$(".mailbox-messages input[type='checkbox']")
-									.iCheck("uncheck");
-							$(".fa", this).removeClass("fa-check-square-o")
-									.addClass('fa-square-o');
-						} else {
-							//Check all checkboxes
-							$(".mailbox-messages input[type='checkbox']")
-									.iCheck("check");
-							$(".fa", this).removeClass("fa-square-o").addClass(
-									'fa-check-square-o');
-						}
-						$(this).data("clicks", !clicks);
-					});
-
-			//Handle starring for glyphicon and font awesome
-			$(".mailbox-star").click(function(e) {
-				e.preventDefault();
-				//detect type
-				var $this = $(this).find("a > i");
-				var glyph = $this.hasClass("glyphicon");
-				var fa = $this.hasClass("fa");
-
-				//Switch states
-				if (glyph) {
-					$this.toggleClass("glyphicon-star");
-					$this.toggleClass("glyphicon-star-empty");
-				}
-
-				if (fa) {
-					$this.toggleClass("fa-star");
-					$this.toggleClass("fa-star-o");
-				}
-			});
-		});
-	</script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="${basePath}/AdminLTE/dist/js/demo.js"></script>
+
+	<!-- import -->
+	<script type="text/javascript"
+		src="${basePath}/MineJavaScript/StockModule/ReadDailyLog.js"></script>
 </body>
-
-<!-- import -->
-<!-- layui javascript -->
-<script src="${basePath}/CssFrame/layui/layui.js"></script>
-<script src="${basePath}/CssFrame/layui/layui.all.js"></script>
-<script src="${basePath}/CssFrame/layui/lay/modules/layer.js"></script>
-
-<!-- layui css -->
-<link rel="stylesheet" type="text/css"
-	href="${basePath}/CssFrame/layui/css/layui.css">
-<link rel="stylesheet" type="text/css"
-	href="${basePath}/CssFrame/layui/css/modules/layer/default/layer.css">
-<link rel="stylesheet" type="text/css"
-	href="${basePath}/CssFrame/layui/css/modules/code.css">
-<link rel="stylesheet" type="text/css"
-	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css">
-
-<script type="text/javascript"
-	src="${basePath}/jquery/OwnJavaScript/StockWorkable.js"></script>
-
 </html>

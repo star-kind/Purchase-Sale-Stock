@@ -1,5 +1,6 @@
 package com.allstargh.ssm.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.IStcokSevice;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.util.StockServiceUtil;
 
 /**
@@ -58,13 +60,26 @@ public class StockController extends ControllerUtils {
 
 	/**
 	 * division<br>
-	 * division<br>
-	 * division<br>
-	 * division<br>
-	 * division<br>
-	 * division<br>
-	 * division<br>
 	 */
+
+	/**
+	 * /stocker-manager/StockController/readDailyLogHandler
+	 * 
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 * @throws SelfServiceException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readDailyLogHandler", method = RequestMethod.POST)
+	public ResponseResult<String[]> readDailyLogHandler(HttpSession session) throws SelfServiceException, IOException {
+		Integer uid = getUsridFromSession(session);
+
+		String[] dailyLog = iss.readDailyLog(uid);
+
+		return new ResponseResult<String[]>(SUCCESS, dailyLog);
+
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/StockController/foundByTypeAreaHandler?areaOrder=0

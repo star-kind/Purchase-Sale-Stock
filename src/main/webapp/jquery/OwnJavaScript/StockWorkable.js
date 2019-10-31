@@ -5,7 +5,60 @@ $(function() {
 	exhibitTableList();
 	exhibitCurrentUsrname();
 	appendDynamicContent();
+	exhibitedClassifyNumsHandler();
 })
+
+/**
+ * 
+ * @returns
+ */
+function exhibitedClassifyNumsHandler() {
+	var uri = '/stocker-manager/PurchaseController/exhibitedClassifyNumsHandler';
+
+	$.ajax({
+		url : uri,
+		type : 'GET',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state == 200) {
+				var map = rr.data;
+				console.log(map);
+				console.log(typeof (map));
+
+				putNumIntoSelector(map);
+
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}
+
+/**
+ * 将各类别统计数植入选择器路径
+ * 
+ * @param map
+ * @returns
+ */
+function putNumIntoSelector(map) {
+	var array = [];
+
+	// Object转数组
+	for ( var i in map) {
+		array.push(map[i]);
+	}
+
+	var n = 1;
+	for (let j = 0; j < array.length; j++) {
+		console.log(array[j]);
+
+		$(
+				'body > div > div.content-wrapper > section.content > div > div.col-md-3 > div:nth-child(3) > div.box-body.no-padding > ul > li:nth-child('
+						+ n++ + ') > a > span').text(array[j].num);
+
+	}
+
+}
 
 /**
  * 
@@ -27,54 +80,54 @@ function getDynamicContent() {
 	var content = '<li class="active">';
 	content += '<a href="javascript:exhibitByClassify(0)">';
 	content += '<i class="fa fa-inbox"></i>电器 ';
-	content += '<span class="label label-primary pull-right classify_length">??</span></a>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a>';
 	content += '</li>';
 
 	content += '<li class="active">';
 	content += '<a href="javascript:exhibitByClassify(1)">';
 	content += '<i class="fa fa-inbox"></i>食品 ';
-	content += '<span class="label label-primary pull-right classify_length">??</span></a>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a>';
 	content += '</li>';
 
 	content += '<li class="active">';
 	content += '<a href="javascript:exhibitByClassify(2)">';
 	content += '<i class="fa fa-inbox"></i>服装';
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">';
 	content += '<a href="javascript:exhibitByClassify(3)">';
 	content += '<i class="fa fa-inbox"></i>日用品 ';
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(4)">'
 	content += '<i class="fa fa-inbox"></i>饮品 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(5)">'
 	content += '<i class="fa fa-inbox"></i>其它 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(6)">'
 	content += '<i class="fa fa-inbox"></i>玩具 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(7)">'
 	content += '<i class="fa fa-inbox"></i>家具 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(8)">'
 	content += '<i class="fa fa-inbox"></i>药品 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	content += '<li class="active">'
 	content += '<a href="javascript:exhibitByClassify(-1)">'
 	content += '<i class="fa fa-inbox"></i>恢复全部展示 '
-	content += '<span class="label label-primary pull-right classify_length">??</span></a></li>';
+	content += '<span class="label label-primary pull-right classify_length"></span></a></li>';
 
 	return content;
 }

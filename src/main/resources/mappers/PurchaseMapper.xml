@@ -769,19 +769,37 @@
 
 		AND
 
-		is_agree = #{isAgree,jdbcType=INTEGER}
+		is_agree =
+		#{isAgree,jdbcType=INTEGER}
+
+		AND
+
+		has_take_goods=1
 	</select>
 
-	<select id="countPurchaseIdGroupByClassify" resultMap="java.util.Map">
-		SELECT 
+	<resultMap type="java.util.Map" id="BaseResultMap01">
+		<result column="classify" property="classify"
+			jdbcType="INTEGER" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="countPurchaseIdGroupByClassify"
+		resultMap="BaseResultMap01">
+		SELECT
 		classify,
-		COUNT(purchase_id)
-		FROM 
+		COUNT(purchase_id) AS num
+		FROM
 		purchase
+		WHERE
+		is_agree=1
+
+		AND
+		has_take_goods=1
+
 		GROUP BY
-		classify 
-		ORDER BY 
-		classify 
+		classify
+		ORDER BY
+		classify
 		ASC
 	</select>
 </mapper>

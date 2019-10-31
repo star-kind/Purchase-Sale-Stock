@@ -38,7 +38,7 @@ public interface ICommonReplenishService {
 	 * 
 	 * @param account
 	 * @param competence
-	 * @return
+	 * @return boolean
 	 * @throws SelfServiceException
 	 */
 	abstract boolean checkForAccount(Accounts account, Integer competence) throws SelfServiceException;
@@ -52,5 +52,15 @@ public interface ICommonReplenishService {
 	 * @throws SelfServiceException
 	 */
 	abstract Accounts checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;
+
+	/**
+	 * <h3>Overload,校验账号权限</h3>
+	 * 
+	 * @param accountId
+	 * @param competences 权限码数组
+	 * @return Accounts
+	 * @throws SelfServiceException
+	 */
+	abstract Accounts checkForAccount(Integer accountId, Integer[] competences) throws SelfServiceException;
 
 }

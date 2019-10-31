@@ -1,13 +1,18 @@
 package com.allstargh.ssm.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.controller.kits.ApprovalControllerUtil;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TApprovalDAO;
@@ -17,6 +22,7 @@ import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
+import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 
 @Service
 public class ApprovalServiceImpl implements IApprovalService {
@@ -31,6 +37,11 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 	@Autowired
 	private PurchaseMapper pmp;
+
+	/**
+	 * 
+	 */
+	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
 
 	@Override
 	public Integer backupAdd(Integer usrid, String replyOpinion, Integer decide, Integer appId,
@@ -81,6 +92,38 @@ public class ApprovalServiceImpl implements IApprovalService {
 		// 销售部,提货申请,Key=3
 
 		return map;
+	}
+
+	@Override
+	public String[] readOutputSubstanceLog(Integer usrid) throws IOException, SelfServiceException {
+		Accounts account = ics.checkForAccount(usrid, 1);
+
+		String path = ControllerUtils.ENGINE_DAILY_PATH;
+
+		StringBuffer buffer = new StringBuffer(path);
+
+		String pathCompelete = buffer.append(ApprovalControllerUtil.DAILY_FILE_NAME).toString();
+
+		Path path2 = Paths.get(pathCompelete);
+
+		String string = new String();
+		try {
+			byte[] bytes = Files.readAllBytes(path2);
+			string = new String(bytes);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		String[] split = string.split("\\n|\\r");
+
+		if (split.length > 10 * 1024) {
+			System.err.println(this.getClass().getName() + ",文件超限");
+			psu.cleanSubstance(ApprovalControllerUtil.DAILY_FILE_NAME);
+		}
+
+		return split;
 	}
 
 }

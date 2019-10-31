@@ -1,5 +1,6 @@
 package com.allstargh.ssm.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.allstargh.ssm.pojo.Purchase;
@@ -13,6 +14,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IStcokSevice {
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	abstract String[] readDailyLog(Integer uid) throws SelfServiceException, IOException;
+
 	/**
 	 * 
 	 * @param usrid

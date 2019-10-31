@@ -1,5 +1,6 @@
 package com.allstargh.ssm.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.IPurchaseService;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 
 @Controller
 @RequestMapping("/ApprovalController")
@@ -30,6 +32,26 @@ public class ApprovalController extends ControllerUtils {
 	 * single instance
 	 */
 	ApprovalControllerUtil instance = ApprovalControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/ApprovalController/readOutputSubstanceLogHandler
+	 * 
+	 * @param session
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readOutputSubstanceLogHandler", method = RequestMethod.POST)
+	public ResponseResult<String[]> readOutputSubstanceLogHandler(HttpSession session)
+			throws SelfServiceException, IOException {
+		Integer uid = getUsridFromSession(session);
+
+		String[] strings = ias.readOutputSubstanceLog(uid);
+
+		return new ResponseResult<String[]>(SUCCESS, strings);
+
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/ApprovalController/exhibitionHandler

@@ -1,9 +1,9 @@
 package com.allstargh.ssm.mapper;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.allstargh.ssm.pojo.Purchase;
@@ -17,10 +17,11 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
-	 * 统计每个商品分类所属的数量 TODO
+	 * 统计每个商品分类所属的数量
 	 * 
 	 * @return
 	 */
+	@MapKey("classify")
 	abstract Map<Integer, Integer> countPurchaseIdGroupByClassify();
 
 	/**

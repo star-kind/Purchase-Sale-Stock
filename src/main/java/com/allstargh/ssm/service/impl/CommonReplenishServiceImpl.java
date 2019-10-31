@@ -98,4 +98,35 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 		return account;
 	}
 
+	@Override
+	public Accounts checkForAccount(Integer accountId, Integer[] competences) throws SelfServiceException {
+		Accounts account = am.selectAccountByUsrid(accountId);
+
+		if (account == null) {
+			String description = ServiceExceptionEnum.USRNAME_ERR.getDescription();
+			throw new SelfServiceException(description);
+
+		} else if (account.getActiveStatus() == 0) {
+			String description = ServiceExceptionEnum.CANCELED_ACCOUNT.getDescription();
+			throw new SelfServiceException(description);
+
+		}
+
+		int n = 0;
+		for (int i = 0; i < competences.length; i++) {
+			if (account.getCompetence() == competences[i]) {
+				n += 1;
+			}
+		}
+
+		System.err.println("n:" + n);
+
+		if (n == 0) {
+			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		return account;
+	}
+
 }

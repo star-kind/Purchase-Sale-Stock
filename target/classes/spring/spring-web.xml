@@ -90,7 +90,6 @@
 	<mvc:interceptors>
 		<!-- 第1个拦截器 -->
 		<mvc:interceptor>
-
 			<!-- 1. 拦截路径（黑名单） -->
 			<mvc:mapping path="/account/**" />
 
@@ -127,6 +126,48 @@
 			<!-- 3. 拦截器,各请求前往该类接受处理 -->
 			<bean class="com.allstargh.ssm.mechanism.LoginMechanism" />
 		</mvc:interceptor>
+
+		<!-- 第二个拦截器 -->
+		<mvc:interceptor>
+			<!-- 1. 拦截路径（黑名单） -->
+			<mvc:mapping path="/PurchaseController/**" />
+
+			<!-- 2. 例外（白名单） -->
+			<mvc:exclude-mapping
+				path="/PurchaseController/exhibitsListByClassifyAndIsAgreeHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/submitToBackstageHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/getPurchaseListByTakedAndAgreedHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/jumpToPurchaseTranceLogHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/jumpToPurchaseWorkableHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/readOutputSubstanceLogHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/deleteMultiplesPurchaseAppByIdsHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/deleteSinglePurchaseAppByIdHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/editOnePurchaseByIdHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/findPurchaseByIdHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/addNewPurchaseAppFormHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/exhibitionAllPurchaseHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/exhibitionPurchaseByOperatorHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/jumpToPurchaseDeptHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/exhibitedClassifyNumsHandler" />
+
+			<!-- 3. 拦截器,各请求前往该类接受处理 -->
+			<bean class="com.allstargh.ssm.mechanism.LoginMechanism" />
+		</mvc:interceptor>
+
 	</mvc:interceptors>
 
 </beans>

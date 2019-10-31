@@ -3,6 +3,7 @@ package services;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,21 @@ public class PurchaseServiceTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void countNumTest() {
+		ips = (IPurchaseService) applicationContext.getBean("purchaseServiceImpl");
+
+		try {
+			Map<Integer, Integer> map = ips.getNumsByClassify(58);
+
+			for (Map.Entry<Integer, Integer> iterable_element : map.entrySet()) {
+				System.err.println(iterable_element.getKey() + "," + iterable_element.getValue());
+			}
+		} catch (SelfServiceException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
 	}
 
 	@Test

@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,14 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	@Autowired
 	private ICommonReplenishService ics;
 
+	/**
+	 * 
+	 */
 	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
+	/**
+	 * 
+	 */
 	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
 
 	@Override
@@ -192,6 +199,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 		Accounts accounts = am.selectAccountByUsrid(usrid);
 		System.out.println(accounts);
+		
 		if (accounts.getCompetence() != 2) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
@@ -215,7 +223,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 		// 如已超限则排空
 		if (ss.length > 12 * 1024) {
-			System.err.println("如已超限则排空");
+			System.err.println(this.getClass().getSimpleName() + ",超限");
 			psu.cleanSubstance(PurchaseControllerUtil.PURCHASE_FILE_NAME);
 		}
 
@@ -350,6 +358,17 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		List<Purchase> list = pm.selectByClassifyAndIsAgree(classify, isAgree);
 
 		return list;
+	}
+
+	@Override
+	public Map<Integer, Integer> getNumsByClassify(Integer uid) throws SelfServiceException {
+		Integer[] competences = { 4, 2 };
+
+		Accounts account = ics.checkForAccount(uid, competences);
+
+		Map<Integer, Integer> map = pm.countPurchaseIdGroupByClassify();
+
+		return map;
 	}
 
 }

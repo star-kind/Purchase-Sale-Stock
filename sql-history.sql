@@ -322,6 +322,22 @@ group by classify order by classify asc;
 
 -- ..............
 
+select classify,count(purchase_id) as num from purchase 
+where is_agree=1 group by classify order by classify asc;  
 
++----------+-----+
+| classify | num |
++----------+-----+
+| 0        | 6   |
+| 1        | 6   |
+| 2        | 3   |
+| 3        | 8   |
+| 4        | 7   |
+| 5        | 6   |
+| 6        | 4   |
+| 7        | 2   |
+| 8        | 1   |
++----------+-----+
 
+-- ..............
 

@@ -3,6 +3,7 @@ package com.allstargh.ssm.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +29,23 @@ public class PurchaseController extends ControllerUtils {
 
 	// 工具类
 	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/exhibitedClassifyNumsHandler
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitedClassifyNumsHandler", method = RequestMethod.GET)
+	public ResponseResult<Map<Integer, Integer>> exhibitedClassifyNumsHandler(HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Map<Integer, Integer> map = ips.getNumsByClassify(uid);
+
+		return new ResponseResult<Map<Integer, Integer>>(SUCCESS, map);
+
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/PurchaseController/exhibitsListByClassifyAndIsAgreeHandler?classify=0
@@ -267,8 +285,12 @@ public class PurchaseController extends ControllerUtils {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "exhibitionAllPurchaseHandler", method = RequestMethod.GET)
-	public ResponseResult<List<Purchase>> exhibitionAllPurchaseHandler() {
+	public ResponseResult<List<Purchase>> exhibitionAllPurchaseHandler(HttpSession session) {
+
 		List<Purchase> list = ips.exhibitsAll();
+		if (getUsrnameFromSession(session) == null || ("".equals(getUsrnameFromSession(session)))) {
+			list = null;
+		}
 		return new ResponseResult<List<Purchase>>(SUCCESS, list);
 
 	}

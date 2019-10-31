@@ -1,5 +1,9 @@
 package com.allstargh.ssm.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +11,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.controller.kits.ControllerUtils;
+import com.allstargh.ssm.controller.kits.StockControllerUtil;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TStockDAO;
@@ -17,6 +23,7 @@ import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IStcokSevice;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
+import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 import com.allstargh.ssm.service.util.StockServiceUtil;
 
 @Service
@@ -33,7 +40,15 @@ public class StockServiceImpl implements IStcokSevice {
 	@Autowired
 	private TStockDAO tsd;
 
+	/**
+	 * StockServiceUtil
+	 */
 	StockServiceUtil ins = StockServiceUtil.getInstance();
+
+	/**
+	 * PurchaseServiceUtil
+	 */
+	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
 
 	@Override
 	public Integer regEntry(Purchase purchase, String stockOperator) throws SelfServiceException {
@@ -155,6 +170,35 @@ public class StockServiceImpl implements IStcokSevice {
 		}
 
 		return null;
+	}
+
+	@Override
+	public String[] readDailyLog(Integer uid) throws SelfServiceException, IOException {
+		Accounts account = ics.checkForAccount(uid, 4);
+
+		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
+		String path = builder.append(StockControllerUtil.DAILY_FILE_NAME).toString();
+
+		Path path2 = Paths.get(path);
+
+		String string = new String();
+		try {
+			byte[] bytes = Files.readAllBytes(path2);
+			string = new String(bytes);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String[] split = string.split("\n|\r");
+
+		// 如已超限则排空
+		if (split.length > 12 * 1024) {
+			System.err.println(this.getClass().getSimpleName() + ",超限");
+			psu.cleanSubstance(StockControllerUtil.DAILY_FILE_NAME);
+		}
+
+		return split;
 	}
 
 }
