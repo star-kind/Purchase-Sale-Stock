@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allstargh.ssm.mapper.TSaleDAO">
+  <resultMap id="BaseResultMap" type="com.allstargh.ssm.pojo.TSale">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="commodity" jdbcType="VARCHAR" property="commodity" />
+    <result column="customer" jdbcType="VARCHAR" property="customer" />
+    <result column="amount_money" jdbcType="REAL" property="amountMoney" />
+    <result column="amount_paid" jdbcType="DECIMAL" property="amountPaid" />
+    <result column="payment_method" jdbcType="INTEGER" property="paymentMethod" />
+    <result column="is_pay" jdbcType="INTEGER" property="isPay" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="sale_operator" jdbcType="INTEGER" property="saleOperator" />
+    <result column="region_department" jdbcType="INTEGER" property="regionDepartment" />
+    <result column="sale_time" jdbcType="TIMESTAMP" property="saleTime" />
+    <result column="is_enough_stock" jdbcType="SMALLINT" property="isEnoughStock" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, commodity, customer, amount_money, amount_paid, payment_method, is_pay, quantity, 
+    sale_operator, region_department, sale_time, is_enough_stock
+  </sql>
+  <select id="selectByExample" parameterType="com.allstargh.ssm.pojo.TSaleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sale
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sale
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allstargh.ssm.pojo.TSaleExample">
+    delete from t_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allstargh.ssm.pojo.TSale">
+    insert into t_sale (id, commodity, customer, 
+      amount_money, amount_paid, payment_method, 
+      is_pay, quantity, sale_operator, 
+      region_department, sale_time, is_enough_stock
+      )
+    values (#{id,jdbcType=INTEGER}, #{commodity,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, 
+      #{amountMoney,jdbcType=REAL}, #{amountPaid,jdbcType=DECIMAL}, #{paymentMethod,jdbcType=INTEGER}, 
+      #{isPay,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{saleOperator,jdbcType=INTEGER}, 
+      #{regionDepartment,jdbcType=INTEGER}, #{saleTime,jdbcType=TIMESTAMP}, #{isEnoughStock,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allstargh.ssm.pojo.TSale">
+    insert into t_sale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commodity != null">
+        commodity,
+      </if>
+      <if test="customer != null">
+        customer,
+      </if>
+      <if test="amountMoney != null">
+        amount_money,
+      </if>
+      <if test="amountPaid != null">
+        amount_paid,
+      </if>
+      <if test="paymentMethod != null">
+        payment_method,
+      </if>
+      <if test="isPay != null">
+        is_pay,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="saleOperator != null">
+        sale_operator,
+      </if>
+      <if test="regionDepartment != null">
+        region_department,
+      </if>
+      <if test="saleTime != null">
+        sale_time,
+      </if>
+      <if test="isEnoughStock != null">
+        is_enough_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commodity != null">
+        #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="amountMoney != null">
+        #{amountMoney,jdbcType=REAL},
+      </if>
+      <if test="amountPaid != null">
+        #{amountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentMethod != null">
+        #{paymentMethod,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null">
+        #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="saleOperator != null">
+        #{saleOperator,jdbcType=INTEGER},
+      </if>
+      <if test="regionDepartment != null">
+        #{regionDepartment,jdbcType=INTEGER},
+      </if>
+      <if test="saleTime != null">
+        #{saleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnoughStock != null">
+        #{isEnoughStock,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into t_sale (id, commodity, customer, 
+      amount_money, amount_paid, payment_method, 
+      is_pay, quantity, sale_operator, 
+      region_department, sale_time, 
+      is_enough_stock)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.commodity,jdbcType=VARCHAR}, #{item.customer,jdbcType=VARCHAR}, 
+        #{item.amountMoney,jdbcType=REAL}, #{item.amountPaid,jdbcType=DECIMAL}, #{item.paymentMethod,jdbcType=INTEGER}, 
+        #{item.isPay,jdbcType=INTEGER}, #{item.quantity,jdbcType=INTEGER}, #{item.saleOperator,jdbcType=INTEGER}, 
+        #{item.regionDepartment,jdbcType=INTEGER}, #{item.saleTime,jdbcType=TIMESTAMP}, 
+        #{item.isEnoughStock,jdbcType=SMALLINT})
+    </foreach>
+  </insert>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into t_sale
+    (id, commodity, customer, amount_money, amount_paid, payment_method, is_pay, quantity, 
+      sale_operator, region_department, sale_time, is_enough_stock)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="item.id != null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.id == null">
+          NULL,
+        </if>
+        <if test="item.commodity != null">
+          #{item.commodity,jdbcType=VARCHAR},
+        </if>
+        <if test="item.commodity == null">
+          NULL,
+        </if>
+        <if test="item.customer != null">
+          #{item.customer,jdbcType=VARCHAR},
+        </if>
+        <if test="item.customer == null">
+          NULL,
+        </if>
+        <if test="item.amountMoney != null">
+          #{item.amountMoney,jdbcType=REAL},
+        </if>
+        <if test="item.amountMoney == null">
+          NULL,
+        </if>
+        <if test="item.amountPaid != null">
+          #{item.amountPaid,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amountPaid == null">
+          NULL,
+        </if>
+        <if test="item.paymentMethod != null">
+          #{item.paymentMethod,jdbcType=INTEGER},
+        </if>
+        <if test="item.paymentMethod == null">
+          NULL,
+        </if>
+        <if test="item.isPay != null">
+          #{item.isPay,jdbcType=INTEGER},
+        </if>
+        <if test="item.isPay == null">
+          NULL,
+        </if>
+        <if test="item.quantity != null">
+          #{item.quantity,jdbcType=INTEGER},
+        </if>
+        <if test="item.quantity == null">
+          NULL,
+        </if>
+        <if test="item.saleOperator != null">
+          #{item.saleOperator,jdbcType=INTEGER},
+        </if>
+        <if test="item.saleOperator == null">
+          NULL,
+        </if>
+        <if test="item.regionDepartment != null">
+          #{item.regionDepartment,jdbcType=INTEGER},
+        </if>
+        <if test="item.regionDepartment == null">
+          NULL,
+        </if>
+        <if test="item.saleTime != null">
+          #{item.saleTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.saleTime == null">
+          NULL,
+        </if>
+        <if test="item.isEnoughStock != null">
+          #{item.isEnoughStock,jdbcType=SMALLINT},
+        </if>
+        <if test="item.isEnoughStock == null">
+          NULL,
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <select id="countByExample" parameterType="com.allstargh.ssm.pojo.TSaleExample" resultType="java.lang.Long">
+    select count(*) from t_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sale
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodity != null">
+        commodity = #{record.commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customer != null">
+        customer = #{record.customer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountMoney != null">
+        amount_money = #{record.amountMoney,jdbcType=REAL},
+      </if>
+      <if test="record.amountPaid != null">
+        amount_paid = #{record.amountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymentMethod != null">
+        payment_method = #{record.paymentMethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPay != null">
+        is_pay = #{record.isPay,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleOperator != null">
+        sale_operator = #{record.saleOperator,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionDepartment != null">
+        region_department = #{record.regionDepartment,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleTime != null">
+        sale_time = #{record.saleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isEnoughStock != null">
+        is_enough_stock = #{record.isEnoughStock,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sale
+    set id = #{record.id,jdbcType=INTEGER},
+      commodity = #{record.commodity,jdbcType=VARCHAR},
+      customer = #{record.customer,jdbcType=VARCHAR},
+      amount_money = #{record.amountMoney,jdbcType=REAL},
+      amount_paid = #{record.amountPaid,jdbcType=DECIMAL},
+      payment_method = #{record.paymentMethod,jdbcType=INTEGER},
+      is_pay = #{record.isPay,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      sale_operator = #{record.saleOperator,jdbcType=INTEGER},
+      region_department = #{record.regionDepartment,jdbcType=INTEGER},
+      sale_time = #{record.saleTime,jdbcType=TIMESTAMP},
+      is_enough_stock = #{record.isEnoughStock,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allstargh.ssm.pojo.TSale">
+    update t_sale
+    <set>
+      <if test="commodity != null">
+        commodity = #{commodity,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        customer = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="amountMoney != null">
+        amount_money = #{amountMoney,jdbcType=REAL},
+      </if>
+      <if test="amountPaid != null">
+        amount_paid = #{amountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentMethod != null">
+        payment_method = #{paymentMethod,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null">
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="saleOperator != null">
+        sale_operator = #{saleOperator,jdbcType=INTEGER},
+      </if>
+      <if test="regionDepartment != null">
+        region_department = #{regionDepartment,jdbcType=INTEGER},
+      </if>
+      <if test="saleTime != null">
+        sale_time = #{saleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnoughStock != null">
+        is_enough_stock = #{isEnoughStock,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allstargh.ssm.pojo.TSale">
+    update t_sale
+    set commodity = #{commodity,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=VARCHAR},
+      amount_money = #{amountMoney,jdbcType=REAL},
+      amount_paid = #{amountPaid,jdbcType=DECIMAL},
+      payment_method = #{paymentMethod,jdbcType=INTEGER},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      sale_operator = #{saleOperator,jdbcType=INTEGER},
+      region_department = #{regionDepartment,jdbcType=INTEGER},
+      sale_time = #{saleTime,jdbcType=TIMESTAMP},
+      is_enough_stock = #{isEnoughStock,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBatchByPrimaryKey" parameterType="java.util.List">
+    update t_sale
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="commodity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.commodity}
+        </foreach>
+      </trim>
+      <trim prefix="customer =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.customer}
+        </foreach>
+      </trim>
+      <trim prefix="amount_money =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.amountMoney}
+        </foreach>
+      </trim>
+      <trim prefix="amount_paid =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.amountPaid}
+        </foreach>
+      </trim>
+      <trim prefix="payment_method =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.paymentMethod}
+        </foreach>
+      </trim>
+      <trim prefix="is_pay =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.isPay}
+        </foreach>
+      </trim>
+      <trim prefix="quantity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.quantity}
+        </foreach>
+      </trim>
+      <trim prefix="sale_operator =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.saleOperator}
+        </foreach>
+      </trim>
+      <trim prefix="region_department =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.regionDepartment}
+        </foreach>
+      </trim>
+      <trim prefix="sale_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.saleTime}
+        </foreach>
+      </trim>
+      <trim prefix="is_enough_stock =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.isEnoughStock}
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    update t_sale
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="commodity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.commodity != null ">
+            when  #{item.id} then #{item.commodity}
+          </if>
+          <if test="item.commodity == null ">
+            when  #{item.id} then t_sale.commodity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="customer =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.customer != null ">
+            when  #{item.id} then #{item.customer}
+          </if>
+          <if test="item.customer == null ">
+            when  #{item.id} then t_sale.customer
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="amount_money =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.amountMoney != null ">
+            when  #{item.id} then #{item.amountMoney}
+          </if>
+          <if test="item.amountMoney == null ">
+            when  #{item.id} then t_sale.amount_money
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="amount_paid =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.amountPaid != null ">
+            when  #{item.id} then #{item.amountPaid}
+          </if>
+          <if test="item.amountPaid == null ">
+            when  #{item.id} then t_sale.amount_paid
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="payment_method =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.paymentMethod != null ">
+            when  #{item.id} then #{item.paymentMethod}
+          </if>
+          <if test="item.paymentMethod == null ">
+            when  #{item.id} then t_sale.payment_method
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_pay =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.isPay != null ">
+            when  #{item.id} then #{item.isPay}
+          </if>
+          <if test="item.isPay == null ">
+            when  #{item.id} then t_sale.is_pay
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="quantity =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.quantity != null ">
+            when  #{item.id} then #{item.quantity}
+          </if>
+          <if test="item.quantity == null ">
+            when  #{item.id} then t_sale.quantity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sale_operator =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.saleOperator != null ">
+            when  #{item.id} then #{item.saleOperator}
+          </if>
+          <if test="item.saleOperator == null ">
+            when  #{item.id} then t_sale.sale_operator
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="region_department =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.regionDepartment != null ">
+            when  #{item.id} then #{item.regionDepartment}
+          </if>
+          <if test="item.regionDepartment == null ">
+            when  #{item.id} then t_sale.region_department
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sale_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.saleTime != null ">
+            when  #{item.id} then #{item.saleTime}
+          </if>
+          <if test="item.saleTime == null ">
+            when  #{item.id} then t_sale.sale_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_enough_stock =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.isEnoughStock != null ">
+            when  #{item.id} then #{item.isEnoughStock}
+          </if>
+          <if test="item.isEnoughStock == null ">
+            when  #{item.id} then t_sale.is_enough_stock
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByExample" parameterType="map">
+    update t_sale
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="commodity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.commodity}
+        </foreach>
+      </trim>
+      <trim prefix="customer =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.customer}
+        </foreach>
+      </trim>
+      <trim prefix="amount_money =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.amountMoney}
+        </foreach>
+      </trim>
+      <trim prefix="amount_paid =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.amountPaid}
+        </foreach>
+      </trim>
+      <trim prefix="payment_method =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.paymentMethod}
+        </foreach>
+      </trim>
+      <trim prefix="is_pay =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.isPay}
+        </foreach>
+      </trim>
+      <trim prefix="quantity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.quantity}
+        </foreach>
+      </trim>
+      <trim prefix="sale_operator =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.saleOperator}
+        </foreach>
+      </trim>
+      <trim prefix="region_department =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.regionDepartment}
+        </foreach>
+      </trim>
+      <trim prefix="sale_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.saleTime}
+        </foreach>
+      </trim>
+      <trim prefix="is_enough_stock =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.isEnoughStock}
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateBatchByExampleSelective" parameterType="map">
+    update t_sale
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="commodity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.commodity != null ">
+            when  #{item.id} then #{item.commodity}
+          </if>
+          <if test="item.commodity == null ">
+            when  #{item.id} then t_sale.commodity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="customer =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.customer != null ">
+            when  #{item.id} then #{item.customer}
+          </if>
+          <if test="item.customer == null ">
+            when  #{item.id} then t_sale.customer
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="amount_money =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.amountMoney != null ">
+            when  #{item.id} then #{item.amountMoney}
+          </if>
+          <if test="item.amountMoney == null ">
+            when  #{item.id} then t_sale.amount_money
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="amount_paid =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.amountPaid != null ">
+            when  #{item.id} then #{item.amountPaid}
+          </if>
+          <if test="item.amountPaid == null ">
+            when  #{item.id} then t_sale.amount_paid
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="payment_method =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.paymentMethod != null ">
+            when  #{item.id} then #{item.paymentMethod}
+          </if>
+          <if test="item.paymentMethod == null ">
+            when  #{item.id} then t_sale.payment_method
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_pay =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.isPay != null ">
+            when  #{item.id} then #{item.isPay}
+          </if>
+          <if test="item.isPay == null ">
+            when  #{item.id} then t_sale.is_pay
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="quantity =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.quantity != null ">
+            when  #{item.id} then #{item.quantity}
+          </if>
+          <if test="item.quantity == null ">
+            when  #{item.id} then t_sale.quantity
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sale_operator =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.saleOperator != null ">
+            when  #{item.id} then #{item.saleOperator}
+          </if>
+          <if test="item.saleOperator == null ">
+            when  #{item.id} then t_sale.sale_operator
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="region_department =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.regionDepartment != null ">
+            when  #{item.id} then #{item.regionDepartment}
+          </if>
+          <if test="item.regionDepartment == null ">
+            when  #{item.id} then t_sale.region_department
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sale_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.saleTime != null ">
+            when  #{item.id} then #{item.saleTime}
+          </if>
+          <if test="item.saleTime == null ">
+            when  #{item.id} then t_sale.sale_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_enough_stock =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.isEnoughStock != null ">
+            when  #{item.id} then #{item.isEnoughStock}
+          </if>
+          <if test="item.isEnoughStock == null ">
+            when  #{item.id} then t_sale.is_enough_stock
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

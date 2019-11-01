@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "somewhere"
+git commit -m "new 2 table"
 
 #github
 git pull github master

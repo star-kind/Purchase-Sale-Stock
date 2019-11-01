@@ -10,12 +10,12 @@ public class TStock {
 	 * 上次更改时间
 	 */
 	private Date lastestModifiedTime;
-	
+
 	/**
 	 * 上次修改人
 	 */
 	private String lastestModifier;
-	
+
 	/**
 	 * 主键
 	 */
@@ -272,5 +272,5 @@ public class TStock {
 				+ stockOperator + ", enterStockTime=" + enterStockTime + ", remark=" + remark + ", agreeEnterStock="
 				+ agreeEnterStock + "]";
 	}
-	
+
 }

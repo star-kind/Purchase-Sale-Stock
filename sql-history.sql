@@ -341,3 +341,7 @@ where is_agree=1 group by classify order by classify asc;
 
 -- ..............
 
+-- 改字段注释
+ALTER TABLE accounts MODIFY `region_department` int(3) NOT NULL COMMENT  
+'部门所处地区:0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦岭,9-酒后,10-平等,11-夏堡,12-富留店';
+

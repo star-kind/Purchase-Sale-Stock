@@ -251,7 +251,7 @@ function manufactureContent(ts) {
 
 	f += '<select value="'
 			+ ts.stockTypeArea
-			+ '" name="stockTypeArea" style="display:none;margin-left: 17rem;width: 14em;" id="ts_stockTypeArea" class="update_set" readonly="readonly">';
+			+ '" name="stockTypeArea" style="display:none;margin-left: 166px;width: 14em;" id="ts_stockTypeArea" class="update_set" readonly="readonly">';
 	f += '<option value="0">电器区</option>';
 	f += '<option value="1">食品区</option>';
 	f += '<option value="2">服装区</option>';

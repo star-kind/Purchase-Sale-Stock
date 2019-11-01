@@ -47,8 +47,10 @@
 		<!-- 指定数据库表 -->
 		<!-- <table tableName="purchase" /> -->
 		<!-- <table tableName="t_stock" /> -->
-		<table tableName="t_approval" />
-
+		<!-- <table tableName="t_approval" /> -->
+		<!-- <table tableName="t_stock_maintain" />
+		<table tableName="t_sale" /> -->
+		
 	</context>
 
 </generatorConfiguration>

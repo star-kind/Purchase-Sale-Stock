@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allstargh.ssm.mapper.TStockMaintainDAO">
+  <resultMap id="BaseResultMap" type="com.allstargh.ssm.pojo.TStockMaintain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lastest_modified_time" jdbcType="TIMESTAMP" property="lastestModifiedTime" />
+    <result column="lastest_modifier" jdbcType="INTEGER" property="lastestModifier" />
+    <result column="modify_type" jdbcType="SMALLINT" property="modifyType" />
+    <result column="modify_info" jdbcType="VARCHAR" property="modifyInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, lastest_modified_time, lastest_modifier, modify_type, modify_info
+  </sql>
+  <select id="selectByExample" parameterType="com.allstargh.ssm.pojo.TStockMaintainExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_stock_maintain
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_stock_maintain
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_stock_maintain
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allstargh.ssm.pojo.TStockMaintainExample">
+    delete from t_stock_maintain
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allstargh.ssm.pojo.TStockMaintain">
+    insert into t_stock_maintain (id, lastest_modified_time, lastest_modifier, 
+      modify_type, modify_info)
+    values (#{id,jdbcType=INTEGER}, #{lastestModifiedTime,jdbcType=TIMESTAMP}, #{lastestModifier,jdbcType=INTEGER}, 
+      #{modifyType,jdbcType=SMALLINT}, #{modifyInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allstargh.ssm.pojo.TStockMaintain">
+    insert into t_stock_maintain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="lastestModifiedTime != null">
+        lastest_modified_time,
+      </if>
+      <if test="lastestModifier != null">
+        lastest_modifier,
+      </if>
+      <if test="modifyType != null">
+        modify_type,
+      </if>
+      <if test="modifyInfo != null">
+        modify_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lastestModifiedTime != null">
+        #{lastestModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastestModifier != null">
+        #{lastestModifier,jdbcType=INTEGER},
+      </if>
+      <if test="modifyType != null">
+        #{modifyType,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyInfo != null">
+        #{modifyInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into t_stock_maintain (id, lastest_modified_time, lastest_modifier, 
+      modify_type, modify_info)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.lastestModifiedTime,jdbcType=TIMESTAMP}, #{item.lastestModifier,jdbcType=INTEGER}, 
+        #{item.modifyType,jdbcType=SMALLINT}, #{item.modifyInfo,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into t_stock_maintain
+    (id, lastest_modified_time, lastest_modifier, modify_type, modify_info)
+    values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="item.id != null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.id == null">
+          NULL,
+        </if>
+        <if test="item.lastestModifiedTime != null">
+          #{item.lastestModifiedTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.lastestModifiedTime == null">
+          NULL,
+        </if>
+        <if test="item.lastestModifier != null">
+          #{item.lastestModifier,jdbcType=INTEGER},
+        </if>
+        <if test="item.lastestModifier == null">
+          NULL,
+        </if>
+        <if test="item.modifyType != null">
+          #{item.modifyType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.modifyType == null">
+          NULL,
+        </if>
+        <if test="item.modifyInfo != null">
+          #{item.modifyInfo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.modifyInfo == null">
+          NULL,
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <select id="countByExample" parameterType="com.allstargh.ssm.pojo.TStockMaintainExample" resultType="java.lang.Long">
+    select count(*) from t_stock_maintain
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_stock_maintain
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastestModifiedTime != null">
+        lastest_modified_time = #{record.lastestModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastestModifier != null">
+        lastest_modifier = #{record.lastestModifier,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyType != null">
+        modify_type = #{record.modifyType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.modifyInfo != null">
+        modify_info = #{record.modifyInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_stock_maintain
+    set id = #{record.id,jdbcType=INTEGER},
+      lastest_modified_time = #{record.lastestModifiedTime,jdbcType=TIMESTAMP},
+      lastest_modifier = #{record.lastestModifier,jdbcType=INTEGER},
+      modify_type = #{record.modifyType,jdbcType=SMALLINT},
+      modify_info = #{record.modifyInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allstargh.ssm.pojo.TStockMaintain">
+    update t_stock_maintain
+    <set>
+      <if test="lastestModifiedTime != null">
+        lastest_modified_time = #{lastestModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastestModifier != null">
+        lastest_modifier = #{lastestModifier,jdbcType=INTEGER},
+      </if>
+      <if test="modifyType != null">
+        modify_type = #{modifyType,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyInfo != null">
+        modify_info = #{modifyInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allstargh.ssm.pojo.TStockMaintain">
+    update t_stock_maintain
+    set lastest_modified_time = #{lastestModifiedTime,jdbcType=TIMESTAMP},
+      lastest_modifier = #{lastestModifier,jdbcType=INTEGER},
+      modify_type = #{modifyType,jdbcType=SMALLINT},
+      modify_info = #{modifyInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBatchByPrimaryKey" parameterType="java.util.List">
+    update t_stock_maintain
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="lastest_modified_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.lastestModifiedTime}
+        </foreach>
+      </trim>
+      <trim prefix="lastest_modifier =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.lastestModifier}
+        </foreach>
+      </trim>
+      <trim prefix="modify_type =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.modifyType}
+        </foreach>
+      </trim>
+      <trim prefix="modify_info =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.modifyInfo}
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    update t_stock_maintain
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="lastest_modified_time =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.lastestModifiedTime != null ">
+            when  #{item.id} then #{item.lastestModifiedTime}
+          </if>
+          <if test="item.lastestModifiedTime == null ">
+            when  #{item.id} then t_stock_maintain.lastest_modified_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="lastest_modifier =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.lastestModifier != null ">
+            when  #{item.id} then #{item.lastestModifier}
+          </if>
+          <if test="item.lastestModifier == null ">
+            when  #{item.id} then t_stock_maintain.lastest_modifier
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="modify_type =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.modifyType != null ">
+            when  #{item.id} then #{item.modifyType}
+          </if>
+          <if test="item.modifyType == null ">
+            when  #{item.id} then t_stock_maintain.modify_type
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="modify_info =case id" suffix="end,">
+        <foreach collection="list" index="index" item="item" separator=" ">
+          <if test="item.modifyInfo != null ">
+            when  #{item.id} then #{item.modifyInfo}
+          </if>
+          <if test="item.modifyInfo == null ">
+            when  #{item.id} then t_stock_maintain.modify_info
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in 
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+       #{item.id} 
+    </foreach>
+  </update>
+  <update id="updateBatchByExample" parameterType="map">
+    update t_stock_maintain
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="lastest_modified_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.lastestModifiedTime}
+        </foreach>
+      </trim>
+      <trim prefix="lastest_modifier =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.lastestModifier}
+        </foreach>
+      </trim>
+      <trim prefix="modify_type =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.modifyType}
+        </foreach>
+      </trim>
+      <trim prefix="modify_info =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          when  #{item.id} then #{item.modifyInfo}
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateBatchByExampleSelective" parameterType="map">
+    update t_stock_maintain
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="lastest_modified_time =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.lastestModifiedTime != null ">
+            when  #{item.id} then #{item.lastestModifiedTime}
+          </if>
+          <if test="item.lastestModifiedTime == null ">
+            when  #{item.id} then t_stock_maintain.lastest_modified_time
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="lastest_modifier =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.lastestModifier != null ">
+            when  #{item.id} then #{item.lastestModifier}
+          </if>
+          <if test="item.lastestModifier == null ">
+            when  #{item.id} then t_stock_maintain.lastest_modifier
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="modify_type =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.modifyType != null ">
+            when  #{item.id} then #{item.modifyType}
+          </if>
+          <if test="item.modifyType == null ">
+            when  #{item.id} then t_stock_maintain.modify_type
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="modify_info =case id" suffix="end,">
+        <foreach collection="recordList" index="index" item="item" separator=" ">
+          <if test="item.modifyInfo != null ">
+            when  #{item.id} then #{item.modifyInfo}
+          </if>
+          <if test="item.modifyInfo == null ">
+            when  #{item.id} then t_stock_maintain.modify_info
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
