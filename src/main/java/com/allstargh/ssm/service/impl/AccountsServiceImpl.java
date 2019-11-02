@@ -341,6 +341,12 @@ public class AccountsServiceImpl implements IAccountsService {
 
 	@Override
 	public Integer reviseBaseProfile(String usrname, String phone, Integer usrid) throws SelfServiceException {
+		Accounts account = accountsMapper.selectByUname(usrname);
+		if (account != null) {
+			String description = ServiceExceptionEnum.UNAME_DUPLICATE_CONFLICT.getDescription();
+			throw new SelfServiceException(description);
+		}
+
 		// 禁止提交之绑定之电话号码过3
 		var i = accountsMapper.countUidByPhone(phone);
 		if (i > 3) {
