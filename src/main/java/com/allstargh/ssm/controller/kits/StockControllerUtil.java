@@ -5,7 +5,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import com.allstargh.ssm.pojo.Purchase;
-import com.allstargh.ssm.pojo.TStock;
 
 public class StockControllerUtil extends ControllerUtils {
 	private static StockControllerUtil instance;

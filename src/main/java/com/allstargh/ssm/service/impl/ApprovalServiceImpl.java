@@ -19,6 +19,8 @@ import com.allstargh.ssm.mapper.TApprovalDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TApproval;
+import com.allstargh.ssm.pojo.TApprovalExample;
+import com.allstargh.ssm.pojo.TApprovalExample.Criteria;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -124,6 +126,23 @@ public class ApprovalServiceImpl implements IApprovalService {
 		}
 
 		return split;
+	}
+
+	@Override
+	public List<TApproval> exhibitionAll(Integer uid) throws SelfServiceException {
+		Accounts account = ics.checkForAccount(uid, 1);
+
+		TApprovalExample example = new TApprovalExample();
+
+		example.setOrderByClause("original_order asc");
+		example.setDistinct(false);
+		
+		Criteria criteria = example.createCriteria();
+		criteria.andIdIsNotNull();
+
+		List<TApproval> list = tad.selectByExample(example);
+
+		return list;
 	}
 
 }

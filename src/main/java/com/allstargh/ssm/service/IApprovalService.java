@@ -6,6 +6,7 @@ package com.allstargh.ssm.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -15,6 +16,14 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IApprovalService {
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	List<TApproval> exhibitionAll(Integer uid) throws SelfServiceException;
+
 	/**
 	 * 读取记录
 	 * 

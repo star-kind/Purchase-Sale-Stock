@@ -12,7 +12,6 @@ import com.allstargh.ssm.pojo.Purchase;
  *
  */
 public class PurchaseControllerUtil extends ControllerUtils {
-
 	private static PurchaseControllerUtil instance;
 
 	// 锁

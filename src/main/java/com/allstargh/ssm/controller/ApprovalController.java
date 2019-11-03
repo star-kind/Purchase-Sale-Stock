@@ -2,6 +2,7 @@ package com.allstargh.ssm.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ApprovalControllerUtil;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -32,6 +34,21 @@ public class ApprovalController extends ControllerUtils {
 	 * single instance
 	 */
 	ApprovalControllerUtil instance = ApprovalControllerUtil.getInstance();
+
+	/**
+	 * http://localhost:8080/stocker-manager/ApprovalController/exhibitionAllHandler
+	 * 
+	 * @param session
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitionAllHandler", method = RequestMethod.GET)
+	public ResponseResult<List<TApproval>> exhibitionAllHandler(HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		List<TApproval> list = ias.exhibitionAll(uid);
+		return new ResponseResult<List<TApproval>>(SUCCESS, list);
+
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/ApprovalController/readOutputSubstanceLogHandler

@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.allstargh.ssm.json.ResponseResult;
-import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 
@@ -34,7 +30,18 @@ public class ControllerUtils {
 	public static final Integer SUCCESS = 200;
 
 	/**
-	 * 工程日志目录绝对之前置根路径
+	 * 当前时间
+	 */
+	protected static String now_time = null;
+
+	static {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		now_time = format.format(new Date());
+
+	}
+
+	/**
+	 * 日志目录实际路径: "/home/admin/workspace/eclipse/eclipse-workspace/Logs/"
 	 */
 	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Logs/";
 
@@ -54,17 +61,13 @@ public class ControllerUtils {
 	protected static byte[] buff = null;
 
 	/**
-	 * 当前时间字符串
+	 * p标签前缀
 	 */
-	protected static String now_time = null;
-
-	static {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		now_time = format.format(new Date());
-	}
-
-	/** p标签前缀 */
 	public static String p_tag_prefix = "<p>";
+
+	/**
+	 * <--------------------------------------------------------------------------------->
+	 */
 
 	/**
 	 * 统一将异常封入json实体

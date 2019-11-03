@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.pojo.Purchase;
+import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -47,6 +48,21 @@ public class ApprovalServiceTest {
 			System.err.println(e.getMessage());
 		}
 
+	}
+
+	@Test
+	public void exhibitionAllTest() {
+		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
+
+		try {
+			List<TApproval> list = ias.exhibitionAll(57);
+
+			for (TApproval tApproval : list) {
+				System.err.println(tApproval);
+			}
+		} catch (SelfServiceException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
 	}
 
 }
