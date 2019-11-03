@@ -1,6 +1,7 @@
 package com.allstargh.ssm.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,28 @@ public class AccountsController extends ControllerUtils {
 	private IAccountsService iAccountsService;
 
 	protected AccountControllerUtil instance = AccountControllerUtil.getInstance();
+
+	/**
+	 * <------------------------------------------------------------------------->
+	 */
+
+	/**
+	 * 
+	 * 
+	 * /stocker-manager/account/obtainIDAndNamesHandler
+	 * 
+	 * @param s
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "obtainIDAndNamesHandler", method = RequestMethod.POST)
+	public ResponseResult<HashMap<Integer, String>> obtainIDAndNamesHandler(HttpSession s) {
+		Integer uid = getUsridFromSession(s);
+
+		HashMap<Integer, String> map = iAccountsService.obtainIDAndNames(uid);
+
+		return new ResponseResult<HashMap<Integer, String>>(SUCCESS, map);
+	}
 
 	/**
 	 * 

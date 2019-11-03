@@ -1,6 +1,7 @@
 package com.allstargh.ssm.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  * 账户之业务接口
  */
 public interface IAccountsService {
+	/**
+	 * {@code 审核部or技术部}获取ID和名字
+	 * 
+	 * @param uid 
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	HashMap<Integer, String> obtainIDAndNames(Integer uid) throws SelfServiceException;
+
 	/**
 	 * 据ID检出资料
 	 * 

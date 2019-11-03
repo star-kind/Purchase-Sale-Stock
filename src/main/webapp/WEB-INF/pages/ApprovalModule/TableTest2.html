@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- jquery -->
+<script src="../../../jquery/jquery-3.2.1.min.js"></script>
+
+<!-- JavaScript 点击链接切换division  -->
+<script type="text/javascript"
+	src="../../../jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
+
+<!-- bootstrap CSS -->
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/bootstrap.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/bootstrap-theme.css"></link>
+
+<!-- jquery ui js -->
+<script src="../../../jquery-ui-1.12.1/jquery-ui.js"></script>
+<script src="../../../jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="../../../jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+
+<!-- jquery ui css -->
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.structure.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.structure.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.theme.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../jquery-ui-1.12.1/jquery-ui.theme.min.css"></link>
+
+<!-- layui javascript -->
+<script src="../../../CssFrame/layui/layui.js"></script>
+<script src="../../../CssFrame/layui/layui.all.js"></script>
+<script src="../../../CssFrame/layui/lay/modules/layer.js"></script>
+
+<!-- layui css -->
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/layui/css/layui.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/layui/css/modules/layer/default/layer.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/layui/css/modules/code.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="../../../CssFrame/layui/css/modules/laydate/default/laydate.css"></link>
+
+<meta charset="UTF-8">
+<title>审批模块主页</title>
+
+<style type="text/css">
+.table_6 thead th {
+	background-color: rgb(128, 102, 160);
+	color: #fff;
+	border-bottom-width: 0;
+}
+
+/* Column Style */
+.table_6 td {
+	color: #000;
+}
+/* Heading and Column Style */
+.table_6 tr, .table_6 th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(128, 102, 160);
+}
+
+/* Padding and font style */
+.table_6 td, .table_6 th {
+	padding: 5px 10px;
+	font-size: 22px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.table_6>a {
+	margin: 20px;
+	text-decoration: underline;
+}
+
+.table_6 tr:nth-child(even) {
+	background: rgb(230, 238, 214)
+}
+
+.table_6 tr:nth-child(odd) {
+	background: #FFF
+}
+</style>
+
+</head>
+<body>
+	<main>
+		<br> <br> <br> <br> <br> <br>
+		<!--  -->
+		<div>
+			<table class="table_6" cellspacing="0" cellpadding="0" border="1">
+				<thead>
+					<tr>
+						<th><input type="checkbox" class="tbl_head_check"
+							onclick="boxsInfluence()">复选</th>
+						<th>归属部门</th>
+						<th>处理时间</th>
+						<th>批复意见</th>
+						<th>原始序号</th>
+						<th>审核决定</th>
+						<th>审核者</th>
+						<th>删除</th>
+						<th>再次审核</th>
+					</tr>
+				</thead>
+
+				<tbody class="table_boby">
+					<tr id="rows_2">
+						<td><input type="checkbox" value="2" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 16:23:26</td>
+						<td>你离地区</td>
+						<td>50</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(2)">删除</a></td>
+						<td><a href="javascript:void(2)">再次审核</a></td>
+					</tr>
+					<tr id="rows_3">
+						<td><input type="checkbox" value="3" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 16:24:18</td>
+						<td>䴆毆</td>
+						<td>51</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(3)">删除</a></td>
+						<td><a href="javascript:void(3)">再次审核</a></td>
+					</tr>
+					<tr id="rows_4">
+						<td><input type="checkbox" value="4" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 16:37:14</td>
+						<td>成熟</td>
+						<td>51</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(4)">删除</a></td>
+						<td><a href="javascript:void(4)">再次审核</a></td>
+					</tr>
+					<tr id="rows_1">
+						<td><input type="checkbox" value="1" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 16:22:50</td>
+						<td>芭提雅</td>
+						<td>52</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(1)">删除</a></td>
+						<td><a href="javascript:void(1)">再次审核</a></td>
+					</tr>
+					<tr id="rows_5">
+						<td><input type="checkbox" value="5" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 20:25:51</td>
+						<td>996</td>
+						<td>54</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(5)">删除</a></td>
+						<td><a href="javascript:void(5)">再次审核</a></td>
+					</tr>
+					<tr id="rows_6">
+						<td><input type="checkbox" value="6" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 20:26:07</td>
+						<td>996</td>
+						<td>55</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(6)">删除</a></td>
+						<td><a href="javascript:void(6)">再次审核</a></td>
+					</tr>
+					<tr id="rows_7">
+						<td><input type="checkbox" value="7" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 21:36:00</td>
+						<td>no</td>
+						<td>56</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(7)">删除</a></td>
+						<td><a href="javascript:void(7)">再次审核</a></td>
+					</tr>
+					<tr id="rows_8">
+						<td><input type="checkbox" value="8" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 21:50:20</td>
+						<td>no</td>
+						<td>57</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(8)">删除</a></td>
+						<td><a href="javascript:void(8)">再次审核</a></td>
+					</tr>
+					<tr id="rows_9">
+						<td><input type="checkbox" value="9" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 21:53:43</td>
+						<td>no</td>
+						<td>57</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(9)">删除</a></td>
+						<td><a href="javascript:void(9)">再次审核</a></td>
+					</tr>
+					<tr id="rows_10">
+						<td><input type="checkbox" value="10" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 22:03:06</td>
+						<td>366</td>
+						<td>58</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(10)">删除</a></td>
+						<td><a href="javascript:void(10)">再次审核</a></td>
+					</tr>
+					<tr id="rows_11">
+						<td><input type="checkbox" value="11" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 22:26:51</td>
+						<td>no</td>
+						<td>59</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(11)">删除</a></td>
+						<td><a href="javascript:void(11)">再次审核</a></td>
+					</tr>
+					<tr id="rows_16">
+						<td><input type="checkbox" value="16" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 10:54:22</td>
+						<td>欧锦卡</td>
+						<td>60</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(16)">删除</a></td>
+						<td><a href="javascript:void(16)">再次审核</a></td>
+					</tr>
+					<tr id="rows_12">
+						<td><input type="checkbox" value="12" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-28 22:30:11</td>
+						<td>Nokia</td>
+						<td>61</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(12)">删除</a></td>
+						<td><a href="javascript:void(12)">再次审核</a></td>
+					</tr>
+					<tr id="rows_15">
+						<td><input type="checkbox" value="15" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 10:27:49</td>
+						<td>nonono</td>
+						<td>62</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(15)">删除</a></td>
+						<td><a href="javascript:void(15)">再次审核</a></td>
+					</tr>
+					<tr id="rows_13">
+						<td><input type="checkbox" value="13" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 00:26:29</td>
+						<td>88</td>
+						<td>63</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(13)">删除</a></td>
+						<td><a href="javascript:void(13)">再次审核</a></td>
+					</tr>
+					<tr id="rows_14">
+						<td><input type="checkbox" value="14" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 00:39:45</td>
+						<td>8888</td>
+						<td>64</td>
+						<td>false</td>
+						<td>57</td>
+						<td><a href="javascript:void(14)">删除</a></td>
+						<td><a href="javascript:void(14)">再次审核</a></td>
+					</tr>
+					<tr id="rows_17">
+						<td><input type="checkbox" value="17" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 10:54:49</td>
+						<td>666000</td>
+						<td>65</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(17)">删除</a></td>
+						<td><a href="javascript:void(17)">再次审核</a></td>
+					</tr>
+					<tr id="rows_18">
+						<td><input type="checkbox" value="18" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-29 10:55:14</td>
+						<td>九夜茴</td>
+						<td>66</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(18)">删除</a></td>
+						<td><a href="javascript:void(18)">再次审核</a></td>
+					</tr>
+					<tr id="rows_19">
+						<td><input type="checkbox" value="19" class="td_order_number"></td>
+						<td>2</td>
+						<td>2019-10-30 14:46:32</td>
+						<td>666</td>
+						<td>67</td>
+						<td>true</td>
+						<td>57</td>
+						<td><a href="javascript:void(19)">删除</a></td>
+						<td><a href="javascript:void(19)">再次审核</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+</body>
+</html>

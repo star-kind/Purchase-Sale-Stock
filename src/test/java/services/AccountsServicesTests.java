@@ -1,7 +1,9 @@
 package services;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,22 @@ public class AccountsServicesTests {
 	public void setUp() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void test01() {
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
+
+		try {
+			HashMap<Integer, String> hashMap = accountsService.obtainIDAndNames(51);
+
+			for (Map.Entry<Integer, String> e : hashMap.entrySet()) {
+				System.err.println(e.getKey() + " : " + e.getValue());
+			}
+
+		} catch (SelfServiceException s) {
+			System.out.println(s.getMessage());
+		}
 	}
 
 	@Test

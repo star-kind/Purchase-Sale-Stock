@@ -35,7 +35,7 @@
 		<ul>
 			<li><a href="#" class="a_links" onclick="opens(1)">申请采购货品</a></li>
 
-			<li><a href="javascript:opens(2);" class="a_links">查看申请单(本人)</a></li>
+			<li><a href="javascript:opens(2);" class="a_links">查看申请单(仅限本人)</a></li>
 
 			<li><a href="javascript:opens(3);" class="a_links">按类型查询</a></li>
 

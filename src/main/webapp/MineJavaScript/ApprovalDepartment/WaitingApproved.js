@@ -64,6 +64,7 @@ function generatesRowsOfPurchase(map_element, typeStr, dept) {
 
 	for (var i = 0; i < map_element.length; i++) {
 		var tr = '<tr id="app_purchase_' + map_element[i].purchaseId + '">';
+		
 		tr += '<td><input type="checkbox" value="' + map_element[i].purchaseId
 				+ '" class="td_order_number"></td>';
 

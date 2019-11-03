@@ -55,65 +55,83 @@
 	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css"></link>
 
 <meta charset="UTF-8">
-<title>审核部</title>
+<title>全部已处理</title>
 
 <style type="text/css">
-.header_div01 {
-	border-bottom: 3px solid #1d7c70;
-	padding: 40px 20px 20px 20px;
+.table_6 thead th {
+	background-color: rgb(128, 102, 160);
+	color: #fff;
+	border-bottom-width: 0;
 }
 
-.header_span01 {
-	font-size: x-large;
-	margin: 4rem 0 0 4rem;
+/* Column Style */
+.table_6 td {
+	color: #000;
+}
+/* Heading and Column Style */
+.table_6 tr, .table_6 th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(128, 102, 160);
 }
 
-.header_span01>a {
+/* Padding and font style */
+.table_6 td, .table_6 th {
+	padding: 5px 10px;
+	font-size: 22px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.table_6>a {
 	margin: 20px;
 	text-decoration: underline;
+}
+
+.table_6 tr:nth-child(even) {
+	background: rgb(230, 238, 214)
+}
+
+.table_6 tr:nth-child(odd) {
+	background: #FFF
 }
 </style>
 
 </head>
 <body>
-	<header>
-		<div class="header_div01">
-			<span class="header_span01"> <a href="javascript:opens(1)">
-					<b> 待审批申请队列 </b>
-			</a>
-			
-			 
-			<a href="javascript:opens(2)"> <b>全部已处理</b> </a>
-			
-			 
-			<a> 等待 </a> 
-			
-			
-			<a	href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
-					<b>查看记录</b>
-			</a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
-			</a> <a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>
-			</a>
-			</span>
-		</div>
-	</header>
-
 	<div>
-		<!-- 待批队列 -->
-		<div class="detail_zone div_module"
-			style="display: none; text-align: center;" id="room1">
-			<jsp:include page="WaitingApproved.jsp"></jsp:include>
-		</div>
+		<br>
+		<table class="table_6" cellspacing="0" cellpadding="0" border="1"
+			style="margin: 4rem auto 10em auto; width: 80%;">
+			<thead>
+				<tr>
+					<th><input type="checkbox" class="tbl_head_check"
+						onclick="boxsInfluence()">复选</th>
+					<th>归属部门</th>
+					<th>处理时间</th>
+					<th>批复意见</th>
+					<th>原始序号</th>
+					<th>审核决定</th>
+					<th>审核者</th>
+					<th>删除</th>
+					<th>再次审核</th>
+				</tr>
+			</thead>
 
-		
-		<!-- 全部已处理 -->
-		<div class="detail_zone div_module"
-			style="display: none; text-align: center;" id="room2">
-			<jsp:include page="AllProcessed.jsp"></jsp:include>
+			<tbody class="table_boby"></tbody>
+		</table>
+
+		<!--  display: none; -->
+		<div class="uid_uname" style="text-align: center;">
+			<p></p>
 		</div>
 		
 	</div>
+
 </body>
 
-</html>
+<script
+	src="${basePath}/MineJavaScript/ApprovalDepartment/AllProcessed.js"></script>
 
+<script src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
+</html>

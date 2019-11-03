@@ -122,6 +122,8 @@
 				path="/account/revisePasswordHandler" />
 			<mvc:exclude-mapping
 				path="/account/reviseBaseProfileHandler" />
+			<mvc:exclude-mapping
+				path="/account/obtainIDAndNamesHandler" />
 
 			<!-- 3. 拦截器,各请求前往该类接受处理 -->
 			<bean class="com.allstargh.ssm.mechanism.LoginMechanism" />

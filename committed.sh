@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "fail test"
+git commit -m "about approval"
 
 #github
 git pull github master

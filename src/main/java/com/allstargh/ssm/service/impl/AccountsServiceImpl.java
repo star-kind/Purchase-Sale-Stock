@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.allstargh.ssm.controller.kits.AccountControllerUtil;
-import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.service.IAccountsService;
+import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 import com.allstargh.ssm.service.util.AccountServiceUtil;
@@ -29,7 +30,12 @@ public class AccountsServiceImpl implements IAccountsService {
 	@Autowired
 	private AccountsMapper accountsMapper;
 
-	// 默认密码
+	@Autowired
+	private ICommonReplenishService icrs;
+
+	/**
+	 * 默认密码
+	 */
 	private static String DEFAULT_KEY = "666";
 
 	public ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
@@ -386,6 +392,23 @@ public class AccountsServiceImpl implements IAccountsService {
 		}
 
 		return "AdminWorkable";
+	}
+
+	@Override
+	public HashMap<Integer, String> obtainIDAndNames(Integer uid) throws SelfServiceException {
+		HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+
+		Integer[] array = { 0, 1 };
+
+		Accounts account = icrs.checkForAccount(uid, array);
+
+		List<Accounts> list = accountsMapper.selectAllFromAccounts();
+
+		for (Accounts a : list) {
+			hashMap.put(a.getUsrid(), a.getUsrname());
+		}
+
+		return hashMap;
 	}
 
 }
