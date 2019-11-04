@@ -322,7 +322,7 @@
 							<li><a
 								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/SubQueue&competence=4">
 									申请入库之采购批次 <span class="pull-right-container"> <span
-										class="label label-primary pull-right">13</span>
+										class="label label-primary pull-right len_amount"></span>
 								</span>
 							</a></li>
 							<li><a href="#">Compose</a></li>

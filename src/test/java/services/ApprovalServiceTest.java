@@ -28,6 +28,20 @@ public class ApprovalServiceTest {
 	}
 
 	@Test
+	public void revampTest() {
+		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
+
+		try {
+			Integer effect = ias.revampByID(60, 0, "bully", 1);
+			System.err.println(effect);
+
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void exhibitionTest() {
 		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
 

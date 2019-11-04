@@ -43,14 +43,15 @@ public class AccountsController extends ControllerUtils {
 	 * @param s
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value = "obtainIDAndNamesHandler", method = RequestMethod.POST)
-	public ResponseResult<HashMap<Integer, String>> obtainIDAndNamesHandler(HttpSession s) {
+	@RequestMapping(value = "obtainIDAndNamesHandler", method = RequestMethod.GET)
+	public String obtainIDAndNamesHandler(HttpSession s, ModelMap model) {
 		Integer uid = getUsridFromSession(s);
 
 		HashMap<Integer, String> map = iAccountsService.obtainIDAndNames(uid);
 
-		return new ResponseResult<HashMap<Integer, String>>(SUCCESS, map);
+		model.addAttribute("map", map);
+
+		return "ApprovalModule/AllProcessed";
 	}
 
 	/**

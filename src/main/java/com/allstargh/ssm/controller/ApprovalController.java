@@ -40,6 +40,47 @@ public class ApprovalController extends ControllerUtils {
 	 */
 
 	/**
+	 * /stocker-manager/ApprovalController/revampByIDHandler
+	 * 
+	 * @param session
+	 * @param tid
+	 * @param approveOperates
+	 * @param replyOpinion
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "revampByIDHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> revampByIDHandler(HttpSession session, @RequestParam("tid") Integer tid,
+			@RequestParam("approveOperates") Integer approveOperates,
+			@RequestParam("replyOpinion") String replyOpinion) {
+		Integer uid = getUsridFromSession(session);
+
+		System.err.println(uid + "," + approveOperates + "," + replyOpinion + "," + tid);
+
+		Integer affect = ias.revampByID(uid, approveOperates, replyOpinion, tid);
+
+		return new ResponseResult<Integer>(SUCCESS, affect);
+
+	}
+
+	/**
+	 * /stocker-manager/ApprovalController/obtainTApprovalByIDHandler
+	 * 
+	 * @param session
+	 * @param tid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "obtainTApprovalByIDHandler", method = RequestMethod.GET)
+	public ResponseResult<TApproval> obtainTApprovalByIDHandler(HttpSession session, @RequestParam("tid") Integer tid) {
+		Integer uid = getUsridFromSession(session);
+
+		TApproval tApproval = ias.obtainTApprovalByID(uid, tid);
+		return new ResponseResult<TApproval>(SUCCESS, tApproval);
+
+	}
+
+	/**
 	 * http://localhost:8080/stocker-manager/ApprovalController/exhibitionAllHandler
 	 * 
 	 * @param session

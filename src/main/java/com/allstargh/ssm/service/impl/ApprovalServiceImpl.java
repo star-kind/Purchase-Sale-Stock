@@ -136,13 +136,50 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 		example.setOrderByClause("original_order asc");
 		example.setDistinct(false);
-		
+
 		Criteria criteria = example.createCriteria();
 		criteria.andIdIsNotNull();
 
 		List<TApproval> list = tad.selectByExample(example);
 
 		return list;
+	}
+
+	@Override
+	public Integer revampByID(Integer uid, Integer approveOperates, String replyOpinion, Integer tid)
+			throws SelfServiceException {
+		TApprovalExample example = new TApprovalExample();
+		Criteria criteria = example.createCriteria();
+
+		TApproval tApproval = new TApproval();
+
+		Accounts account = ics.checkForAccount(uid, 1);
+
+		tApproval.setReplyOpinion(replyOpinion);
+
+		if (approveOperates == 0) {
+			tApproval.setApproveOperates(false);
+		} else if (approveOperates == 1) {
+			tApproval.setApproveOperates(true);
+		}
+
+		tApproval.setApprovalsTime(new Date());
+		tApproval.setAuditor(uid);
+
+		criteria.andIdEqualTo(tid);
+
+		int selective = tad.updateByExampleSelective(tApproval, example);
+
+		return selective;
+	}
+
+	@Override
+	public TApproval obtainTApprovalByID(Integer uid, Integer approvalID) throws SelfServiceException {
+		Accounts account = ics.checkForAccount(uid, 1);
+
+		TApproval tApproval = tad.selectByPrimaryKey(approvalID);
+
+		return tApproval;
 	}
 
 }

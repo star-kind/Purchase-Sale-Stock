@@ -2,9 +2,13 @@
  * AllProcessed.jsp
  */
 $(function() {
+	getInnerTextFromTags();
 	exhibitionAllHandler();
-	obtainIDAndNamesHandler();
+
 })
+
+// 全局变量
+var arrays1 = [];
 
 /**
  * 
@@ -68,8 +72,9 @@ function inToTbody(x) {
 		tr += '</td>';
 
 		// 审核者
+		var textName = compareByKeyID(x[i].auditor);
 		tr += '<td>';
-		tr += x[i].auditor;
+		tr += textName;
 		tr += '</td>';
 
 		tr += '<td>';
@@ -89,34 +94,6 @@ function inToTbody(x) {
 		$('.table_boby').append(tr);
 
 	}
-
-}
-
-/**
- * 
- * @returns
- */
-function obtainIDAndNamesHandler() {
-	var uri = '/stocker-manager/account/obtainIDAndNamesHandler';
-
-	var uid_uname = $('.uid_uname > p:nth-child(1)');
-
-	$.ajax({
-		url : uri,
-		type : 'POST',
-		dataType : 'json',
-		success : function(rr) {
-			if (rr.state === 200) {
-				console.log(rr.data);
-
-				// TODO
-				uid_uname.append(rr.data);
-
-			} else {
-				layer.alert(rr.message);
-			}
-		}
-	});
 
 }
 
@@ -160,4 +137,53 @@ function settingDepartmentNumber(departmentNumber) {
 	}
 
 	return dept;
+}
+
+/**
+ * [getInnerTextFromTags description]
+ * 
+ * @return {[type]} [description]
+ */
+function getInnerTextFromTags() {
+	// 遍历获取i标签中的文本,赋予数组
+	$('.result_index').each(function() {
+		arrays1.push(this.innerText);
+	});
+	console.log(arrays1);
+}
+
+/**
+ * [getKeyID description]
+ * 
+ * @param {[type]}
+ *            argument [description]
+ * @return {[type]} [description]
+ */
+function getKeyID(argument) {
+	var selectorID = null;
+
+	for (var i = 0; i < arrays1.length; i++) {
+		if (arrays1[i] == argument) {
+			selectorID = 'result_element_' + arrays1[i];
+			console.log(selectorID);
+			return selectorID;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * 
+ * @param argument
+ * @returns 人名
+ */
+function compareByKeyID(argument) {
+	var selectorID = getKeyID(argument);
+	console.log(selectorID);
+
+	var textName = document.getElementById(selectorID).innerText;
+	console.log(textName);
+
+	return textName;
 }

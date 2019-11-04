@@ -48,7 +48,7 @@ public interface ICommonReplenishService {
 	 * 
 	 * @param accountId
 	 * @param competence
-	 * @return
+	 * @return Accounts
 	 * @throws SelfServiceException
 	 */
 	abstract Accounts checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;

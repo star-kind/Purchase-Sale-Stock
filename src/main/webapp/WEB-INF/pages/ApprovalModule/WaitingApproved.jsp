@@ -86,12 +86,12 @@
 }
 
 /*奇数行*/
-.tbl_body_a tr:nth-of-type(odd) {
+.tbl_body_a tr:nth-child(odd) {
 	background: #bfe6c2;
 }
 
 /*偶数行*/
-.tbl_body_a tr:nth-of-type(even) {
+.tbl_body_a tr:nth-child(even) {
 	background: #95ecf1;
 }
 </style>

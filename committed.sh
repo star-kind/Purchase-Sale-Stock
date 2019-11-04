@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "about approval"
+git commit -m "hardword for js"
 
 #github
 git pull github master

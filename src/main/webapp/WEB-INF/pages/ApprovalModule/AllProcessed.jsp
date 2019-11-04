@@ -95,14 +95,47 @@
 .table_6 tr:nth-child(odd) {
 	background: #FFF
 }
+
+.header_div01 {
+	border-bottom: 3px solid #1d7c70;
+	padding: 40px 20px 20px 20px;
+}
+
+.header_span01 {
+	font-size: x-large;
+	margin: 4rem 0 0 4rem;
+}
+
+.header_span01>a {
+	margin: 20px;
+	text-decoration: underline;
+}
 </style>
 
 </head>
 <body>
+
+	<header>
+		<div class="header_div01">
+			<span class="header_span01"> <a
+				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1">
+					<b> 返回部门主页 </b>
+			</a> <a href="/stocker-manager/account/obtainIDAndNamesHandler"> <b>全部已处理</b>
+			</a> <a> 等待 </a> <a
+				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
+					<b>查看记录</b>
+			</a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
+			</a> <a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>
+			</a>
+			</span>
+		</div>
+	</header>
+
+	<!--  -->
 	<div>
 		<br>
 		<table class="table_6" cellspacing="0" cellpadding="0" border="1"
-			style="margin: 4rem auto 10em auto; width: 80%;">
+			style="margin: 6rem auto 10em auto; width: 80%;">
 			<thead>
 				<tr>
 					<th><input type="checkbox" class="tbl_head_check"
@@ -118,14 +151,18 @@
 				</tr>
 			</thead>
 
-			<tbody class="table_boby"></tbody>
+			<tbody class="table_boby">
+			</tbody>
 		</table>
 
-		<!--  display: none; -->
-		<div class="uid_uname" style="text-align: center;">
-			<p></p>
-		</div>
-		
+	</div>
+
+	<div class="uid_uname" style="display: none; text-align: center;">
+		<c:forEach items="${map}" var="e">
+			<p>
+				<i class="result_index">${e.key}</i><b id="result_element_${e.key}">${e.value}</b>
+			</p>
+		</c:forEach>
 	</div>
 
 </body>

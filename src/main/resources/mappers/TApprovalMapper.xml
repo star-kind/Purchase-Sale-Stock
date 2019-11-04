@@ -2,524 +2,585 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allstargh.ssm.mapper.TApprovalDAO">
 
-  <resultMap id="BaseResultMap" type="com.allstargh.ssm.pojo.TApproval">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="department_number" jdbcType="TINYINT" property="departmentNumber" />
-    <result column="approvals_time" jdbcType="TIMESTAMP" property="approvalsTime" />
-    <result column="reply_opinion" jdbcType="CHAR" property="replyOpinion" />
-    <result column="original_order" jdbcType="INTEGER" property="originalOrder" />
-    <result column="auditor" jdbcType="INTEGER" property="auditor" />
-    <result column="approve_operates" jdbcType="BIT" property="approveOperates" />
-  </resultMap>
-  
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, department_number, approvals_time, reply_opinion, original_order, auditor, approve_operates
-  </sql>
-  <select id="selectByExample" parameterType="com.allstargh.ssm.pojo.TApprovalExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_approval
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_approval
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_approval
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.allstargh.ssm.pojo.TApprovalExample">
-    delete from t_approval
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  
-  <insert id="insert" parameterType="com.allstargh.ssm.pojo.TApproval">
-    insert into t_approval (id, department_number, approvals_time, 
-      reply_opinion, original_order, auditor, 
-      approve_operates)
-    values (#{id,jdbcType=INTEGER}, #{departmentNumber,jdbcType=TINYINT}, #{approvalsTime,jdbcType=TIMESTAMP}, 
-      #{replyOpinion,jdbcType=CHAR}, #{originalOrder,jdbcType=INTEGER}, #{auditor,jdbcType=INTEGER}, 
-      #{approveOperates,jdbcType=BIT})
-  </insert>
-  
-  <insert id="insertSelective" parameterType="com.allstargh.ssm.pojo.TApproval">
-    insert into t_approval
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="departmentNumber != null">
-        department_number,
-      </if>
-      <if test="approvalsTime != null">
-        approvals_time,
-      </if>
-      <if test="replyOpinion != null">
-        reply_opinion,
-      </if>
-      <if test="originalOrder != null">
-        original_order,
-      </if>
-      <if test="auditor != null">
-        auditor,
-      </if>
-      <if test="approveOperates != null">
-        approve_operates,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="departmentNumber != null">
-        #{departmentNumber,jdbcType=TINYINT},
-      </if>
-      <if test="approvalsTime != null">
-        #{approvalsTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="replyOpinion != null">
-        #{replyOpinion,jdbcType=CHAR},
-      </if>
-      <if test="originalOrder != null">
-        #{originalOrder,jdbcType=INTEGER},
-      </if>
-      <if test="auditor != null">
-        #{auditor,jdbcType=INTEGER},
-      </if>
-      <if test="approveOperates != null">
-        #{approveOperates,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <insert id="insertBatch" parameterType="java.util.List">
-    insert into t_approval (id, department_number, approvals_time, 
-      reply_opinion, original_order, auditor, 
-      approve_operates)
-    values 
-    <foreach collection="list" index="index" item="item" separator=",">
-      (#{item.id,jdbcType=INTEGER}, #{item.departmentNumber,jdbcType=TINYINT}, #{item.approvalsTime,jdbcType=TIMESTAMP}, 
-        #{item.replyOpinion,jdbcType=CHAR}, #{item.originalOrder,jdbcType=INTEGER}, #{item.auditor,jdbcType=INTEGER}, 
-        #{item.approveOperates,jdbcType=BIT})
-    </foreach>
-  </insert>
-  <insert id="insertBatchSelective" parameterType="java.util.List">
-    insert into t_approval
-    (id, department_number, approvals_time, reply_opinion, original_order, auditor, approve_operates
-      )
-    values 
-    <foreach collection="list" index="index" item="item" separator=",">
-      <trim prefix="(" suffix=")" suffixOverrides=",">
-        <if test="item.id != null">
-          #{item.id,jdbcType=INTEGER},
-        </if>
-        <if test="item.id == null">
-          NULL,
-        </if>
-        <if test="item.departmentNumber != null">
-          #{item.departmentNumber,jdbcType=TINYINT},
-        </if>
-        <if test="item.departmentNumber == null">
-          NULL,
-        </if>
-        <if test="item.approvalsTime != null">
-          #{item.approvalsTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="item.approvalsTime == null">
-          NULL,
-        </if>
-        <if test="item.replyOpinion != null">
-          #{item.replyOpinion,jdbcType=CHAR},
-        </if>
-        <if test="item.replyOpinion == null">
-          NULL,
-        </if>
-        <if test="item.originalOrder != null">
-          #{item.originalOrder,jdbcType=INTEGER},
-        </if>
-        <if test="item.originalOrder == null">
-          NULL,
-        </if>
-        <if test="item.auditor != null">
-          #{item.auditor,jdbcType=INTEGER},
-        </if>
-        <if test="item.auditor == null">
-          NULL,
-        </if>
-        <if test="item.approveOperates != null">
-          #{item.approveOperates,jdbcType=BIT},
-        </if>
-        <if test="item.approveOperates == null">
-          NULL,
-        </if>
-      </trim>
-    </foreach>
-  </insert>
-  <select id="countByExample" parameterType="com.allstargh.ssm.pojo.TApprovalExample" resultType="java.lang.Long">
-    select count(*) from t_approval
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_approval
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.departmentNumber != null">
-        department_number = #{record.departmentNumber,jdbcType=TINYINT},
-      </if>
-      <if test="record.approvalsTime != null">
-        approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.replyOpinion != null">
-        reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
-      </if>
-      <if test="record.originalOrder != null">
-        original_order = #{record.originalOrder,jdbcType=INTEGER},
-      </if>
-      <if test="record.auditor != null">
-        auditor = #{record.auditor,jdbcType=INTEGER},
-      </if>
-      <if test="record.approveOperates != null">
-        approve_operates = #{record.approveOperates,jdbcType=BIT},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_approval
-    set id = #{record.id,jdbcType=INTEGER},
-      department_number = #{record.departmentNumber,jdbcType=TINYINT},
-      approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
-      reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
-      original_order = #{record.originalOrder,jdbcType=INTEGER},
-      auditor = #{record.auditor,jdbcType=INTEGER},
-      approve_operates = #{record.approveOperates,jdbcType=BIT}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.allstargh.ssm.pojo.TApproval">
-    update t_approval
-    <set>
-      <if test="departmentNumber != null">
-        department_number = #{departmentNumber,jdbcType=TINYINT},
-      </if>
-      <if test="approvalsTime != null">
-        approvals_time = #{approvalsTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="replyOpinion != null">
-        reply_opinion = #{replyOpinion,jdbcType=CHAR},
-      </if>
-      <if test="originalOrder != null">
-        original_order = #{originalOrder,jdbcType=INTEGER},
-      </if>
-      <if test="auditor != null">
-        auditor = #{auditor,jdbcType=INTEGER},
-      </if>
-      <if test="approveOperates != null">
-        approve_operates = #{approveOperates,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.allstargh.ssm.pojo.TApproval">
-    update t_approval
-    set department_number = #{departmentNumber,jdbcType=TINYINT},
-      approvals_time = #{approvalsTime,jdbcType=TIMESTAMP},
-      reply_opinion = #{replyOpinion,jdbcType=CHAR},
-      original_order = #{originalOrder,jdbcType=INTEGER},
-      auditor = #{auditor,jdbcType=INTEGER},
-      approve_operates = #{approveOperates,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateBatchByPrimaryKey" parameterType="java.util.List">
-    update t_approval
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="department_number =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.departmentNumber}
-        </foreach>
-      </trim>
-      <trim prefix="approvals_time =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.approvalsTime}
-        </foreach>
-      </trim>
-      <trim prefix="reply_opinion =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.replyOpinion}
-        </foreach>
-      </trim>
-      <trim prefix="original_order =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.originalOrder}
-        </foreach>
-      </trim>
-      <trim prefix="auditor =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.auditor}
-        </foreach>
-      </trim>
-      <trim prefix="approve_operates =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.approveOperates}
-        </foreach>
-      </trim>
-    </trim>
-    where id in 
-    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
-       #{item.id} 
-    </foreach>
-  </update>
-  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
-    update t_approval
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="department_number =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.departmentNumber != null ">
-            when  #{item.id} then #{item.departmentNumber}
-          </if>
-          <if test="item.departmentNumber == null ">
-            when  #{item.id} then t_approval.department_number
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="approvals_time =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.approvalsTime != null ">
-            when  #{item.id} then #{item.approvalsTime}
-          </if>
-          <if test="item.approvalsTime == null ">
-            when  #{item.id} then t_approval.approvals_time
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="reply_opinion =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.replyOpinion != null ">
-            when  #{item.id} then #{item.replyOpinion}
-          </if>
-          <if test="item.replyOpinion == null ">
-            when  #{item.id} then t_approval.reply_opinion
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="original_order =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.originalOrder != null ">
-            when  #{item.id} then #{item.originalOrder}
-          </if>
-          <if test="item.originalOrder == null ">
-            when  #{item.id} then t_approval.original_order
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="auditor =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.auditor != null ">
-            when  #{item.id} then #{item.auditor}
-          </if>
-          <if test="item.auditor == null ">
-            when  #{item.id} then t_approval.auditor
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="approve_operates =case id" suffix="end,">
-        <foreach collection="list" index="index" item="item" separator=" ">
-          <if test="item.approveOperates != null ">
-            when  #{item.id} then #{item.approveOperates}
-          </if>
-          <if test="item.approveOperates == null ">
-            when  #{item.id} then t_approval.approve_operates
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in 
-    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
-       #{item.id} 
-    </foreach>
-  </update>
-  <update id="updateBatchByExample" parameterType="map">
-    update t_approval
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="department_number =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.departmentNumber}
-        </foreach>
-      </trim>
-      <trim prefix="approvals_time =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.approvalsTime}
-        </foreach>
-      </trim>
-      <trim prefix="reply_opinion =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.replyOpinion}
-        </foreach>
-      </trim>
-      <trim prefix="original_order =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.originalOrder}
-        </foreach>
-      </trim>
-      <trim prefix="auditor =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.auditor}
-        </foreach>
-      </trim>
-      <trim prefix="approve_operates =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          when  #{item.id} then #{item.approveOperates}
-        </foreach>
-      </trim>
-    </trim>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateBatchByExampleSelective" parameterType="map">
-    update t_approval
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="department_number =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.departmentNumber != null ">
-            when  #{item.id} then #{item.departmentNumber}
-          </if>
-          <if test="item.departmentNumber == null ">
-            when  #{item.id} then t_approval.department_number
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="approvals_time =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.approvalsTime != null ">
-            when  #{item.id} then #{item.approvalsTime}
-          </if>
-          <if test="item.approvalsTime == null ">
-            when  #{item.id} then t_approval.approvals_time
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="reply_opinion =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.replyOpinion != null ">
-            when  #{item.id} then #{item.replyOpinion}
-          </if>
-          <if test="item.replyOpinion == null ">
-            when  #{item.id} then t_approval.reply_opinion
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="original_order =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.originalOrder != null ">
-            when  #{item.id} then #{item.originalOrder}
-          </if>
-          <if test="item.originalOrder == null ">
-            when  #{item.id} then t_approval.original_order
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="auditor =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.auditor != null ">
-            when  #{item.id} then #{item.auditor}
-          </if>
-          <if test="item.auditor == null ">
-            when  #{item.id} then t_approval.auditor
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="approve_operates =case id" suffix="end,">
-        <foreach collection="recordList" index="index" item="item" separator=" ">
-          <if test="item.approveOperates != null ">
-            when  #{item.id} then #{item.approveOperates}
-          </if>
-          <if test="item.approveOperates == null ">
-            when  #{item.id} then t_approval.approve_operates
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+	<resultMap id="BaseResultMap"
+		type="com.allstargh.ssm.pojo.TApproval">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="department_number" jdbcType="TINYINT"
+			property="departmentNumber" />
+		<result column="approvals_time" jdbcType="TIMESTAMP"
+			property="approvalsTime" />
+		<result column="reply_opinion" jdbcType="CHAR"
+			property="replyOpinion" />
+		<result column="original_order" jdbcType="INTEGER"
+			property="originalOrder" />
+		<result column="auditor" jdbcType="INTEGER" property="auditor" />
+		<result column="approve_operates" jdbcType="BIT"
+			property="approveOperates" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, department_number, approvals_time, reply_opinion, original_order,
+		auditor, approve_operates
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.allstargh.ssm.pojo.TApprovalExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_approval
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_approval
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from t_approval
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.allstargh.ssm.pojo.TApprovalExample">
+		delete from t_approval
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.allstargh.ssm.pojo.TApproval">
+		insert into t_approval (id, department_number, approvals_time,
+		reply_opinion, original_order, auditor,
+		approve_operates)
+		values (#{id,jdbcType=INTEGER}, #{departmentNumber,jdbcType=TINYINT},
+		#{approvalsTime,jdbcType=TIMESTAMP},
+		#{replyOpinion,jdbcType=CHAR}, #{originalOrder,jdbcType=INTEGER}, #{auditor,jdbcType=INTEGER},
+		#{approveOperates,jdbcType=BIT})
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.allstargh.ssm.pojo.TApproval">
+		insert into t_approval
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="departmentNumber != null">
+				department_number,
+			</if>
+			<if test="approvalsTime != null">
+				approvals_time,
+			</if>
+			<if test="replyOpinion != null">
+				reply_opinion,
+			</if>
+			<if test="originalOrder != null">
+				original_order,
+			</if>
+			<if test="auditor != null">
+				auditor,
+			</if>
+			<if test="approveOperates != null">
+				approve_operates,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="departmentNumber != null">
+				#{departmentNumber,jdbcType=TINYINT},
+			</if>
+			<if test="approvalsTime != null">
+				#{approvalsTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="replyOpinion != null">
+				#{replyOpinion,jdbcType=CHAR},
+			</if>
+			<if test="originalOrder != null">
+				#{originalOrder,jdbcType=INTEGER},
+			</if>
+			<if test="auditor != null">
+				#{auditor,jdbcType=INTEGER},
+			</if>
+			<if test="approveOperates != null">
+				#{approveOperates,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into t_approval (id, department_number, approvals_time,
+		reply_opinion, original_order, auditor,
+		approve_operates)
+		values
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			(#{item.id,jdbcType=INTEGER}, #{item.departmentNumber,jdbcType=TINYINT},
+			#{item.approvalsTime,jdbcType=TIMESTAMP},
+			#{item.replyOpinion,jdbcType=CHAR},
+			#{item.originalOrder,jdbcType=INTEGER},
+			#{item.auditor,jdbcType=INTEGER},
+			#{item.approveOperates,jdbcType=BIT})
+		</foreach>
+	</insert>
+	<insert id="insertBatchSelective" parameterType="java.util.List">
+		insert into t_approval
+		(id, department_number, approvals_time, reply_opinion, original_order,
+		auditor, approve_operates
+		)
+		values
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="item.id != null">
+					#{item.id,jdbcType=INTEGER},
+				</if>
+				<if test="item.id == null">
+					NULL,
+				</if>
+				<if test="item.departmentNumber != null">
+					#{item.departmentNumber,jdbcType=TINYINT},
+				</if>
+				<if test="item.departmentNumber == null">
+					NULL,
+				</if>
+				<if test="item.approvalsTime != null">
+					#{item.approvalsTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.approvalsTime == null">
+					NULL,
+				</if>
+				<if test="item.replyOpinion != null">
+					#{item.replyOpinion,jdbcType=CHAR},
+				</if>
+				<if test="item.replyOpinion == null">
+					NULL,
+				</if>
+				<if test="item.originalOrder != null">
+					#{item.originalOrder,jdbcType=INTEGER},
+				</if>
+				<if test="item.originalOrder == null">
+					NULL,
+				</if>
+				<if test="item.auditor != null">
+					#{item.auditor,jdbcType=INTEGER},
+				</if>
+				<if test="item.auditor == null">
+					NULL,
+				</if>
+				<if test="item.approveOperates != null">
+					#{item.approveOperates,jdbcType=BIT},
+				</if>
+				<if test="item.approveOperates == null">
+					NULL,
+				</if>
+			</trim>
+		</foreach>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.allstargh.ssm.pojo.TApprovalExample"
+		resultType="java.lang.Long">
+		select count(*) from t_approval
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_approval
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.departmentNumber != null">
+				department_number = #{record.departmentNumber,jdbcType=TINYINT},
+			</if>
+			<if test="record.approvalsTime != null">
+				approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.replyOpinion != null">
+				reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
+			</if>
+			<if test="record.originalOrder != null">
+				original_order = #{record.originalOrder,jdbcType=INTEGER},
+			</if>
+			<if test="record.auditor != null">
+				auditor = #{record.auditor,jdbcType=INTEGER},
+			</if>
+			<if test="record.approveOperates != null">
+				approve_operates = #{record.approveOperates,jdbcType=BIT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<update id="updateByExample" parameterType="map">
+		update t_approval
+		set id = #{record.id,jdbcType=INTEGER},
+		department_number = #{record.departmentNumber,jdbcType=TINYINT},
+		approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
+		reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
+		original_order = #{record.originalOrder,jdbcType=INTEGER},
+		auditor = #{record.auditor,jdbcType=INTEGER},
+		approve_operates = #{record.approveOperates,jdbcType=BIT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.allstargh.ssm.pojo.TApproval">
+		update t_approval
+		<set>
+			<if test="departmentNumber != null">
+				department_number = #{departmentNumber,jdbcType=TINYINT},
+			</if>
+			<if test="approvalsTime != null">
+				approvals_time = #{approvalsTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="replyOpinion != null">
+				reply_opinion = #{replyOpinion,jdbcType=CHAR},
+			</if>
+			<if test="originalOrder != null">
+				original_order = #{originalOrder,jdbcType=INTEGER},
+			</if>
+			<if test="auditor != null">
+				auditor = #{auditor,jdbcType=INTEGER},
+			</if>
+			<if test="approveOperates != null">
+				approve_operates = #{approveOperates,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.allstargh.ssm.pojo.TApproval">
+		update t_approval
+		set department_number = #{departmentNumber,jdbcType=TINYINT},
+		approvals_time = #{approvalsTime,jdbcType=TIMESTAMP},
+		reply_opinion = #{replyOpinion,jdbcType=CHAR},
+		original_order = #{originalOrder,jdbcType=INTEGER},
+		auditor = #{auditor,jdbcType=INTEGER},
+		approve_operates = #{approveOperates,jdbcType=BIT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateBatchByPrimaryKey"
+		parameterType="java.util.List">
+		update t_approval
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="department_number =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.departmentNumber}
+				</foreach>
+			</trim>
+			<trim prefix="approvals_time =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approvalsTime}
+				</foreach>
+			</trim>
+			<trim prefix="reply_opinion =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.replyOpinion}
+				</foreach>
+			</trim>
+			<trim prefix="original_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.originalOrder}
+				</foreach>
+			</trim>
+			<trim prefix="auditor =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.auditor}
+				</foreach>
+			</trim>
+			<trim prefix="approve_operates =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approveOperates}
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" index="index" item="item"
+			open="(" separator=",">
+			#{item.id}
+		</foreach>
+	</update>
+	<update id="updateBatchByPrimaryKeySelective"
+		parameterType="java.util.List">
+		update t_approval
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="department_number =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.departmentNumber != null ">
+						when #{item.id} then #{item.departmentNumber}
+					</if>
+					<if test="item.departmentNumber == null ">
+						when #{item.id} then t_approval.department_number
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approvals_time =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.approvalsTime != null ">
+						when #{item.id} then #{item.approvalsTime}
+					</if>
+					<if test="item.approvalsTime == null ">
+						when #{item.id} then t_approval.approvals_time
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="reply_opinion =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.replyOpinion != null ">
+						when #{item.id} then #{item.replyOpinion}
+					</if>
+					<if test="item.replyOpinion == null ">
+						when #{item.id} then t_approval.reply_opinion
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="original_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.originalOrder != null ">
+						when #{item.id} then #{item.originalOrder}
+					</if>
+					<if test="item.originalOrder == null ">
+						when #{item.id} then t_approval.original_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="auditor =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.auditor != null ">
+						when #{item.id} then #{item.auditor}
+					</if>
+					<if test="item.auditor == null ">
+						when #{item.id} then t_approval.auditor
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approve_operates =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.approveOperates != null ">
+						when #{item.id} then #{item.approveOperates}
+					</if>
+					<if test="item.approveOperates == null ">
+						when #{item.id} then t_approval.approve_operates
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" index="index" item="item"
+			open="(" separator=",">
+			#{item.id}
+		</foreach>
+	</update>
+	<update id="updateBatchByExample" parameterType="map">
+		update t_approval
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="department_number =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.departmentNumber}
+				</foreach>
+			</trim>
+			<trim prefix="approvals_time =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approvalsTime}
+				</foreach>
+			</trim>
+			<trim prefix="reply_opinion =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.replyOpinion}
+				</foreach>
+			</trim>
+			<trim prefix="original_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.originalOrder}
+				</foreach>
+			</trim>
+			<trim prefix="auditor =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.auditor}
+				</foreach>
+			</trim>
+			<trim prefix="approve_operates =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approveOperates}
+				</foreach>
+			</trim>
+		</trim>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateBatchByExampleSelective" parameterType="map">
+		update t_approval
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="department_number =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.departmentNumber != null ">
+						when #{item.id} then #{item.departmentNumber}
+					</if>
+					<if test="item.departmentNumber == null ">
+						when #{item.id} then t_approval.department_number
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approvals_time =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.approvalsTime != null ">
+						when #{item.id} then #{item.approvalsTime}
+					</if>
+					<if test="item.approvalsTime == null ">
+						when #{item.id} then t_approval.approvals_time
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="reply_opinion =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.replyOpinion != null ">
+						when #{item.id} then #{item.replyOpinion}
+					</if>
+					<if test="item.replyOpinion == null ">
+						when #{item.id} then t_approval.reply_opinion
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="original_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.originalOrder != null ">
+						when #{item.id} then #{item.originalOrder}
+					</if>
+					<if test="item.originalOrder == null ">
+						when #{item.id} then t_approval.original_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="auditor =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.auditor != null ">
+						when #{item.id} then #{item.auditor}
+					</if>
+					<if test="item.auditor == null ">
+						when #{item.id} then t_approval.auditor
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approve_operates =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.approveOperates != null ">
+						when #{item.id} then #{item.approveOperates}
+					</if>
+					<if test="item.approveOperates == null ">
+						when #{item.id} then t_approval.approve_operates
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
 </mapper>

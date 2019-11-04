@@ -59,7 +59,7 @@
 
 <style type="text/css">
 .address_previous {
-	margin-top: 4rem;
+	margin: 2em 0 2em auto;
 	border-bottom: 2px solid #b84848;
 }
 

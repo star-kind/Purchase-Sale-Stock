@@ -82,9 +82,7 @@
 					<b> 待审批申请队列 </b>
 			</a>
 			
-			 
-			<a href="javascript:opens(2)"> <b>全部已处理</b> </a>
-			
+			<a href="/stocker-manager/account/obtainIDAndNamesHandler"> <b>全部已处理</b> </a>
 			 
 			<a> 等待 </a> 
 			
@@ -105,13 +103,6 @@
 			<jsp:include page="WaitingApproved.jsp"></jsp:include>
 		</div>
 
-		
-		<!-- 全部已处理 -->
-		<div class="detail_zone div_module"
-			style="display: none; text-align: center;" id="room2">
-			<jsp:include page="AllProcessed.jsp"></jsp:include>
-		</div>
-		
 	</div>
 </body>
 
