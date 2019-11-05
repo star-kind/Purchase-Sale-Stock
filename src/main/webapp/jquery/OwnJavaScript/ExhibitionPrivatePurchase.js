@@ -563,7 +563,6 @@ function submitPurchaseData() {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
-
 				layer.alert('修改成功', function() {
 					location.reload();
 

@@ -54,12 +54,12 @@ public class ApprovalControllerUtil extends ControllerUtils {
 		if (this != PLACEHOLDER) {
 			System.err.println("占位符/默认值不能执行");
 			return false;
-			
+
 		}
-		
+
 		System.err.println("占位符/默认值能够执行");
 		return true;
-		
+
 	}
 
 	/**
@@ -135,6 +135,40 @@ public class ApprovalControllerUtil extends ControllerUtils {
 		s.append(LINE_SEPARATOR);
 
 		writeRecordLog(affect, DAILY_FILE_NAME, s.toString());
+	}
+
+	/**
+	 * 
+	 * @param approveOperates
+	 * @param username
+	 * @param affect
+	 * @param order
+	 */
+	public void revampByIDHandlerRecord(Integer approveOperates, String username, Integer affect, Integer order) {
+		String decides = "";
+
+		StringBuilder builder = new StringBuilder(p_tag_prefix);
+
+		if (approveOperates == 0) {
+			decides = "否决";
+		} else if (approveOperates == 1) {
+			decides = "同意";
+		}
+
+		builder.append("审批员");
+		builder.append(username);
+		builder.append("于");
+		builder.append(now_time);
+		builder.append("对");
+		builder.append(affect);
+		builder.append("份申请单进行了复核,");
+		builder.append("复核决定为:");
+		builder.append(decides);
+		builder.append(",序号为:");
+		builder.append(order);
+		builder.append(",原部门暂不披露");
+
+		writeRecordLog(affect, DAILY_FILE_NAME, builder.toString());
 	}
 
 }

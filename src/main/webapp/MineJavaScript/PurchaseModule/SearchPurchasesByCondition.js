@@ -378,7 +378,7 @@ function eject(detail) {
 		closeBtn : true,// 关闭窗体按钮,真,显示
 		shade : 0.4,
 		id : 'detail_of_purchase',// 为上层div设1个ID,防止重复出现
-		resize : true,// 更改大小,假,禁止
+		resize : true,// 更改大小,假:禁止
 		moveType : 1,
 		area : [ '800px', '480px' ],// 宽,高
 		content : detail

@@ -58,7 +58,10 @@ public class ApprovalController extends ControllerUtils {
 		System.err.println(uid + "," + approveOperates + "," + replyOpinion + "," + tid);
 
 		Integer affect = ias.revampByID(uid, approveOperates, replyOpinion, tid);
-
+		
+		String username = getUsrnameFromSession(session);
+		instance.revampByIDHandlerRecord(approveOperates, username, affect, tid);
+		
 		return new ResponseResult<Integer>(SUCCESS, affect);
 
 	}

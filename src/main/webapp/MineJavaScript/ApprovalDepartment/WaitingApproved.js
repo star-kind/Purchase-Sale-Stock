@@ -21,7 +21,6 @@ function exhibitionHandler() {
 				console.log(rr.data[2]);
 
 				generateRowsContent(rr.data[2], 2);
-
 			} else {
 				layer.alert(rr.message, function() {
 					setTimeout(function() {
@@ -63,7 +62,8 @@ function generatesRowsOfPurchase(map_element, typeStr, dept) {
 	var signal = 2;
 
 	for (var i = 0; i < map_element.length; i++) {
-		var tr = '<tr id="app_purchase_' + map_element[i].purchaseId + '">';
+		var tr = '<tr id="app_purchase_' + map_element[i].purchaseId
+				+ '" class="purchases">';
 
 		tr += '<td><input type="checkbox" value="' + map_element[i].purchaseId
 				+ '" class="td_order_number"></td>';
@@ -260,6 +260,8 @@ function getFormContentAtPurchase(data) {
 	formHtml += '<br><input type="text" readonly="readonly"  value=" '
 			+ data.classify + ' ">';
 	formHtml += '</p>';
+
+	formHtml += '<br>';
 
 	formHtml += '<p>批复意见</p>';
 	formHtml += '<textarea rows="3" class="mine_replyOpinion_commit" maxlength="80"></textarea>';

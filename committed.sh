@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "hardword for js"
+git commit -m "new module:sale"
 
 #github
 git pull github master
