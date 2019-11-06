@@ -43,18 +43,20 @@ function exhibitedClassifyNumsHandler() {
 function putNumIntoSelector(map) {
 	var array = [];
 
+	var n = 1;
+
 	// Object转数组
 	for ( var i in map) {
 		array.push(map[i]);
 	}
 
-	var n = 1;
 	for (let j = 0; j < array.length; j++) {
 		console.log(array[j]);
 
-		$(
-				'body > div > div.content-wrapper > section.content > div > div.col-md-3 > div:nth-child(3) > div.box-body.no-padding > ul > li:nth-child('
-						+ n++ + ') > a > span').text(array[j].num);
+		var selector = $('body > div > div.content-wrapper > section.content > div > div.col-md-3 > div:nth-child(3) > div.box-body.no-padding > ul > li:nth-child('
+				+ n++ + ') > a > span');
+
+		selector.text(array[j].num);
 
 	}
 
@@ -234,11 +236,15 @@ function exhibitTableList() {
  * @returns
  */
 function exhibitLenAmount(list) {
+	var length = 0;
+
 	var lensTag = $('.len_amount');
 	lensTag.empty();
 
-	var length = list.length + 1;
-	console.log('applications.length:' + length);
+	if (list != null) {
+		length = list.length;
+		console.log('applications.length:' + length);
+	}
 
 	lensTag.text(length);
 }

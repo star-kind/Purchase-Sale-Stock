@@ -19,6 +19,8 @@ import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
+import com.allstargh.ssm.pojo.TStockExample;
+import com.allstargh.ssm.pojo.TStockExample.Criteria;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IStcokSevice;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -199,6 +201,41 @@ public class StockServiceImpl implements IStcokSevice {
 		}
 
 		return split;
+	}
+
+	@Override
+	public List<TStock> foundByStockTypeArea(Integer uid, Integer type) throws SelfServiceException {
+		TStockExample example = new TStockExample();
+		Criteria criteria = example.createCriteria();
+
+		Integer[] competences = { 3, 4 };
+
+		Accounts account = ics.checkForAccount(uid, competences);
+
+		byte bt = (byte) type.intValue();
+
+		example.setDistinct(false);
+		example.setOrderByClause("lastest_modified_time asc");
+
+		criteria.andStockTypeAreaEqualTo(bt);
+
+		List<TStock> list = tsd.selectByExample(example);
+
+		return list;
+	}
+
+	@Override
+	public Integer getStoreAuantityByID(Integer uid, Integer sid) throws SelfServiceException {
+		Integer[] competences = { 3, 4 };
+
+		Accounts account = ics.checkForAccount(uid, competences);
+
+		long id = sid.longValue();
+		TStock stock = tsd.selectByPrimaryKey(id);
+
+		Integer quantity = stock.getStoreQuantity();
+
+		return quantity;
 	}
 
 }

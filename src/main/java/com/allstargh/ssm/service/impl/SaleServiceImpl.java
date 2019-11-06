@@ -19,21 +19,23 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 @Service
-public class SaleServiceImpl implements ISaleService{
+public class SaleServiceImpl implements ISaleService {
 	@Autowired
 	private TSaleDAO tSaleDAO;
-	
+
 	@Autowired
 	private ICommonReplenishService icrs;
-	
+
 	@Override
 	public Integer add(Integer uid, TSale tSale) throws SelfServiceException {
 		Accounts account = icrs.checkForAccount(uid, 3);
-		
+
 		tSale.setSaleOperator(uid);
 		tSale.setSaleTime(new Date());
-		
-		return null;
+
+		int affect = tSaleDAO.insert(tSale);
+
+		return affect;
 	}
 
 }

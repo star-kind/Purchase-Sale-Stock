@@ -758,6 +758,13 @@
 		operator=#{operator}
 	</select>
 
+	<!-- 差集条件 -->
+	<sql id="Difference_Set_Condition">
+		purchase.purchase_id
+		NOT IN
+		(SELECT purchase_id FROM t_stock)
+	</sql>
+
 	<select id="selectByClassifyAndIsAgree"
 		resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
@@ -768,13 +775,14 @@
 		classify = #{classify,jdbcType=INTEGER}
 
 		AND
-
 		is_agree =
 		#{isAgree,jdbcType=INTEGER}
 
 		AND
-
 		has_take_goods=1
+
+		AND
+		<include refid="Difference_Set_Condition" />
 	</select>
 
 	<resultMap type="java.util.Map" id="BaseResultMap01">
@@ -795,6 +803,9 @@
 
 		AND
 		has_take_goods=1
+
+		AND
+		<include refid="Difference_Set_Condition" />
 
 		GROUP BY
 		classify

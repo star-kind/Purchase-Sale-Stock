@@ -59,8 +59,29 @@ public class StockController extends ControllerUtils {
 	StockServiceUtil serviceUtil = StockServiceUtil.getInstance();
 
 	/**
-	 * division<br>
+	 * [------------------------------------------------------------------------]
 	 */
+
+	/**
+	 * /stocker-manager/StockController/getStoreAuantityByIDHandler
+	 * 
+	 * @param session
+	 * @param sid
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getStoreAuantityByIDHandler", method = RequestMethod.GET)
+	public ResponseResult<Integer> getStoreAuantityByIDHandler(HttpSession session, @RequestParam("sid") Integer sid)
+			throws SelfServiceException, IOException {
+		Integer uid = getUsridFromSession(session);
+
+		Integer quantity = iss.getStoreAuantityByID(uid, sid);
+
+		return new ResponseResult<Integer>(SUCCESS, quantity);
+
+	}
 
 	/**
 	 * /stocker-manager/StockController/readDailyLogHandler

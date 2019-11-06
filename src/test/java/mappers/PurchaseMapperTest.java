@@ -38,7 +38,7 @@ public class PurchaseMapperTest {
 	public void selectTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 
-		List<Purchase> list = pm.selectByClassifyAndIsAgree(0, 1);
+		List<Purchase> list = pm.selectByClassifyAndIsAgree(2, 1);
 
 		for (Purchase purchase : list) {
 			System.err.println(purchase.toString());

@@ -98,8 +98,8 @@
 	
 	<div>
 		<!-- 填写销售记录报告 -->
-		<div class="detail_zone div_module"
-			style="display: none; text-align: center;" id="room1">
+		<div class="div_module"
+			style="display: none;" id="room1">
 			<jsp:include page="AddRecord.jsp"></jsp:include>
 		</div>
 

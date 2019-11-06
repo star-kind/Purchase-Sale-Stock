@@ -10,14 +10,37 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.TStock;
+import com.allstargh.ssm.pojo.TStockExample;
+import com.allstargh.ssm.pojo.TStockExample.Criteria;
 
-public class TStockMapper {
+public class TStockMapperTest {
 	private ApplicationContext applicationContext;
 	private TStockDAO dao;
 
 	@Before
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
+	}
+
+	@Test
+	public void selectByAreaTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		TStockExample example = new TStockExample();
+		Criteria criteria = example.createCriteria();
+
+		example.setDistinct(false);
+		example.setOrderByClause("lastest_modified_time asc");
+
+		byte b = 1;
+		criteria.andStockTypeAreaEqualTo(b);
+		
+		List<TStock> list = dao.selectByExample(example);
+		
+		for (TStock tStock : list) {
+			System.err.println(tStock);
+		}
+
 	}
 
 	@Test

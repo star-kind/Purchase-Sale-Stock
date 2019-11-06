@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "new module:sale"
+git commit -m "add of sale"
 
 #github
 git pull github master

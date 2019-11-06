@@ -25,7 +25,6 @@ public class ApprovalControllerUtil extends ControllerUtils {
 	 * 私有构造方法,防止被引用
 	 */
 	private ApprovalControllerUtil() {
-
 	}
 
 	private ApprovalControllerUtil(String arg) {
@@ -62,10 +61,14 @@ public class ApprovalControllerUtil extends ControllerUtils {
 
 	}
 
+	/*----------------------------------------------------------------------*/
+
 	/**
 	 * daily file name
 	 */
 	public static final String DAILY_FILE_NAME = "Auditor-record.txt";
+
+	/*----------------------------------------------------------------------*/
 
 	/**
 	 * 

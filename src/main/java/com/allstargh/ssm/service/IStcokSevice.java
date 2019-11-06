@@ -17,6 +17,25 @@ public interface IStcokSevice {
 	/**
 	 * 
 	 * @param uid
+	 * @param sid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer getStoreAuantityByID(Integer uid, Integer sid) throws SelfServiceException;
+
+	/**
+	 * 按存储类型区域查询
+	 * 
+	 * @param uid
+	 * @param type
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	List<TStock> foundByStockTypeArea(Integer uid, Integer type) throws SelfServiceException;
+
+	/**
+	 * 
+	 * @param uid
 	 * @return
 	 * @throws SelfServiceException
 	 * @throws IOException

@@ -68,6 +68,7 @@ function generatesRowsOfPurchase(map_element, typeStr, dept) {
 		tr += '<td><input type="checkbox" value="' + map_element[i].purchaseId
 				+ '" class="td_order_number"></td>';
 
+		tr += '<td>' + map_element[i].commodity + '</td>';
 		tr += '<td>' + typeStr + '</td>';
 		tr += '<td>' + dept + '</td>';
 		tr += '<td>';
@@ -346,7 +347,6 @@ function agreeOrAgainst(deptNumber, id, decide) {
 				}, function() {
 					$('#app_purchase_' + id).remove();
 					layer.closeAll();
-					location.reload();
 				});
 
 			} else {

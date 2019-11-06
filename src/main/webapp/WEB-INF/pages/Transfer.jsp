@@ -44,7 +44,9 @@
 				</tr>
 
 				<tr class="t_rows">
-					<td class="data_cells"><a href="#" class="links_dept">销售部</a></td>
+					<td class="data_cells"><a
+						href="/stocker-manager/cross/generalAccess?moduleName=SaleRecords/SalerWorkable&competence=3"
+						class="links_dept">销售部</a></td>
 				</tr>
 
 				<tr class="t_rows">

@@ -104,6 +104,7 @@
 				<tr>
 					<th scope="col"><input type="checkbox" id="head_check"
 						onclick="headInfluence()">多选</th>
+					<th scope="col">名称</th>						
 					<th scope="col">申请单类型</th>
 					<th scope="col">原部门</th>
 					<th scope="col">查看</th>

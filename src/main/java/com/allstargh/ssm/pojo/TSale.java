@@ -285,4 +285,13 @@ public class TSale {
 	public void setIsEnoughStock(Short isEnoughStock) {
 		this.isEnoughStock = isEnoughStock;
 	}
+
+	@Override
+	public String toString() {
+		return "TSale [id=" + id + ", commodity=" + commodity + ", customer=" + customer + ", amountMoney="
+				+ amountMoney + ", amountPaid=" + amountPaid + ", paymentMethod=" + paymentMethod + ", isPay=" + isPay
+				+ ", quantity=" + quantity + ", saleOperator=" + saleOperator + ", regionDepartment=" + regionDepartment
+				+ ", saleTime=" + saleTime + ", isEnoughStock=" + isEnoughStock + "]";
+	}
+
 }

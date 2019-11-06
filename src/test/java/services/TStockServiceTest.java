@@ -28,6 +28,36 @@ public class TStockServiceTest {
 	}
 
 	@Test
+	public void selectTest1() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		try {
+			Integer q = iss.getStoreAuantityByID(61, 21);
+
+			System.err.println(q);
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void selectByAreaTest1() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		try {
+			List<TStock> list = iss.foundByStockTypeArea(62, 1);
+
+			for (TStock tStock : list) {
+				System.err.println(tStock.toString());
+			}
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void selectByAreaTest() {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 
