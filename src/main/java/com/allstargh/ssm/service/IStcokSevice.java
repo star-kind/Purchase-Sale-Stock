@@ -2,7 +2,9 @@ package com.allstargh.ssm.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -41,6 +43,20 @@ public interface IStcokSevice {
 	 * @throws IOException
 	 */
 	abstract String[] readDailyLog(Integer uid) throws SelfServiceException, IOException;
+
+	/**
+	 * 分页察看文本日志记录
+	 * 
+	 * <b><i>overload<i><b>
+	 * 
+	 * @param uid
+	 * @param pageNum
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	abstract PagingText readDailyLog(Integer uid, Integer pageNum)
+			throws SelfServiceException, IOException;
 
 	/**
 	 * 

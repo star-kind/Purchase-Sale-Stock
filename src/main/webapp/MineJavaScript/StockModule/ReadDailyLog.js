@@ -1,9 +1,36 @@
 $(function() {
-	readDailyLogHandler();
+	// readDailyLogHandler();
+	readDailyLogHandlerPlus();
 	exhibitTableList();
 })
 
 /**
+ * 
+ * @returns
+ */
+function readDailyLogHandlerPlus() {
+	var uri = '/stocker-manager/StockController/readDailyLogHandlerPlus';
+
+	var selector = $('.records_stock_dept');
+
+	$.ajax({
+		url : uri,
+		type : 'post',
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				selector.html(rr.data.textContent);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
+
+/**
+ * 作废
  * 
  * @returns
  */
@@ -18,7 +45,7 @@ function readDailyLogHandler() {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
-				 selector.html(rr.data);
+				selector.html(rr.data);
 			} else {
 				layer.alert(rr.message);
 			}
@@ -56,7 +83,6 @@ function exhibitTableList() {
 	})
 
 }
-
 
 /**
  * 

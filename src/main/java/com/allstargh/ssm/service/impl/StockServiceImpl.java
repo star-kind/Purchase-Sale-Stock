@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.pojo.TStockExample;
@@ -27,6 +29,7 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 import com.allstargh.ssm.service.util.StockServiceUtil;
+import com.allstargh.ssm.util.SegmentReadText;
 
 @Service
 public class StockServiceImpl implements IStcokSevice {
@@ -181,11 +184,11 @@ public class StockServiceImpl implements IStcokSevice {
 		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
 		String path = builder.append(StockControllerUtil.DAILY_FILE_NAME).toString();
 
-		Path path2 = Paths.get(path);
+		Path path1 = Paths.get(path);
 
 		String string = new String();
 		try {
-			byte[] bytes = Files.readAllBytes(path2);
+			byte[] bytes = Files.readAllBytes(path1);
 			string = new String(bytes);
 
 		} catch (Exception e) {
@@ -197,7 +200,7 @@ public class StockServiceImpl implements IStcokSevice {
 		// 如已超限则排空
 		if (split.length > 12 * 1024) {
 			System.err.println(this.getClass().getSimpleName() + ",超限");
-			psu.cleanSubstance(StockControllerUtil.DAILY_FILE_NAME);
+			psu.cleanSubstance(path);
 		}
 
 		return split;
@@ -236,6 +239,23 @@ public class StockServiceImpl implements IStcokSevice {
 		Integer quantity = stock.getStoreQuantity();
 
 		return quantity;
+	}
+
+	@Override
+	public PagingText readDailyLog(Integer uid, Integer pageNum) throws SelfServiceException, IOException {
+		Accounts account = ics.checkForAccount(uid, 4);
+
+		SegmentReadText seg = new SegmentReadText();
+
+		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
+
+		String path = builder.append(StockControllerUtil.DAILY_FILE_NAME).toString();
+
+		ics.checkTextOutOfCapacity(path, 11 * 1024);
+
+		PagingText text = seg.potting(path, pageNum);
+
+		return text;
 	}
 
 }

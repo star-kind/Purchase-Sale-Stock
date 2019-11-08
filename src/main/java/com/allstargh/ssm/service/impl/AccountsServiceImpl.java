@@ -277,6 +277,8 @@ public class AccountsServiceImpl implements IAccountsService {
 	public List<String> readSubstanceFromLog(Integer usrid) throws IOException, SelfServiceException {
 		Accounts accounts = accountsMapper.selectAccountByUsrid(usrid);
 
+		LinkedList<String> list = new LinkedList<String>();
+
 		if (usrid == null) {
 			String desc = ServiceExceptionEnum.OFFLINE_LOGIN.getDescription();
 			throw new SelfServiceException(desc);
@@ -314,8 +316,6 @@ public class AccountsServiceImpl implements IAccountsService {
 		} finally {
 			bis.close();
 		}
-
-		LinkedList<String> list = new LinkedList<String>();
 
 		list.add(s);
 

@@ -567,13 +567,8 @@
 							</div>
 
 							<div class="box-body no-padding">
-								<div class="mailbox-read-info">
-									<!-- <h3>Message Subject Is Placed Here</h3> -->
-									<!-- <h5>
-										From: help@example.com <span
-											class="mailbox-read-time pull-right">15 Feb. 2016
-											11:03 PM</span>
-									</h5> -->
+								<div class="mailbox-read-info records_stock_dept">
+									
 								</div>
 								<!-- /.mailbox-read-info -->
 								<div class="mailbox-controls with-border text-center">
@@ -671,6 +666,33 @@
 								</button>
 							</div>
 							<!-- /.box-footer -->
+
+							<!-- 上页下页 -->
+							<div>
+								<style type="text/css" media="screen">
+.address_div {
+	text-align: center;
+	font-size: 22px;
+}
+
+.address_div a {
+	margin: 0 15px 0 15px;
+}
+
+.current_page_index {
+	display: none;
+}
+</style>
+								<div class="address_div">
+									<span class="current_page_index"></span> <a
+										href="javascript:void()" class="first_page">首页</a> <a
+										href="javascript:void()" class="prev_page">上一页</a> <a
+										href="javascript:void()" class="next_page">下一页</a> <a
+										href="javascript:void()" class="last_page">尾页</a>
+								</div>
+							</div>
+							<!-- 上页下页end -->
+
 						</div>
 						<!-- /. box -->
 					</div>

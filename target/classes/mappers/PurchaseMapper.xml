@@ -762,7 +762,8 @@
 	<sql id="Difference_Set_Condition">
 		purchase.purchase_id
 		NOT IN
-		(SELECT purchase_id FROM t_stock)
+		(SELECT ts.purchase_id FROM
+		t_stock ts)
 	</sql>
 
 	<select id="selectByClassifyAndIsAgree"
@@ -796,21 +797,18 @@
 		SELECT
 		classify,
 		COUNT(purchase_id) AS num
-		FROM
-		purchase
-		WHERE
-		is_agree=1
+		FROM purchase p
+		WHERE p.purchase_id
 
-		AND
-		has_take_goods=1
-
-		AND
+		NOT IN
 		<include refid="Difference_Set_Condition" />
 
-		GROUP BY
-		classify
-		ORDER BY
-		classify
-		ASC
+		AND is_agree=1
+
+		AND has_take_goods=1
+
+		GROUP BY classify
+
+		ORDER BY classify ASC
 	</select>
 </mapper>

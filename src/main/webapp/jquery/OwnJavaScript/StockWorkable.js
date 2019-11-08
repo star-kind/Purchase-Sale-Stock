@@ -25,8 +25,8 @@ function exhibitedClassifyNumsHandler() {
 				console.log(map);
 				console.log(typeof (map));
 
-				putNumIntoSelector(map);
-
+				/* 该功能失败 TODO */
+				// putNumIntoSelector(map);
 			} else {
 				layer.alert(rr.message);
 			}

@@ -106,11 +106,11 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 		String pathCompelete = buffer.append(ApprovalControllerUtil.DAILY_FILE_NAME).toString();
 
-		Path path2 = Paths.get(pathCompelete);
+		Path path1 = Paths.get(pathCompelete);
 
 		String string = new String();
 		try {
-			byte[] bytes = Files.readAllBytes(path2);
+			byte[] bytes = Files.readAllBytes(path1);
 			string = new String(bytes);
 
 		} catch (Exception e) {
@@ -122,7 +122,7 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 		if (split.length > 10 * 1024) {
 			System.err.println(this.getClass().getName() + ",文件超限");
-			psu.cleanSubstance(ApprovalControllerUtil.DAILY_FILE_NAME);
+			psu.cleanSubstance(pathCompelete);
 		}
 
 		return split;

@@ -1,5 +1,7 @@
 package com.allstargh.ssm.service;
 
+import java.io.IOException;
+
 import org.springframework.ui.ModelMap;
 
 import com.allstargh.ssm.pojo.Accounts;
@@ -12,6 +14,15 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface ICommonReplenishService {
+	/**
+	 * 检测文本是否超出容量
+	 * 
+	 * @param path     文件位置(含文件名)
+	 * @param capacity 容量上限
+	 * @throws IOException
+	 */
+	void checkTextOutOfCapacity(String path, int capacity) throws IOException;
+
 	/**
 	 * 检查进入模块的资格
 	 * 

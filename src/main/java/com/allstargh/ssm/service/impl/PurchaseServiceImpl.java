@@ -199,7 +199,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 		Accounts accounts = am.selectAccountByUsrid(usrid);
 		System.out.println(accounts);
-		
+
 		if (accounts.getCompetence() != 2) {
 			String description = ServiceExceptionEnum.COMPETENCE_DISLOCATION.getDescription();
 			throw new SelfServiceException(description);
@@ -224,7 +224,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		// 如已超限则排空
 		if (ss.length > 12 * 1024) {
 			System.err.println(this.getClass().getSimpleName() + ",超限");
-			psu.cleanSubstance(PurchaseControllerUtil.PURCHASE_FILE_NAME);
+			psu.cleanSubstance(uri);
 		}
 
 		return ss;

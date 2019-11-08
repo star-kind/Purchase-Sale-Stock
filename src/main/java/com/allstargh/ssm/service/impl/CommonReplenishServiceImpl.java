@@ -1,19 +1,31 @@
 package com.allstargh.ssm.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import com.allstargh.ssm.controller.kits.StockControllerUtil;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
+import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 
 @Service
 public class CommonReplenishServiceImpl implements ICommonReplenishService {
 	@Autowired
 	private AccountsMapper am;
+
+	/**
+	 * PurchaseServiceUtil
+	 */
+	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
 
 	@Override
 	public String checkEnterCompetence(Integer usrid, Integer competence, ModelMap model, String moduleName) {
@@ -127,6 +139,29 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 		}
 
 		return account;
+	}
+
+	@Override
+	public void checkTextOutOfCapacity(String path, int capacity) throws IOException {
+		Path path1 = Paths.get(path);
+
+		String string = new String();
+		try {
+			byte[] bytes = Files.readAllBytes(path1);
+			string = new String(bytes);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String[] split = string.split("\n|\r");
+
+		// 如已超限则排空
+		if (split.length > capacity) {
+			System.err.println(this.getClass().getSimpleName() + ",超限");
+			psu.cleanSubstance(path);
+		}
+
 	}
 
 }

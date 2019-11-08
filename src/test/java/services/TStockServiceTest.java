@@ -1,13 +1,16 @@
 package services;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.IAccountsService;
@@ -25,6 +28,22 @@ public class TStockServiceTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void readTest() {
+		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
+
+		try {
+			PagingText text = iss.readDailyLog(54, 0);
+
+			System.err.println(text.toString());
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Test

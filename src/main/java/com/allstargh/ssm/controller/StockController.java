@@ -6,6 +6,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.StockControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
@@ -99,6 +101,28 @@ public class StockController extends ControllerUtils {
 		String[] dailyLog = iss.readDailyLog(uid);
 
 		return new ResponseResult<String[]>(SUCCESS, dailyLog);
+
+	}
+
+	/**
+	 * /stocker-manager/StockController/readDailyLogHandlerPlus
+	 * 
+	 * @param session
+	 * @param pageNum
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readDailyLogHandlerPlus", method = RequestMethod.POST)
+	public ResponseResult<PagingText> readDailyLogHandlerPlus(HttpSession session,
+			@RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum)
+			throws SelfServiceException, IOException {
+		Integer uid = getUsridFromSession(session);
+
+		PagingText text = iss.readDailyLog(uid, pageNum);
+
+		return new ResponseResult<PagingText>(SUCCESS, text);
 
 	}
 

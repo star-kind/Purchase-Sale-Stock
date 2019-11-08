@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "add of sale"
+git commit -m "paging text"
 
 #github
 git pull github master
