@@ -326,7 +326,7 @@
 								</span>
 							</a></li>
 							<li><a href="#">Compose</a></li>
-							<li class="active"><a href="read-mail.html">查看日志记录</a></li>
+							<li class="active"><a href="javascript:void(0)">查看日志记录</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
 							<span>Examples</span> <span class="pull-right-container">
@@ -679,16 +679,28 @@
 	margin: 0 15px 0 15px;
 }
 
-.current_page_index {
+.page_index {
 	display: none;
 }
 </style>
 								<div class="address_div">
-									<span class="current_page_index"></span> <a
-										href="javascript:void()" class="first_page">首页</a> <a
-										href="javascript:void()" class="prev_page">上一页</a> <a
-										href="javascript:void()" class="next_page">下一页</a> <a
-										href="javascript:void()" class="last_page">尾页</a>
+									<!-- 当前页 -->
+									<span class="current_page_index page_index"></span>
+									
+									<!-- 总页数 --> 
+									<span class="total_page_index page_index"></span>
+									
+									<!-- 是否还有上一页 -->
+									<span class="previous_page_index page_index"></span>
+									
+									<!-- 是否还有下一页 -->
+									<span class="next_page_index page_index"></span>
+									
+									<a
+										href="javascript:pageNumber(2)" class="first_page">首页</a> <a
+										href="javascript:pageNumber(1)" class="prev_page">上一页</a> <a
+										href="javascript:pageNumber(0)" class="next_page">下一页</a> <a
+										href="javascript:pageNumber(3)" class="last_page">尾页</a>
 								</div>
 							</div>
 							<!-- 上页下页end -->

@@ -4,30 +4,186 @@ $(function() {
 	exhibitTableList();
 })
 
+/* global variable */
+var uri_path = '/stocker-manager/StockController/readDailyLogHandlerPlus';
+
 /**
  * 
  * @returns
  */
 function readDailyLogHandlerPlus() {
-	var uri = '/stocker-manager/StockController/readDailyLogHandlerPlus';
-
-	var selector = $('.records_stock_dept');
-
 	$.ajax({
-		url : uri,
-		type : 'post',
+		url : uri_path,
+		type : 'GET',
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
 				console.log(rr.data);
 
-				selector.html(rr.data.textContent);
+				putInto(rr.data);
 			} else {
 				layer.alert(rr.message);
 			}
 		}
 	});
 }
+
+/**
+ * 
+ * @param y
+ * @returns
+ */
+function pageNumber(y) {
+	console.log('y:' + y);
+
+	switch (y) {
+	case 0:
+		var param = pageDown();
+		pageTurn(param);
+		break;
+
+	case 1:
+		var param = pageUp();
+		pageTurn(param);
+		break;
+
+	case 2:
+		pageTurn(0);
+		break;
+
+	case 3:
+		var total = $('.total_page_index').text();
+		pageTurn(total);
+		break;
+	}
+
+}
+
+/**
+ * 上一页
+ * 
+ * @returns
+ */
+function pageUp() {
+	console.log('pageUp():');
+
+	var n = null;
+
+	var current = transform($('.current_page_index').text());
+	var previous = transform($('.previous_page_index').text());
+	var next = transform($('.next_page_index').text());
+	var total = transform($('.total_page_index').text());
+
+	if (current > 0 && previous == true) {
+		n = current - 1;
+		console.log(n);
+	}
+
+	return n;
+}
+
+/**
+ * 下一页
+ * 
+ * @returns
+ */
+function pageDown() {
+	console.log('pageDown():');
+
+	var n = null;
+
+	var current = transform($('.current_page_index').text());
+	var previous = transform($('.previous_page_index').text());
+	var next = transform($('.next_page_index').text());
+	var total = transform($('.total_page_index').text());
+
+	if (current < total && next == true) {
+		n = current + 1;
+		console.log(n);
+	}
+
+	return n;
+}
+
+/**
+ * 转型:string转boolean或number
+ * 
+ * @param key
+ * @returns
+ */
+function transform(key) {
+	console.log(this);
+
+	switch (key) {
+	case 'false':
+		key = false;
+		break;
+
+	case 'true':
+		key = true;
+		break;
+
+	default:
+		key = parseInt(key);
+		break;
+	}
+
+	console.log(key);
+	console.log(typeof (key));
+
+	return key;
+}
+
+/**
+ * 翻页
+ * 
+ * @param param
+ * @returns
+ */
+function pageTurn(param) {
+	console.log('param==' + param);
+
+	if (param == null || '') {
+		return;
+	}
+
+	$.ajax({
+		url : uri_path,
+		data : {
+			'pageNum' : param
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				putInto(rr.data);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
+
+/**
+ * 
+ * @param data
+ * @returns
+ */
+function putInto(data) {
+	console.log(data);
+
+	$('.records_stock_dept').empty();
+	$('.records_stock_dept').append(data.textContent);
+
+	$('.current_page_index').text(data.currentPage);
+	$('.total_page_index').text(data.totalPages);
+	$('.previous_page_index').text(data.isPrevious);
+	$('.next_page_index').text(data.isNext);
+}
+
+/*-----------------------------------------------------------------------------------*/
 
 /**
  * 作废

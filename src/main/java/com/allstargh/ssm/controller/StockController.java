@@ -114,11 +114,12 @@ public class StockController extends ControllerUtils {
 	 * @throws IOException
 	 */
 	@ResponseBody
-	@RequestMapping(value = "readDailyLogHandlerPlus", method = RequestMethod.POST)
+	@RequestMapping(value = "readDailyLogHandlerPlus", method = RequestMethod.GET)
 	public ResponseResult<PagingText> readDailyLogHandlerPlus(HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum)
 			throws SelfServiceException, IOException {
 		Integer uid = getUsridFromSession(session);
+		System.err.println("num==" + pageNum);
 
 		PagingText text = iss.readDailyLog(uid, pageNum);
 

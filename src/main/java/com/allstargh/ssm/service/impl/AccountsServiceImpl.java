@@ -308,7 +308,7 @@ public class AccountsServiceImpl implements IAccountsService {
 			s = string;
 
 			// 若果超限,先删除,在创建一个相同的;一个汉字=2byte,1kb=1024byte
-			if (i > 5 * 1024) {
+			if (i > 10 * 1024) {
 				file.delete();
 				file.createNewFile();
 			}

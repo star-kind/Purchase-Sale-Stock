@@ -253,7 +253,7 @@ public class StockServiceImpl implements IStcokSevice {
 
 		ics.checkTextOutOfCapacity(path, 11 * 1024);
 
-		PagingText text = seg.potting(path, pageNum);
+		PagingText text = seg.packaging(path, pageNum);
 
 		return text;
 	}

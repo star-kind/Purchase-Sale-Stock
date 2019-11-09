@@ -1,5 +1,6 @@
 package com.allstargh.ssm.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -26,9 +27,9 @@ public class PagingText {
 	 */
 	private Integer totalPages;
 
-	private List<Map<Integer, String>> textContent;
+	private String[] textContent;
 	private Boolean isPrevious;
-	private Boolean isNextPage;
+	private Boolean isNext;
 
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -46,11 +47,11 @@ public class PagingText {
 		this.totalPages = totalPages;
 	}
 
-	public List<Map<Integer, String>> getTextContent() {
+	public String[] getTextContent() {
 		return textContent;
 	}
 
-	public void setTextContent(List<Map<Integer, String>> textContent) {
+	public void setTextContent(String[] textContent) {
 		this.textContent = textContent;
 	}
 
@@ -62,18 +63,18 @@ public class PagingText {
 		this.isPrevious = isPrevious;
 	}
 
-	public Boolean getIsNextPage() {
-		return isNextPage;
+	public Boolean getIsNext() {
+		return isNext;
 	}
 
-	public void setIsNextPage(Boolean isNextPage) {
-		this.isNextPage = isNextPage;
+	public void setIsNext(Boolean isNext) {
+		this.isNext = isNext;
 	}
 
 	@Override
 	public String toString() {
-		return "PagingText [currentPage=" + currentPage + ", totalPages=" + totalPages + ", textContent=" + textContent
-				+ ", isPrevious=" + isPrevious + ", isNextPage=" + isNextPage + "]";
+		return "PagingText [currentPage=" + currentPage + ", totalPages=" + totalPages + ", textContent="
+				+ Arrays.toString(textContent) + ", isPrevious=" + isPrevious + ", isNext=" + isNext + "]";
 	}
 
 }

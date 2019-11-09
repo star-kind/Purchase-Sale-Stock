@@ -18,19 +18,17 @@ import com.allstargh.ssm.pojo.PagingText;
 /**
  * 从文本文件中分页读取数据
  * 
+ * <b>在这里,第0当做是现实中的第1</b>
+ * 
  * @author admin
  *
  */
 public class SegmentReadText {
 	/**
-	 * 每隔 index * beginning 行作为开始行,如此便可达到"分页"的效果
+	 * 每次从文件中读取的行数,同时,<br>
+	 * 以每隔 index * LINE_COUNT 作为开始行,可达到"分页"的效果
 	 */
-	public static int beginning = 80;
-
-	/**
-	 * 每次从文件中读取的行数
-	 */
-	public static final Integer LINE_COUNT = 80;
+	public static final Integer LINE_COUNT = 10;
 
 	/**
 	 * 文件默认编码
@@ -43,7 +41,8 @@ public class SegmentReadText {
 	private Map<String, Integer> counterMap = Collections.synchronizedMap(new HashMap<String, Integer>());
 
 	/**
-	 * 设置从文件的开始读取行数
+	 * 设置从文件的开始读取行数<br>
+	 * <b>msgKey默认值一定是null,而不能是空字符串,不然得到的数据会一直是重复不变的</b>
 	 * 
 	 * @param msgKey 文件的唯一标识
 	 * @param offset 开始读取的行数位置
@@ -66,10 +65,8 @@ public class SegmentReadText {
 
 		if (counterMap.get(msgKey) == null) {
 			counterMap.put(msgKey, line);
-
 		} else {
 			line = counterMap.get(msgKey);
-
 		}
 
 		try {
@@ -139,7 +136,8 @@ public class SegmentReadText {
 	 * @return
 	 */
 	public List<Map<Integer, String>> getTextData(String filePath, Integer index) {
-		setupBeginLines(null, index * beginning);
+		/* msgKey默认值一定是null,而不能是空字符串,不然得到的数据会一直是重复不变的 */
+		setupBeginLines(null, index * LINE_COUNT);
 
 		List<Map<Integer, String>> list = readRowsRecords(null, filePath);
 		System.err.println("list.size: " + list.size());
@@ -187,16 +185,45 @@ public class SegmentReadText {
 	}
 
 	/**
+	 * 炼制数据<br>
+	 * 为了更好地将文本内容投射在前台页面,需要将内容提取转化为字符串数组
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public String[] refineData(List<Map<Integer, String>> list) {
+		String value = null;
+
+		for (Map<Integer, String> map : list) {
+			for (Map.Entry<Integer, String> ele : map.entrySet()) {
+				// System.out.println(ele.getKey() + " , " + ele.getValue());
+				value += ele.getValue();
+			}
+		}
+
+		// System.err.println(value);
+		String[] split = value.split("\n|\r");
+
+		for (int i = 0; i < split.length; i++) {
+			// System.err.println(split[i]);
+		}
+
+		return split;
+	}
+
+	/**
 	 * 封装
 	 * 
 	 * @param filePath
 	 * @param index
 	 * @return
 	 */
-	public PagingText potting(String filePath, Integer index) {
+	public PagingText packaging(String filePath, Integer index) {
 		PagingText text = new PagingText();
 
 		List<Map<Integer, String>> list = getTextData(filePath, index);
+
+		String[] data = refineData(list);
 
 		Integer lines = countTextLines(filePath);
 
@@ -204,17 +231,25 @@ public class SegmentReadText {
 
 		text.setTotalPages(totalPages);
 
-		if (index > totalPages) {
-			text.setIsNextPage(false);
+		if (index >= totalPages && totalPages > 0) {
+			text.setIsNext(false);
 			text.setIsPrevious(true);
 
-		} else {
-			text.setIsNextPage(true);
+		} else if (index < totalPages && index > 0) {
+			text.setIsNext(true);
+			text.setIsPrevious(true);
+
+		} else if (index == 0 && totalPages > 0) {
+			text.setIsNext(true);
+			text.setIsPrevious(false);
+
+		} else if (totalPages == 0) {
+			text.setIsNext(false);
 			text.setIsPrevious(false);
 
 		}
 
-		text.setTextContent(list);
+		text.setTextContent(data);
 		text.setCurrentPage(index);
 
 		return text;

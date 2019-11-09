@@ -35,7 +35,7 @@ public class TStockServiceTest {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 
 		try {
-			PagingText text = iss.readDailyLog(54, 0);
+			PagingText text = iss.readDailyLog(54, 1);
 
 			System.err.println(text.toString());
 		} catch (SelfServiceException e) {

@@ -760,10 +760,10 @@
 
 	<!-- 差集条件 -->
 	<sql id="Difference_Set_Condition">
-		purchase.purchase_id
+		purchase_id
 		NOT IN
-		(SELECT ts.purchase_id FROM
-		t_stock ts)
+		(SELECT purchase_id FROM
+		t_stock)
 	</sql>
 
 	<select id="selectByClassifyAndIsAgree"
@@ -797,10 +797,9 @@
 		SELECT
 		classify,
 		COUNT(purchase_id) AS num
-		FROM purchase p
-		WHERE p.purchase_id
-
-		NOT IN
+		FROM purchase
+		
+		WHERE
 		<include refid="Difference_Set_Condition" />
 
 		AND is_agree=1
@@ -809,6 +808,7 @@
 
 		GROUP BY classify
 
-		ORDER BY classify ASC
+		ORDER BY classify
+		ASC
 	</select>
 </mapper>

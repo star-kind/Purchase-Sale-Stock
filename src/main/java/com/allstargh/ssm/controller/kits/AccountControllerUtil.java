@@ -41,7 +41,7 @@ public class AccountControllerUtil extends ControllerUtils {
 	 * @return
 	 */
 	public ArrayList<HashMap<Integer, String[]>> addScopeArray() {
-		String[] competence = { "管理员", "总经理", "采购经理", "销售经理", "仓库主管", "普通雇员" };
+		String[] competence = { "管理员", "审查员", "采购经理", "销售经理", "仓库主管", "普通雇员" };
 		String[] activeStatus = { "已注销", "已激活" };
 
 		HashMap<Integer, String[]> hashMap = new HashMap<Integer, String[]>();
@@ -98,17 +98,13 @@ public class AccountControllerUtil extends ControllerUtils {
 		try {
 			string += acc.getUsrname() + " 于 " + now_time;
 			string += "注册成功,岗位为" + acc.getCompetence();
-			string += ",部门区域为";
+			string += ",地区为";
 			string += acc.getRegionDepartment() + ",执行者:";
 			string += session.getAttribute("usrname").toString();
 			string += LINE_SEPARATOR;
 
 		} catch (Exception e) {
-			string += acc.getUsrname() + " 于 " + now_time;
-			string += "试图注册账号,职务为" + acc.getCompetence();
-			string += ",部门地区为" + acc.getRegionDepartment();
-			string += LINE_SEPARATOR;
-
+			e.printStackTrace();
 		}
 
 		if (row == 1) {
@@ -169,7 +165,7 @@ public class AccountControllerUtil extends ControllerUtils {
 
 		String usridStr = geneateUsridStr(usrids);
 
-		string += usrids.length + "位用户:ID为[ " + usridStr + "]提交注销请求,其中";
+		string += usrids.length + "位用户:ID为[ " + usridStr + " ]提交注销请求,其中";
 		string += affects + "位用户于" + now_time + "完成注销,";
 		string += "执行人为: " + session.getAttribute("usrname").toString();
 		string += LINE_SEPARATOR;
@@ -301,7 +297,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += "ID为 " + uid + " 的账户于";
 		string += now_time + "修改了基本资料,新用户名为:" + uname;
 		string += ",新电话为:" + phone + LINE_SEPARATOR;
-		
+
 		if (affect == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
 		}
@@ -318,7 +314,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		String useridStr = "";
 
 		for (int i = 0; i < usrids.length; i++) {
-			useridStr += Integer.valueOf(usrids[i]) + ",";
+			useridStr += Integer.valueOf(usrids[i]);
 		}
 
 		return useridStr;

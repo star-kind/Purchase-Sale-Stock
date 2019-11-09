@@ -55,7 +55,7 @@
 	<div class="detail_zone div_module"
 		style="display: block; text-align: center;" id="room1">
 
-		<table border="1" class="member-table">
+		<table border="1" class="member-table" style="font-size: 2rem;">
 			<br>
 			<br>
 			<caption>The Register List</caption>
