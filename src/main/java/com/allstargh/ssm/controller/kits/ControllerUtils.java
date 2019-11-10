@@ -242,7 +242,8 @@ public class ControllerUtils {
 	}
 
 	/**
-	 * 把记录写入日志文件(针对单行操作) <b>overload</b>
+	 * 把记录写入日志文件(针对单行操作) <br>
+	 * <b>Overload</b>
 	 * 
 	 * @param fileName
 	 * @param sentence

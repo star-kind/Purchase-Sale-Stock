@@ -28,7 +28,7 @@ DESC accounts;
 -- ======================================================
 
 -- 修改
- update purchase set is_agree=1,has_take_goods=1  where purchase_id<10;    
+update purchase set is_agree=1,has_take_goods=1  where purchase_id<10;    
 
 alter table accounts change reg_time reg_time date not null;
 
@@ -242,7 +242,6 @@ purchase_sale_stock> select purchase_id pid from t_stock;
 | 19  |
 +-----+
 
-
 --ts集合可以说属于全集p,查找ts集合的补集(属于p,且不属于ts)
 --差集操作
 select purchase_id from purchase where purchase.purchase_id not in(select purchase_id from t_stock);
@@ -304,7 +303,6 @@ from purchase
 
 group by classify order by classify asc;
 
-
 +----------+------+
 | classify | 数量 |
 +----------+------+
@@ -345,3 +343,78 @@ where is_agree=1 group by classify order by classify asc;
 ALTER TABLE accounts MODIFY `region_department` int(3) NOT NULL COMMENT  
 '部门所处地区:0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-鸦岭,9-酒后,10-平等,11-夏堡,12-富留店';
 
+-- 新增1列
+alter table t_sale add surplus_demand int(11) not null comment '剩余需求量';
+
+-- 新增1列
+alter table t_sale add has_submitted_approval smallint(1) not null default 0 comment '是否已送审:0未送,1已送';
+
+-- 修改
+update t_sale set surplus_demand = 100 where id>0;
+
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 0,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 1  | 111.11       |
+| 2  | 250.14       |
+| 3  | 360.14       |
++----+--------------+
+
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 1,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 2  |  250.14      |
+| 3  |  360.14      |
+| 4  | 2540.78      |
++----+--------------+
+
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 2,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 3  |  360.14      |
+| 4  | 2540.78      |
+| 5  | 1261.04      |
++----+--------------+
+
+-- 翻页,第一页0,n
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 0,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 1  | 111.11       |
+| 2  | 250.14       |
+| 3  | 360.14       |
++----+--------------+
+
+-- 第二页n,n
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 3,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 4  | 2540.78      |
+| 5  | 1261.04      |
+| 6  | 1261.04      |
++----+--------------+
+
+-- 第三页2n,n
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 6,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 7  |  252.14      |
+| 8  | 2052.14      |
+| 9  |  152.14      |
++----+--------------+
+
+-- 第四页3n,n
+select id,amount_money from t_sale ORDER BY sale_time,id ASC limit 9,3;
++----+--------------+
+| id | amount_money |
++----+--------------+
+| 10 | 15211.1      |
+| 11 |   211.14     |
+| 12 |  1211.4      |
++----+--------------+

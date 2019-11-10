@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.allstargh.ssm.controller.kits.ControllerUtils;
+import com.allstargh.ssm.controller.kits.TransferControllerUtil;
 import com.allstargh.ssm.service.ICommonReplenishService;
 
 /**
@@ -22,6 +23,11 @@ import com.allstargh.ssm.service.ICommonReplenishService;
 public class TransferController extends ControllerUtils {
 	@Autowired
 	private ICommonReplenishService ics;
+	
+	/**
+	 * 工具类
+	 */
+	TransferControllerUtil instance=TransferControllerUtil.getInstance();
 
 	/**
 	 * 例如:/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1
@@ -37,9 +43,13 @@ public class TransferController extends ControllerUtils {
 		Integer uid = getUsridFromSession(session);
 
 		System.err.println("competence:" + competence + "," + "moduleName:" + moduleName);
-		String string = ics.checkEnterCompetence(uid, competence, model, moduleName);
+		String target = ics.checkEnterCompetence(uid, competence, model, moduleName);
+		
+		String username = getUsrnameFromSession(session);
 
-		return string;
+		instance.generalAccessRecords(username, competence);
+		
+		return target;
 
 	}
 

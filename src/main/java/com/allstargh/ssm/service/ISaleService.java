@@ -1,5 +1,6 @@
 package com.allstargh.ssm.service;
 
+import com.allstargh.ssm.pojo.Pagination;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -17,5 +18,16 @@ public interface ISaleService {
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	Integer add(Integer uid,TSale tSale) throws SelfServiceException;
+	Integer add(Integer uid, TSale tSale) throws SelfServiceException;
+
+	/**
+	 * 分页展示
+	 * 
+	 * @param pageth 当前页
+	 * @param rows   每页显示条数
+	 * @param uid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Pagination<TSale> pagingDisplay(Integer pageth, Integer rows, Integer uid) throws SelfServiceException;
 }

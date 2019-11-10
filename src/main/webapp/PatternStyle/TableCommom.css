@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
+/*th*/
 .table-head {
-	font-size: 14px;
+	font-size: 24px;
 	background: #eee;
 	font-weight: normal;
 }
 
-/*表格样式*/
+/*table*/
 .member-table {
 	width: 90%;
 	background: #ccc;
@@ -15,6 +16,7 @@
 	border-collapse: collapse;
 	margin-top: 25px;
 	margin-bottom: 25px;
+	font-size: 22px;
 }
 
 .member-table th td {

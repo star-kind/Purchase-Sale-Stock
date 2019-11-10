@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.SaleControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.Pagination;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
@@ -41,6 +42,27 @@ public class SaleController extends ControllerUtils {
 	 * 懒汉式
 	 */
 	SaleControllerUtil scu = SaleControllerUtil.getInstance();
+
+	/**
+	 * /stocker-manager/SaleController/pagingDisplayHandler?pageth=1
+	 * 
+	 * @param session
+	 * @param pageth
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "pagingDisplayHandler", method = RequestMethod.GET)
+	public ResponseResult<Pagination<TSale>> pagingDisplayHandler(HttpSession session,
+			@RequestParam(value = "pageth", defaultValue = "0") Integer pageth) {
+		System.err.println("pageth==" + pageth);
+
+		Integer uid = getUsridFromSession(session);
+
+		Pagination<TSale> pagination = iss.pagingDisplay(pageth, 3, uid);
+
+		return new ResponseResult<Pagination<TSale>>(SUCCESS, pagination);
+
+	}
 
 	/**
 	 * /stocker-manager/SaleController/addHandler

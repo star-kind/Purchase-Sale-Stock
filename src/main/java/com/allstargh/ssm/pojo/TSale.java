@@ -4,7 +4,21 @@ package com.allstargh.ssm.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TSale {
+	/**
+	 * 是否已送审:0未送,1已送'
+	 */
+	private Short hasSubmittedApproval;
+
+	/**
+	 * 剩余需求量
+	 */
+	private Integer surplusDemand;
+
 	/**
 	 * 主键
 	 */
@@ -59,6 +73,7 @@ public class TSale {
 	/**
 	 * 销售时间
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date saleTime;
 
 	/**
@@ -255,6 +270,7 @@ public class TSale {
 	 * 
 	 * @return 销售时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getSaleTime() {
 		return saleTime;
 	}
@@ -286,12 +302,29 @@ public class TSale {
 		this.isEnoughStock = isEnoughStock;
 	}
 
+	public Short getHasSubmittedApproval() {
+		return hasSubmittedApproval;
+	}
+
+	public void setHasSubmittedApproval(Short hasSubmittedApproval) {
+		this.hasSubmittedApproval = hasSubmittedApproval;
+	}
+
+	public Integer getSurplusDemand() {
+		return surplusDemand;
+	}
+
+	public void setSurplusDemand(Integer surplusDemand) {
+		this.surplusDemand = surplusDemand;
+	}
+
 	@Override
 	public String toString() {
-		return "TSale [id=" + id + ", commodity=" + commodity + ", customer=" + customer + ", amountMoney="
-				+ amountMoney + ", amountPaid=" + amountPaid + ", paymentMethod=" + paymentMethod + ", isPay=" + isPay
-				+ ", quantity=" + quantity + ", saleOperator=" + saleOperator + ", regionDepartment=" + regionDepartment
-				+ ", saleTime=" + saleTime + ", isEnoughStock=" + isEnoughStock + "]";
+		return "TSale [hasSubmittedApproval=" + hasSubmittedApproval + ", surplusDemand=" + surplusDemand + ", id=" + id
+				+ ", commodity=" + commodity + ", customer=" + customer + ", amountMoney=" + amountMoney
+				+ ", amountPaid=" + amountPaid + ", paymentMethod=" + paymentMethod + ", isPay=" + isPay + ", quantity="
+				+ quantity + ", saleOperator=" + saleOperator + ", regionDepartment=" + regionDepartment + ", saleTime="
+				+ saleTime + ", isEnoughStock=" + isEnoughStock + "]";
 	}
 
 }

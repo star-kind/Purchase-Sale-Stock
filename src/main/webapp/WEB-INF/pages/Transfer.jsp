@@ -40,7 +40,8 @@
 
 				<tr class="t_rows">
 					<td class="data_cells"><a
-						href="${basePath}/account/toAdminWorkable" class="links_dept">信息技术部</a></td>
+						href="/stocker-manager/cross/generalAccess?moduleName=AdminWorkable&competence=0"
+						class="links_dept">信息技术部</a></td>
 				</tr>
 
 				<tr class="t_rows">
@@ -51,13 +52,13 @@
 
 				<tr class="t_rows">
 					<td class="data_cells"><a
-						href="${basePath}/PurchaseController/jumpToPurchaseDeptHandler"
+						href="/stocker-manager/cross/generalAccess?moduleName=PurchaseDir/PurchaseWorkable&competence=2"
 						class="links_dept">采购部</a></td>
 				</tr>
 
 				<tr class="t_rows">
 					<td class="data_cells"><a
-						href="/stocker-manager/StockController/checkEnterCompetenceHandler"
+						href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/StockerWorkable&competence=4"
 						class="links_dept">仓库管理</a></td>
 				</tr>
 

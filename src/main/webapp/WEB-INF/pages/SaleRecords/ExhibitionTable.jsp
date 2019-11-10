@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 
 <!-- jquery -->
 <script src="${basePath}/jquery/jquery-3.2.1.min.js"></script>
@@ -54,51 +55,73 @@
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/CssFrame/layui/css/modules/laydate/default/laydate.css"></link>
 
-<meta charset="UTF-8">
-<title>销售部门主页</title>
+<!-- 表格样式 -->
+<link rel="stylesheet" type="text/css"
+	href="${basePath}/PatternStyle/TableCommom.css">
+
+<title>销售记录单展示列表</title>
 
 <style type="text/css">
-.header_div01 {
-	border-bottom: 3px solid #1d7c70;
-	padding: 40px 20px 20px 20px;
-}
-
-.header_span01 {
-	font-size: x-large;
-	margin: 4rem 0 0 4rem;
-}
-
-.header_span01>a {
-	margin: 20px;
+.mine_address_0 {
+	margin: 18px;
 	text-decoration: underline;
 }
 </style>
 
 </head>
 <body>
-	<header>
-		<div class="header_div01">
-			<span class="header_span01"> <a href="javascript:opens(1)">
-					<b> 填写销售记录报告 </b>
-			</a> <a href="javascript:opens(2)"> <b> 全部销售记录单 </b>
-			</a> </a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
-			</a> <a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>
-			</a>
-			</span>
-		</div>
-	</header>
 
-	<div>
-		<!-- 填写销售记录报告 -->
-		<div class="div_module" style="display: none;" id="room1">
-			<jsp:include page="AddRecord.jsp"></jsp:include>
+	<div style="text-align: center;">
+		<!--  -->
+		<table border="1" class="member-table table salers_tbl_list">
+			<br>
+			<br>
+			<caption>销售记录单列表</caption>
+			<thead>
+				<tr>
+					<th class="table-head">全选 <input type="checkbox"
+						id="head_check" class="head-box" onclick="headInfluence()">
+					</th>
+					<th class="table-head">次序号</th>
+					<th class="table-head">售出货物之名</th>
+					<th class="table-head">客户名</th>
+					<th class="table-head">客户定购货物之数量</th>
+					<th class="table-head">时间</th>
+					<th class="table-head">查看详情</th>
+					<th class="table-head">删除</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+			</tbody>
+		</table>
+
+		<br>
+		<div class="mine_div_00" style="display: none;">
+			<p class="total_page_nums"></p>
+			<p class="current_page_nums"></p>
+			<p class="previous_page_bool"></p>
+			<p class="next_page_bool"></p>
+			<p class="shows_rows"></p>
 		</div>
 
-		<!-- ExhibitionTable.jsp -->
-		<div class="div_module" style="display: none;" id="room2">
-			<jsp:include page="ExhibitionTable.jsp"></jsp:include>
+		<br>
+		<div class="mine_div_11" style="font-size: 24px;">
+			<a href="#" class="mine_address_0">首页</a>
+			<!--  -->
+			<a href="#" class="mine_address_0">上一页</a>
+			<!--  -->
+			<a href="#" class="mine_address_0">下一页</a>
+			<!--  -->
+			<a href="#" class="mine_address_0">尾页</a>
 		</div>
-
 	</div>
 </body>
+
+<!-- 复选框 -->
+<script src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
+
+<!-- 当页JavaScript -->
+<script src="${basePath}/MineJavaScript/SaleRecords/ExhibitionTable.js"></script>
 </html>
