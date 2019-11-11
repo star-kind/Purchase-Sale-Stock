@@ -144,6 +144,8 @@ function intoSelect(list) {
 
 /**
  * 给"付款情况"赋值
+ * 
+ * @returns
  */
 function setIsPay() {
 	var money = $('.amountMoney').val();

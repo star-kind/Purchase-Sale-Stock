@@ -28,7 +28,6 @@ function verifyIsInputNullPlus(selector) {
  * @returns
  */
 function judgeAtRecurrent(args) {
-
 	for (var i = 0; i < args.length; i++) {
 		if (args[i] == null || args[i] === '' || $.trim(args[i]) == '') {
 			alert('第' + (i + 1) + '个空未填入');

@@ -44,6 +44,25 @@ public class SaleController extends ControllerUtils {
 	SaleControllerUtil scu = SaleControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/SaleController/searchSingleHandler?id=1
+	 * 
+	 * @param session
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "searchSingleHandler", method = RequestMethod.GET)
+	public ResponseResult<TSale> searchSingleHandler(HttpSession session, @RequestParam("id") Integer id) {
+		System.err.println("ID==" + id);
+
+		Integer uid = getUsridFromSession(session);
+
+		TSale sale = iss.searchSingle(uid, id);
+
+		return new ResponseResult<TSale>(SUCCESS, sale);
+	}
+
+	/**
 	 * /stocker-manager/SaleController/pagingDisplayHandler?pageth=1
 	 * 
 	 * @param session

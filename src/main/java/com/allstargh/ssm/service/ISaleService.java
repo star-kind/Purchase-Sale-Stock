@@ -12,6 +12,26 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface ISaleService {
 	/**
+	 * 改动
+	 * 
+	 * @param uid
+	 * @param tSale
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Integer revision(Integer uid, TSale tSale) throws SelfServiceException;
+
+	/**
+	 * 查找一笔记录单
+	 * 
+	 * @param uid
+	 * @param id
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	TSale searchSingle(Integer uid, Integer id) throws SelfServiceException;
+
+	/**
 	 * 
 	 * @param uid
 	 * @param tSale

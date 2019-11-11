@@ -147,7 +147,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 
 		string += p_tag_prefix;
 		string += "采购专员" + usrname + "于" + now_time;
-		string += "提交了" + affect + "份采购申请单" + LINE_SEPARATOR;
+		string += "提交了" + affect + "份采购申请单" + LINE_SEPARATOR_SUFFIX;
 
 		writeRecordPlus(affect, string);
 
@@ -167,7 +167,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 		string += "采购经理";
 		string += usrname + "于" + now_time + "修改了";
 		string += affect + "份申单单号为" + purchase.getPurchaseId();
-		string += "的采购申请单" + LINE_SEPARATOR;
+		string += "的采购申请单" + LINE_SEPARATOR_SUFFIX;
 
 		writeRecordPlus(affect, string);
 
@@ -184,7 +184,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 
 		string += p_tag_prefix;
 		string += "采购经理" + usrname + "于" + now_time;
-		string += "删除了" + effect + "份采购申请单" + LINE_SEPARATOR;
+		string += "删除了" + effect + "份采购申请单" + LINE_SEPARATOR_SUFFIX;
 
 		writeRecordPlus(effect, string);
 	}
@@ -206,7 +206,7 @@ public class PurchaseControllerUtil extends ControllerUtils {
 		string += "删除了";
 		string += effects.length;
 		string += "份采购单";
-		string += LINE_SEPARATOR;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		writeRecordPlus(effects, string);
 	}

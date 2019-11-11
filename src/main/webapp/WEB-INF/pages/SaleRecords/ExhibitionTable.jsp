@@ -66,6 +66,41 @@
 	margin: 18px;
 	text-decoration: underline;
 }
+
+.own_input {
+	display: none;
+}
+
+.own_button {
+	margin: 16px;
+}
+
+input.btn:nth-child(3) {
+	visibility: hidden;
+}
+
+.own_form_0 {
+	margin: 22px;
+}
+
+.form_div {
+	font-size: 25px;
+}
+
+.form_div p {
+	margin: 15px 0 15px 0;
+}
+
+.form_div_00 {
+	padding: 0 0 0 36%;
+}
+
+hr.own_input {
+	height: 4px;
+	width: 360px;
+	background: #bf8036;
+	margin: 85px 0 85px 0;
+}
 </style>
 
 </head>
@@ -75,6 +110,7 @@
 		<!--  -->
 		<table border="1" class="member-table table salers_tbl_list">
 			<br>
+			<h5 class="saler_name" style="display: none;"></h5>
 			<br>
 			<caption>销售记录单列表</caption>
 			<thead>
@@ -121,6 +157,9 @@
 
 <!-- 复选框 -->
 <script src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
+
+<!-- 校验提交非空 -->
+<script src="${basePath}/jquery/OwnJavaScript/VerifyInput.js"></script>
 
 <!-- 当页JavaScript -->
 <script src="${basePath}/MineJavaScript/SaleRecords/ExhibitionTable.js"></script>

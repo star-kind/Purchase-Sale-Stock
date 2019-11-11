@@ -77,7 +77,7 @@ public class TSale {
 	private Date saleTime;
 
 	/**
-	 * 是否有足够存货(-无,1-少量,2-半数左右,3-勉强供应,4-完全满足)
+	 * 是否有足够存货(0-无,1-少量,2-半数左右,3-勉强供应,4-完全满足)
 	 */
 	private Short isEnoughStock;
 

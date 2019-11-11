@@ -135,7 +135,7 @@ public class ApprovalControllerUtil extends ControllerUtils {
 		s.append(",审批决定:");
 		s.append(decideStr);
 		s.append(",本次审批记录备案成功.");
-		s.append(LINE_SEPARATOR);
+		s.append(LINE_SEPARATOR_SUFFIX);
 
 		writeRecordLog(affect, DAILY_FILE_NAME, s.toString());
 	}

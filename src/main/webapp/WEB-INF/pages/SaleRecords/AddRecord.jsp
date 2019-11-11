@@ -145,7 +145,7 @@ select {
 
 						<!-- 自动赋值 -->
 						<div class="form-group">
-							<span>客户是否已付款(付款情况)</span> <input type="text"
+							<span>客户付款情况</span> <input type="text"
 								class="contact-email form-control is_pay" readonly="readonly">
 
 							<input type="text" name="isPay"

@@ -32,12 +32,10 @@ public class ControllerUtils {
 	/**
 	 * 当前时间
 	 */
-	protected static String now_time = null;
+	public static String now_time = null;
 
 	static {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		now_time = format.format(new Date());
-
+		now_time = getNowTime();
 	}
 
 	/**
@@ -46,9 +44,9 @@ public class ControllerUtils {
 	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Logs/";
 
 	/**
-	 * 系统换行符
+	 * 换行分隔符+p闭合标签后缀
 	 */
-	protected static final String LINE_SEPARATOR = System.getProperty("line.separator") + "</p>";
+	protected static final String LINE_SEPARATOR_SUFFIX = System.getProperty("line.separator") + "</p>";
 
 	/**
 	 * 文件输出流
@@ -65,9 +63,18 @@ public class ControllerUtils {
 	 */
 	public static String p_tag_prefix = "<p>";
 
+	/* <-----------------------------------------------------------------> */
+
 	/**
-	 * <--------------------------------------------------------------------------------->
+	 * 
+	 * @return
 	 */
+	public static String getNowTime() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateStr = format.format(new Date());
+
+		return dateStr;
+	}
 
 	/**
 	 * 统一将异常封入json实体
@@ -134,6 +141,10 @@ public class ControllerUtils {
 
 		case "提交为空":
 			rr.setState(ServiceExceptionEnum.COMMIT_HAS_NULL.getCode());
+			break;
+
+		case "业已递交与审批部门,禁止更改":
+			rr.setState(ServiceExceptionEnum.HAS_BEEN_SUBMITTED_TO_APPROVAL_DEPARTMENT.getCode());
 			break;
 
 		}

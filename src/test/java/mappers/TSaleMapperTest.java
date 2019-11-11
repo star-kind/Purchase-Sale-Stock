@@ -24,6 +24,40 @@ public class TSaleMapperTest {
 	}
 
 	@Test
+	public void updateTest() {
+		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
+
+		TSaleExample e = new TSaleExample();
+		Criteria c = e.createCriteria();
+
+		TSale sale = new TSale();
+		
+		sale.setAmountMoney(221.45F);
+		
+		BigDecimal d = BigDecimal.valueOf(13.54);
+		sale.setAmountPaid(d);
+		
+		sale.setCommodity("water");
+		
+		short enough=1;
+		sale.setIsEnoughStock(enough);
+		
+		sale.setIsPay(1);
+		sale.setPaymentMethod(0);
+		sale.setQuantity(58);
+		sale.setRegionDepartment(6);
+		sale.setSaleOperator(59);
+		sale.setSaleTime(new Date());
+		sale.setSurplusDemand(99);
+		
+		c.andIdEqualTo(2);
+		
+		int affect = tSaleDAO.updateByExampleSelective(sale, e);
+		
+		System.err.println(affect);
+	}
+
+	@Test
 	public void selectAllTest() {
 		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
 
@@ -85,5 +119,5 @@ public class TSaleMapperTest {
 		System.err.println(effect);
 
 	}
-	
+
 }

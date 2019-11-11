@@ -65,7 +65,7 @@ public interface ICommonReplenishService {
 	abstract Accounts checkForAccount(Integer accountId, Integer competence) throws SelfServiceException;
 
 	/**
-	 * <h3>Overload,校验账号权限</h3>
+	 * <h3>Overload,多重校验账号权限</h3>
 	 * 
 	 * @param accountId
 	 * @param competences 权限码数组

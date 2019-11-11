@@ -411,4 +411,19 @@ public class AccountsServiceImpl implements IAccountsService {
 		return hashMap;
 	}
 
+	@Override
+	public Accounts findAccountByUserid(Integer uid, Integer targetID) throws SelfServiceException {
+		Integer[] competences = { 0, 1, 2, 3, 4 };
+
+		Accounts account = icrs.checkForAccount(uid, competences);
+
+		if (targetID != null || !("".equals(targetID))) {
+			Accounts account1 = accountsMapper.selectAccountByUsrid(targetID);
+			
+			return account1;
+		}
+
+		return null;
+	}
+
 }

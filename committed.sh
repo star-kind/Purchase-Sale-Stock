@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "paging acting at data"
+git commit -m "work hard for update"
 
 #github
 git pull github master

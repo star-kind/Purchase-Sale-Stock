@@ -163,8 +163,6 @@ function surveyDetail(purchaseId) {
  * @returns
  */
 function eject(detail) {
-	// console.log(detail);
-
 	layer.open({
 		type : 1,// 若为页面层
 		title : '采购申请单',

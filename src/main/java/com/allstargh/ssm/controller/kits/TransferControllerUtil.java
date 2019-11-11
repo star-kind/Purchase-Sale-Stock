@@ -66,7 +66,7 @@ public class TransferControllerUtil extends ControllerUtils {
 		b.append(now_time);
 		b.append("进入");
 		b.append(dept);
-		b.append(LINE_SEPARATOR);
+		b.append(LINE_SEPARATOR_SUFFIX);
 		
 		writeRecordLog(RECORD_FILE_NAME, b.toString());
 	}

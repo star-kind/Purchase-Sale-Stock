@@ -80,6 +80,110 @@ public class AccountControllerUtil extends ControllerUtils {
 	}
 
 	/**
+	 * [getRegion description:根据数字获取地区名称]
+	 * 
+	 * @param key [description]
+	 * @return [description]
+	 */
+	public String getRegion(Integer key) {
+		var area = "";
+
+		switch (key) {
+		case 0:
+			area = "滨河";
+			break;
+
+		case 1:
+			area = "上天院";
+			break;
+
+		case 2:
+			area = "鸣皋";
+			break;
+
+		case 3:
+			area = "焦王";
+			break;
+
+		case 4:
+			area = "申坡";
+			break;
+
+		case 5:
+			area = "遵王";
+			break;
+
+		case 6:
+			area = "常海山";
+			break;
+
+		case 7:
+			area = "老君堂";
+			break;
+
+		case 8:
+			area = "鸦岭";
+			break;
+
+		case 9:
+			area = "酒后";
+			break;
+
+		case 10:
+			area = "平等";
+			break;
+
+		case 11:
+			area = "夏堡";
+			break;
+
+		case 12:
+			area = "富留店";
+			break;
+		}
+
+		return area;
+	}
+
+	/**
+	 * [getJobName description:根据数字获得岗位名称]
+	 * 
+	 * @param key [description]
+	 * @return [description]
+	 */
+	public String getPosition(Integer key) {
+		String position = "";
+		switch (key) {
+		case 0:
+			position = "系统管理员";
+			break;
+
+		case 1:
+			position = "审核员";
+			break;
+
+		case 2:
+			position = "销售经理";
+			break;
+
+		case 3:
+			position = "采购经理";
+			break;
+
+		case 4:
+			position = "仓管员";
+			break;
+
+		case 5:
+			position = "普通雇员";
+			break;
+
+		}
+
+		return position;
+	}
+
+	/**
 	 * 记录账户模块活动记录的TXT文件之完整路径
 	 */
 	public static final String ACCOUNT_FILE_URI = ENGINE_DAILY_PATH + "Account-Log.txt";
@@ -97,11 +201,11 @@ public class AccountControllerUtil extends ControllerUtils {
 
 		try {
 			string += acc.getUsrname() + " 于 " + now_time;
-			string += "注册成功,岗位为" + acc.getCompetence();
+			string += "注册成功,岗位为" + getPosition(acc.getCompetence());
 			string += ",地区为";
-			string += acc.getRegionDepartment() + ",执行者:";
+			string += getRegion(acc.getRegionDepartment()) + ",执行者:";
 			string += session.getAttribute("usrname").toString();
-			string += LINE_SEPARATOR;
+			string += LINE_SEPARATOR_SUFFIX;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,7 +226,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		String string = "";
 		string += p_tag_prefix;
 
-		string += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR;
+		string += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR_SUFFIX;
 
 		if (usrname != null) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -141,10 +245,10 @@ public class AccountControllerUtil extends ControllerUtils {
 		String string = "";
 		string += p_tag_prefix;
 
-		string += "地区:" + acc.getRegionDepartment();
-		string += ",职务:" + acc.getCompetence();
+		string += "地区:" + getRegion(acc.getRegionDepartment());
+		string += ",职务:" + getPosition(acc.getCompetence());
 		string += ",用户 " + usrname + " 登录成功";
-		string += ",时间:" + now_time + LINE_SEPARATOR;
+		string += ",时间:" + now_time + LINE_SEPARATOR_SUFFIX;
 
 		if (session.getAttribute("usrname").toString() != null) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -168,7 +272,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += usrids.length + "位用户:ID为[ " + usridStr + " ]提交注销请求,其中";
 		string += affects + "位用户于" + now_time + "完成注销,";
 		string += "执行人为: " + session.getAttribute("usrname").toString();
-		string += LINE_SEPARATOR;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
 
@@ -190,7 +294,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += usrids.length + "位用户:ID为[" + usridStr + "]提交激活请求,其中";
 		string += affects + "位用户于" + now_time + "完成激活,";
 		string += "执行人为: " + session.getAttribute("usrname").toString();
-		string += LINE_SEPARATOR;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
 	}
@@ -211,7 +315,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += usrids.length + "位用户:ID为[" + usridStr + "]提交重置密码请求,其中";
 		string += affects + "位用户于" + now_time + "完成密码重置,";
 		string += "执行人为: " + session.getAttribute("usrname").toString();
-		string += LINE_SEPARATOR;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
 	}
@@ -235,7 +339,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += "ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为";
 		string += usrname + ",新电话为" + phone + ",新职务为" + competence;
 		string += ",新地区为" + regionDepartment + ",执行人:";
-		string += session.getAttribute("usrname").toString() + LINE_SEPARATOR;
+		string += session.getAttribute("usrname").toString() + LINE_SEPARATOR_SUFFIX;
 
 		if (affects == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -256,7 +360,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += "ID为 " + usrid;
 		string += "的账户于 " + now_time;
 		string += "被删除,执行者为: " + session.getAttribute("usrname").toString();
-		string += LINE_SEPARATOR;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (code == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -274,7 +378,7 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += p_tag_prefix;
 
 		string += "ID为 " + uid + " 的账号于" + now_time;
-		string += "修改了密码" + LINE_SEPARATOR;
+		string += "修改了密码" + LINE_SEPARATOR_SUFFIX;
 
 		if (row == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -296,7 +400,7 @@ public class AccountControllerUtil extends ControllerUtils {
 
 		string += "ID为 " + uid + " 的账户于";
 		string += now_time + "修改了基本资料,新用户名为:" + uname;
-		string += ",新电话为:" + phone + LINE_SEPARATOR;
+		string += ",新电话为:" + phone + LINE_SEPARATOR_SUFFIX;
 
 		if (affect == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);

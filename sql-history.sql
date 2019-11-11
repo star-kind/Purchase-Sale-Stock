@@ -349,6 +349,36 @@ alter table t_sale add surplus_demand int(11) not null comment '剩余需求量'
 -- 新增1列
 alter table t_sale add has_submitted_approval smallint(1) not null default 0 comment '是否已送审:0未送,1已送';
 
+-- 新增1列
+alter table t_sale add warehouse_goods_order bigint(20) not null comment '对应的仓储库货物序号';
+
+-- 增加约束
+alter table t_sale add unique(warehouse_goods_order);
+
+-- 更新
+update t_sale set warehouse_goods_order = 1 where id=1;
++----+-----------------------+
+| id | warehouse_goods_order |
++----+-----------------------+
+| 1  | 0                     |
+| 2  | 0                     |
+| 3  | 0                     |
+| 4  | 0                     |
+| 5  | 0                     |
+| 6  | 0                     |
+| 7  | 0                     |
+| 8  | 0                     |
+| 9  | 0                     |
+| 10 | 0                     |
+| 11 | 0                     |
+| 12 | 0                     |
+| 13 | 0                     |
+| 14 | 0                     |
+| 15 | 0                     |
+| 16 | 0                     |
++----+-----------------------+
+
+
 -- 修改
 update t_sale set surplus_demand = 100 where id>0;
 

@@ -53,9 +53,7 @@
 +---------+-----------------------------------------------------------------------------------------------------------------------------
 --------------------------------------+
 | t_stock | CREATE TABLE `t_stock` (                                                                                                    
-                                      |
 |         |   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',                                                          
-                                      |
 |         |   `purchase_id` int(13) NOT NULL COMMENT '采购申请单ID',                                                                                                          |
 |         |   `store_commodity` varchar(45) NOT NULL COMMENT '存储货物之名',                                                                                                  |
 |         |   `store_quantity` mediumint(9) NOT NULL COMMENT '存储数量',                                                                                                      |

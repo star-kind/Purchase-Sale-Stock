@@ -31,9 +31,27 @@ public class AccountsController extends ControllerUtils {
 
 	protected AccountControllerUtil instance = AccountControllerUtil.getInstance();
 
+	/* <--------------------------------------------> */
+
 	/**
-	 * <------------------------------------------------------------------------->
+	 * /stocker-manager/account/findAccountByUseridHandler
+	 * 
+	 * @param session
+	 * @param userid
+	 * @return
 	 */
+	@ResponseBody
+	@RequestMapping(value = "findAccountByUseridHandler", method = RequestMethod.GET)
+	public ResponseResult<Accounts> findAccountByUseridHandler(HttpSession session,
+			@RequestParam("userid") Integer userid) {
+		System.err.println("userid===" + userid);
+
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.findAccountByUserid(uid, userid);
+
+		return new ResponseResult<Accounts>(SUCCESS, account);
+	}
 
 	/**
 	 * 

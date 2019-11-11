@@ -9,7 +9,9 @@ package com.allstargh.ssm.service.ex;
 public enum ServiceExceptionEnum {
 	/** 实例成员 */
 	INSTANCE,
-	/* -0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0- */
+
+	/** 业已递交与审批部门,禁止更改 */
+	HAS_BEEN_SUBMITTED_TO_APPROVAL_DEPARTMENT(423, "业已递交与审批部门,禁止更改"),
 	/** 审批已过截止期,禁止更改 */
 	OVER_DEADLINE(422, "审批已过截止期,禁止更改"),
 	/** 您已下线,请重新登录 */

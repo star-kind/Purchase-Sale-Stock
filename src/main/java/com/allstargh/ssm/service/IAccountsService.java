@@ -17,9 +17,19 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IAccountsService {
 	/**
+	 * 查找指定用户
+	 * 
+	 * @param uid
+	 * @param targetID
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Accounts findAccountByUserid(Integer uid, Integer targetID) throws SelfServiceException;
+
+	/**
 	 * {@code 审核部or技术部}获取ID和名字
 	 * 
-	 * @param uid 
+	 * @param uid
 	 * @return
 	 * @throws SelfServiceException
 	 */

@@ -132,7 +132,7 @@ public class StockControllerUtil extends ControllerUtils {
 		sentence.append("批货物登记入库,货物批次号为:");
 		sentence.append(purchase.getPurchaseId());
 		sentence.append(".");
-		sentence.append(LINE_SEPARATOR);
+		sentence.append(LINE_SEPARATOR_SUFFIX);
 
 		writeRecordLog(affect, DAILY_FILE_NAME, sentence.toString());
 	}
@@ -151,7 +151,7 @@ public class StockControllerUtil extends ControllerUtils {
 		sentence.append("于");
 		sentence.append(now_time);
 		sentence.append("进入仓库模块.");
-		sentence.append(LINE_SEPARATOR);
+		sentence.append(LINE_SEPARATOR_SUFFIX);
 
 		if (path != null || !("".equals(path))) {
 			writeRecordLog(DAILY_FILE_NAME, sentence.toString());
@@ -177,7 +177,7 @@ public class StockControllerUtil extends ControllerUtils {
 		s.append("将次序号为");
 		s.append(formData.getPurchaseId());
 		s.append("的货品移往外部临时区域.");
-		s.append(LINE_SEPARATOR);
+		s.append(LINE_SEPARATOR_SUFFIX);
 
 		writeRecordLog(DAILY_FILE_NAME, s.toString());
 	}
@@ -202,7 +202,7 @@ public class StockControllerUtil extends ControllerUtils {
 		s.append("对申购次序号为");
 		s.append(map.get("purchaseId"));
 		s.append("的货品资料进行了改动.");
-		s.append(LINE_SEPARATOR);
+		s.append(LINE_SEPARATOR_SUFFIX);
 
 		writeRecordLog(affected, DAILY_FILE_NAME, s.toString());
 	}

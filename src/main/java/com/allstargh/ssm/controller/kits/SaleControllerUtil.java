@@ -78,7 +78,7 @@ public class SaleControllerUtil extends ControllerUtils {
 		b.append("录入");
 		b.append(affect);
 		b.append("份销售记录书");
-		b.append(LINE_SEPARATOR);
+		b.append(LINE_SEPARATOR_SUFFIX);
 
 		writeRecordLog(affect, LOG_FILE_NAME, b.toString());
 	}
