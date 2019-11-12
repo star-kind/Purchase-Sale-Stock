@@ -54,14 +54,30 @@ public class SaleControllerUtil extends ControllerUtils {
 
 	}
 
-	/*----------------------------------------------------------------------*/
-
 	/**
 	 * daily file name
 	 */
 	public static final String LOG_FILE_NAME = "Saler-record.txt";
 
-	/*----------------------------------------------------------------------*/
+	/**
+	 * 
+	 * @param uname
+	 * @param affect
+	 */
+	public void revisionHandler(String uname, Integer affect) {
+		StringBuilder b = new StringBuilder(p_tag_prefix);
+
+		b.append("销售人员");
+		b.append(uname);
+		b.append("于");
+		b.append(now_time);
+		b.append("成功修改");
+		b.append(affect);
+		b.append("份销售记录单");
+		b.append(LINE_SEPARATOR_SUFFIX);
+
+		writeRecordLog(affect, LOG_FILE_NAME, b.toString());
+	}
 
 	/**
 	 * 

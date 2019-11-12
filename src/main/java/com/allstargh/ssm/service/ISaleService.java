@@ -12,6 +12,16 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface ISaleService {
 	/**
+	 * 送审
+	 * 
+	 * @param uid
+	 * @param sid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Integer submitCensorship(Integer uid, Integer sid) throws SelfServiceException;
+
+	/**
 	 * 改动
 	 * 
 	 * @param uid

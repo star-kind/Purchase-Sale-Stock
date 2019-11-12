@@ -1,5 +1,6 @@
 package com.allstargh.ssm.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +10,13 @@ import org.springframework.stereotype.Service;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TSaleDAO;
+import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Pagination;
-import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.pojo.TSaleExample;
 import com.allstargh.ssm.pojo.TSaleExample.Criteria;
+import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ISaleService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -38,7 +40,7 @@ public class SaleServiceImpl implements ISaleService {
 	private AccountsMapper am;
 
 	@Autowired
-	private TSaleDAO sd;
+	private TStockDAO tStockDAO;
 
 	@Autowired
 	private ICommonReplenishService icrs;
@@ -48,10 +50,12 @@ public class SaleServiceImpl implements ISaleService {
 		Accounts account = icrs.checkForAccount(uid, 3);
 
 		// 从仓库中获取货品名称
-		int pid = Integer.parseInt(tSale.getCommodity());
-		TSale sale = sd.selectByPrimaryKey(pid);
+		Long pid = Long.parseLong(tSale.getCommodity());
+		TStock stock = tStockDAO.selectByPrimaryKey(pid);
 
-		tSale.setCommodity(sale.getCommodity());
+		tSale.setWarehouseGoodsOrder(pid);
+
+		tSale.setCommodity(stock.getStoreCommodity());
 
 		tSale.setSaleOperator(uid);
 		tSale.setSaleTime(new Date());
@@ -128,16 +132,13 @@ public class SaleServiceImpl implements ISaleService {
 
 	@Override
 	public Integer revision(Integer uid, TSale tSale) throws SelfServiceException {
-		Accounts account = icrs.checkForAccount(uid, 1);
+		Accounts account = icrs.checkForAccount(uid, 3);
 
 		TSaleExample e = new TSaleExample();
 		Criteria c = e.createCriteria();
 
 		// 获取本行原先数据
 		TSale tSale01 = tSaleDAO.selectByPrimaryKey(tSale.getId());
-
-		// 经手人
-		String operator = account.getUsrname();
 
 		// 时间
 		Date now = new Date();
@@ -151,13 +152,11 @@ public class SaleServiceImpl implements ISaleService {
 		/*
 		 * 计算付款情况
 		 */
-		String amountPaid = tSale.getAmountPaid().toString();
-		Integer paid = Integer.valueOf(amountPaid);
+		Float amountPaid = tSale.getAmountPaid().floatValue();
 
-		String amountMoney = tSale.getAmountMoney().toString();
-		Integer money = Integer.valueOf(amountMoney);
+		Float amountMoney = tSale.getAmountMoney();
 
-		Integer percent = paid / money;
+		float percent = amountPaid / amountMoney;
 		Integer paymentSituation = null;
 
 		if (percent == 0) {
@@ -177,12 +176,71 @@ public class SaleServiceImpl implements ISaleService {
 		/*
 		 * 存货是否足够
 		 */
+		int warehouseGoodsOrder = tSale.getWarehouseGoodsOrder().intValue();
+		Integer quantity = tSaleDAO.selectByPrimaryKey(warehouseGoodsOrder).getQuantity();// 获取仓储存量
 
-		/*
-		 * 剩余需求量
-		 */
+		Short isEnoughStock = null;
 
-		return null;
+		Integer per = tSale.getQuantity() / quantity;
+
+		if (per == 0) {
+			isEnoughStock = 0;
+
+		} else if (per > 0 && per < 0.45) {
+			isEnoughStock = 1;
+
+		} else if (per >= 0.45 && per <= 0.55) {
+			isEnoughStock = 2;
+
+		} else if (per >= 0.90 && per <= 0.99) {
+			isEnoughStock = 3;
+
+		} else if (per >= 1) {
+			isEnoughStock = 4;
+
+		}
+
+		// 剩余需求量
+		Integer demand = tSale.getQuantity() - quantity;
+
+		tSale.setIsPay(paymentSituation);
+		tSale.setIsEnoughStock(isEnoughStock);
+		tSale.setSurplusDemand(demand);
+		tSale.setSaleOperator(account.getUsrid());
+		tSale.setSaleTime(now);
+
+		c.andIdEqualTo(tSale.getId());
+
+		int affect = tSaleDAO.updateByExampleSelective(tSale, e);
+
+		return affect;
+	}
+
+	@Override
+	public Integer submitCensorship(Integer uid, Integer sid) throws SelfServiceException {
+		Accounts account = icrs.checkForAccount(uid, 3);
+
+		TSaleExample e = new TSaleExample();
+		Criteria c = e.createCriteria();
+
+		TSale tSale = new TSale();
+
+		// 如果业已送审,则不必要再送审
+		TSale tSale01 = tSaleDAO.selectByPrimaryKey(sid);
+
+		if (tSale01.getHasSubmittedApproval() == 1) {
+			String description = ServiceExceptionEnum.HAS_BEEN_SUBMITTED_TO_APPROVAL_DEPARTMENT.getDescription();
+			throw new SelfServiceException(description);
+		}
+
+		short s = 1;
+		tSale.setHasSubmittedApproval(s);
+
+		Criteria criteria = c.andIdEqualTo(sid);
+
+		int effect = tSaleDAO.updateByExampleSelective(tSale, e);
+
+		return effect;
 	}
 
 }

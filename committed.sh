@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "work hard for update"
+git commit -m "update has done"
 
 #github
 git pull github master

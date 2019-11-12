@@ -419,7 +419,10 @@ public class AccountsServiceImpl implements IAccountsService {
 
 		if (targetID != null || !("".equals(targetID))) {
 			Accounts account1 = accountsMapper.selectAccountByUsrid(targetID);
-			
+
+			account1.setPassword(null);
+			account1.setSalt(null);
+
 			return account1;
 		}
 

@@ -171,7 +171,14 @@ function generateContent(sale) {
 
 	f += '<b class="own_input">ID</b>';
 	f += '<input type="text" class="own_input own_input_01" value="' + sale.id
-			+ '" name="id" style="cursor: not-allowed;">';
+			+ '" name="id" style="cursor: not-allowed;" readonly="readonly">';
+
+	f += '<br>';
+
+	f += '<b class="own_input">库存原序号</b>';
+	f += '<input type="text" class="own_input own_input_01" value="'
+			+ sale.warehouseGoodsOrder
+			+ '" name="warehouseGoodsOrder" style="cursor: not-allowed;" readonly="readonly">';
 
 	f += '<p>';
 	f += '商品名:';
@@ -198,7 +205,7 @@ function generateContent(sale) {
 	f += '</span>';
 	f += '</p>';
 	f += '<input type="text" class="own_input own_input_01" value="'
-			+ sale.amountMoney + '"  name="customer">';
+			+ sale.amountMoney + '"  name="amountMoney">';
 
 	f += '<p>';
 	f += '已付款金额:';
@@ -300,7 +307,7 @@ function generateContent(sale) {
 	f += '<br>';
 	f += '<div>';
 	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="修改" onclick="prepareRevision()">';
-	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="送审" onclick="">';
+	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="送审" onclick="censorship()">';
 
 	f += '<input type="button" class="btn btn-lg btn-primary own_button" value="提交" onclick="sendRevision()">';
 
@@ -315,6 +322,40 @@ function generateContent(sale) {
 	f += '</div>';
 
 	return f;
+}
+
+/**
+ * 送审
+ * 
+ * @returns
+ */
+function submitCensorship() {
+	var sid = $('input.own_input:nth-child(2)').val();
+
+	var url = '';
+
+	layer.confirm('确定要送审吗?', {
+		btn : [ '确定', '取消' ],
+		title : '提示'
+	}, function() {
+		$.ajax({
+			url : url,
+			data : sid,
+			dataType : 'json',
+			type : 'GET',
+			success : function(rr) {
+				if (rr.state == 200) {
+					layer.msg(rr.data + "份销售记录单送审成功", function() {
+						location.reload();
+					}, {
+						icon : 1
+					})
+				} else {
+					layer.alert(rr.message);
+				}
+			}
+		})
+	})
 }
 
 /**
@@ -339,6 +380,19 @@ function prepareRevision() {
  * @return {[type]} [description]
  */
 function sendRevision() {
+	// 销售金额
+	var money = $('.input.own_input:nth-child(11)').val();
+
+	// 已付款金额
+	var hasPaid = $('.input.own_input:nth-child(13)').val();
+
+	if (hasPaid > money) {
+		layer.alert('已付款金额不能大于销售金额');
+		return;
+	}
+
+	var uri = '/stocker-manager/SaleController/revisionHandler';
+
 	var data = $('.own_form_0').serialize();
 	console.log(data);
 
@@ -350,7 +404,21 @@ function sendRevision() {
 	}
 	console.log(b);
 
-	// TODO
+	$.ajax({
+		url : uri,
+		data : data,
+		dataType : 'json',
+		type : 'POST',
+		success : function(rr) {
+			if (rr.state == 200) {
+				layer.msg(rr.data + '份销售记录单已成功修改完毕', function() {
+					location.reload();
+				})
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
 }
 
 /**

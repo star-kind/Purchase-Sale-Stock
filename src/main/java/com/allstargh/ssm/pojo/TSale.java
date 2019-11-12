@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class TSale {
 	/**
+	 * 对应仓储物品的ID
+	 */
+	private Long warehouseGoodsOrder;
+
+	/**
 	 * 是否已送审:0未送,1已送'
 	 */
 	private Short hasSubmittedApproval;
@@ -318,13 +323,22 @@ public class TSale {
 		this.surplusDemand = surplusDemand;
 	}
 
+	public Long getWarehouseGoodsOrder() {
+		return warehouseGoodsOrder;
+	}
+
+	public void setWarehouseGoodsOrder(Long warehouseGoodsOrder) {
+		this.warehouseGoodsOrder = warehouseGoodsOrder;
+	}
+
 	@Override
 	public String toString() {
-		return "TSale [hasSubmittedApproval=" + hasSubmittedApproval + ", surplusDemand=" + surplusDemand + ", id=" + id
-				+ ", commodity=" + commodity + ", customer=" + customer + ", amountMoney=" + amountMoney
-				+ ", amountPaid=" + amountPaid + ", paymentMethod=" + paymentMethod + ", isPay=" + isPay + ", quantity="
-				+ quantity + ", saleOperator=" + saleOperator + ", regionDepartment=" + regionDepartment + ", saleTime="
-				+ saleTime + ", isEnoughStock=" + isEnoughStock + "]";
+		return "TSale [warehouseGoodsOrder=" + warehouseGoodsOrder + ", hasSubmittedApproval=" + hasSubmittedApproval
+				+ ", surplusDemand=" + surplusDemand + ", id=" + id + ", commodity=" + commodity + ", customer="
+				+ customer + ", amountMoney=" + amountMoney + ", amountPaid=" + amountPaid + ", paymentMethod="
+				+ paymentMethod + ", isPay=" + isPay + ", quantity=" + quantity + ", saleOperator=" + saleOperator
+				+ ", regionDepartment=" + regionDepartment + ", saleTime=" + saleTime + ", isEnoughStock="
+				+ isEnoughStock + "]";
 	}
 
 }

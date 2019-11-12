@@ -1,6 +1,7 @@
 package services;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Date;
 
 import org.junit.Before;
@@ -49,22 +50,43 @@ public class SaleServiceTest {
 	}
 
 	@Test
-	public void test02() {
+	public void testCensorship() {
 		iss = (ISaleService) applicationContext.getBean("saleServiceImpl");
 
 		try {
+			Integer affect = iss.submitCensorship(61, 2);
 
+			System.err.println(affect);
 		} catch (SelfServiceException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
 	}
 
 	@Test
-	public void test03() {
+	public void testUpdate() {
 		iss = (ISaleService) applicationContext.getBean("saleServiceImpl");
 
 		try {
+			TSale t = new TSale();
 
+			MathContext context = new MathContext(2);
+
+			BigDecimal p = new BigDecimal(30.11, context);
+
+			long order = 17;
+
+			t.setId((int) order);
+			t.setWarehouseGoodsOrder(order);
+			t.setCommodity("packing");
+			t.setCustomer("my floor");
+			t.setAmountMoney(1160.02F);
+			t.setAmountPaid(p);
+			t.setPaymentMethod(2);
+			t.setQuantity(105);
+			t.setRegionDepartment(5);
+
+			Integer effect = iss.revision(61, t);
+			System.err.println(effect);
 		} catch (SelfServiceException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
@@ -76,17 +98,18 @@ public class SaleServiceTest {
 
 		try {
 			TSale ts = new TSale();
+
 			ts.setAmountMoney(254.21F);
 
 			BigDecimal paid = BigDecimal.valueOf(11.55);
 			ts.setAmountPaid(paid);
 
-			ts.setCommodity("红包");
-			ts.setCustomer("北门口弟弟");
-			
-			short sh=0;
+			ts.setCommodity("17");
+			ts.setCustomer("北门差率");
+
+			short sh = 0;
 			ts.setHasSubmittedApproval(sh);
-			
+
 			ts.setIsEnoughStock(sh);
 			ts.setIsPay(2);
 			ts.setPaymentMethod(0);
@@ -95,7 +118,7 @@ public class SaleServiceTest {
 			ts.setSaleOperator(61);
 			ts.setSaleTime(new Date());
 			ts.setSurplusDemand(302);
-			
+
 			Integer affect = iss.add(61, ts);
 			System.err.println(affect);
 		} catch (SelfServiceException e) {

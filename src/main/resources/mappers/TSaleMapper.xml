@@ -30,6 +30,8 @@
 			property="hasSubmittedApproval" />
 		<result column="surplus_demand" jdbcType="INTEGER"
 			property="surplusDemand" />
+		<result column="warehouse_goods_order" jdbcType="BIGINT"
+			property="warehouseGoodsOrder" />
 	</resultMap>
 
 	<sql id="Example_Where_Clause">
@@ -106,7 +108,8 @@
 		is_pay, quantity,
 		sale_operator, region_department,
 		sale_time, is_enough_stock,
-		has_submitted_approval,surplus_demand
+		has_submitted_approval,surplus_demand,
+		warehouse_goods_order
 	</sql>
 
 	<select id="selectByExample"
@@ -155,9 +158,11 @@
 		quantity, sale_operator,
 		region_department, sale_time, is_enough_stock,
 		surplus_demand,
-		has_submitted_approval
+		has_submitted_approval,
+		warehouse_goods_order
 		)
-		values (#{id,jdbcType=INTEGER},
+		values
+		(#{id,jdbcType=INTEGER},
 		#{commodity,jdbcType=VARCHAR},
 		#{customer,jdbcType=VARCHAR},
 		#{amountMoney,jdbcType=REAL},
@@ -169,7 +174,8 @@
 		#{regionDepartment,jdbcType=INTEGER}, #{saleTime,jdbcType=TIMESTAMP},
 		#{isEnoughStock,jdbcType=SMALLINT},
 		#{surplusDemand,jdbcType=INTEGER},
-		#{hasSubmittedApproval,jdbcType=SMALLINT}
+		#{hasSubmittedApproval,jdbcType=SMALLINT},
+		#{warehouseGoodsOrder,jdbcType=BIGINT}
 		)
 	</insert>
 
@@ -428,6 +434,11 @@
 			<if test="record.hasSubmittedApproval != null">
 				has_submitted_approval =
 				#{record.hasSubmittedApproval,jdbcType=SMALLINT},
+			</if>
+
+			<if test="record.warehouseGoodsOrder != null">
+				warehouse_goods_order =
+				#{record.warehouseGoodsOrder,jdbcType=BIGINT},
 			</if>
 
 		</set>

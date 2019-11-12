@@ -44,6 +44,29 @@ public class SaleController extends ControllerUtils {
 	SaleControllerUtil scu = SaleControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/SaleController/revisionHandler
+	 * 
+	 * @param session
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "revisionHandler", method = RequestMethod.POST)
+	public ResponseResult<Integer> revisionHandler(HttpSession session, TSale data) {
+		Integer uid = getUsridFromSession(session);
+		String uname = getUsrnameFromSession(session);
+
+		System.err.println(data.toString());
+
+		Integer effect = iss.revision(uid, data);
+
+		// 写入文件
+		scu.revisionHandler(uname, effect);
+
+		return new ResponseResult<Integer>(SUCCESS, effect);
+	}
+
+	/**
 	 * /stocker-manager/SaleController/searchSingleHandler?id=1
 	 * 
 	 * @param session
