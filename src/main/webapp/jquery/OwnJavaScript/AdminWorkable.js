@@ -152,7 +152,7 @@ function changingDateFormat() {
 	var j = 0;
 	var strArr = [];
 	var vari = "";
-	
+
 	for (var i = 1; i <= part; i++) {
 		// 分段截取28字符
 		var sub = arr.substring(j, unit * i);
@@ -174,11 +174,11 @@ function changingDateFormat() {
 function GreenwichTransToNormalFormat(greenwich) {
 	var date = new Date(greenwich);
 
-	//年月日
+	// 年月日
 	var gener = date.getFullYear() + '-' + (date.getMonth() + 1) + '-'
 			+ date.getDate();
 
-	//时分秒
+	// 时分秒
 	gener += ' ';
 	gener += date.getHours() + ':';
 	gener += date.getMinutes() + ':';
@@ -572,9 +572,9 @@ function singleResetLock(usrid) {
 		type : 'GET',
 		success : function(r) {
 			if (r.state == 200) {
-				alert('该账号密码复位成功')
+				alert('该账号密码复位成功');
 			} else {
-				alert('系统故障,请排查维修')
+				alert('系统故障,请排查维修');
 			}
 
 		}
@@ -600,7 +600,7 @@ function singleCancel(usrid) {
 			if (r.state == 200) {
 				alert('已将' + r.data + '个账号注销')
 			} else {
-				alert('系统故障,请排查维修')
+				alert('系统故障,请排查维修');
 			}
 
 		}
@@ -624,29 +624,9 @@ function singleActive(usrid) {
 			if (r.state == 200) {
 				alert('已激活' + r.data + '个账号');
 			} else {
-				alert('系统故障,请排查维修')
+				alert('系统故障,请排查维修');
 			}
 
-		}
-	})
-}
-
-/**
- * 显示获得的账号活动系统日志内容
- */
-function readOutSubstacne() {
-	$.ajax({
-		url : '/stocker-manager/account/read_substacne',
-		dataType : 'json',
-		type : 'GET',
-		success : function(r) {
-			if (r.state == 200) {
-				$("#log_substance").empty();
-				$("#log_substance").html(r.data);
-
-			} else {
-				$("#log_substance").append('<h1>what is your problem?</h1>')
-			}
 		}
 	})
 }

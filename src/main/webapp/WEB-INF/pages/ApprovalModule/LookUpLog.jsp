@@ -61,6 +61,7 @@
 .address_previous {
 	margin: 2em 0 2em auto;
 	border-bottom: 2px solid #b84848;
+	height: 80px;
 }
 
 body>main>div {

@@ -1,5 +1,6 @@
 package com.allstargh.ssm.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,11 +16,13 @@ import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.SaleControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Pagination;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ISaleService;
 import com.allstargh.ssm.service.IStcokSevice;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 
 /**
  * 
@@ -44,6 +47,52 @@ public class SaleController extends ControllerUtils {
 	SaleControllerUtil scu = SaleControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/SaleController/viewLogHandler
+	 * 
+	 * @param session
+	 * @param index
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "viewLogHandler", method = RequestMethod.GET)
+	public ResponseResult<PagingTextII> viewLogHandler(HttpSession session,
+			@RequestParam(value = "pageIndex", defaultValue = "0") Integer index)
+			throws SelfServiceException, IOException {
+		System.err.println(this.getClass().getName() + ",index===");
+		System.err.println(index);
+
+		Integer uid = getUsridFromSession(session);
+
+		PagingTextII log = iss.viewLog(uid, index, 8);
+
+		return new ResponseResult<PagingTextII>(SUCCESS, log);
+	}
+
+	/**
+	 * /stocker-manager/SaleController/submitCensorshipHandler
+	 * 
+	 * @param session
+	 * @param sid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "submitCensorshipHandler", method = RequestMethod.GET)
+	public ResponseResult<Integer> submitCensorshipHandler(HttpSession session, @RequestParam("sid") Integer sid) {
+		System.err.println(this.getClass() + ",sid==" + sid);
+
+		Integer uid = getUsridFromSession(session);
+		String uname = getUsrnameFromSession(session);
+
+		Integer affect = iss.submitCensorship(uid, sid);
+
+		scu.submitCensorshipHandlerRecord(uname, affect, sid);
+
+		return new ResponseResult<Integer>(SUCCESS, affect);
+	}
+
+	/**
 	 * /stocker-manager/SaleController/revisionHandler
 	 * 
 	 * @param session
@@ -61,7 +110,7 @@ public class SaleController extends ControllerUtils {
 		Integer effect = iss.revision(uid, data);
 
 		// 写入文件
-		scu.revisionHandler(uname, effect);
+		scu.revisionHandlerRecord(uname, effect);
 
 		return new ResponseResult<Integer>(SUCCESS, effect);
 	}

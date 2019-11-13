@@ -63,8 +63,29 @@ public class SaleControllerUtil extends ControllerUtils {
 	 * 
 	 * @param uname
 	 * @param affect
+	 * @param sid
 	 */
-	public void revisionHandler(String uname, Integer affect) {
+	public void submitCensorshipHandlerRecord(String uname, Integer affect, Integer sid) {
+		StringBuilder b = new StringBuilder(p_tag_prefix);
+
+		b.append("销售人员");
+		b.append(uname);
+		b.append("于");
+		b.append(now_time);
+		b.append("将序列号为");
+		b.append(sid);
+		b.append("的销售记录报告成功送交给审批部");
+		b.append(LINE_SEPARATOR_SUFFIX);
+
+		writeRecordLog(affect, LOG_FILE_NAME, b.toString());
+	}
+
+	/**
+	 * 
+	 * @param uname
+	 * @param affect
+	 */
+	public void revisionHandlerRecord(String uname, Integer affect) {
 		StringBuilder b = new StringBuilder(p_tag_prefix);
 
 		b.append("销售人员");

@@ -23,7 +23,7 @@ public interface IStcokSevice {
 	 * @return
 	 * @throws SelfServiceException
 	 */
-	Integer getStoreAuantityByID(Integer uid, Integer sid) throws SelfServiceException;
+	Integer getStoreQuantityByID(Integer uid, Integer sid) throws SelfServiceException;
 
 	/**
 	 * 按存储类型区域查询

@@ -51,7 +51,7 @@ public class TStockServiceTest {
 		iss = (IStcokSevice) applicationContext.getBean("stockServiceImpl");
 
 		try {
-			Integer q = iss.getStoreAuantityByID(61, 21);
+			Integer q = iss.getStoreQuantityByID(61, 21);
 
 			System.err.println(q);
 		} catch (SelfServiceException e) {

@@ -40,7 +40,7 @@
 			<li><a href="javascript:opens(3);" class="a_links">按类型查询</a></li>
 
 			<li><a
-				href="${basePath}/PurchaseController/jumpToPurchaseTranceLogHandler"
+				href="/stocker-manager/PurchaseController/jumpToPurchaseTranceLogHandler"
 				class="a_links">采买活动记录</a></li>
 
 			<li><a href="/stocker-manager/cross/toTransfer" class="a_links">返回导航页</a></li>

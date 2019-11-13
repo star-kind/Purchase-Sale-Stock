@@ -12,15 +12,100 @@ var previous_page_bool = $(".previous_page_bool");
 var next_page_bool = $(".next_page_bool");
 var shows_rows = $('.shows_rows');
 
+var pagingDisplay_uri = '/stocker-manager/SaleController/pagingDisplayHandler';
+
+/**
+ * 翻页
+ * 
+ * @param flag
+ * @returns
+ */
+function pageTurning(flag) {
+	console.log(flag);
+
+	var page = null;
+	var bool = null;
+
+	switch (flag) {
+	case -1:
+		sendPagth(0); // 首页
+		break;
+
+	case -2:
+		/*
+		 * 上一页
+		 */
+		bool = previous_page_bool.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		page = parseInt(current_page_nums.text()) - 1;
+
+		sendPagth(page);
+		break;
+
+	case -3:
+		/*
+		 * 下一页
+		 */
+		bool = next_page_bool.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		page = parseInt(current_page_nums.text()) + 1;
+
+		sendPagth(page);
+		break;
+
+	case -4:
+		page = total_page_nums.text();
+		sendPagth(page);// 尾页
+		break;
+
+	}
+}
+
+/**
+ * 发送页码
+ * 
+ * @param pageth
+ * @returns
+ */
+function sendPagth(pageth) {
+	console.log(pageth);
+
+	$.ajax({
+		url : pagingDisplay_uri,
+		data : {
+			'pageth' : pageth
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				executeAppendToTbody(rr.data.data);
+				executeAppendOther(rr.data);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
+
 /**
  * 
  * @returns
  */
 function pagingDisplayHandler() {
-	var uri = '/stocker-manager/SaleController/pagingDisplayHandler';
 
 	$.ajax({
-		url : uri,
+		url : pagingDisplay_uri,
 		dataType : 'json',
 		type : 'GET',
 		success : function(rr) {
@@ -61,7 +146,7 @@ function executeAppendToTbody(list) {
 	var n = 1;
 
 	for (var i = 0; i < list.length; i++) {
-		var html = '<tr>';
+		var html = '<tr id="my_tbl_tr_' + list[i].id + '">';
 
 		html += '<td>';
 		html += '<input type="checkbox" class="td_order_number" value="'
@@ -100,6 +185,11 @@ function executeAppendToTbody(list) {
 		html += '</tr>';
 
 		tbody.append(html);
+
+		if (list[i].hasSubmittedApproval == 1) {
+			$('#my_tbl_tr_' + list[i].id).css('background', '#c2c9a7');
+		}
+		
 	}
 
 	n = 1;
@@ -307,7 +397,7 @@ function generateContent(sale) {
 	f += '<br>';
 	f += '<div>';
 	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="修改" onclick="prepareRevision()">';
-	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="送审" onclick="censorship()">';
+	f += '<input type="button" class="btn btn-lg btn-warning own_button" value="送审" onclick="submitCensorship()">';
 
 	f += '<input type="button" class="btn btn-lg btn-primary own_button" value="提交" onclick="sendRevision()">';
 
@@ -332,7 +422,7 @@ function generateContent(sale) {
 function submitCensorship() {
 	var sid = $('input.own_input:nth-child(2)').val();
 
-	var url = '';
+	var url = '/stocker-manager/SaleController/submitCensorshipHandler';
 
 	layer.confirm('确定要送审吗?', {
 		btn : [ '确定', '取消' ],
@@ -340,7 +430,9 @@ function submitCensorship() {
 	}, function() {
 		$.ajax({
 			url : url,
-			data : sid,
+			data : {
+				'sid' : sid
+			},
 			dataType : 'json',
 			type : 'GET',
 			success : function(rr) {

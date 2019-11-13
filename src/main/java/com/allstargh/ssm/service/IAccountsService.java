@@ -10,12 +10,26 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.ModelMap;
 
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
 /**
  * 账户之业务接口
  */
 public interface IAccountsService {
+	/**
+	 * 分页读取日志文件
+	 * 
+	 * @param uid
+	 * @param index 第几页
+	 * @param lines 每页行数
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	abstract PagingTextII readSubstanceLog(Integer uid, Integer index, Integer lines)
+			throws SelfServiceException, IOException;
+
 	/**
 	 * 查找指定用户
 	 * 

@@ -155,6 +155,8 @@ public class CommonReplenishServiceImpl implements ICommonReplenishService {
 		}
 
 		String[] split = string.split("\n|\r");
+		System.err.println(this.getClass().getName() + ",split.length===");
+		System.err.println(split.length);
 
 		// 如已超限则排空
 		if (split.length > capacity) {

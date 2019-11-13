@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.pojo.Pagination;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.service.ISaleService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -32,19 +34,20 @@ public class SaleServiceTest {
 			Pagination<TSale> pagination = iss.pagingDisplay(2, 4, 61);
 
 			System.err.println(pagination.toString());
-
 		} catch (SelfServiceException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
 	}
 
 	@Test
-	public void test01() {
+	public void testReadlog() {
 		iss = (ISaleService) applicationContext.getBean("saleServiceImpl");
 
 		try {
+			PagingTextII log = iss.viewLog(61, 2, 5);
 
-		} catch (SelfServiceException e) {
+			System.err.println(log);
+		} catch (SelfServiceException | IOException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
 	}

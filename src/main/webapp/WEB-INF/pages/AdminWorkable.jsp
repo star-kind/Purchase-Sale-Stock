@@ -35,19 +35,28 @@
 	href="${basePath}/CssFrame/bootstrap-theme.css">
 
 </head>
+
+<style>
+.tbody_content a {
+	color: #fdfdfd;
+}
+</style>
+
 <body>
 	<div class="accesses">
 		<ul>
-			<li><a href="showAllAccount" class="a_links" onclick="opens(1)">账号名单</a></li>
+			<li><a href="/stocker-manager/account/showAllAccount"
+				class="a_links" onclick="opens(1)">账号名单</a></li>
 
 			<li><a href="javascript:opens(2)" class="a_links">按类型查看</a></li>
 
-			<li><a href="${basePath}/cross/toSubstacne" class="a_links">账号活动记录</a></li>
+			<li><a href="/stocker-manager/cross/toSubstacne" class="a_links">账号活动记录</a></li>
 
-			<li><a href="${basePath}/cross/toTransfer" class="a_links">返回导航页</a></li>
+			<li><a href="/stocker-manager/account/toTransfer"
+				class="a_links">返回导航页</a></li>
 
-			<li><a href="/stocker-manager/login.jsp" class="a_links"> <b>
-						返回主页 </b></a></li>
+			<li><a href="/stocker-manager/login.jsp" class="a_links">
+					返回主页 </a></li>
 		</ul>
 	</div>
 
@@ -108,7 +117,8 @@
 
 	<!-- 按条件搜索 -->
 	<div class="detail_zone div_module container"
-		style="display: none; text-align: center;" id="room2">
+		style="display: none; text-align: center; margin-right: 17%;"
+		id="room2">
 
 		<div class="col-md-10">
 			<br>
@@ -137,7 +147,8 @@
 		<br>
 
 		<div>
-			<table border="1" class="member-table table-bordered">
+			<table border="1" class="member-table table-bordered"
+				style="width: 1260px;">
 				<caption>Account List</caption>
 				<thead>
 					<tr>

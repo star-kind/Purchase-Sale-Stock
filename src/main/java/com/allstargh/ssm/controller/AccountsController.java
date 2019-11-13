@@ -21,6 +21,7 @@ import com.allstargh.ssm.controller.kits.AccountControllerUtil;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.service.IAccountsService;
 
 @Controller
@@ -358,12 +359,16 @@ public class AccountsController extends ControllerUtils {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "read_substacne", method = RequestMethod.GET)
-	public ResponseResult<List<String>> readAccountRecordHandler(HttpSession session) throws IOException {
+	public ResponseResult<PagingTextII> readAccountRecordHandler(HttpSession session,
+			@RequestParam(value = "index", defaultValue = "0") Integer index) throws IOException {
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 
-		List<String> list = iAccountsService.readSubstanceFromLog(uid);
+		System.err.println(this.getClass().getName() + ",index===");
+		System.err.println(index);
 
-		return new ResponseResult<List<String>>(SUCCESS, list);
+		PagingTextII text = iAccountsService.readSubstanceLog(uid, index, 12);
+
+		return new ResponseResult<PagingTextII>(SUCCESS, text);
 	}
 
 	/**

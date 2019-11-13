@@ -12,18 +12,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.text.StrBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.allstargh.ssm.controller.kits.AccountControllerUtil;
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.service.IAccountsService;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 import com.allstargh.ssm.service.util.AccountServiceUtil;
+import com.allstargh.ssm.util.SegmentReadText;
+import com.allstargh.ssm.util.SegmentReadTextII;
 
 @Service
 public class AccountsServiceImpl implements IAccountsService {
@@ -427,6 +432,23 @@ public class AccountsServiceImpl implements IAccountsService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public PagingTextII readSubstanceLog(Integer uid, Integer index, Integer lines)
+			throws SelfServiceException, IOException {
+		Accounts account = icrs.checkForAccount(uid, 0);
+
+		String path = new StrBuilder(AccountControllerUtil.ACCOUNT_FILE_URI).toString();
+		System.err.println("path===" + path);
+
+		icrs.checkTextOutOfCapacity(path, 100 * 1024);
+
+		SegmentReadTextII seg = new SegmentReadTextII(lines, path);
+
+		PagingTextII text = seg.packaging(index);
+
+		return text;
 	}
 
 }

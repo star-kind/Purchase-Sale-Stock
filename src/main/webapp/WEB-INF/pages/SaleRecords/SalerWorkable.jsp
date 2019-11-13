@@ -80,11 +80,18 @@
 		<div class="header_div01">
 			<span class="header_span01"> <a href="javascript:opens(1)">
 					<b> 填写销售记录报告 </b>
-			</a> <a href="javascript:opens(2)"> <b> 全部销售记录单 </b>
-			</a> </a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
-			</a> <a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>
-			</a>
-			</span>
+			</a> <!--  --> <!--  --> <!--  --> <a href="javascript:opens(2)"> <b>
+						全部销售记录单 </b>
+			</a> <!--  --> <!--  --> <!--  --> <!--  --> <a
+				href="/stocker-manager/cross/generalAccess?moduleName=SaleRecords/ViewLog&competence=3">
+					<!--  --> <b> 查看日志记录 </b>
+			</a> <!--  --> <!--  --> <!--  --> <a
+				href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
+			</a> <!--  --> <!--  -->
+				<!--  --> <!--  -->
+				<!--  --> <!--  --> <a href="/stocker-manager/login.jsp"> <b>
+						返回首页 </b>
+			</a></span>
 		</div>
 	</header>
 

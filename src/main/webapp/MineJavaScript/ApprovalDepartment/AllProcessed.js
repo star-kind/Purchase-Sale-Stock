@@ -4,7 +4,6 @@
 $(function() {
 	getInnerTextFromTags();
 	exhibitionAllHandler();
-
 })
 
 // 全局变量
@@ -26,7 +25,6 @@ function exhibitionAllHandler() {
 				$('.table_boby').empty();
 
 				inToTbody(rr.data);
-
 			} else {
 				layer.alert(rr.message);
 			}

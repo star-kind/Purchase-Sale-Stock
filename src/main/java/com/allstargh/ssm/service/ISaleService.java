@@ -1,6 +1,9 @@
 package com.allstargh.ssm.service;
 
+import java.io.IOException;
+
 import com.allstargh.ssm.pojo.Pagination;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -11,6 +14,19 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface ISaleService {
+	/**
+	 * 查阅记录日志
+	 * 
+	 * @param uid
+	 * @param pageIndex 第几页
+	 * @param lines     每页行数
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	abstract PagingTextII viewLog(Integer uid, Integer pageIndex, Integer lines)
+			throws SelfServiceException, IOException;
+
 	/**
 	 * 送审
 	 * 

@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.service.IAccountsService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -27,7 +28,22 @@ public class AccountsServicesTests {
 	}
 
 	@Test
-	public void test01() {
+	public void testLog() {
+		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
+
+		try {
+			PagingTextII log = accountsService.readSubstanceLog(51, 7, 8);
+
+			System.err.println(log);
+		} catch (SelfServiceException s) {
+			System.out.println(s.getMessage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testGet() {
 		accountsService = (IAccountsService) applicationContext.getBean("accountsServiceImpl");
 
 		try {

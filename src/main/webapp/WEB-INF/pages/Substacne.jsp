@@ -28,9 +28,31 @@
 </head>
 
 <style type="text/css">
+body {
+	font-size: 23px;
+}
+
 p {
 	margin-bottom: 16px;
 	font-family: 中文楷体;
+}
+
+.page_div {
+	margin: 15px 0 0 32%;
+}
+
+.page_div li {
+	list-style: none;
+	float: left;
+	margin: 0 25px 0 25px;
+}
+
+.mine_index_invoke {
+	display: none;
+}
+
+.log_substance {
+	margin: 35px 0 200px 80px;
 }
 </style>
 
@@ -42,20 +64,47 @@ p {
 
 			<!--  -->
 			<div style="text-align: center;">
-				<a href="${basePath}/account/toAdminWorkable">返回</a> <br>
+				<br> <br> <a
+					href="/stocker-manager/account/toAdminWorkable">返回</a> <br> <br>
 				<h3 class="col-md-5">账号活动日志记录</h3>
+
+				<br>
+				<div class="page_div">
+					<ol>
+						<li><a href="javascript:pageTurning(0)">首页</a></li>
+						<li><a href="javascript:pageTurning(1)">上页</a></li>
+						<li><span>当前: <b class="mine_current_page"></b> 页
+						</span></li>
+						<li><a href="javascript:pageTurning(2)">下页</a></li>
+						<li><a href="javascript:pageTurning(3)">尾页</a></li>
+					</ol>
+				</div>
+
+
+				<br> <br>
+			</div>
+
+			<br> <br>
+
+			<div class="mine_index_invoke">
+				<p>
+					<i> 总共:<i class="total_page"></i>
+					</i> <br> <i> 是否还有上页:<i class="has_previous"></i>
+					</i> <br> <i> 是否还有下页:<i class="has_next"></i>
+					</i>
+
+				</p>
 			</div>
 
 			<hr>
+			<br> <br>
 
-			<div id="log_substance" class="row"></div>
+			<div class="log_substance row"></div>
 
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	$(document).ready(function() {
-		readOutSubstacne();
-	});
-</script>
+
+<script type="text/javascript"
+	src="${basePath}/MineJavaScript/AccountJS/Substacne.js"></script>
 </html>

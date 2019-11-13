@@ -1,5 +1,6 @@
 package com.allstargh.ssm.service.impl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -7,12 +8,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.controller.kits.ControllerUtils;
+import com.allstargh.ssm.controller.kits.SaleControllerUtil;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TSaleDAO;
 import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Pagination;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.pojo.TSaleExample;
 import com.allstargh.ssm.pojo.TSaleExample.Criteria;
@@ -21,6 +25,7 @@ import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ISaleService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
+import com.allstargh.ssm.util.SegmentReadTextII;
 
 /**
  * 销售记录实现类
@@ -64,6 +69,33 @@ public class SaleServiceImpl implements ISaleService {
 
 		short hasSubmittedApproval = 0;
 		tSale.setHasSubmittedApproval(hasSubmittedApproval);
+
+		Short isEnoughStock = null;
+		if (tSale.getIsEnoughStock() == null) {
+			Integer storeQuantity = stock.getStoreQuantity();
+			Integer quantity = tSale.getQuantity();
+
+			float percent = quantity / storeQuantity;
+
+			if (percent == 0) {
+				isEnoughStock = 0;
+
+			} else if (percent > 0 && percent < 0.45) {
+				isEnoughStock = 1;
+
+			} else if (percent >= 0.45 && percent <= 0.55) {
+				isEnoughStock = 2;
+
+			} else if (percent >= 0.90 && percent <= 0.99) {
+				isEnoughStock = 3;
+
+			} else if (percent >= 1) {
+				isEnoughStock = 4;
+
+			}
+		}
+
+		tSale.setIsEnoughStock(isEnoughStock);
 
 		int affect = tSaleDAO.insert(tSale);
 
@@ -241,6 +273,23 @@ public class SaleServiceImpl implements ISaleService {
 		int effect = tSaleDAO.updateByExampleSelective(tSale, e);
 
 		return effect;
+	}
+
+	@Override
+	public PagingTextII viewLog(Integer uid, Integer pageIndex,Integer lines) throws SelfServiceException, IOException {
+		Accounts account = icrs.checkForAccount(uid, 3);
+
+		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
+
+		String fileUri = builder.append(SaleControllerUtil.LOG_FILE_NAME).toString();
+
+		SegmentReadTextII seg = new SegmentReadTextII(lines, fileUri);
+
+		icrs.checkTextOutOfCapacity(fileUri, 16 * 1024);
+
+		PagingTextII text = seg.packaging(pageIndex);
+
+		return text;
 	}
 
 }

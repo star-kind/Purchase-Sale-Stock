@@ -2,17 +2,16 @@ $(document).ready(function() {
 
 });
 
-/*------------------------------------------------------------------*/
 /**
  * 根据仓储物品ID获取其数量,进而判断数量是否足够
  * 
  * @returns
  */
 function getQuantityByStockID() {
-	var uri = '/stocker-manager/StockController/getStoreAuantityByIDHandler';
+	var uri = '/stocker-manager/StockController/getStoreQuantityByIDHandler';
 
 	var sid = $('.commodity_select').val();
-	console.log('Sid:' + sid);
+	console.log(sid);
 
 	$.ajax({
 		url : uri,
@@ -23,7 +22,7 @@ function getQuantityByStockID() {
 		type : 'GET',
 		success : function(rr) {
 			if (rr.state === 200) {
-				console.log('存量:' + rr.data);
+				console.log(rr.data);
 
 				judges(rr.data);
 			} else {
@@ -45,10 +44,12 @@ function judges(quantity) {
 
 	// 拟定销出量
 	var number = $('.quantity').val();
+	console.log(number);
 
 	if (number != null || '') {
 		var percent = quantity / number;
-		console.log('percent:' + percent);
+		console.log('percent:');
+		console.log(percent);
 
 		if (percent == 0) {
 			judges = '没有存货';
@@ -84,6 +85,8 @@ function judges(quantity) {
  * @returns
  */
 function intoIsEnoughStock(judges, isEnoughStock) {
+	console.log(judges + ':' + isEnoughStock);
+
 	var selector = $('.isEnoughStock').prev('input');
 
 	$('.isEnoughStock').val(isEnoughStock);

@@ -228,7 +228,7 @@ public class StockServiceImpl implements IStcokSevice {
 	}
 
 	@Override
-	public Integer getStoreAuantityByID(Integer uid, Integer sid) throws SelfServiceException {
+	public Integer getStoreQuantityByID(Integer uid, Integer sid) throws SelfServiceException {
 		Integer[] competences = { 3, 4 };
 
 		Accounts account = ics.checkForAccount(uid, competences);
@@ -251,7 +251,7 @@ public class StockServiceImpl implements IStcokSevice {
 
 		String path = builder.append(StockControllerUtil.DAILY_FILE_NAME).toString();
 
-		ics.checkTextOutOfCapacity(path, 11 * 1024);
+		ics.checkTextOutOfCapacity(path, 12 * 1024);
 
 		PagingText text = seg.packaging(path, pageNum);
 

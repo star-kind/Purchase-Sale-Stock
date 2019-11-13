@@ -80,14 +80,9 @@
 		<div class="header_div01">
 			<span class="header_span01"> <a href="javascript:opens(1)">
 					<b> 待审批申请队列 </b>
-			</a>
-			
-			<a href="/stocker-manager/account/obtainIDAndNamesHandler"> <b>全部已处理</b> </a>
-			 
-			<a> 等待 </a> 
-			
-			
-			<a	href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
+			</a> <a href="/stocker-manager/account/obtainIDAndNamesHandler"> <b>全部已处理</b>
+			</a> <a
+				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
 					<b>查看记录</b>
 			</a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>
 			</a> <a href="/stocker-manager/login.jsp"> <b> 返回首页 </b>

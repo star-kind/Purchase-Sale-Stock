@@ -144,13 +144,13 @@ hr.own_input {
 
 		<br>
 		<div class="mine_div_11" style="font-size: 24px;">
-			<a href="#" class="mine_address_0">首页</a>
+			<a href="#" class="mine_address_0" onclick="pageTurning(-1)">首页</a>
 			<!--  -->
-			<a href="#" class="mine_address_0">上一页</a>
+			<a href="#" class="mine_address_0 pageTurning_2" onclick="pageTurning(-2)">上一页</a>
 			<!--  -->
-			<a href="#" class="mine_address_0">下一页</a>
+			<a href="#" class="mine_address_0 pageTurning_3" onclick="pageTurning(-3)">下一页</a>
 			<!--  -->
-			<a href="#" class="mine_address_0">尾页</a>
+			<a href="#" class="mine_address_0" onclick="pageTurning(-4)">尾页</a>
 		</div>
 	</div>
 </body>

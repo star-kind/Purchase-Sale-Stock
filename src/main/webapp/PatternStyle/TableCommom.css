@@ -39,12 +39,12 @@
 }
 
 .member-table td a {
-	color: #06f;
+	color: #0d0e0f;
 	text-decoration: none;
 }
 
 .member-table td a:hover {
-	color: #06f;
+	color: #fdfdfd;
 	text-decoration: underline;
 }
 
