@@ -16,11 +16,16 @@ import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TApprovalDAO;
+import com.allstargh.ssm.mapper.TOutDAO;
+import com.allstargh.ssm.mapper.TSaleDAO;
+import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.pojo.TApprovalExample;
 import com.allstargh.ssm.pojo.TApprovalExample.Criteria;
+import com.allstargh.ssm.pojo.TOut;
+import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -30,6 +35,12 @@ import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 public class ApprovalServiceImpl implements IApprovalService {
 	@Autowired
 	private TApprovalDAO tad;
+
+	@Autowired
+	private TSaleDAO tsd;
+
+	@Autowired
+	private TOutDAO tod;
 
 	@Autowired
 	private AccountsMapper acmp;
@@ -81,17 +92,24 @@ public class ApprovalServiceImpl implements IApprovalService {
 		HashMap<Integer, Object> map = new HashMap<Integer, Object>();
 
 		Accounts account = acmp.selectAccountByUsrid(usrid);
+		
+		short param=0;
 
 		// 检查账号
 		boolean b = ics.checkForAccount(account, 1);
 
-		// 采购部,设Key=2;获取所有is_agree=0 from purchase
+		// 采购申请,设Key=2;获取所有is_agree=0 from purchase
 		List<Purchase> list = pmp.selectByPurchasesIsAgree(0);
+
+		// 出库申请,Key=4,has_approval_handle=false
+		List<TOut> list1 = tod.selectByHasApprovalHandle(false);
+
+		// 提货申请,Key=3,销售提货申请:has_submitted_approval=0
+		List<TSale> list2 = tsd.selectByHasSubmittedApproval(param);
+
 		map.put(2, list);
-
-		// 仓管部,出库申请,Key=4
-
-		// 销售部,提货申请,Key=3
+		map.put(4, list1);
+		map.put(3, list2);
 
 		return map;
 	}

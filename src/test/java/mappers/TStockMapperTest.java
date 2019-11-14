@@ -34,9 +34,9 @@ public class TStockMapperTest {
 
 		byte b = 1;
 		criteria.andStockTypeAreaEqualTo(b);
-		
+
 		List<TStock> list = dao.selectByExample(example);
-		
+
 		for (TStock tStock : list) {
 			System.err.println(tStock);
 		}
@@ -51,7 +51,6 @@ public class TStockMapperTest {
 		for (TStock tStock : list) {
 			System.err.println(tStock);
 		}
-
 	}
 
 	@Test

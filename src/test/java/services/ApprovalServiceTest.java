@@ -28,6 +28,25 @@ public class ApprovalServiceTest {
 	}
 
 	@Test
+	public void exhibitionTest1() {
+		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
+
+		try {
+			HashMap<Integer, Object> map = ias.exhibition(60);
+
+			for (Map.Entry<Integer, Object> element : map.entrySet()) {
+				System.err.println(element.getKey() + "," + element.getValue());
+			}
+
+			// 分段,切割,分割Map
+
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void revampTest() {
 		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
 

@@ -167,6 +167,8 @@ select {
 							<input type="text" name="quantity"
 								class="quantity contact-email form-control" maxlength="11"
 								onblur="getQuantityByStockID()">
+							<!--  -->
+
 						</div>
 
 						<div class="form-group">
@@ -174,8 +176,15 @@ select {
 								class="contact-email form-control customer" maxlength="44">
 						</div>
 
-						<!-- 自动赋值 -->
 						<div class="form-group">
+							<span>仓内存货数量</span>
+							<!--  -->
+							<input type="number" class="mine_number contact-email form-control"
+								readonly="readonly">
+						</div>
+
+						<!-- 自动赋值 -->
+						<div class="form-group" style="display: none;">
 							<span>存货是否足够</span>
 							<!--  -->
 							<input type="text" class="contact-email form-control"

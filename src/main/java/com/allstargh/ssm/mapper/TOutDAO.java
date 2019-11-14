@@ -1,8 +1,8 @@
 /* https://github.com/orange1438 */
 package com.allstargh.ssm.mapper;
 
-import com.allstargh.ssm.pojo.TSale;
-import com.allstargh.ssm.pojo.TSaleExample;
+import com.allstargh.ssm.pojo.TOut;
+import com.allstargh.ssm.pojo.TOutExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,24 +11,16 @@ import org.apache.ibatis.annotations.Param;
  * https://github.com/orange1438/mybatis-generator-core-chinese-annotation1.3.5-chinese-annotation
  * 自动生成
  * 
- * @author orange1438 code generator date:2019-11-01 23:48:26
+ * @author orange1438 code generator date:2019-11-14 18:08:07
  */
-public interface TSaleDAO {
+public interface TOutDAO {
 	/**
-	 * 根据是否已经送审查询
+	 * 根据是否已被审批部门处理查询
 	 * 
+	 * @param choice
 	 * @return
 	 */
-	List<TSale> selectByHasSubmittedApproval(Short hasSubmittedApproval);
-
-	/**
-	 * 分页查询基础语句
-	 * 
-	 * @param pageth 页码
-	 * @param rows   每页行数
-	 * @return
-	 */
-	List<TSale> selectLimitByPageRows(@Param("pageth") Integer pageth, @Param("rows") Integer rows);
+	List<TOut> selectByHasApprovalHandle(Boolean choice);
 
 	/**
 	 * 查询数量
@@ -36,7 +28,7 @@ public interface TSaleDAO {
 	 * @param example 条件对象
 	 * @return 返回数据的数量
 	 */
-	long countByExample(TSaleExample example);
+	long countByExample(TOutExample example);
 
 	/**
 	 * 根据条件删除
@@ -44,7 +36,7 @@ public interface TSaleDAO {
 	 * @param example 条件对象
 	 * @return 返回删除成功的数量
 	 */
-	int deleteByExample(TSaleExample example);
+	int deleteByExample(TOutExample example);
 
 	/**
 	 * 根据ID删除
@@ -60,7 +52,7 @@ public interface TSaleDAO {
 	 * @param record 插入字段对象(必须含ID）
 	 * @return 返回添加成功的数量
 	 */
-	int insert(TSale record);
+	int insert(TOut record);
 
 	/**
 	 * 添加对象对应字段
@@ -68,7 +60,7 @@ public interface TSaleDAO {
 	 * @param record 插入字段对象(必须含ID）
 	 * @return 返回添加成功的数量
 	 */
-	int insertSelective(TSale record);
+	int insertSelective(TOut record);
 
 	/**
 	 * 根据条件查询（二进制大对象）
@@ -76,7 +68,7 @@ public interface TSaleDAO {
 	 * @param example 条件对象
 	 * @return 返回查询的结果
 	 */
-	List<TSale> selectByExample(TSaleExample example);
+	List<TOut> selectByExample(TOutExample example);
 
 	/**
 	 * 根据ID查询
@@ -84,7 +76,7 @@ public interface TSaleDAO {
 	 * @param id 主键ID
 	 * @return 返回查询的结果
 	 */
-	TSale selectByPrimaryKey(Integer id);
+	TOut selectByPrimaryKey(Integer id);
 
 	/**
 	 * 根据条件修改对应字段
@@ -93,7 +85,7 @@ public interface TSaleDAO {
 	 * @param example 条件对象
 	 * @return 返回更新成功的数量
 	 */
-	int updateByExampleSelective(@Param("record") TSale record, @Param("example") TSaleExample example);
+	int updateByExampleSelective(@Param("record") TOut record, @Param("example") TOutExample example);
 
 	/**
 	 * 根据条件修改所有字段
@@ -102,7 +94,7 @@ public interface TSaleDAO {
 	 * @param example 条件对象
 	 * @return 返回更新成功的数量
 	 */
-	int updateByExample(@Param("record") TSale record, @Param("example") TSaleExample example);
+	int updateByExample(@Param("record") TOut record, @Param("example") TOutExample example);
 
 	/**
 	 * 根据ID修改对应字段
@@ -110,7 +102,7 @@ public interface TSaleDAO {
 	 * @param record 修改字段对象(必须含ID）
 	 * @return 返回更新成功的数量
 	 */
-	int updateByPrimaryKeySelective(TSale record);
+	int updateByPrimaryKeySelective(TOut record);
 
 	/**
 	 * 根据ID修改所有字段(必须含ID）
@@ -118,5 +110,5 @@ public interface TSaleDAO {
 	 * @param record 修改字段对象(必须含ID）
 	 * @return 返回更新成功的数量
 	 */
-	int updateByPrimaryKey(TSale record);
+	int updateByPrimaryKey(TOut record);
 }

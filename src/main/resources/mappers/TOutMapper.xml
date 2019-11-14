@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allstargh.ssm.mapper.TOutDAO">
+
+	<resultMap id="BaseResultMap"
+		type="com.allstargh.ssm.pojo.TOut">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="store_commodity" jdbcType="VARCHAR"
+			property="storeCommodity" />
+		<result column="store_order" jdbcType="BIGINT"
+			property="storeOrder" />
+		<result column="quantity" jdbcType="INTEGER"
+			property="quantity" />
+		<result column="store_area" jdbcType="TINYINT"
+			property="storeArea" />
+		<result column="classify" jdbcType="INTEGER"
+			property="classify" />
+		<result column="approver_is_agree" jdbcType="BIT"
+			property="approverIsAgree" />
+		<result column="destination" jdbcType="INTEGER"
+			property="destination" />
+		<result column="sale_order" jdbcType="INTEGER"
+			property="saleOrder" />
+		<result column="stocker_is_agree" jdbcType="BIT"
+			property="stockerIsAgree" />
+		<result column="out_time" jdbcType="TIMESTAMP"
+			property="outTime" />
+		<result column="sale_operator" jdbcType="INTEGER"
+			property="saleOperator" />
+		<result column="applicant" jdbcType="INTEGER"
+			property="applicant" />
+		<result column="remarks" jdbcType="VARCHAR" property="remarks" />
+
+		<result column="has_approval_handle" jdbcType="TINYINT"
+			property="hasApprovalHandle" />
+
+		<result column="has_stock_handle" jdbcType="TINYINT"
+			property="hasStockHandle" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List">
+		id, store_commodity, store_order, quantity, store_area,
+		classify,
+		approver_is_agree,
+		destination, sale_order, stocker_is_agree,
+		out_time, sale_operator, applicant,
+		remarks,has_stock_handle,has_approval_handle
+	</sql>
+
+	<select id="selectByExample"
+		parameterType="com.allstargh.ssm.pojo.TOutExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_out
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_out
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from t_out
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.allstargh.ssm.pojo.TOutExample">
+		delete from t_out
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.allstargh.ssm.pojo.TOut">
+		insert into t_out (id,
+		store_commodity, store_order,
+		quantity, store_area, classify,
+		approver_is_agree, destination, sale_order,
+		stocker_is_agree, out_time,
+		sale_operator,
+		applicant, remarks,
+		has_approval_handle,has_stock_handle
+		)
+		values (#{id,jdbcType=INTEGER}, #{storeCommodity,jdbcType=VARCHAR},
+		#{storeOrder,jdbcType=BIGINT},
+		#{quantity,jdbcType=INTEGER},
+		#{storeArea,jdbcType=TINYINT}, #{classify,jdbcType=INTEGER},
+		#{approverIsAgree,jdbcType=BIT}, #{destination,jdbcType=INTEGER},
+		#{saleOrder,jdbcType=INTEGER},
+		#{stockerIsAgree,jdbcType=BIT},
+		#{outTime,jdbcType=TIMESTAMP}, #{saleOperator,jdbcType=INTEGER},
+		#{applicant,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR},
+		#{hasApprovalHandle,jdbcType=TINYINT},#{hasStockHandle,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<insert id="insertSelective"
+		parameterType="com.allstargh.ssm.pojo.TOut">
+		insert into t_out
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="storeCommodity != null">
+				store_commodity,
+			</if>
+			<if test="storeOrder != null">
+				store_order,
+			</if>
+			<if test="quantity != null">
+				quantity,
+			</if>
+			<if test="storeArea != null">
+				store_area,
+			</if>
+			<if test="classify != null">
+				classify,
+			</if>
+			<if test="approverIsAgree != null">
+				approver_is_agree,
+			</if>
+			<if test="destination != null">
+				destination,
+			</if>
+			<if test="saleOrder != null">
+				sale_order,
+			</if>
+			<if test="stockerIsAgree != null">
+				stocker_is_agree,
+			</if>
+			<if test="outTime != null">
+				out_time,
+			</if>
+			<if test="saleOperator != null">
+				sale_operator,
+			</if>
+			<if test="applicant != null">
+				applicant,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+
+			<if test="hasApprovalHandle != null">
+				has_approval_handle,
+			</if>
+
+			<if test="hasStockHandle != null">
+				has_stock_handle,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="storeCommodity != null">
+				#{storeCommodity,jdbcType=VARCHAR},
+			</if>
+			<if test="storeOrder != null">
+				#{storeOrder,jdbcType=BIGINT},
+			</if>
+			<if test="quantity != null">
+				#{quantity,jdbcType=INTEGER},
+			</if>
+			<if test="storeArea != null">
+				#{storeArea,jdbcType=TINYINT},
+			</if>
+			<if test="classify != null">
+				#{classify,jdbcType=INTEGER},
+			</if>
+			<if test="approverIsAgree != null">
+				#{approverIsAgree,jdbcType=BIT},
+			</if>
+			<if test="destination != null">
+				#{destination,jdbcType=INTEGER},
+			</if>
+			<if test="saleOrder != null">
+				#{saleOrder,jdbcType=INTEGER},
+			</if>
+			<if test="stockerIsAgree != null">
+				#{stockerIsAgree,jdbcType=BIT},
+			</if>
+			<if test="outTime != null">
+				#{outTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="saleOperator != null">
+				#{saleOperator,jdbcType=INTEGER},
+			</if>
+			<if test="applicant != null">
+				#{applicant,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into t_out (id, store_commodity, store_order,
+		quantity,
+		store_area, classify,
+		approver_is_agree, destination, sale_order,
+		stocker_is_agree, out_time, sale_operator,
+		applicant, remarks)
+		values
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			(#{item.id,jdbcType=INTEGER},
+			#{item.storeCommodity,jdbcType=VARCHAR},
+			#{item.storeOrder,jdbcType=BIGINT},
+			#{item.quantity,jdbcType=INTEGER},
+			#{item.storeArea,jdbcType=TINYINT},
+			#{item.classify,jdbcType=INTEGER},
+			#{item.approverIsAgree,jdbcType=BIT},
+			#{item.destination,jdbcType=INTEGER},
+			#{item.saleOrder,jdbcType=INTEGER},
+			#{item.stockerIsAgree,jdbcType=BIT},
+			#{item.outTime,jdbcType=TIMESTAMP},
+			#{item.saleOperator,jdbcType=INTEGER},
+			#{item.applicant,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	<insert id="insertBatchSelective" parameterType="java.util.List">
+		insert into t_out
+		(id, store_commodity, store_order, quantity,
+		store_area, classify,
+		approver_is_agree,
+		destination, sale_order,
+		stocker_is_agree, out_time, sale_operator, applicant,
+		remarks)
+		values
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="item.id != null">
+					#{item.id,jdbcType=INTEGER},
+				</if>
+				<if test="item.id == null">
+					NULL,
+				</if>
+				<if test="item.storeCommodity != null">
+					#{item.storeCommodity,jdbcType=VARCHAR},
+				</if>
+				<if test="item.storeCommodity == null">
+					NULL,
+				</if>
+				<if test="item.storeOrder != null">
+					#{item.storeOrder,jdbcType=BIGINT},
+				</if>
+				<if test="item.storeOrder == null">
+					NULL,
+				</if>
+				<if test="item.quantity != null">
+					#{item.quantity,jdbcType=INTEGER},
+				</if>
+				<if test="item.quantity == null">
+					NULL,
+				</if>
+				<if test="item.storeArea != null">
+					#{item.storeArea,jdbcType=TINYINT},
+				</if>
+				<if test="item.storeArea == null">
+					NULL,
+				</if>
+				<if test="item.classify != null">
+					#{item.classify,jdbcType=INTEGER},
+				</if>
+				<if test="item.classify == null">
+					NULL,
+				</if>
+				<if test="item.approverIsAgree != null">
+					#{item.approverIsAgree,jdbcType=BIT},
+				</if>
+				<if test="item.approverIsAgree == null">
+					NULL,
+				</if>
+				<if test="item.destination != null">
+					#{item.destination,jdbcType=INTEGER},
+				</if>
+				<if test="item.destination == null">
+					NULL,
+				</if>
+				<if test="item.saleOrder != null">
+					#{item.saleOrder,jdbcType=INTEGER},
+				</if>
+				<if test="item.saleOrder == null">
+					NULL,
+				</if>
+				<if test="item.stockerIsAgree != null">
+					#{item.stockerIsAgree,jdbcType=BIT},
+				</if>
+				<if test="item.stockerIsAgree == null">
+					NULL,
+				</if>
+				<if test="item.outTime != null">
+					#{item.outTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.outTime == null">
+					NULL,
+				</if>
+				<if test="item.saleOperator != null">
+					#{item.saleOperator,jdbcType=INTEGER},
+				</if>
+				<if test="item.saleOperator == null">
+					NULL,
+				</if>
+				<if test="item.applicant != null">
+					#{item.applicant,jdbcType=INTEGER},
+				</if>
+				<if test="item.applicant == null">
+					NULL,
+				</if>
+				<if test="item.remarks != null">
+					#{item.remarks,jdbcType=VARCHAR},
+				</if>
+				<if test="item.remarks == null">
+					NULL,
+				</if>
+			</trim>
+		</foreach>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.allstargh.ssm.pojo.TOutExample"
+		resultType="java.lang.Long">
+		select count(*) from t_out
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_out
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.storeCommodity != null">
+				store_commodity =
+				#{record.storeCommodity,jdbcType=VARCHAR},
+			</if>
+			<if test="record.storeOrder != null">
+				store_order = #{record.storeOrder,jdbcType=BIGINT},
+			</if>
+			<if test="record.quantity != null">
+				quantity = #{record.quantity,jdbcType=INTEGER},
+			</if>
+			<if test="record.storeArea != null">
+				store_area = #{record.storeArea,jdbcType=TINYINT},
+			</if>
+			<if test="record.classify != null">
+				classify = #{record.classify,jdbcType=INTEGER},
+			</if>
+			<if test="record.approverIsAgree != null">
+				approver_is_agree =
+				#{record.approverIsAgree,jdbcType=BIT},
+			</if>
+			<if test="record.destination != null">
+				destination = #{record.destination,jdbcType=INTEGER},
+			</if>
+			<if test="record.saleOrder != null">
+				sale_order = #{record.saleOrder,jdbcType=INTEGER},
+			</if>
+			<if test="record.stockerIsAgree != null">
+				stocker_is_agree = #{record.stockerIsAgree,jdbcType=BIT},
+			</if>
+			<if test="record.outTime != null">
+				out_time = #{record.outTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.saleOperator != null">
+				sale_operator = #{record.saleOperator,jdbcType=INTEGER},
+			</if>
+			<if test="record.applicant != null">
+				applicant = #{record.applicant,jdbcType=INTEGER},
+			</if>
+			<if test="record.remarks != null">
+				remarks = #{record.remarks,jdbcType=VARCHAR},
+			</if>
+
+			<if test="record.hasApprovalHandle != null">
+				remarks = #{record.hasApprovalHandle,jdbcType=VARCHAR},
+			</if>
+
+			<if test="record.hasStockHandle != null">
+				remarks = #{record.hasStockHandle,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_out
+		set id = #{record.id,jdbcType=INTEGER},
+		store_commodity =
+		#{record.storeCommodity,jdbcType=VARCHAR},
+		store_order =
+		#{record.storeOrder,jdbcType=BIGINT},
+		quantity =
+		#{record.quantity,jdbcType=INTEGER},
+		store_area =
+		#{record.storeArea,jdbcType=TINYINT},
+		classify =
+		#{record.classify,jdbcType=INTEGER},
+		approver_is_agree =
+		#{record.approverIsAgree,jdbcType=BIT},
+		destination =
+		#{record.destination,jdbcType=INTEGER},
+		sale_order =
+		#{record.saleOrder,jdbcType=INTEGER},
+		stocker_is_agree =
+		#{record.stockerIsAgree,jdbcType=BIT},
+		out_time =
+		#{record.outTime,jdbcType=TIMESTAMP},
+		sale_operator =
+		#{record.saleOperator,jdbcType=INTEGER},
+		applicant =
+		#{record.applicant,jdbcType=INTEGER},
+		remarks =
+		#{record.remarks,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.allstargh.ssm.pojo.TOut">
+		update t_out
+		<set>
+			<if test="storeCommodity != null">
+				store_commodity = #{storeCommodity,jdbcType=VARCHAR},
+			</if>
+			<if test="storeOrder != null">
+				store_order = #{storeOrder,jdbcType=BIGINT},
+			</if>
+			<if test="quantity != null">
+				quantity = #{quantity,jdbcType=INTEGER},
+			</if>
+			<if test="storeArea != null">
+				store_area = #{storeArea,jdbcType=TINYINT},
+			</if>
+			<if test="classify != null">
+				classify = #{classify,jdbcType=INTEGER},
+			</if>
+			<if test="approverIsAgree != null">
+				approver_is_agree = #{approverIsAgree,jdbcType=BIT},
+			</if>
+			<if test="destination != null">
+				destination = #{destination,jdbcType=INTEGER},
+			</if>
+			<if test="saleOrder != null">
+				sale_order = #{saleOrder,jdbcType=INTEGER},
+			</if>
+			<if test="stockerIsAgree != null">
+				stocker_is_agree = #{stockerIsAgree,jdbcType=BIT},
+			</if>
+			<if test="outTime != null">
+				out_time = #{outTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="saleOperator != null">
+				sale_operator = #{saleOperator,jdbcType=INTEGER},
+			</if>
+			<if test="applicant != null">
+				applicant = #{applicant,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+
+			<if test="record.hasApprovalHandle != null">
+				remarks = #{record.has_approval_handle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.hasStockHandle != null">
+				remarks = #{record.has_stock_handle,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey"
+		parameterType="com.allstargh.ssm.pojo.TOut">
+		update t_out
+		set store_commodity =
+		#{storeCommodity,jdbcType=VARCHAR},
+		store_order =
+		#{storeOrder,jdbcType=BIGINT},
+		quantity = #{quantity,jdbcType=INTEGER},
+		store_area = #{storeArea,jdbcType=TINYINT},
+		classify =
+		#{classify,jdbcType=INTEGER},
+		approver_is_agree =
+		#{approverIsAgree,jdbcType=BIT},
+		destination =
+		#{destination,jdbcType=INTEGER},
+		sale_order =
+		#{saleOrder,jdbcType=INTEGER},
+		stocker_is_agree =
+		#{stockerIsAgree,jdbcType=BIT},
+		out_time =
+		#{outTime,jdbcType=TIMESTAMP},
+		sale_operator =
+		#{saleOperator,jdbcType=INTEGER},
+		applicant =
+		#{applicant,jdbcType=INTEGER},
+		remarks = #{remarks,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateBatchByPrimaryKey"
+		parameterType="java.util.List">
+		update t_out
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="store_commodity =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeCommodity}
+				</foreach>
+			</trim>
+			<trim prefix="store_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeOrder}
+				</foreach>
+			</trim>
+			<trim prefix="quantity =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.quantity}
+				</foreach>
+			</trim>
+			<trim prefix="store_area =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeArea}
+				</foreach>
+			</trim>
+			<trim prefix="classify =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.classify}
+				</foreach>
+			</trim>
+			<trim prefix="approver_is_agree =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approverIsAgree}
+				</foreach>
+			</trim>
+			<trim prefix="destination =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.destination}
+				</foreach>
+			</trim>
+			<trim prefix="sale_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.saleOrder}
+				</foreach>
+			</trim>
+			<trim prefix="stocker_is_agree =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.stockerIsAgree}
+				</foreach>
+			</trim>
+			<trim prefix="out_time =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.outTime}
+				</foreach>
+			</trim>
+			<trim prefix="sale_operator =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.saleOperator}
+				</foreach>
+			</trim>
+			<trim prefix="applicant =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.applicant}
+				</foreach>
+			</trim>
+			<trim prefix="remarks =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.remarks}
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" index="index" item="item"
+			open="(" separator=",">
+			#{item.id}
+		</foreach>
+	</update>
+	<update id="updateBatchByPrimaryKeySelective"
+		parameterType="java.util.List">
+		update t_out
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="store_commodity =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.storeCommodity != null ">
+						when #{item.id} then #{item.storeCommodity}
+					</if>
+					<if test="item.storeCommodity == null ">
+						when #{item.id} then t_out.store_commodity
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="store_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.storeOrder != null ">
+						when #{item.id} then #{item.storeOrder}
+					</if>
+					<if test="item.storeOrder == null ">
+						when #{item.id} then t_out.store_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="quantity =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.quantity != null ">
+						when #{item.id} then #{item.quantity}
+					</if>
+					<if test="item.quantity == null ">
+						when #{item.id} then t_out.quantity
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="store_area =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.storeArea != null ">
+						when #{item.id} then #{item.storeArea}
+					</if>
+					<if test="item.storeArea == null ">
+						when #{item.id} then t_out.store_area
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="classify =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.classify != null ">
+						when #{item.id} then #{item.classify}
+					</if>
+					<if test="item.classify == null ">
+						when #{item.id} then t_out.classify
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approver_is_agree =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.approverIsAgree != null ">
+						when #{item.id} then #{item.approverIsAgree}
+					</if>
+					<if test="item.approverIsAgree == null ">
+						when #{item.id} then t_out.approver_is_agree
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="destination =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.destination != null ">
+						when #{item.id} then #{item.destination}
+					</if>
+					<if test="item.destination == null ">
+						when #{item.id} then t_out.destination
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="sale_order =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.saleOrder != null ">
+						when #{item.id} then #{item.saleOrder}
+					</if>
+					<if test="item.saleOrder == null ">
+						when #{item.id} then t_out.sale_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="stocker_is_agree =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.stockerIsAgree != null ">
+						when #{item.id} then #{item.stockerIsAgree}
+					</if>
+					<if test="item.stockerIsAgree == null ">
+						when #{item.id} then t_out.stocker_is_agree
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="out_time =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.outTime != null ">
+						when #{item.id} then #{item.outTime}
+					</if>
+					<if test="item.outTime == null ">
+						when #{item.id} then t_out.out_time
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="sale_operator =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.saleOperator != null ">
+						when #{item.id} then #{item.saleOperator}
+					</if>
+					<if test="item.saleOperator == null ">
+						when #{item.id} then t_out.sale_operator
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="applicant =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.applicant != null ">
+						when #{item.id} then #{item.applicant}
+					</if>
+					<if test="item.applicant == null ">
+						when #{item.id} then t_out.applicant
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="remarks =case id" suffix="end,">
+				<foreach collection="list" index="index" item="item"
+					separator=" ">
+					<if test="item.remarks != null ">
+						when #{item.id} then #{item.remarks}
+					</if>
+					<if test="item.remarks == null ">
+						when #{item.id} then t_out.remarks
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where id in
+		<foreach close=")" collection="list" index="index" item="item"
+			open="(" separator=",">
+			#{item.id}
+		</foreach>
+	</update>
+	<update id="updateBatchByExample" parameterType="map">
+		update t_out
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="store_commodity =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeCommodity}
+				</foreach>
+			</trim>
+			<trim prefix="store_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeOrder}
+				</foreach>
+			</trim>
+			<trim prefix="quantity =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.quantity}
+				</foreach>
+			</trim>
+			<trim prefix="store_area =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.storeArea}
+				</foreach>
+			</trim>
+			<trim prefix="classify =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.classify}
+				</foreach>
+			</trim>
+			<trim prefix="approver_is_agree =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.approverIsAgree}
+				</foreach>
+			</trim>
+			<trim prefix="destination =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.destination}
+				</foreach>
+			</trim>
+			<trim prefix="sale_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.saleOrder}
+				</foreach>
+			</trim>
+			<trim prefix="stocker_is_agree =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.stockerIsAgree}
+				</foreach>
+			</trim>
+			<trim prefix="out_time =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.outTime}
+				</foreach>
+			</trim>
+			<trim prefix="sale_operator =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.saleOperator}
+				</foreach>
+			</trim>
+			<trim prefix="applicant =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.applicant}
+				</foreach>
+			</trim>
+			<trim prefix="remarks =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					when #{item.id} then #{item.remarks}
+				</foreach>
+			</trim>
+		</trim>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateBatchByExampleSelective" parameterType="map">
+		update t_out
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="store_commodity =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.storeCommodity != null ">
+						when #{item.id} then #{item.storeCommodity}
+					</if>
+					<if test="item.storeCommodity == null ">
+						when #{item.id} then t_out.store_commodity
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="store_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.storeOrder != null ">
+						when #{item.id} then #{item.storeOrder}
+					</if>
+					<if test="item.storeOrder == null ">
+						when #{item.id} then t_out.store_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="quantity =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.quantity != null ">
+						when #{item.id} then #{item.quantity}
+					</if>
+					<if test="item.quantity == null ">
+						when #{item.id} then t_out.quantity
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="store_area =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.storeArea != null ">
+						when #{item.id} then #{item.storeArea}
+					</if>
+					<if test="item.storeArea == null ">
+						when #{item.id} then t_out.store_area
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="classify =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.classify != null ">
+						when #{item.id} then #{item.classify}
+					</if>
+					<if test="item.classify == null ">
+						when #{item.id} then t_out.classify
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="approver_is_agree =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.approverIsAgree != null ">
+						when #{item.id} then #{item.approverIsAgree}
+					</if>
+					<if test="item.approverIsAgree == null ">
+						when #{item.id} then t_out.approver_is_agree
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="destination =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.destination != null ">
+						when #{item.id} then #{item.destination}
+					</if>
+					<if test="item.destination == null ">
+						when #{item.id} then t_out.destination
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="sale_order =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.saleOrder != null ">
+						when #{item.id} then #{item.saleOrder}
+					</if>
+					<if test="item.saleOrder == null ">
+						when #{item.id} then t_out.sale_order
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="stocker_is_agree =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.stockerIsAgree != null ">
+						when #{item.id} then #{item.stockerIsAgree}
+					</if>
+					<if test="item.stockerIsAgree == null ">
+						when #{item.id} then t_out.stocker_is_agree
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="out_time =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.outTime != null ">
+						when #{item.id} then #{item.outTime}
+					</if>
+					<if test="item.outTime == null ">
+						when #{item.id} then t_out.out_time
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="sale_operator =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.saleOperator != null ">
+						when #{item.id} then #{item.saleOperator}
+					</if>
+					<if test="item.saleOperator == null ">
+						when #{item.id} then t_out.sale_operator
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="applicant =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.applicant != null ">
+						when #{item.id} then #{item.applicant}
+					</if>
+					<if test="item.applicant == null ">
+						when #{item.id} then t_out.applicant
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="remarks =case id" suffix="end,">
+				<foreach collection="recordList" index="index" item="item"
+					separator=" ">
+					<if test="item.remarks != null ">
+						when #{item.id} then #{item.remarks}
+					</if>
+					<if test="item.remarks == null ">
+						when #{item.id} then t_out.remarks
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<select id="selectByHasApprovalHandle"
+		parameterType="java.lang.Boolean" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_out
+		WHERE
+		has_approval_handle=#{choice}
+	</select>
+</mapper>

@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "working at paging text"
+git commit -m "table of approval"
 
 #github
 git pull github master

@@ -956,12 +956,22 @@
 		parameterType="java.lang.Integer">
 		SELECT
 		<include refid="Base_Column_List" />
-		from
+		FROM
 		t_sale
 		ORDER BY
 		sale_time,id
 		ASC
 		LIMIT
 		#{pageth,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByHasSubmittedApproval"
+		parameterType="java.lang.Short" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_sale
+		WHERE
+		has_submitted_approval=#{hasSubmittedApproval}
 	</select>
 </mapper>

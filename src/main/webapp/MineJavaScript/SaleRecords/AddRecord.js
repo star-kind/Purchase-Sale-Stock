@@ -24,7 +24,7 @@ function getQuantityByStockID() {
 			if (rr.state === 200) {
 				console.log(rr.data);
 
-				judges(rr.data);
+				$('.mine_number').val(rr.data);
 			} else {
 				layer.alert(rr.message);
 			}
@@ -33,21 +33,26 @@ function getQuantityByStockID() {
 }
 
 /**
+ * <b>本函数无效,作废</b>
+ * 
  * 判断存货是否足够之情况
  * 
  * @param quantity
  * @returns
  */
-function judges(quantity) {
+function judges() {
+	var num = $('.mine_number').val();
+	console.log(num);
+
 	var judges = '';
 	var isEnoughStock = null;
 
 	// 拟定销出量
-	var number = $('.quantity').val();
-	console.log(number);
+	var quantity = $('.quantity').val();
+	console.log(quantity);
 
-	if (number != null || '') {
-		var percent = quantity / number;
+	if (quantity != null || '') {
+		var percent = num / quantity;
 		console.log('percent:');
 		console.log(percent);
 

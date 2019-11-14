@@ -10,8 +10,8 @@
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/purchase_sale_stock" userId="root"
-			password="root">
+			connectionURL="jdbc:mysql://localhost:3306/purchase_sale_stock"
+			userId="root" password="root">
 		</jdbcConnection>
 
 		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为true时把JDBC DECIMAL 
@@ -48,8 +48,9 @@
 		<!-- <table tableName="purchase" /> -->
 		<!-- <table tableName="t_stock" /> -->
 		<!-- <table tableName="t_approval" /> -->
-		<table tableName="t_sale" /> -->
-		
+		<!-- <table tableName="t_sale" /> -->
+		<table tableName="t_out" />
+
 	</context>
 
 </generatorConfiguration>

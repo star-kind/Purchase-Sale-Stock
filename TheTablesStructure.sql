@@ -122,6 +122,53 @@
 +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                               |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t_out | CREATE TABLE `t_out` (                                                                                                                                     |
+|       |   `id` int(22) NOT NULL AUTO_INCREMENT COMMENT '主键',                                                                                                     |
+|       |   `store_commodity` varchar(45) NOT NULL COMMENT '货物物品之名',                                                                                           |
+|       |   `store_order` bigint(20) unsigned NOT NULL COMMENT '货品仓储主键',                                                                                       |
+|       |   `quantity` int(11) NOT NULL COMMENT '货物之数量',                                                                                                        |
+|       |   `store_area` tinyint(2) NOT NULL COMMENT '原存储区域:0-电器区,1-食品区,2-服装区,3-日用品区,4-饮品区,5-混装区,6-家具区,7-玩具区,8-药品区,9-仓库外临时区', |
+|       |   `classify` int(2) NOT NULL COMMENT '货品类型:0-电器,1-食品,2-服装,3-日用品,4-饮品,5-其它,6-玩具,7-家具,8-药品',                                          |
+|       |   `approver_is_agree` tinyint(1) NOT NULL COMMENT '审批部门人员是否同意,false-不准,true-准许',                                                             |
+|       |   `destination` int(3) NOT NULL COMMENT '目的地:0-滨河,1-上天院,2-鸣皋,3-焦王,4-申坡,5-遵王,6-常海山,7-老君堂,8-\n鸦岭,9-酒后,10-平等,11-夏堡,12-富留店',  |
+|       |   `sale_order` int(22) NOT NULL COMMENT '对应销售记录主键',                                                                                                |
+|       |   `stocker_is_agree` tinyint(1) NOT NULL COMMENT '仓管是否同意出库,false-不准,true-准许',                                                                  |
+|       |   `out_time` timestamp NOT NULL COMMENT '出库时间',                                                                                                        |
+|       |   `sale_operator` int(22) NOT NULL COMMENT '出库经办人,对应账号表usrid',                                                                                   |
+|       |   `applicant` int(22) NOT NULL COMMENT '提货申请者,对应账号表usrid',                                                                                       |
+|       |   `remarks` varchar(80) DEFAULT NULL COMMENT '备注',                                                                                                       |
+|       |   `has_approval_handle` tinyint(1) NOT NULL COMMENT '是否经过审批部处理,false-未经过,true-已经过',                                                         |
+|       |   `has_stock_handle` tinyint(1) NOT NULL COMMENT '是否经过仓管处理,false-未经过,true-已经过',                                                              |
+|       |   PRIMARY KEY (`id`),                                                                                                                                      |
+|       |   UNIQUE KEY `sale_order` (`sale_order`),                                                                                                                  |
+|       |   UNIQUE KEY `store_order` (`store_order`)                                                                                                                 |
+|       | ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库记录表'                                                   |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
