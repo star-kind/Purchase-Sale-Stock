@@ -501,3 +501,11 @@ UNIQUE KEY `store_order` (`store_order`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库记录表';
 
+-- 分页查询
+SELECT purchase_id from purchase WHERE is_agree=0 
+ORDER BY amount_money,purchase_id ASC LIMIT pageNum*row,row;
+
+-- 分页查询
+SELECT purchase_id,is_agree from purchase WHERE is_agree=0  
+ORDER BY amount_money,purchase_id ASC LIMIT 1,4;  
+

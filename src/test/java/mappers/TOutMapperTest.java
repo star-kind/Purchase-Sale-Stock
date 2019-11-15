@@ -19,46 +19,65 @@ public class TOutMapperTest {
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
 	}
+
+	@Test
+	public void selectByIdTest() {
+		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
+
+		TOut tOut = tom.selectByPrimaryKey(1);
+		System.err.println(tOut.toString());
+	}
 	
 	@Test
-	public void selectTest() {
+	public void selectLimitTest() {
 		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
-		
-		List<TOut> list = tom.selectByHasApprovalHandle(false);
-		
+
+		List<TOut> list = tom.selectByHasApprovalHandleAndLimit(false, 1, 3);
+
 		for (TOut tOut : list) {
 			System.err.println(tOut.toString());
 		}
 	}
-	
+
+	@Test
+	public void selectTest() {
+		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
+
+		List<TOut> list = tom.selectByHasApprovalHandle(false);
+
+		for (TOut tOut : list) {
+			System.err.println(tOut.toString());
+		}
+	}
+
 	@Test
 	public void insertOneTest() {
 		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
-		
+
 		TOut t = new TOut();
-		
+
 		t.setApplicant(61);
 		t.setApproverIsAgree(false);
 		t.setClassify(2);
-		t.setDestination(11);
+		t.setDestination(0);
 		t.setOutTime(new Date());
 		t.setQuantity(33);
-		t.setRemarks("gosh");
+		t.setRemarks("red pie");
 		t.setSaleOperator(58);
-		t.setSaleOrder(5);
+		t.setSaleOrder(12);// unique
 		t.setStockerIsAgree(false);
-		
-		byte b=9;
+
+		byte b = 9;
 		t.setStoreArea(b);
-		
-		t.setStoreCommodity("moon");
-		t.setStoreOrder(4L);
+
+		t.setStoreCommodity("dollar box");
+		t.setStoreOrder(11L);// unique
 		t.setHasApprovalHandle(false);
 		t.setHasStockHandle(false);
-		
+
 		int effect = tom.insert(t);
-		
+
 		System.err.println(effect);
 	}
-	
+
 }

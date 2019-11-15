@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.allstargh.ssm.pojo.Pagination;
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -81,4 +83,15 @@ public interface IApprovalService {
 	 * @throws SelfServiceException
 	 */
 	abstract HashMap<Integer, Object> exhibition(Integer usrid) throws SelfServiceException;
+
+	/**
+	 * <b>分页</b>展示待处理的申请单们
+	 * 
+	 * @override
+	 * @param usrid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract PaginationII<HashMap<Integer, Object>> exhibition(Integer usrid, Integer pageNum, Integer lines)
+			throws SelfServiceException;
 }

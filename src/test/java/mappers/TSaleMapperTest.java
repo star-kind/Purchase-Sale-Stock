@@ -102,6 +102,18 @@ public class TSaleMapperTest {
 	}
 
 	@Test
+	public void selectLimitTest() {
+		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
+
+		short param = 0;
+		List<TSale> list = tSaleDAO.selectByHasSubmittedApprovalAndLimit(param, 2, 3);
+
+		for (TSale tSale : list) {
+			System.err.println(tSale.toString());
+		}
+	}
+
+	@Test
 	public void insertOneTest() {
 		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
 

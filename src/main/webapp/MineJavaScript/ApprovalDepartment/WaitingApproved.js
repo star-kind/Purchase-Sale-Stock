@@ -1,6 +1,304 @@
 $(document).ready(function() {
-	exhibitionHandler();
+	// exhibitionHandler();
+	exhibitionHandler01();
 })
+
+/* global variable */
+var has_prev = $('.has_prev');
+var has_next = $('.has_next');
+var each_tbl_rows = $('.each_tbl_rows');
+var current_index = $('.current_index');
+var total_pages = $('.total_pages');
+
+/**
+ * 
+ * @param sid
+ * @returns
+ */
+function getDataFormStock(sid) {
+	var uri = '/stocker-manager/OutWareHouseController/getToutProfileByIdHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'sid' : sid
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state == 200) {
+				console.log(rr.data);
+
+				ejectInOutStock(rr.data);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
+
+/**
+ * 
+ * @param data
+ * @returns
+ */
+function ejectInOutStock(data) {
+	var content = generateOutStockForm(data);
+
+	layer.open({
+		type : 1,
+		title : '审核出库申请',
+		area : [ '600px', '480px' ],
+		id : [ 'store_myself' ],
+		resize : true,
+		closeBtn : true,
+		shade : 0.4,// 遮罩透明度
+		content : content
+	});
+}
+
+/**
+ * 
+ * @param data
+ * @returns
+ */
+function generateOutStockForm(data) {
+
+}
+
+/**
+ * 翻页
+ * 
+ * @param signal
+ * @returns
+ */
+function pageJump(signal) {
+	// 当前页的值
+	var currVal = parseInt(current_index.text()) - 1;
+
+	// 总页数
+	var totalVal = parseInt(total_pages.text()) - 1;
+
+	var next = has_next.text();
+	var prev = has_prev.text();
+
+	switch (signal) {
+	case 0:
+		exhibitionHandler01(0);
+		break;
+
+	case 1:
+		if (prev === 'false') {
+			return;
+		}
+
+		exhibitionHandler01(currVal - 1);
+		break;
+
+	case 2:
+		if (next === 'false') {
+			return;
+		}
+
+		exhibitionHandler01(currVal + 1);
+		break;
+
+	case 3:
+		exhibitionHandler01(totalVal);
+		break;
+
+	}
+
+}
+
+/**
+ * 
+ * @param pageNum
+ * @returns
+ */
+function exhibitionHandler01(pageNum) {
+	console.log(pageNum);
+
+	var uri = "/stocker-manager/ApprovalController/exhibitionHandler01";
+
+	$.ajax({
+		url : uri,
+		type : 'GET',
+		dataType : 'json',
+		data : {
+			'pageNum' : pageNum
+		},
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				has_prev.text(rr.data.hasPreviousPage);
+				has_next.text(rr.data.hasNextPage);
+				each_tbl_rows.text(rr.data.rows);
+				current_index.text(rr.data.currentPageth + 1);
+				total_pages.text(rr.data.totalPages + 1);
+
+				$('.tbl_body_a').empty();
+
+				appendDataInTo(rr.data.data);
+			} else {
+				layer.alert(rr.message, function() {
+					setTimeout(function() {
+						layer.closeAll();
+					}, 200);
+				});
+			}
+		}
+	})
+}
+
+/**
+ * 
+ * @param data
+ * @returns
+ */
+function appendDataInTo(data) {
+	var key = [ 0, 1, 2 ];
+
+	var html = '';
+
+	for (var i = 0; i < key.length; i++) {
+		html += generateRowsContent01(data, i);
+	}
+
+	$('.tbl_body_a').append(html);
+}
+
+/**
+ * 
+ * @param data
+ * @param key
+ * @returns
+ */
+function generateRowsContent01(data, key) {
+	var typeStr = '';
+	var dept = '';
+
+	var tr = '';
+
+	switch (key) {
+	case 0:
+		typeStr = '采购申请单';
+		dept = '采购部';
+		tr = generatesRowsOfPurchase00(data[key], typeStr, dept);
+		break;
+
+	case 1:
+		typeStr = '出库申请单';
+		dept = '仓储部';
+		tr = generatesRowsOfWarehouse(data[key], typeStr, dept);
+		break;
+
+	case 2:
+		typeStr = '提货申请单';
+		dept = '销售部';
+		tr = generatesRowsOfSale(data[key], typeStr, dept);
+		break;
+	}
+
+	return tr;
+}
+
+/**
+ * 销售部的提货申请
+ * 
+ * @param element
+ * @param typeStr
+ * @param dept
+ * @returns
+ */
+function generatesRowsOfSale(element, typeStr, dept) {
+	var tr = '';
+
+	for (var i = 0; i < element.length; i++) {
+		tr += '<tr id="store_' + element[i].id + '" class="saler_men">';
+
+		tr += '<td><input type="checkbox" value="' + element[i].id
+				+ '" class="td_order_number"></td>';
+
+		tr += '<td>' + element[i].commodity + '</td>';
+		tr += '<td>' + typeStr + '</td>';
+		tr += '<td>' + dept + '</td>';
+		tr += '<td>';
+		tr += '<a href="javascript:getDataFormSale(' + element[i].id
+				+ ');">详情</a>';
+		tr += '</td>';
+		tr += '<tr>';
+
+	}
+
+	return tr;
+}
+
+/**
+ * 仓管部的出库申请
+ * 
+ * @param element
+ * @param typeStr
+ * @param dept
+ * @returns
+ */
+function generatesRowsOfWarehouse(element, typeStr, dept) {
+	var tr = '';
+
+	for (var i = 0; i < element.length; i++) {
+		tr += '<tr id="store_' + element[i].id + '" class="store_people">';
+
+		tr += '<td><input type="checkbox" value="' + element[i].id
+				+ '" class="td_order_number"></td>';
+
+		tr += '<td>' + element[i].storeCommodity + '</td>';
+		tr += '<td>' + typeStr + '</td>';
+		tr += '<td>' + dept + '</td>';
+		tr += '<td>';
+		tr += '<a href="javascript:getDataFormStock(' + element[i].id
+				+ ');">详情</a>';
+		tr += '</td>';
+		tr += '<tr>';
+
+	}
+
+	return tr;
+}
+
+/**
+ * 采购部的采购申请
+ * 
+ * @param element
+ * @param typeStr
+ * @param dept
+ * @returns
+ */
+function generatesRowsOfPurchase00(element, typeStr, dept) {
+	var tr = '';
+
+	for (var i = 0; i < element.length; i++) {
+		tr += '<tr id="app_purchase_' + element[i].purchaseId
+				+ '" class="purchases">';
+
+		tr += '<td><input type="checkbox" value="' + element[i].purchaseId
+				+ '" class="td_order_number"></td>';
+
+		tr += '<td>' + element[i].commodity + '</td>';
+		tr += '<td>' + typeStr + '</td>';
+		tr += '<td>' + dept + '</td>';
+		tr += '<td>';
+		tr += '<a href="javascript:getDataFormPurchase('
+				+ element[i].purchaseId + ');">详情</a>';
+		tr += '</td>';
+		tr += '<tr>';
+
+	}
+
+	return tr;
+}
+
+/* ----------------------------------------------------------------------------- */
 
 /**
  * 
@@ -15,10 +313,10 @@ function exhibitionHandler() {
 		dataType : 'json',
 		success : function(rr) {
 			if (rr.state === 200) {
-				$('.tbl_body_a').empty();
-
 				console.log(rr.data);
 				console.log(rr.data[2]);
+
+				$('.tbl_body_a').empty();
 
 				generateRowsContent(rr.data[2], 2);
 			} else {
@@ -29,7 +327,7 @@ function exhibitionHandler() {
 				});
 			}
 		}
-	})
+	});
 }
 
 /**
@@ -53,27 +351,25 @@ function generateRowsContent(map_element, index) {
 
 /**
  * 
- * @param map_element
+ * @param element
  * @param typeStr
  * @param dept
  * @returns
  */
-function generatesRowsOfPurchase(map_element, typeStr, dept) {
-	var signal = 2;
-
-	for (var i = 0; i < map_element.length; i++) {
-		var tr = '<tr id="app_purchase_' + map_element[i].purchaseId
+function generatesRowsOfPurchase(element, typeStr, dept) {
+	for (var i = 0; i < element.length; i++) {
+		var tr = '<tr id="app_purchase_' + element[i].purchaseId
 				+ '" class="purchases">';
 
-		tr += '<td><input type="checkbox" value="' + map_element[i].purchaseId
+		tr += '<td><input type="checkbox" value="' + element[i].purchaseId
 				+ '" class="td_order_number"></td>';
 
-		tr += '<td>' + map_element[i].commodity + '</td>';
+		tr += '<td>' + element[i].commodity + '</td>';
 		tr += '<td>' + typeStr + '</td>';
 		tr += '<td>' + dept + '</td>';
 		tr += '<td>';
 		tr += '<a href="javascript:getDataFormPurchase('
-				+ map_element[i].purchaseId + ');">详情</a>';
+				+ element[i].purchaseId + ');">详情</a>';
 		tr += '</td>';
 		tr += '<tr>';
 
@@ -300,7 +596,7 @@ function getFormContentAtPurchase(data) {
 function layuiOfOpen(formContent) {
 	layer.open({
 		type : 1,
-		title : '进行审核',
+		title : '审核采购申请',
 		area : [ '600px', '480px' ],
 		id : [ 'application-form' ],
 		resize : true,

@@ -121,7 +121,7 @@
 				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1">
 					<b> 返回部门主页 </b>
 			</a> <a href="/stocker-manager/account/obtainIDAndNamesHandler"> <b>全部已处理</b>
-			</a> <a> 等待 </a> <a
+			</a> <a
 				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/LookUpLog&competence=1">
 					<b>查看记录</b>
 			</a> <a href="/stocker-manager/cross/toTransfer"> <b> 返回导航页 </b>

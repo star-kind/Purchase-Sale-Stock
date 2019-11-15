@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ApprovalControllerUtil;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.IPurchaseService;
@@ -128,6 +129,26 @@ public class ApprovalController extends ControllerUtils {
 		HashMap<Integer, Object> hashMap = ias.exhibition(uid);
 
 		return new ResponseResult<HashMap<Integer, Object>>(SUCCESS, hashMap);
+	}
+
+	/**
+	 * http://localhost:8080/stocker-manager/ApprovalController/exhibitionHandler01?pageNum=1
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitionHandler01", method = RequestMethod.GET)
+	public ResponseResult<PaginationII<HashMap<Integer, Object>>> exhibitionHandler01(HttpSession session,
+			@RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum) {
+		System.err.println(this.getClass().getName() + ",page num==");
+		System.err.println(pageNum);
+
+		Integer uid = getUsridFromSession(session);
+
+		PaginationII<HashMap<Integer, Object>> map = ias.exhibition(uid, pageNum, 4);
+
+		return new ResponseResult<PaginationII<HashMap<Integer, Object>>>(SUCCESS, map);
 	}
 
 	/**

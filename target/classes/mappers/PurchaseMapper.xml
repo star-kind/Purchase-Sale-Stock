@@ -526,6 +526,32 @@
 		is_agree=#{isAgree}
 	</select>
 
+	<select id="selectByIsAgreeAndLimit"
+		resultType="com.allstargh.ssm.pojo.Purchase">
+		SELECT
+		purchase_id AS purchaseId,
+		commodity, is_agree
+		AS
+		isAgree, supplier, quantity,
+		amount_money AS
+		amountMoney,
+		payment_method
+		AS paymentMethod, is_pay AS
+		isPay,
+		has_take_goods AS
+		hasTakeGoods,
+		operator, purchase_time AS
+		purchaseTime,classify
+		FROM
+		purchase
+		WHERE
+		is_agree=#{isAgree}
+		ORDER BY
+		amount_money,purchase_id ASC
+		LIMIT
+		#{pageNum},#{lines}
+	</select>
+
 	<update id="updateMultipleRowByPids">
 		UPDATE purchase SET
 		is_agree=#{isAgree}
@@ -798,7 +824,7 @@
 		classify,
 		COUNT(purchase_id) AS num
 		FROM purchase
-		
+
 		WHERE
 		<include refid="Difference_Set_Condition" />
 

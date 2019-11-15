@@ -55,8 +55,7 @@ public interface IStcokSevice {
 	 * @throws SelfServiceException
 	 * @throws IOException
 	 */
-	abstract PagingText readDailyLog(Integer uid, Integer pageNum)
-			throws SelfServiceException, IOException;
+	abstract PagingText readDailyLog(Integer uid, Integer pageNum) throws SelfServiceException, IOException;
 
 	/**
 	 * 
@@ -85,6 +84,16 @@ public interface IStcokSevice {
 	 * @throws SelfServiceException
 	 */
 	abstract TStock findTStockByPurchaseId(Integer purchaseId, Integer usrid) throws SelfServiceException;
+
+	/**
+	 * 多权限从仓库中查找
+	 * 
+	 * @param sid
+	 * @param usrid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract TStock getStoreById(Integer sid, Integer usrid) throws SelfServiceException;
 
 	/**
 	 * 

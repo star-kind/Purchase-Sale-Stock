@@ -15,6 +15,17 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TSaleDAO {
 	/**
+	 * 根据hasSubmittedApproval分页查询
+	 * 
+	 * @param hasSubmittedApproval
+	 * @param pageNum
+	 * @param lines
+	 * @return
+	 */
+	List<TSale> selectByHasSubmittedApprovalAndLimit(@Param("hasSubmittedApproval") Short hasSubmittedApproval,
+			@Param("pageNum") Integer pageNum, @Param("lines") Integer lines);
+
+	/**
 	 * 根据是否已经送审查询
 	 * 
 	 * @return

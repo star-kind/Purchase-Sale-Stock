@@ -258,4 +258,17 @@ public class StockServiceImpl implements IStcokSevice {
 		return text;
 	}
 
+	@Override
+	public TStock getStoreById(Integer sid, Integer usrid) throws SelfServiceException {
+		Integer[] competences = { 1, 4 };
+
+		Accounts account = ics.checkForAccount(usrid, competences);
+
+		Long id = (long) sid.intValue();
+
+		TStock tStock = tsd.selectByPrimaryKey(id);
+		
+		return tStock;
+	}
+
 }

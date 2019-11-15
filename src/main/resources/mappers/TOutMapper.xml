@@ -1071,4 +1071,19 @@
 		WHERE
 		has_approval_handle=#{choice}
 	</select>
+
+	<select id="selectByHasApprovalHandleAndLimit"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_out
+		WHERE
+		has_approval_handle=#{trigger}
+		ORDER BY
+		id,quantity
+		ASC
+		Limit
+		#{pageNum},#{lines}
+	</select>
 </mapper>

@@ -24,6 +24,17 @@ public class PurchaseMapperTest {
 	}
 
 	@Test
+	public void limitTest() {
+		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
+
+		List<Purchase> list = pm.selectByIsAgreeAndLimit(0, 1, 4);
+
+		for (Purchase purchase : list) {
+			System.err.println(purchase.toString());
+		}
+	}
+
+	@Test
 	public void countTest() {
 		pm = (PurchaseMapper) applicationContext.getBean("purchaseMapper");
 

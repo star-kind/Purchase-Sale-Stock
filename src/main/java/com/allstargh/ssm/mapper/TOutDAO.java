@@ -15,6 +15,17 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TOutDAO {
 	/**
+	 * 根据HasApprovalHandle分页查询
+	 * 
+	 * @param trigger
+	 * @param pageNum
+	 * @param lines
+	 * @return
+	 */
+	List<TOut> selectByHasApprovalHandleAndLimit(@Param("trigger") Boolean trigger, @Param("pageNum") Integer pageNum,
+			@Param("lines") Integer lines);
+
+	/**
 	 * 根据是否已被审批部门处理查询
 	 * 
 	 * @param choice

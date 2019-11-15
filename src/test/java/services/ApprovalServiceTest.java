@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
@@ -28,6 +29,21 @@ public class ApprovalServiceTest {
 	}
 
 	@Test
+	public void exhibitionTest01() {
+		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
+
+		try {
+			PaginationII<HashMap<Integer, Object>> pagination = ias.exhibition(60, 0, 3);
+
+			System.err.println(pagination.toString());
+
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void exhibitionTest1() {
 		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
 
@@ -38,7 +54,7 @@ public class ApprovalServiceTest {
 				System.err.println(element.getKey() + "," + element.getValue());
 			}
 
-			// 分段,切割,分割Map
+			System.err.println(map.size());
 
 		} catch (SelfServiceException e) {
 			System.err.println(e.getMessage());

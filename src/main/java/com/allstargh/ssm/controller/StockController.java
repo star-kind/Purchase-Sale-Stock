@@ -60,6 +60,25 @@ public class StockController extends ControllerUtils {
 	 */
 	StockServiceUtil serviceUtil = StockServiceUtil.getInstance();
 
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/getStoreByIdHandler?sid=2
+	 * 
+	 * @param session
+	 * @param sid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getStoreByIdHandler", method = RequestMethod.GET)
+	public ResponseResult<TStock> getStoreByIdHandler(HttpSession session, @RequestParam("sid") Integer sid) {
+		System.err.println(this.getClass().getName() + ",sid===");
+		System.err.println(sid);
+
+		Integer uid = getUsridFromSession(session);
+
+		TStock tStock = iss.getStoreById(sid, uid);
+
+		return new ResponseResult<TStock>(SUCCESS, tStock);
+	}
 
 	/**
 	 * /stocker-manager/StockController/getStoreQuantityByIDHandler
@@ -72,7 +91,7 @@ public class StockController extends ControllerUtils {
 	@ResponseBody
 	@RequestMapping(value = "getStoreQuantityByIDHandler", method = RequestMethod.GET)
 	public ResponseResult<Integer> getStoreQuantityByIDHandler(HttpSession session, @RequestParam("sid") Integer sid)
-			throws SelfServiceException{
+			throws SelfServiceException {
 		System.err.println(this.getClass().getName() + ",sid==");
 		System.err.println(sid);
 

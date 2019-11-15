@@ -18,8 +18,8 @@ import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TApprovalDAO;
 import com.allstargh.ssm.mapper.TOutDAO;
 import com.allstargh.ssm.mapper.TSaleDAO;
-import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.pojo.TApprovalExample;
@@ -49,7 +49,7 @@ public class ApprovalServiceImpl implements IApprovalService {
 	private ICommonReplenishService ics;
 
 	@Autowired
-	private PurchaseMapper pmp;
+	private PurchaseMapper pm;
 
 	/**
 	 * 
@@ -92,19 +92,19 @@ public class ApprovalServiceImpl implements IApprovalService {
 		HashMap<Integer, Object> map = new HashMap<Integer, Object>();
 
 		Accounts account = acmp.selectAccountByUsrid(usrid);
-		
-		short param=0;
+
+		short param = 0;
 
 		// 检查账号
 		boolean b = ics.checkForAccount(account, 1);
 
-		// 采购申请,设Key=2;获取所有is_agree=0 from purchase
-		List<Purchase> list = pmp.selectByPurchasesIsAgree(0);
+		// 采购申请,设Key=2;from purchase获取所有is_agree=0
+		List<Purchase> list = pm.selectByPurchasesIsAgree(0);
 
-		// 出库申请,Key=4,has_approval_handle=false
+		// 出库申请,Key=4;has_approval_handle=false
 		List<TOut> list1 = tod.selectByHasApprovalHandle(false);
 
-		// 提货申请,Key=3,销售提货申请:has_submitted_approval=0
+		// 提货申请,Key=3;销售提货申请:has_submitted_approval=0
 		List<TSale> list2 = tsd.selectByHasSubmittedApproval(param);
 
 		map.put(2, list);
@@ -112,6 +112,65 @@ public class ApprovalServiceImpl implements IApprovalService {
 		map.put(3, list2);
 
 		return map;
+	}
+
+	@Override
+	public PaginationII<HashMap<Integer, Object>> exhibition(Integer usrid, Integer pageNum, Integer lines)
+			throws SelfServiceException {
+		Accounts account = acmp.selectAccountByUsrid(usrid);
+
+		// 检查账号
+		boolean b = ics.checkForAccount(account, 1);
+
+		HashMap<Integer, Object> map = new HashMap<Integer, Object>();
+
+		PaginationII<HashMap<Integer, Object>> pagination = new PaginationII<HashMap<Integer, Object>>(map);
+
+		short param = 0;
+
+		// 采购申请,设Key=0;from purchase获取is_agree=0
+		List<Purchase> list = pm.selectByIsAgreeAndLimit(0, pageNum * lines, lines);
+
+		// 出库申请,Key=1,has_approval_handle=false
+		List<TOut> list1 = tod.selectByHasApprovalHandleAndLimit(false, pageNum * lines, lines);
+
+		// 提货申请,Key=2,销售提货申请:has_submitted_approval=0
+		List<TSale> list2 = tsd.selectByHasSubmittedApprovalAndLimit(param, pageNum * lines, lines);
+
+		// 算出总页数
+		Integer totalPages = getTotalPagesByList(lines);
+
+		map.put(0, list);
+		map.put(1, list1);
+		map.put(2, list2);
+
+		/*
+		 * 判断是否有上一页和下一页
+		 */
+		if (pageNum == 0 && totalPages > 0) {// 总页数至少2页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(false);
+
+		} else if (pageNum > 0 && pageNum < totalPages) {// 总页数至少3页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(true);
+
+		} else if (pageNum == totalPages && totalPages > 0) {// 总页数字少2页
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(true);
+
+		} else if (totalPages == 0) {// 总页数仅仅一页
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(false);
+
+		}
+
+		pagination.setCurrentPageth(pageNum);
+		pagination.setRows(lines);
+		pagination.setTotalPages(totalPages);
+		pagination.setData(map);
+
+		return pagination;
 	}
 
 	@Override
@@ -198,6 +257,30 @@ public class ApprovalServiceImpl implements IApprovalService {
 		TApproval tApproval = tad.selectByPrimaryKey(approvalID);
 
 		return tApproval;
+	}
+
+	/**
+	 * 根据List获取总页数
+	 * 
+	 * @param lines
+	 * @return
+	 */
+	public Integer getTotalPagesByList(Integer lines) {
+		short param = 0;
+
+		// 采购申请;获取所有is_agree=0 from purchase
+		List<Purchase> list = pm.selectByPurchasesIsAgree(0);
+
+		// 出库申请;has_approval_handle=false
+		List<TOut> list1 = tod.selectByHasApprovalHandle(false);
+
+		// 提货申请;销售提货申请:has_submitted_approval=0
+		List<TSale> list2 = tsd.selectByHasSubmittedApproval(param);
+
+		// 算出前台页面表格总页数,每张表显示lines行,三张表就是3*lines
+		Integer totalPages = (list.size() + list1.size() + list2.size()) / (lines * 3);
+
+		return totalPages;
 	}
 
 }

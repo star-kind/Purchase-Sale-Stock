@@ -3,7 +3,12 @@ package com.allstargh.ssm.json;
 import java.io.Serializable;
 
 /**
- * 响应结果类 state;//状态代号 message;//消息 data;//传输之数据,泛型未定
+ * 响应结果类 <br>
+ * <ol>
+ * <li>state状态</li>
+ * <li>message消息</li>
+ * <li>data数据</li>
+ * <ol>
  */
 public class ResponseResult<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -73,7 +78,6 @@ public class ResponseResult<T> implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ResponseResult{" + "state=" + state + ", message='" + message
-				+ '\'' + ", data=" + data + '}';
+		return "ResponseResult{" + "state=" + state + ", message='" + message + '\'' + ", data=" + data + '}';
 	}
 }

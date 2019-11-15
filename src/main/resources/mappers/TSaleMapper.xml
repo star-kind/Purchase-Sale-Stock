@@ -974,4 +974,19 @@
 		WHERE
 		has_submitted_approval=#{hasSubmittedApproval}
 	</select>
+
+	<select id="selectByHasSubmittedApprovalAndLimit"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_sale
+		WHERE
+		has_submitted_approval=#{hasSubmittedApproval}
+		ORDER BY
+		warehouse_goods_order,id
+		ASC
+		LIMIT
+		#{pageNum},#{lines}
+	</select>
 </mapper>

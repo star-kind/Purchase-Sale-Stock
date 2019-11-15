@@ -17,6 +17,17 @@ import com.allstargh.ssm.pojo.PurchaseExample;
  */
 public interface PurchaseMapper {
 	/**
+	 * 根据isagree进行分页查询
+	 * 
+	 * @param isAgree 是否已通过审批
+	 * @param pageNum 第几页
+	 * @param lines   每页行数
+	 * @return
+	 */
+	abstract List<Purchase> selectByIsAgreeAndLimit(@Param("isAgree") Integer isAgree,
+			@Param("pageNum") Integer pageNum, @Param("lines") Integer lines);
+
+	/**
 	 * 统计每个商品分类所属的数量
 	 * 
 	 * @return
