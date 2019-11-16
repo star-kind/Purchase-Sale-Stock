@@ -23,16 +23,26 @@ import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.service.IAccountsService;
+import com.allstargh.ssm.service.ICommonReplenishService;
 
+/**
+ * 
+ * @author admin
+ *
+ */
 @Controller
 @RequestMapping("/account")
 public class AccountsController extends ControllerUtils {
 	@Autowired
 	private IAccountsService iAccountsService;
 
-	protected AccountControllerUtil instance = AccountControllerUtil.getInstance();
+	@Autowired
+	private ICommonReplenishService icrs;
 
-	/* <--------------------------------------------> */
+	/**
+	 * 
+	 */
+	protected AccountControllerUtil instance = AccountControllerUtil.getInstance();
 
 	/**
 	 * /stocker-manager/account/findAccountByUseridHandler
@@ -49,14 +59,12 @@ public class AccountsController extends ControllerUtils {
 
 		Integer uid = getUsridFromSession(session);
 
-		Accounts account = iAccountsService.findAccountByUserid(uid, userid);
+		Accounts account = iAccountsService.findAccountByUserid(uid, userid);// TODO
 
 		return new ResponseResult<Accounts>(SUCCESS, account);
 	}
 
 	/**
-	 * 
-	 * 
 	 * /stocker-manager/account/obtainIDAndNamesHandler
 	 * 
 	 * @param s
@@ -99,10 +107,8 @@ public class AccountsController extends ControllerUtils {
 	 */
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseResult<Void> loginHandler(
-			@RequestParam(value = "usrname", required = false, defaultValue = "springmvc") String usrname,
-			@RequestParam(value = "password", required = false, defaultValue = "springmvc") String password,
-			HttpSession session) {
+	public ResponseResult<Void> loginHandler(@RequestParam(value = "usrname", required = false) String usrname,
+			@RequestParam(value = "password", required = false) String password, HttpSession session) {
 		System.out.println("username=" + usrname + ",password=" + password);
 
 		instance.inputAllLoginRecords(usrname);
@@ -171,6 +177,14 @@ public class AccountsController extends ControllerUtils {
 	 */
 	@RequestMapping(value = "emerge", method = { RequestMethod.GET })
 	public String showModifiyHandler(HttpServletRequest request, ModelMap modelMap) {
+		HttpSession session = request.getSession();
+
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		return iAccountsService.showingProfileToEditing(request, modelMap);
 	}
 
@@ -205,8 +219,16 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "multiple_cancel", method = { RequestMethod.POST })
 	public ResponseResult<Integer> multipleCancelHandler(@RequestParam("usrids") Integer[] usrids,
 			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer affects = iAccountsService.multipleCancel(usrids);
+
 		instance.multipleCancelRecords(affects, session, usrids);
+
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
@@ -222,8 +244,16 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "multiple_active", method = { RequestMethod.POST })
 	public ResponseResult<Integer> multipleActiveHandler(@RequestParam("usrids") Integer[] usrids,
 			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer affects = iAccountsService.multipleActive(usrids);
+
 		instance.multipleActiveRecords(affects, session, usrids);
+
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
@@ -239,23 +269,40 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "multiple_reset_pwd", method = { RequestMethod.POST })
 	public ResponseResult<Integer> multipleResetPwdHandler(@RequestParam("usrids") Integer[] usrids,
 			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer affects = iAccountsService.multipleResetPwd(usrids);
 
 		instance.multipleResetRecords(affects, session, usrids);
+
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/account/search_by_threeType_scene?str=长川
 	 * 
-	 * @param str 地区部门/职位/是否注销激活
+	 * @param str     地区部门/职位/是否注销激活
+	 * @param session
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "search_by_threeType_scene", method = { RequestMethod.POST })
-	public ResponseResult<List<Accounts>> searchByFourTypeSceneHandler(@RequestParam("str") String str) {
-		System.err.println("Str: " + str);
+	public ResponseResult<List<Accounts>> searchByFourTypeSceneHandler(@RequestParam("str") String str,
+			HttpSession session) {
 		List<Accounts> list = null;
+
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
+		System.err.println(this.getClass().getName() + ",str==");
+		System.err.println(str);
 
 		int p = instance.prospect(str);
 		if (p == 0) {
@@ -272,12 +319,20 @@ public class AccountsController extends ControllerUtils {
 	/**
 	 * http://localhost:8080/stocker-manager/account/search_by_confuse_name?uname=ck
 	 * 
-	 * @param uname 残缺的只言
+	 * @param uname   残缺的只言
+	 * @param session
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "search_by_confuse_name", method = { RequestMethod.POST })
-	public ResponseResult<List<Accounts>> searchByConfuseNameHandler(@RequestParam("uname") String uname) {
+	public ResponseResult<List<Accounts>> searchByConfuseNameHandler(@RequestParam("uname") String uname,
+			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		System.err.println("Uname:" + uname);
 
 		List<Accounts> list = iAccountsService.findBaseOnLikeName(uname);
@@ -296,7 +351,14 @@ public class AccountsController extends ControllerUtils {
 	@ResponseBody
 	@RequestMapping(value = "single/{usrid}/reset_pwd", method = RequestMethod.GET)
 	public ResponseResult<Void> singleRestorePwdHandler(@PathVariable("usrid") Integer usrid, HttpSession session) {
-		System.out.println("reset-usrid:" + usrid);
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
+		System.out.println(this.getClass().getName() + "reset-usrid:");
+		System.err.println(usrid);
 
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
@@ -318,6 +380,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "single/{usrid}/cancel", method = RequestMethod.GET)
 	public ResponseResult<Integer> singleCancelAccountHandler(@PathVariable("usrid") Integer usrid,
 			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		System.out.println("cancel-usrid:" + usrid);
 
 		Integer[] ids = new Integer[1];
@@ -340,6 +408,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "single/{usrid}/active", method = RequestMethod.GET)
 	public ResponseResult<Integer> singleActiveAccountHandler(@PathVariable("usrid") Integer usrid,
 			HttpSession session) {
+		Integer uid = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer[] ids = new Integer[1];
 		ids[0] = usrid;
 
@@ -361,6 +435,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "read_substacne", method = RequestMethod.GET)
 	public ResponseResult<PagingTextII> readAccountRecordHandler(HttpSession session,
 			@RequestParam(value = "index", defaultValue = "0") Integer index) throws IOException {
+		Integer uid01 = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid01);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 
 		System.err.println(this.getClass().getName() + ",index===");
@@ -383,6 +463,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "revisePasswordHandler", method = RequestMethod.POST)
 	public ResponseResult<Integer> revisePasswordHandler(HttpSession session,
 			@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+		Integer uid01 = getUsridFromSession(session);
+
+		Accounts account = iAccountsService.gainAccount(uid01);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 
 		Integer effects = iAccountsService.revisePassword(oldPassword, newPassword, uid);
@@ -403,6 +489,12 @@ public class AccountsController extends ControllerUtils {
 	@ResponseBody
 	@RequestMapping(value = "exhibitionBaseProfileHandler", method = RequestMethod.GET)
 	public ResponseResult<Accounts> exhibitionBaseProfileHandler(HttpSession s) {
+		Integer uid01 = getUsridFromSession(s);
+
+		Accounts account = iAccountsService.gainAccount(uid01);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
 
 		Accounts profile = iAccountsService.exhibitionBaseProfile(uid);
@@ -420,6 +512,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "reviseBaseProfileHandler", method = RequestMethod.POST)
 	public ResponseResult<Integer> reviseBaseProfileHandler(HttpSession s, @RequestParam("usrname") String usrname,
 			@RequestParam("phone") String phone) {
+		Integer uid01 = getUsridFromSession(s);
+
+		Accounts account = iAccountsService.gainAccount(uid01);
+
+		boolean b = icrs.checkForAccount(account, 0);
+
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
 		System.out.println(uid + "," + usrname + "," + phone);
 

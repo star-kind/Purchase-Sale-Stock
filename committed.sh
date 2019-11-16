@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "paging query completed"
+git commit -m "out stock still not yet"
 
 #github
 git pull github master

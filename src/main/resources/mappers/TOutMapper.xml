@@ -1080,6 +1080,12 @@
 		t_out
 		WHERE
 		has_approval_handle=#{trigger}
+
+		AND
+		has_stock_handle=true
+		AND
+		stocker_is_agree=true
+
 		ORDER BY
 		id,quantity
 		ASC

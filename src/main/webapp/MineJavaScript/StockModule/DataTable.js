@@ -165,8 +165,8 @@ function layerOpenEject(ts) {
  * @returns
  */
 function manufactureContent(ts) {
-	/*	 */
 	var typeArea = null;
+	
 	switch (ts.stockTypeArea) {
 	case 0:
 		typeArea = '电器区';

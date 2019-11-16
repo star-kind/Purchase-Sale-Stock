@@ -48,7 +48,7 @@ function ejectInOutStock(data) {
 	layer.open({
 		type : 1,
 		title : '审核出库申请',
-		area : [ '600px', '480px' ],
+		area : [ '600px', '580px' ],// 宽,高
 		id : [ 'store_myself' ],
 		resize : true,
 		closeBtn : true,
@@ -63,7 +63,282 @@ function ejectInOutStock(data) {
  * @returns
  */
 function generateOutStockForm(data) {
+	var aka = '';
 
+	aka += '<div class="personal_div">';
+	aka += '<form accept-charset="utf-8" class="personal_form">';
+
+	aka += '<div class="myself_div">';
+
+	aka += '<input type="text" name="id" value="' + data.id
+			+ '" class="t_out_none">';
+
+	aka += '<p>出库货物名: ';
+	aka += '<b>' + data.storeCommodity + '</b> ';
+	aka += '</p>';
+	aka += '<input type="text" name="storeCommodity" value="'
+			+ data.storeCommodity + '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>';
+	aka += '原贮存序号:';
+	aka += '<b>' + data.storeOrder + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="storeOrder" value="' + data.storeOrder
+			+ '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>';
+	aka += '数量:';
+	aka += '<b>' + data.quantity + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="quantity" value="' + data.quantity
+			+ '" readonly="readonly" class="t_out_none">';
+
+	var area = switchTypeAreaByKey(data.storeArea);
+	aka += '<p>';
+	aka += '原贮存域:';
+	aka += '<b>' + area + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="storeArea" value="' + data.storeArea
+			+ '" readonly="readonly" class="t_out_none">';
+
+	var classify = switchByClassify(data.classify);
+	aka += '<p>';
+	aka += '货品类型:';
+	aka += '<b>' + classify + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="classify" value="' + data.classify
+			+ '" readonly="readonly" class="t_out_none">';
+
+	var d = getRegionByKey(data.destination);
+	aka += '<p>';
+	aka += '目的地:';
+	aka += '<b>' + d + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="destination" value="' + data.destination
+			+ '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>';
+	aka += '经办仓管:';// 仓储部人士
+	aka += '<b></b>';
+	aka += '</p>';
+	aka += '<input type="text" name="saleOperator" value="' + data.saleOperator
+			+ '" readonly="readonly" class="t_out_none">';
+
+	var agree = '';
+	if (data.stockerIsAgree == false) {
+		agree = '不同意';
+	} else {
+		agree = '同意';
+	}
+	aka += '<p>';
+	aka += '仓管是否同意出库:';
+	aka += '<b>' + agree + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="stockerIsAgree" value="'
+			+ data.stockerIsAgree + '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>';
+	aka += '出库时间:';
+	aka += '<b>' + data.outTime + '</b>';
+	aka += '</p>';
+	aka += '<input type="datetime" name="outTime" value="' + data.outTime
+			+ '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>';
+	aka += '提货申请人:';// 销售部人员
+	aka += '<b></b>';
+	aka += '</p>';
+	aka += '<input type="text" name="applicant" value="' + data.applicant
+			+ '" readonly="readonly" class="t_out_none">';
+
+	aka += '<p>仓管备注</p>';
+	aka += '<textarea name="remarks" readonly="readonly" rows="3" value="'
+			+ data.remarks + '">' + data.remarks + '</textarea> ';
+
+	aka += '<p>批复意见</p>';
+	aka += '<textarea rows="3" class="mine_replyOpinion_commit" maxlength="80"></textarea>';
+
+	aka += '</div>';
+
+	aka += '<div class="btn_div">';
+	aka += '<input type="button" value="同意" onclick="" class="btn btn-lg btn-warning personal_btn">';
+	aka += '<input type="button" value="不同意" onclick="" class="btn btn-lg btn-warning personal_btn">';
+	aka += '</div>';
+
+	aka += '</form>';
+	aka += '</div>';
+
+	return aka;
+}
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function getRegionByKey(key) {
+	var d = '';
+
+	switch (key) {
+	case 0:
+		d = '滨河';
+		break;
+
+	case 1:
+		d = '上天院';
+		break;
+
+	case 2:
+		d = '鸣皋';
+		break;
+
+	case 3:
+		d = '焦王';
+		break;
+
+	case 4:
+		d = '申坡';
+		break;
+
+	case 5:
+		d = '遵王';
+		break;
+
+	case 6:
+		d = '常海山';
+		break;
+
+	case 7:
+		d = '老君堂';
+		break;
+
+	case 8:
+		d = '鸦岭';
+		break;
+
+	case 9:
+		d = '酒后';
+		break;
+
+	case 10:
+		d = '平等';
+		break;
+
+	case 11:
+		d = '夏堡';
+		break;
+
+	case 12:
+		d = '富留店';
+		break;
+	}
+
+	return d;
+}
+
+/**
+ * 贮存域
+ * 
+ * @param key
+ * @returns
+ */
+function switchTypeAreaByKey(key) {
+	var typeArea = null;
+
+	switch (key) {
+	case 0:
+		typeArea = '电器区';
+		break;
+
+	case 1:
+		typeArea = '食品区';
+		break;
+
+	case 2:
+		typeArea = '服装区';
+		break;
+
+	case 3:
+		typeArea = '日用品区';
+		break;
+
+	case 4:
+		typeArea = '饮品区';
+		break;
+
+	case 5:
+		typeArea = '混装区';
+		break;
+
+	case 6:
+		typeArea = '家具区';
+		break;
+
+	case 7:
+		typeArea = '玩具区';
+		break;
+
+	case 8:
+		typeArea = '药品区';
+		break;
+
+	case 9:
+		typeArea = '仓外临时区';
+		break;
+	}
+
+	return typeArea;
+}
+
+/**
+ * 决定商品类型
+ * 
+ * @param key
+ * @returns
+ */
+function switchByClassify(key) {
+	var classify = '';
+
+	/* 分类 */
+	switch (key) {
+	case 0:
+		classify = '电器'
+		break;
+
+	case 1:
+		classify = '食品'
+		break;
+
+	case 2:
+		classify = '服装'
+		break;
+
+	case 3:
+		classify = '日用品'
+		break;
+
+	case 4:
+		classify = '饮品'
+		break;
+
+	case 5:
+		classify = '其它'
+		break;
+
+	case 6:
+		classify = '家具'
+		break;
+
+	case 7:
+		classify = '玩具'
+		break;
+
+	case 8:
+		classify = '药品'
+		break;
+	}
+
+	return classify;
 }
 
 /**

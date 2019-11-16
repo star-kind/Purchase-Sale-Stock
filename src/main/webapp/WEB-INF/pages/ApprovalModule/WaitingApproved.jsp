@@ -121,6 +121,36 @@
 .hor_minimalist_a>thead:nth-child(1)>tr:nth-child(1)>th:nth-child(1) {
 	border-left: none;
 }
+
+/* --- */
+.myself_div {
+	margin: auto auto auto 25%;
+}
+
+.myself_div p {
+	margin: 10px auto 15px auto;
+}
+
+.personal_form {
+	margin: 20px auto 40px auto;
+	font-size: 23px;
+}
+
+.personal_btn {
+	margin: 26px 26px auto auto;
+}
+
+.t_out_none {
+	display: none;
+}
+
+.btn_div {
+	margin: auto auto auto 36%;
+}
+
+.myself_div b {
+	margin: auto auto auto 12px;
+}
 </style>
 
 </head>
@@ -133,6 +163,12 @@
 				<b> <i>是否还上页:</i> <i class="has_prev"></i></b> <b><i>是否还下页:</i>
 					<i class="has_next"></i></b> <b><i>每张表行数:</i> <i
 					class="each_tbl_rows"></i></b>
+
+				<!-- 提货申请人 -->
+				<p class="applicant"></p>
+
+				<!-- 经办仓管 -->
+				<p class="operator"></p>
 			</div>
 
 			<br> <br>
