@@ -164,30 +164,23 @@ public class ApprovalController extends ControllerUtils {
 	public ResponseResult<Integer> agreeOrAgainstHandler(HttpSession session, @RequestParam("id") Integer id,
 			@RequestParam("replyOpinion") String replyOpinion, @RequestParam("decide") Integer decide,
 			@RequestParam("deptNumber") Integer deptNumber) {
-		System.err.println(
-				"id:" + id + ",decide:" + decide + ",replyOpinion:" + replyOpinion + ",deptNumber:" + deptNumber);
+		System.err.println(this.getClass().getName() + ",replyOpinion:" + replyOpinion);
+		System.err.print("id: ");
+		System.err.print(id);
+		System.err.print(",decide: ");
+		System.err.print(decide);
+		System.err.print(",deptNumber: ");
+		System.err.println(deptNumber);
 
 		Integer uid = getUsridFromSession(session);
 
-		Integer affects = null;
+		String uname = getUsrnameFromSession(session);
 
-		if (deptNumber == 2) {
-			affects = ips.decidedPurchaseIsAgree(uid, id, decide);
-		}
+		Integer effect = ias.agreeOrAgainst(uid, decide, id, replyOpinion, deptNumber);
 
-		// 添入审批记录表
-		if (affects == 1) {
-			Integer effect = ias.backupAdd(uid, replyOpinion, decide, id, deptNumber);
+		instance.agreeOrAgainstHandlerRecord(uname, effect, deptNumber, id, decide);
 
-			String uname = getUsrnameFromSession(session);
-
-			instance.agreeOrAgainstHandlerRecord(uname, effect, deptNumber, id, decide);
-
-			return new ResponseResult<Integer>(SUCCESS, effect);
-		}
-
-		return null;
-
+		return new ResponseResult<Integer>(SUCCESS, effect);
 	}
 
 }

@@ -19,6 +19,20 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  */
 public interface IApprovalService {
 	/**
+	 * 审批各部门审单
+	 * 
+	 * @param uid        审批者
+	 * @param decide     是否同意,0假1真
+	 * @param order      审单ID
+	 * @param remark     意见备注
+	 * @param deptNumber 部门编号(2采购部,采购申请单;3销售部,提货申请单;4仓储部,出库申请单)
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract Integer agreeOrAgainst(Integer uid, Integer decide, Integer order, String remark, Integer deptNumber)
+			throws SelfServiceException;
+
+	/**
 	 * 获取已处理的申请单
 	 * 
 	 * @param uid
@@ -63,12 +77,11 @@ public interface IApprovalService {
 	/**
 	 * 不管批准与否都要备份
 	 * 
-	 * @param usrid
-	 * @param replyOpinion
-	 * @param decide           0:disagree<br>
-	 *                         1:agree
-	 * @param appId
-	 * @param departmentNumber
+	 * @param usrid            审批执行者
+	 * @param replyOpinion     意见备注
+	 * @param decide           0:disagree;1:agree
+	 * @param appId            审单序号
+	 * @param departmentNumber 部门编号
 	 * @return
 	 * @throws SelfServiceException
 	 */

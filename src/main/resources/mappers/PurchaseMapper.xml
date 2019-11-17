@@ -546,6 +546,12 @@
 		purchase
 		WHERE
 		is_agree=#{isAgree}
+
+		AND
+		purchase_id NOT IN
+		(SELECT original_order FROM t_approval WHERE
+		department_number=2)
+
 		ORDER BY
 		amount_money,purchase_id ASC
 		LIMIT

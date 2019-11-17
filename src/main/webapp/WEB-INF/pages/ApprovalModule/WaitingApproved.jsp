@@ -122,7 +122,8 @@
 	border-left: none;
 }
 
-/* --- */
+/* ------ */
+
 .myself_div {
 	margin: auto auto auto 25%;
 }
@@ -151,6 +152,35 @@
 .myself_div b {
 	margin: auto auto auto 12px;
 }
+
+/* ------ */
+
+.play_none {
+	display: none;
+}
+
+.s_form {
+	font-size: 25px;
+	margin: 15px auto 20px 24%;
+}
+
+.s_form p {
+	margin: 12px 0;
+}
+
+.mine_input_button {
+	font-size: 22px;
+	margin: 30px;
+}
+
+.textarea_p {
+	/*text-align: center;*/
+	
+}
+
+.mine_input_button_div {
+	margin-left: 3%;
+}
 </style>
 
 </head>
@@ -169,6 +199,9 @@
 
 				<!-- 经办仓管 -->
 				<p class="operator"></p>
+
+				<!-- 销售经办 -->
+				<p class="sale_operator"></p>
 			</div>
 
 			<br> <br>

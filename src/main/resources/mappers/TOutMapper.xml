@@ -1086,6 +1086,12 @@
 		AND
 		stocker_is_agree=true
 
+		AND
+		id NOT IN
+		(SELECT original_order FROM
+		t_approval WHERE
+		department_number=4)
+
 		ORDER BY
 		id,quantity
 		ASC

@@ -983,6 +983,11 @@
 		t_sale
 		WHERE
 		has_submitted_approval=#{hasSubmittedApproval}
+
+		AND
+		id NOT IN
+		(SELECT original_order FROM t_approval WHERE department_number=3)
+
 		ORDER BY
 		warehouse_goods_order,id
 		ASC

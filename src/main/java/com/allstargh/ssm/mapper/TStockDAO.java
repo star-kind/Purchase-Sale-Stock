@@ -15,6 +15,29 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TStockDAO {
 	/**
+	 * 根据审核表中已经同意的销售部申请单序号从仓库中查找对应数据,分页查询
+	 * 
+	 * @param deptNum          部门号
+	 * @param approveOperation 0不同意;1同意
+	 * @param pageth           页码
+	 * @param lines            单页行数
+	 * @return
+	 */
+	abstract List<TStock> selectNotInApprovalFromStockLimit(@Param("deptNum") Integer deptNum,
+			@Param("approveOperation") Integer approveOperation, @Param("pageth") Integer pageth,
+			@Param("lines") Integer lines);
+
+	/**
+	 * 根据审核表中已经同意的销售部申请单序号从仓库中查找对应数据
+	 * 
+	 * @param deptNum          部门号
+	 * @param approveOperation 0不同意;1同意
+	 * @return
+	 */
+	abstract List<TStock> selectNotInApprovalFromStock(@Param("deptNum") Integer deptNum,
+			@Param("approveOperation") Integer approveOperation);
+
+	/**
 	 * 据储藏区查找
 	 * 
 	 * @param stockTypeArea

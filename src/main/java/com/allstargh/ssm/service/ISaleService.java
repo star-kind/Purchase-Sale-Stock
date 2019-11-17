@@ -48,6 +48,16 @@ public interface ISaleService {
 	abstract Integer revision(Integer uid, TSale tSale) throws SelfServiceException;
 
 	/**
+	 * 多权限查找一笔记录单
+	 * 
+	 * @param uid
+	 * @param id
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	TSale multiSearchSingle(Integer uid, Integer id) throws SelfServiceException;
+
+	/**
 	 * 查找一笔记录单
 	 * 
 	 * @param uid

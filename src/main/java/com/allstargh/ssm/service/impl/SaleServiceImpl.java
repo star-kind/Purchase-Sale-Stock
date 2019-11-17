@@ -126,7 +126,9 @@ public class SaleServiceImpl implements ISaleService {
 		// 查找每页数据
 		List<TSale> pageList = tSaleDAO.selectLimitByPageRows(pageth * rows, rows);
 
-		// 判断是否有上一页和下一页
+		/*
+		 * 判断是否有上一页和下一页
+		 */
 		if (pageth == 0 && totalPages > 0) {// 总页数至少2页
 			pagination.setHasNextPage(true);
 			pagination.setHasPreviousPage(false);
@@ -135,7 +137,7 @@ public class SaleServiceImpl implements ISaleService {
 			pagination.setHasNextPage(true);
 			pagination.setHasPreviousPage(true);
 
-		} else if (pageth == totalPages && totalPages > 0) {// 总页数字少2页
+		} else if (pageth == totalPages && totalPages > 0) {// 总页数至少2页
 			pagination.setHasNextPage(false);
 			pagination.setHasPreviousPage(true);
 
@@ -276,7 +278,8 @@ public class SaleServiceImpl implements ISaleService {
 	}
 
 	@Override
-	public PagingTextII viewLog(Integer uid, Integer pageIndex,Integer lines) throws SelfServiceException, IOException {
+	public PagingTextII viewLog(Integer uid, Integer pageIndex, Integer lines)
+			throws SelfServiceException, IOException {
 		Accounts account = icrs.checkForAccount(uid, 3);
 
 		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
@@ -290,6 +293,17 @@ public class SaleServiceImpl implements ISaleService {
 		PagingTextII text = seg.packaging(pageIndex);
 
 		return text;
+	}
+
+	@Override
+	public TSale multiSearchSingle(Integer uid, Integer id) throws SelfServiceException {
+		Integer[] competences = { 1, 3 };
+
+		Accounts account = icrs.checkForAccount(uid, competences);
+
+		TSale sale = tSaleDAO.selectByPrimaryKey(id);
+
+		return sale;
 	}
 
 }

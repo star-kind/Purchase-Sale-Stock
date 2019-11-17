@@ -22,6 +22,11 @@
 		<result column="remark" jdbcType="CHAR" property="remark" />
 		<result column="agree_enter_stock" jdbcType="BIT"
 			property="agreeEnterStock" />
+
+		<result column="lastest_modified_time" jdbcType="TIMESTAMP"
+			property="lastestModifiedTime" />
+		<result column="lastest_modifier" jdbcType="VARCHAR"
+			property="lastestModifier" />
 	</resultMap>
 
 	<sql id="Example_Where_Clause">
@@ -97,7 +102,8 @@
 		unit_price,
 		stock_type_area, stock_operator,
 		enter_stock_time, remark,
-		agree_enter_stock
+		agree_enter_stock,
+		lastest_modified_time,lastest_modifier
 	</sql>
 
 	<select id="selectByExample"
@@ -808,7 +814,12 @@
 		stockOperator,
 		enter_stock_time AS enterStockTime,
 		remark,
-		agree_enter_stock AS agreeEnterStock
+		agree_enter_stock AS agreeEnterStock,
+
+		lastest_modified_time AS
+		lastestModifiedTime,
+		lastest_modifier AS lastestModifier
+
 		FROM
 		t_stock
 	</select>
@@ -830,7 +841,12 @@
 		enter_stock_time AS enterStockTime,
 		remark,
 		agree_enter_stock AS
-		agreeEnterStock
+		agreeEnterStock,
+
+		lastest_modified_time AS
+		lastestModifiedTime,
+		lastest_modifier AS lastestModifier
+
 		FROM
 		t_stock
 		WHERE
@@ -860,5 +876,56 @@
 		t_stock
 		WHERE
 		stock_type_area=#{stockTypeArea}
+	</select>
+
+	<select id="selectNotInApprovalFromStock"
+		resultMap="BaseResultMap">
+		SELECT
+
+		<include refid="Base_Column_List" />
+
+		FROM
+		t_stock
+		WHERE
+		id
+		IN
+		(
+		SELECT
+		ta.original_order
+		FROM
+		t_approval ta
+		WHERE
+		ta.department_number=#{deptNum}
+		AND
+		ta.approve_operates=#{approveOperation}
+		)
+	</select>
+
+	<select id="selectNotInApprovalFromStockLimit"
+		resultMap="BaseResultMap">
+		SELECT
+
+		<include refid="Base_Column_List" />
+
+		FROM
+		t_stock
+		WHERE
+		id
+		IN
+		(
+		SELECT
+		ta.original_order
+		FROM
+		t_approval ta
+		WHERE
+		ta.department_number=#{deptNum}
+		AND
+		ta.approve_operates=#{approveOperation}
+		)
+
+		ORDER BY 
+		id,store_quantity
+		LIMIT
+		#{pageth},#{lines}
 	</select>
 </mapper>

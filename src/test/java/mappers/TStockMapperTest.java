@@ -23,6 +23,28 @@ public class TStockMapperTest {
 	}
 
 	@Test
+	public void selectByConditionLimitTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		List<TStock> list = dao.selectNotInApprovalFromStockLimit(3, 1, 1 * 3, 3);
+
+		for (TStock tStock : list) {
+			System.err.println(tStock.toString());
+		}
+	}
+
+	@Test
+	public void selectByConditionTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		List<TStock> list = dao.selectNotInApprovalFromStock(3, 1);
+
+		for (TStock tStock : list) {
+			System.err.println(tStock.toString());
+		}
+	}
+
+	@Test
 	public void selectByAreaTest() {
 		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
 

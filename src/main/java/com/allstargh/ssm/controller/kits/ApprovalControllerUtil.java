@@ -130,7 +130,7 @@ public class ApprovalControllerUtil extends ControllerUtils {
 		s.append(deptStr);
 		s.append("的");
 		s.append(appTypeStr);
-		s.append(",元次序号为:");
+		s.append(",原次序号为:");
 		s.append(appId);
 		s.append(",审批决定:");
 		s.append(decideStr);

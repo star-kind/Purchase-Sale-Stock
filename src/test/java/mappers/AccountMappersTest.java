@@ -16,7 +16,7 @@ public class AccountMappersTest {
 	private AccountsMapper accountsMapper;
 
 	@Before
-	public void setUp() throws Exception {
+	public void initialize() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
 	}
 

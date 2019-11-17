@@ -42,9 +42,14 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
 
 	/**
-	 * 
+	 * 服务层工具类
 	 */
 	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();
+
+	/**
+	 * 控制层工具类
+	 */
+	PurchaseControllerUtil pcu = PurchaseControllerUtil.getInstance();
 
 	@Override
 	public Integer addOnePurchaseApplicationForm(Purchase purchase, String usrname) throws SelfServiceException {
@@ -341,10 +346,14 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 		Integer[] pids = { pid };
 
-		if (decide == 0) {
+		switch (decide) {
+		case 0:
 			affects = pm.updateMultipleRowByPids(pids, 2);
-		} else if (decide == 1) {
+			break;
+
+		case 1:
 			affects = pm.updateMultipleRowByPids(pids, 1);
+			break;
 		}
 
 		return affects;

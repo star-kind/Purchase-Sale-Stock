@@ -135,6 +135,26 @@ public class SaleController extends ControllerUtils {
 	}
 
 	/**
+	 * /stocker-manager/SaleController/multiSearchSingleHandler?id=1
+	 * 
+	 * @param session
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "multiSearchSingleHandler", method = RequestMethod.GET)
+	public ResponseResult<TSale> multiSearchSingleHandler(HttpSession session, @RequestParam("id") Integer id) {
+		System.err.println(this.getClass().getName() + ",ID==");
+		System.err.println(id);
+
+		Integer uid = getUsridFromSession(session);
+
+		TSale sale = iss.multiSearchSingle(uid, id);
+
+		return new ResponseResult<TSale>(SUCCESS, sale);
+	}
+
+	/**
 	 * /stocker-manager/SaleController/pagingDisplayHandler?pageth=1
 	 * 
 	 * @param session

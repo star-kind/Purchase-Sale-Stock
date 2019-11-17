@@ -87,6 +87,12 @@ public class PaginationII<E> implements Serializable {
 		this.data = data;
 	}
 
+	/**
+	 * 冇参
+	 */
+	public PaginationII() {
+	}
+
 	@Override
 	public String toString() {
 		return "PaginationII [totalPages=" + totalPages + ", rows=" + rows + ", hasPreviousPage=" + hasPreviousPage

@@ -10,6 +10,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.allstargh.ssm.mapper.TOutDAO;
 import com.allstargh.ssm.pojo.TOut;
+import com.allstargh.ssm.pojo.TOutExample;
+import com.allstargh.ssm.pojo.TOutExample.Criteria;
 
 public class TOutMapperTest {
 	private ApplicationContext applicationContext;
@@ -21,13 +23,30 @@ public class TOutMapperTest {
 	}
 
 	@Test
+	public void updateTest() {
+		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
+
+		TOutExample example = new TOutExample();
+		Criteria criteria = example.createCriteria();
+
+		TOut out = new TOut();
+
+		out.setApproverIsAgree(true);
+
+		criteria.andIdEqualTo(1);
+
+		int effects = tom.updateByExampleSelective(out, example);
+		System.err.println(effects);
+	}
+
+	@Test
 	public void selectByIdTest() {
 		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
 
 		TOut tOut = tom.selectByPrimaryKey(1);
 		System.err.println(tOut.toString());
 	}
-	
+
 	@Test
 	public void selectLimitTest() {
 		tom = (TOutDAO) applicationContext.getBean("TOutDAO");

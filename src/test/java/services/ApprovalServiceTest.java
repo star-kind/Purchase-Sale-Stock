@@ -23,13 +23,27 @@ public class ApprovalServiceTest {
 	private IApprovalService ias;
 
 	@Before
-	public void setUp() throws Exception {
+	public void initialize() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
 	}
 
 	@Test
-	public void exhibitionTest01() {
+	public void approvalTest() {
+		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
+
+		try {
+			Integer row = ias.agreeOrAgainst(60, 1, 2, "just like", 4);
+
+			System.err.println(row);
+		} catch (SelfServiceException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void paginationTest() {
 		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
 
 		try {
@@ -44,7 +58,7 @@ public class ApprovalServiceTest {
 	}
 
 	@Test
-	public void exhibitionTest1() {
+	public void exhibitionPlusTest() {
 		ias = (IApprovalService) applicationContext.getBean("approvalServiceImpl");
 
 		try {

@@ -28,6 +28,8 @@ import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.pojo.TSale;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.ICommonReplenishService;
+import com.allstargh.ssm.service.IOutStockService;
+import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 
@@ -50,6 +52,12 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 	@Autowired
 	private PurchaseMapper pm;
+
+	@Autowired
+	private IPurchaseService ips;
+
+	@Autowired
+	private IOutStockService ioss;
 
 	/**
 	 * 
@@ -281,6 +289,37 @@ public class ApprovalServiceImpl implements IApprovalService {
 		Integer totalPages = (list.size() + list1.size() + list2.size()) / (lines * 3);
 
 		return totalPages;
+	}
+
+	@Override
+	public Integer agreeOrAgainst(Integer uid, Integer decide, Integer order, String remark, Integer deptNumber)
+			throws SelfServiceException {
+		Accounts account = ics.checkForAccount(uid, 1);
+
+		Integer affects = null;
+
+		Integer records = null;
+
+		switch (deptNumber) {
+		case 2:
+			affects = ips.decidedPurchaseIsAgree(uid, order, decide);
+			records = backupAdd(uid, remark, decide, order, deptNumber);
+			break;
+
+		case 3:
+			records = backupAdd(uid, remark, decide, order, deptNumber);
+			break;
+
+		case 4:
+			affects = ioss.updateIsAgreeByApprover(uid, decide, order);
+			records = backupAdd(uid, remark, decide, order, deptNumber);
+
+			// TODO 批准之后,剩余需求数量要相应改变
+
+			break;
+		}
+
+		return records;
 	}
 
 }

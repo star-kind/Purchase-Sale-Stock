@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "out stock still not yet"
+git commit -m "out stock processing.."
 
 #github
 git pull github master

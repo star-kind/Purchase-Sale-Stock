@@ -117,9 +117,11 @@ function generateOutStockForm(data) {
 	aka += '<input type="text" name="destination" value="' + data.destination
 			+ '" readonly="readonly" class="t_out_none">';
 
+	findAccountByUseridHandler(data.saleOperator, $('.operator'));
+	var operator = $('.operator').text();
 	aka += '<p>';
 	aka += '经办仓管:';// 仓储部人士
-	aka += '<b></b>';
+	aka += '<b>' + operator + '</b>';
 	aka += '</p>';
 	aka += '<input type="text" name="saleOperator" value="' + data.saleOperator
 			+ '" readonly="readonly" class="t_out_none">';
@@ -144,14 +146,16 @@ function generateOutStockForm(data) {
 	aka += '<input type="datetime" name="outTime" value="' + data.outTime
 			+ '" readonly="readonly" class="t_out_none">';
 
+	findAccountByUseridHandler(data.applicant, $('.applicant'));
+	var applicant = $('.applicant').text();
 	aka += '<p>';
 	aka += '提货申请人:';// 销售部人员
-	aka += '<b></b>';
+	aka += '<b>' + applicant + '</b>';
 	aka += '</p>';
 	aka += '<input type="text" name="applicant" value="' + data.applicant
 			+ '" readonly="readonly" class="t_out_none">';
 
-	aka += '<p>仓管备注</p>';
+	aka += '<p>仓管备注:</p>';
 	aka += '<textarea name="remarks" readonly="readonly" rows="3" value="'
 			+ data.remarks + '">' + data.remarks + '</textarea> ';
 
@@ -161,14 +165,45 @@ function generateOutStockForm(data) {
 	aka += '</div>';
 
 	aka += '<div class="btn_div">';
-	aka += '<input type="button" value="同意" onclick="" class="btn btn-lg btn-warning personal_btn">';
-	aka += '<input type="button" value="不同意" onclick="" class="btn btn-lg btn-warning personal_btn">';
+	aka += '<input type="button" value="同意" onclick="agreeOrAgainst(4,'
+			+ data.id + ',0)" class="btn btn-lg btn-warning personal_btn">';
+
+	aka += '<input type="button" value="不同意" onclick="agreeOrAgainst(4,'
+			+ data.id + ',0)" class="btn btn-lg btn-warning personal_btn">';
 	aka += '</div>';
 
 	aka += '</form>';
 	aka += '</div>';
 
 	return aka;
+}
+
+/**
+ * 
+ * @param id
+ * @param selector
+ * @returns
+ */
+function findAccountByUseridHandler(id, selector) {
+	var uri = '/stocker-manager/account/findAccountByUseridHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'userid' : id
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state == 200) {
+				console.log(rr.data);
+
+				selector.text(rr.data.usrname);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
 }
 
 /**
@@ -491,7 +526,7 @@ function generatesRowsOfSale(element, typeStr, dept) {
 	var tr = '';
 
 	for (var i = 0; i < element.length; i++) {
-		tr += '<tr id="store_' + element[i].id + '" class="saler_men">';
+		tr += '<tr id="salemen_' + element[i].id + '" class="saler_men">';
 
 		tr += '<td><input type="checkbox" value="' + element[i].id
 				+ '" class="td_order_number"></td>';
@@ -511,6 +546,280 @@ function generatesRowsOfSale(element, typeStr, dept) {
 }
 
 /**
+ * 
+ * @param id
+ * @returns
+ */
+function getDataFormSale(id) {
+	var uri = '/stocker-manager/SaleController/multiSearchSingleHandler';
+
+	$.ajax({
+		url : uri,
+		data : {
+			'id' : id
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				ejectForm(rr.data);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}
+
+/**
+ * 
+ * @param data
+ * @returns
+ */
+function ejectForm(data) {
+	var formContent = createFormContent(data);
+
+	layer.open({
+		type : 1,
+		title : '审核提货申请',
+		area : [ '600px', '500px' ],
+		id : [ 'take_goods_form' ],
+		resize : true,
+		closeBtn : true,
+		shade : 0.4,// 遮罩透明度
+		content : formContent
+	});
+}
+
+/**
+ * 
+ * @param s
+ * @returns
+ */
+function createFormContent(s) {
+	var aka = '';
+
+	aka += '<div class="s_form_div">';
+
+	aka += '<form accept-charset="utf-8" class="s_form">';
+
+	aka += '<input type="text" name="id" value="' + s.id
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<input type="text" name="warehouseGoodsOrder" value="'
+			+ s.warehouseGoodsOrder
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<div class="form_first_div">';
+
+	aka += '<p>  ';
+	aka += '<span>剩余需求量:</span>';
+	aka += '<b>' + s.surplusDemand + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="surplusDemand" value="'
+			+ s.surplusDemand + '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>货物名字:</span>';
+	aka += '<b>' + s.commodity + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="commodity" value="' + s.commodity
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>客户名字:</span>';
+	aka += '<b>' + s.customer + '</b>';
+	aka += '</p>';
+	aka += '<input type="text" name="customer" value="' + s.customer
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>售价:</span>';
+	aka += '<b>' + s.amountMoney + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="amountMoney" value="' + s.amountMoney
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>已付款金额:</span>';
+	aka += '<b>' + s.amountPaid + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="amountPaid" value="' + s.amountPaid
+			+ '" class="play_none" readonly="readonly">';
+
+	var methods = switchByPaymentMethod(s.paymentMethod);
+	aka += '<p>';
+	aka += '<span>付款方式:</span>';
+	aka += '<b>' + methods + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="paymentMethod" value="'
+			+ s.paymentMethod + '" class="play_none" readonly="readonly">';
+
+	var pay = switchByIsPay(s.isPay);
+	aka += '<p>';
+	aka += '<span>付款情况:</span>';
+	aka += '<b>' + pay + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="isPay" value="' + s.isPay
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>货物数量:</span>';
+	aka += '<b>' + s.quantity + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="quantity" value="' + s.quantity
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p>';
+	aka += '<span>销售时间:</span>';
+	aka += '<b>' + s.saleTime + '</b>';
+	aka += '</p>';
+	aka += '<input type="datetime" name="saleTime" value="' + s.saleTime
+			+ '" class="play_none" readonly="readonly">';
+
+	var p = switchByIsEnoughStock(s.isEnoughStock);
+	aka += '<p>';
+	aka += '<span>存货情况:</span>';
+	aka += '<b>' + p + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="isEnoughStock" value="'
+			+ s.isEnoughStock + '" class="play_none" readonly="readonly">';
+
+	var r = getRegionByKey(s.regionDepartment);
+	aka += '<p>';
+	aka += '<span>地区:</span>';
+	aka += '<b>' + r + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="regionDepartment" value="'
+			+ s.regionDepartment + '" class="play_none" readonly="readonly">';
+
+	findAccountByUseridHandler(s.saleOperator, $('.sale_operator'));
+	var sale_operator = $('.sale_operator').text();
+	aka += '<p>';
+	aka += '<span>销售经办者:</span>';
+	aka += '<b>' + sale_operator + '</b>';
+	aka += '</p>';
+	aka += '<input type="number" name="saleOperator" value="' + s.saleOperator
+			+ '" class="play_none" readonly="readonly">';
+
+	aka += '<p class="textarea_p">';
+	aka += '<span>批复意见</span>';
+	aka += '<textarea rows="3" class="mine_replyOpinion_commit" maxlength="80"></textarea>';
+	aka += '</p>';
+
+	aka += '</div>';
+
+	aka += '<div class="mine_input_button_div">';
+
+	aka += '<input type="button" value="同意" onclick="agreeOrAgainst(3,' + s.id
+			+ ',1)" class="mine_input_button btn btn-default btn-primary">';
+
+	aka += '<input type="button" value="不同意" onclick="agreeOrAgainst(3,' + s.id
+			+ ',0)" class="mine_input_button btn btn-default btn-primary">';
+
+	aka += '</div>';
+	aka += '</form>';
+	aka += '</div>';
+
+	return aka;
+}
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function switchByIsEnoughStock(key) {
+	var p = '';
+
+	switch (key) {
+	case 0:
+		p = '无存货';
+		break;
+
+	case 1:
+		p = '少年存货';
+		break;
+
+	case 2:
+		p = '有一半左右存货';
+		break;
+
+	case 3:
+		p = '可以勉强供应全部';
+		break;
+
+	case 4:
+		p = '完全可以供应';
+		break;
+	}
+
+	return p;
+}
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function switchByIsPay(key) {
+	var p = '';
+
+	switch (key) {
+	case 0:
+		p = '未付款';
+		break;
+
+	case 1:
+		p = '已付定金';
+		break;
+
+	case 2:
+		p = '多于定金少于全款';
+		break;
+
+	case 3:
+		p = '已付全款';
+		break;
+	}
+
+	return p;
+}
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function switchByPaymentMethod(key) {
+	var paymentMethod = '';
+
+	/* 支付方式 */
+	switch (key) {
+	case 0:
+		paymentMethod = '现金';
+		break;
+
+	case 1:
+		paymentMethod = '网银';
+		break;
+
+	case 2:
+		paymentMethod = '信用卡';
+		break;
+
+	case 3:
+		paymentMethod = '其他';
+		break;
+	}
+
+	return paymentMethod;
+}
+
+/* ---------------------------------------------------------------------- */
+
+/**
  * 仓管部的出库申请
  * 
  * @param element
@@ -522,7 +831,7 @@ function generatesRowsOfWarehouse(element, typeStr, dept) {
 	var tr = '';
 
 	for (var i = 0; i < element.length; i++) {
-		tr += '<tr id="store_' + element[i].id + '" class="store_people">';
+		tr += '<tr id="store_tr_' + element[i].id + '" class="store_people">';
 
 		tr += '<td><input type="checkbox" value="' + element[i].id
 				+ '" class="td_order_number"></td>';
@@ -888,7 +1197,7 @@ function layuiOfOpen(formContent) {
  * @param id
  *            申请单ID
  * @param decide
- *            操作代号
+ *            操作决定
  * @returns
  */
 function agreeOrAgainst(deptNumber, id, decide) {
@@ -914,17 +1223,38 @@ function agreeOrAgainst(deptNumber, id, decide) {
 
 				layer.msg('已成功处理该申请', {
 					offset : [ '50%' ],
-					time : 4000
+					time : 2000
 				}, function() {
-					$('#app_purchase_' + id).remove();
+					switchByDeptRemove(id, deptNumber);
 					layer.closeAll();
 				});
 
 			} else {
 				layer.alert(rr.message);
-
 			}
 		}
 	});
+}
+
+/**
+ * 
+ * @param id
+ * @param dept
+ * @returns
+ */
+function switchByDeptRemove(id, dept) {
+	switch (dept) {
+	case 2:
+		$('#app_purchase_' + id).remove();
+		break;
+
+	case 3:
+		$('#salemen_' + id).remove();
+		break;
+
+	case 4:
+		$('#store_tr_' + id).remove();
+		break;
+	}
 
 }

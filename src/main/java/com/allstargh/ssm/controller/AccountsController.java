@@ -55,11 +55,12 @@ public class AccountsController extends ControllerUtils {
 	@RequestMapping(value = "findAccountByUseridHandler", method = RequestMethod.GET)
 	public ResponseResult<Accounts> findAccountByUseridHandler(HttpSession session,
 			@RequestParam("userid") Integer userid) {
-		System.err.println("userid===" + userid);
+		System.err.println(this.getClass().getName() + ",userid===");
+		System.err.println(userid);
 
 		Integer uid = getUsridFromSession(session);
 
-		Accounts account = iAccountsService.findAccountByUserid(uid, userid);// TODO
+		Accounts account = iAccountsService.findAccountByUserid(uid, userid);
 
 		return new ResponseResult<Accounts>(SUCCESS, account);
 	}

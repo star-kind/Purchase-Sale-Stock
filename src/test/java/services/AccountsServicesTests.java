@@ -22,7 +22,7 @@ public class AccountsServicesTests {
 	private IAccountsService accountsService;
 
 	@Before
-	public void setUp() throws Exception {
+	public void initialize() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
 	}
