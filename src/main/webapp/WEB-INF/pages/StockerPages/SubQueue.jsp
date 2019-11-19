@@ -283,7 +283,9 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"> <i class="fa fa-circle-o"></i> 提货申请队列
+							<li><a
+								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/OutStoreRoster&competence=4">
+									<i class="fa fa-circle-o"></i> 提货申请队列
 							</a></li>
 							<li><a href="/stocker-manager/StockController/DataTables"><i
 									class="fa fa-circle-o"></i> 全部仓储物资</a></li>
@@ -388,8 +390,7 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-3">
-						<a href="#"
-							class="btn btn-primary btn-block margin-bottom">Compose</a>
+						<a href="#" class="btn btn-primary btn-block margin-bottom">Compose</a>
 
 						<div class="box box-solid" style="display: none;">
 							<div class="box-header with-border">

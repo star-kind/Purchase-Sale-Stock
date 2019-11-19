@@ -23,6 +23,37 @@ public class TOutMapperTest {
 	}
 
 	@Test
+	public void insertTest() {
+		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
+
+		TOut out = new TOut();
+
+		out.setApplicant(61);
+		out.setApproverIsAgree(true);
+		out.setClassify(3);
+		out.setDestination(1);
+		out.setHasApprovalHandle(true);
+		out.setHasStockHandle(false);
+		out.setOutTime(new Date());
+		out.setQuantity(35);
+		out.setRemarks("border-top-width");
+		out.setSaleOperator(59);
+		out.setSaleOrder(13);
+		out.setStockerIsAgree(false);
+
+		byte by = 5;
+		out.setStoreArea(by);
+
+		out.setStoreCommodity("dollar-type");
+
+		long o = 12;
+		out.setStoreOrder(o);
+		
+		int row = tom.insert(out);
+		System.err.println(row);
+	}
+
+	@Test
 	public void updateTest() {
 		tom = (TOutDAO) applicationContext.getBean("TOutDAO");
 

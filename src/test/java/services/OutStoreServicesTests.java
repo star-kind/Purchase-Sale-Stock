@@ -41,7 +41,7 @@ public class OutStoreServicesTests {
 		ioss = (IOutStockService) applicationContext.getBean("outStockServiceImpl");
 
 		try {
-			PaginationII<List<TStock>> queue = ioss.exhibitionQueue(54, 3, 1, 0, 3);
+			PaginationII<List<TStock>> queue = ioss.exhibitionQueue(54, 3, 1, 3, 3);
 
 			System.err.println(queue.toString());
 		} catch (SelfServiceException s) {

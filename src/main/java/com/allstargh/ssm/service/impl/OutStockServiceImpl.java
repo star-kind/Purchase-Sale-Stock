@@ -82,10 +82,12 @@ public class OutStockServiceImpl implements IOutStockService {
 
 		PaginationII<List<TStock>> pagination = new PaginationII<List<TStock>>();
 
+		List<TStock> list = tStockDAO.selectNotInApprovalFromStock(deptNum, operate);
+
 		List<TStock> data = tStockDAO.selectNotInApprovalFromStockLimit(deptNum, operate, pageth * lines, lines);
 
 		// 总页数
-		int totalPages = data.size() / lines;
+		Integer totalPages = list.size() / lines;
 
 		/*
 		 * 判断是否有上一页和下一页

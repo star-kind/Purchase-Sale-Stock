@@ -131,32 +131,5 @@
 
 </body>
 
-<script type="text/javascript">
-	function commit00() {
-		var selector = $("#form_usr :input[type='text']");
-
-		//校验输入非空, 返回开关量
-		var verify = verifyIsInputNullPlus(selector);
-		if (verify == false) {
-			return;
-		}
-
-		var profile = $('#form_usr').serialize();
-
-		$.ajax({
-			type : 'POST',
-			url : 'account/reg',
-			data : profile,
-			dataType : 'json',
-			success : function(rr) {
-				if (rr.state == 200) {
-					alert('注册成功');
-					location.href = 'login.jsp';
-				} else {
-					document.getElementById('info-tip').innerText = rr.message;
-				}
-			}
-		});
-	}
-</script>
+<script type="text/javascript" src="MineJavaScript/AccountJS/Reg.js"></script>
 </html>

@@ -330,9 +330,8 @@
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="active treeview"><a href="#"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span> <span
-							class="pull-right-container"> 
-							<i class="pull-right">+</i>
-							<!-- <i
+							class="pull-right-container"> <i class="pull-right">+</i>
+								<!-- <i
 								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
@@ -348,100 +347,80 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Top Navigation</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Boxed</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Fixed</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Top
+									Navigation</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Boxed</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Fixed</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Collapsed
+									Sidebar</a></li>
 						</ul></li>
-					<li><a href="#"> <i class="fa fa-th"></i>
-							<span>Widgets</span> <span class="pull-right-container"> <small
+					<li><a href="#"> <i class="fa fa-th"></i> <span>Widgets</span>
+							<span class="pull-right-container"> <small
 								class="label pull-right bg-green">new</small>
 						</span>
 					</a></li>
 					<li class="treeview"><a href="#"> <i
 							class="fa fa-pie-chart"></i> <span>Charts</span> <span
-							class="pull-right-container"> 
-							<i class="pull-right">+</i>
-							<!-- <i
+							class="pull-right-container"> <i class="pull-right">+</i>
+								<!-- <i
 								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> ChartJS</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Morris</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Flot</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Inline charts</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Morris</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Flot</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Inline
+									charts</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 							<span>UI Elements</span> <span class="pull-right-container">
-								<i class="pull-right">+</i>
-								<!-- <i class="fa fa-angle-left pull-right"></i> -->
+								<i class="pull-right">+</i> <!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> General</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Icons</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Buttons</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Sliders</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Timeline</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Modals</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> General</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Icons</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Buttons</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Sliders</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Timeline</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Modals</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-							<span>Forms</span> <span class="pull-right-container"> 
-							<i class="pull-right">+</i>
-							<!-- <i
+							<span>Forms</span> <span class="pull-right-container"> <i
+								class="pull-right">+</i> <!-- <i
 								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> General Elements</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Advanced Elements</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Editors</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> General
+									Elements</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Advanced
+									Elements</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
 						</ul></li>
-					<li class="treeview">
-							<a href="#"> 
-							<i class="fa fa-table"></i>
-							<span>仓库表格</span> <span class="pull-right-container"> 
-							<i class="pull-right">+</i>
-							<!-- <i
+					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
+							<span>仓库表格</span> <span class="pull-right-container"> <i
+								class="pull-right">+</i> <!-- <i
 								class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
+							<li><a
+								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/OutStoreRoster&competence=4"><i
 									class="fa fa-circle-o"></i> 提货申请队列</a></li>
-									
+
 							<li><a href="/stocker-manager/StockController/DataTables"><i
 									class="fa fa-circle-o"></i> 全部仓储货物</a></li>
-						</ul>
-					</li>
-						
-					<li><a href="#"> <i
-							class="fa fa-calendar"></i> <span>Calendar</span> <span
-							class="pull-right-container"> <small
+						</ul></li>
+
+					<li><a href="#"> <i class="fa fa-calendar"></i> <span>Calendar</span>
+							<span class="pull-right-container"> <small
 								class="label pull-right bg-red">3</small> <small
 								class="label pull-right bg-blue">17</small>
 						</span>
 					</a></li>
-					<li><a href="/stocker-manager/StockController/SubQueue"> 
-					<!-- ----------------------------------------------------------- -->
+					<li><a href="/stocker-manager/StockController/SubQueue"> <!-- ----------------------------------------------------------- -->
 							<i class="fa fa-envelope"></i> <span>入库申请队列</span> <span
 							class="pull-right-container"> <!--  --> <small
 								class="label pull-right bg-yellow len_amount"></small> <!--  -->
@@ -451,44 +430,34 @@
 					</a></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
 							<span>Examples</span> <span class="pull-right-container">
-								
-								<i class="pull-right">+</i>
-								<!-- <!-- <i class="fa fa-angle-left pull-right"></i> -->
+
+								<i class="pull-right">+</i> <!-- <!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Invoice</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Profile</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Login</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Register</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Lockscreen</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> 404 Error</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> 500 Error</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Blank Page</a></li>
-							<li><a href="#"><i
-									class="fa fa-circle-o"></i> Pace Page</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Invoice</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Profile</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Login</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Register</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i>
+									Lockscreen</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Blank
+									Page</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"></i> Pace Page</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 							<span>Multilevel</span> <span class="pull-right-container">
-								<i class="pull-right">+</i>
-								<!-- <i class="fa fa-angle-left pull-right"></i> -->
+								<i class="pull-right">+</i> <!-- <i class="fa fa-angle-left pull-right"></i> -->
 						</span>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 							<li class="treeview"><a href="#"><i
 									class="fa fa-circle-o"></i> Level One <span
-									class="pull-right-container"> 
-									<i class="pull-right">+</i>
-									<!-- <i
+									class="pull-right-container"> <i class="pull-right">+</i>
+										<!-- <i
 										class="fa fa-angle-left pull-right"></i> -->
 								</span> </a>
 								<ul class="treeview-menu">
@@ -496,9 +465,8 @@
 											Two</a></li>
 									<li class="treeview"><a href="#"><i
 											class="fa fa-circle-o"></i> Level Two <span
-											class="pull-right-container">
-											<i class="pull-right">+</i> 
-											<!-- <i
+											class="pull-right-container"> <i class="pull-right">+</i>
+												<!-- <i
 												class="fa fa-angle-left pull-right"></i> -->
 										</span> </a>
 										<ul class="treeview-menu">

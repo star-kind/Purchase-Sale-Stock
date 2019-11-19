@@ -90,6 +90,6 @@
 </body>
 
 <!-- 随机验证码和登录 -->
-<script src="jquery/OwnJavaScript/ValidateRandomCode.js"></script>
+<script src="MineJavaScript/AccountJS/Loging.js"></script>
 
 </html>

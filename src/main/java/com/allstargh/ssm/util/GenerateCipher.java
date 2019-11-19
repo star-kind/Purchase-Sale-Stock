@@ -28,7 +28,7 @@ public class GenerateCipher {
 
 		String string = cipher.recurringCompare(StockControllerUtil.chars, line.toCharArray());
 
-		String string2 = cipher.reduceByCharIndex(string);
+		String string1 = cipher.reduceByCharIndex(string);
 
 	}
 
