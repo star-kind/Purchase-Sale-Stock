@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.allstargh.ssm.pojo.JointStockVO;
 import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.pojo.TStock;
@@ -21,6 +22,21 @@ public class OutStoreServicesTests {
 	public void initialize() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext(
 				new String[] { "spring/spring-dao.xml", "spring/spring-service.xml" });
+	}
+
+	@Test
+	public void testSelectVo() {
+		ioss = (IOutStockService) applicationContext.getBean("outStockServiceImpl");
+
+		try {
+			List<JointStockVO> data = ioss.gainJointData(54, 20);
+
+			for (JointStockVO jointStockVO : data) {
+				System.out.println(jointStockVO.toString());
+			}
+		} catch (SelfServiceException s) {
+			System.out.println(s.getMessage());
+		}
 	}
 
 	@Test

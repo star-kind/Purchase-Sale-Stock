@@ -1,4 +1,4 @@
-package com.allstargh.ssm.controller.kits;
+package com.allstargh.ssm.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,10 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.service.IOutStockService;
 
+/**
+ * 
+ * @author admin
+ *
+ */
 @RequestMapping("/OutWareHouseController")
 @Controller
 public class OutWareHouseController extends ControllerUtils {

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allstargh.ssm.mapper.AssociativeMapper">
+	<!-- 字段及其对应之类型 -->
+	<resultMap id="BaseResultMap"
+		type="com.allstargh.ssm.pojo.AssociativeEntity">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="purchase_id" jdbcType="INTEGER"
+			property="purchaseId" />
+		<result column="store_commodity" jdbcType="VARCHAR"
+			property="storeCommodity" />
+		<result column="store_quantity" jdbcType="INTEGER"
+			property="storeQuantity" />
+		<result column="unit_price" jdbcType="DECIMAL"
+			property="unitPrice" />
+		<result column="stock_type_area" jdbcType="TINYINT"
+			property="stockTypeArea" />
+		<result column="stock_operator" jdbcType="VARCHAR"
+			property="stockOperator" />
+		<result column="enter_stock_time" jdbcType="TIMESTAMP"
+			property="enterStockTime" />
+		<result column="remark" jdbcType="CHAR" property="remark" />
+		<result column="agree_enter_stock" jdbcType="BIT"
+			property="agreeEnterStock" />
+		<result column="lastest_modified_time" jdbcType="TIMESTAMP"
+			property="lastestModifiedTime" />
+		<result column="lastest_modifier" jdbcType="VARCHAR"
+			property="lastestModifier" />
+		<result column="usrname" jdbcType="VARCHAR"
+			property="applicant" />
+	</resultMap>
+
+	<resultMap id="JointStockVOResultMap"
+		type="com.allstargh.ssm.pojo.JointStockVO">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="purchase_id" jdbcType="INTEGER"
+			property="purchaseId" />
+		<result column="store_commodity" jdbcType="VARCHAR"
+			property="storeCommodity" />
+		<result column="store_quantity" jdbcType="INTEGER"
+			property="storeQuantity" />
+		<result column="unit_price" jdbcType="DECIMAL"
+			property="unitPrice" />
+		<result column="stock_type_area" jdbcType="TINYINT"
+			property="stockTypeArea" />
+		<result column="stock_operator" jdbcType="VARCHAR"
+			property="stockOperator" />
+		<result column="enter_stock_time" jdbcType="TIMESTAMP"
+			property="enterStockTime" />
+		<result column="remark" jdbcType="CHAR" property="remark" />
+		<result column="agree_enter_stock" jdbcType="BIT"
+			property="agreeEnterStock" />
+		<result column="lastest_modified_time" jdbcType="TIMESTAMP"
+			property="lastestModifiedTime" />
+		<result column="lastest_modifier" jdbcType="VARCHAR"
+			property="lastestModifier" />
+
+		<result column="usrid" jdbcType="INTEGER" property="uid" />
+		<result column="salePrimaryKey" jdbcType="INTEGER"
+			property="salePrimaryKey" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		st.id,
+		st.purchase_id,
+		st.store_commodity,
+		st.store_quantity,
+		st.unit_price,
+		st.stock_type_area,
+		st.stock_operator,
+		st.enter_stock_time,
+		st.remark,
+		st.agree_enter_stock,
+		st.lastest_modified_time,
+		st.lastest_modifier,
+		ac.usrname
+	</sql>
+
+	<sql id="JointStock_VO">
+		st.id, st.purchase_id, st.store_commodity,
+		st.store_quantity, st.unit_price,
+		st.stock_type_area,
+		st.stock_operator, st.enter_stock_time, st.remark,
+		st.agree_enter_stock, st.lastest_modified_time, st.lastest_modifier,
+		ac.usrid,
+		sa.id salePrimaryKey
+	</sql>
+
+	<select id="queryByStID" resultMap="JointStockVOResultMap">
+		SELECT
+		<include refid="JointStock_VO" />
+
+		FROM t_approval ta
+		LEFT JOIN t_sale sa
+		ON (ta.original_order=sa.id)
+
+		LEFT
+		JOIN t_stock st
+		ON (st.id=ta.original_order)
+
+		LEFT JOIN accounts ac
+		ON
+		(sa.sale_operator=ac.usrid)
+
+		WHERE
+		st.id=#{sid}
+	</select>
+
+	<!-- 多表联合查询,总 -->
+	<select id="multiTableJointQuery" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_approval ta
+		LEFT JOIN t_sale sa
+		ON (ta.original_order=sa.id)
+
+		LEFT
+		JOIN t_stock st
+		ON (st.id=ta.original_order)
+
+		LEFT JOIN accounts ac
+		ON
+		(sa.sale_operator=ac.usrid)
+
+		WHERE
+		ta.department_number=#{deptNum}
+		AND
+		ta.approve_operates=#{operate}
+		ORDER BY ta.original_order,ta.id ASC
+	</select>
+
+	<!-- 多表联合查询,分页 -->
+	<select id="multiTableJointQueryLimit" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM t_approval ta
+		LEFT JOIN t_sale sa
+		ON (ta.original_order=sa.id)
+
+		LEFT
+		JOIN t_stock st
+		ON (st.id=ta.original_order)
+
+		LEFT JOIN accounts ac
+		ON
+		(sa.sale_operator=ac.usrid)
+
+		WHERE
+		ta.department_number=#{deptNum}
+		AND
+		ta.approve_operates=#{operate}
+		AND
+		NOT ISNULL(st.id)
+		
+		ORDER BY
+		ta.original_order,ta.id
+		ASC
+		LIMIT
+		#{pageth},#{lines}
+	</select>
+
+</mapper>
+
+
+
+
+

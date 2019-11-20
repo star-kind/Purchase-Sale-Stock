@@ -28,7 +28,7 @@ public class TOutMapperTest {
 
 		TOut out = new TOut();
 
-		out.setApplicant(61);
+		out.setApplicant(61);// 用户表id
 		out.setApproverIsAgree(true);
 		out.setClassify(3);
 		out.setDestination(1);
@@ -38,7 +38,7 @@ public class TOutMapperTest {
 		out.setQuantity(35);
 		out.setRemarks("border-top-width");
 		out.setSaleOperator(59);
-		out.setSaleOrder(13);
+		out.setSaleOrder(13);// 销售表ID
 		out.setStockerIsAgree(false);
 
 		byte by = 5;
@@ -48,7 +48,7 @@ public class TOutMapperTest {
 
 		long o = 12;
 		out.setStoreOrder(o);
-		
+
 		int row = tom.insert(out);
 		System.err.println(row);
 	}

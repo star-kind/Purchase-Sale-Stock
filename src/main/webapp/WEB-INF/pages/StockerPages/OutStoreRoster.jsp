@@ -203,6 +203,42 @@ border-bottom-color: rgb(235, 242, 224);*/
 .hints_p {
 	display: none;
 }
+/*------弹窗--------*/
+.input_info_div {
+	display: none;
+}
+
+.own_base_div {
+	font-size: 25px;
+}
+
+.details_p_div p {
+	margin: 20px auto;
+}
+
+.input_radio_p_div {
+	margin: 20px auto;
+}
+
+.input_radio_p_div p {
+	margin: 7px auto;
+}
+
+.second_span_radio {
+	margin-left: 70px;
+}
+
+.gets_form {
+	margin: 48px auto 50px 26%;
+}
+
+.button_area_div {
+	margin: 30px auto auto 25%;
+}
+
+.gets_form textarea {
+	margin-top: 13px;
+}
 </style>
 
 <body>
@@ -234,6 +270,7 @@ border-bottom-color: rgb(235, 242, 224);*/
 						<th>序号</th>
 						<th>名称</th>
 						<th>数量</th>
+						<th>申请人</th>
 						<th>详情</th>
 
 					</tr>
@@ -261,14 +298,14 @@ border-bottom-color: rgb(235, 242, 224);*/
 	<br>
 	<br>
 	<footer>
-		<p class="hints_p">
-		<p>
-			是否还有下:<i class="has_next"></i>
-		</p>
-		<p>
-			是否还有上:<i class="has_prev"></i>
-		</p>
-		</p>
+		<div class="hints_p">
+			<p>
+				是否还有下:<i class="has_next"></i>
+			</p>
+			<p>
+				是否还有上:<i class="has_prev"></i>
+			</p>
+		</div>
 	</footer>
 </body>
 </html>

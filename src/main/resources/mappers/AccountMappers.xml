@@ -3,18 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--映射接口包 -->
 <mapper namespace="com.allstargh.ssm.mapper.AccountsMapper">
-
 	<!-- 统计权限为parameter的人数 -->
 	<select id="selectCountCompetence"
 		resultType="java.lang.Integer">
-
 		SELECT
 		COUNT(competence)
 		FROM
 		accounts
 		WHERE
 		competence=#{competence}
-
 	</select>
 
 	<update id="updatePartialProfileById">

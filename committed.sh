@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "Very difficult"
+git commit -m "out warehouse work almost done"
 
 #github
 git pull github master

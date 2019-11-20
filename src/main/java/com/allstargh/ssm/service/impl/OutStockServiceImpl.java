@@ -1,15 +1,21 @@
 package com.allstargh.ssm.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.mapper.AssociativeMapper;
+import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TOutDAO;
 import com.allstargh.ssm.mapper.TSaleDAO;
 import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.AssociativeEntity;
+import com.allstargh.ssm.pojo.JointStockVO;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.pojo.TOutExample;
 import com.allstargh.ssm.pojo.TOutExample.Criteria;
@@ -35,7 +41,13 @@ public class OutStockServiceImpl implements IOutStockService {
 	private TStockDAO tStockDAO;
 
 	@Autowired
+	private PurchaseMapper pm;
+
+	@Autowired
 	private ICommonReplenishService icrs;
+
+	@Autowired
+	private AssociativeMapper associativeMapper;
 
 	@Override
 	public TOut getToutProfileById(Integer uid, Integer oid) throws SelfServiceException {
@@ -116,6 +128,91 @@ public class OutStockServiceImpl implements IOutStockService {
 		pagination.setCurrentPageth(pageth);
 
 		return pagination;
+	}
+
+	@Override
+	public PaginationII<List<AssociativeEntity>> exhibitionQueuePlus(Integer uid, Integer deptNum, Integer operate,
+			Integer pageth, Integer lines) throws SelfServiceException {
+		Accounts account = icrs.checkForAccount(uid, 4);
+
+		PaginationII<List<AssociativeEntity>> pagination = new PaginationII<List<AssociativeEntity>>();
+
+		List<AssociativeEntity> list = associativeMapper.multiTableJointQuery(deptNum, operate);
+
+		List<AssociativeEntity> data = associativeMapper.multiTableJointQueryLimit(deptNum, operate, pageth * lines,
+				lines);
+
+		System.err.println("size: ");
+		System.err.println(list.size());
+
+		// 总页数
+		Integer totalPages = list.size() / lines;
+
+		/*
+		 * 判断是否有上一页和下一页
+		 */
+		if (pageth == 0 && totalPages > 0) {// 总页数至少2页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(false);
+
+		} else if ((pageth + 1) == totalPages && totalPages > 0) {// 总页数至少2页
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(true);
+
+		} else if (totalPages == 0 || data == null) {// 总页数仅仅一页或冇数据
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(false);
+
+		} else if (pageth > 0 && pageth < totalPages) {// 总页数至少3页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(true);
+
+		}
+
+		pagination.setData(data);
+		pagination.setTotalPages(totalPages);
+		pagination.setRows(lines);
+		pagination.setCurrentPageth(pageth);
+
+		return pagination;
+	}
+
+	@Override
+	public List<JointStockVO> gainJointData(Integer uid, Integer sid) throws SelfServiceException {
+		Accounts account = icrs.checkForAccount(uid, 4);
+
+		List<JointStockVO> vo = associativeMapper.queryByStID(sid);
+
+		return vo;
+	}
+
+	@Override
+	public Integer addOut(Integer uid, JointStockVO vo) throws SelfServiceException {
+		Accounts account = icrs.checkForAccount(uid, 4);
+
+		TOut out = new TOut();
+
+		Purchase purchase = pm.selectByPrimaryKey(vo.getPurchaseId());
+
+		out.setApplicant(vo.getUid());
+		out.setApproverIsAgree(true);
+		out.setClassify(purchase.getClassify());
+		out.setDestination(account.getRegionDepartment());
+		out.setHasApprovalHandle(true);
+		out.setHasStockHandle(true);
+		out.setOutTime(new Date());
+		out.setQuantity(vo.getStoreQuantity());
+		out.setRemarks(vo.getRemark());
+		out.setSaleOrder(vo.getSalePrimaryKey());
+		out.setStockerIsAgree(vo.getStockerIsAgree());
+		out.setStoreArea(vo.getStockTypeArea());
+		out.setStoreCommodity(vo.getStoreCommodity());
+		out.setStoreOrder(vo.getId());
+		out.setSaleOperator(uid);
+
+		int affect = tod.insert(out);
+
+		return affect;
 	}
 
 }

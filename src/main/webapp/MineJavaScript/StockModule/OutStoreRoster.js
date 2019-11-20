@@ -57,7 +57,7 @@ function pageTurning(flag) {
 function exhibitionQueueHandler(index) {
 	console.log(index);
 
-	var uri = '/stocker-manager/OutStockController/exhibitionQueueHandler';
+	var uri = '/stocker-manager/OutStockController/exhibitionQueueHandler01';
 
 	$.ajax({
 		url : uri,
@@ -75,7 +75,7 @@ function exhibitionQueueHandler(index) {
 
 				// 赋值提示给其它标签
 				span_current.text(rr.data.currentPageth + 1);
-				span_all_page.text(rr.data.totalPages + 1);
+				span_all_page.text(rr.data.totalPages);
 				has_next.text(rr.data.hasNextPage);
 				has_prev.text(rr.data.hasPreviousPage);
 			} else {
@@ -118,6 +118,10 @@ function appendIntoTBody(bo) {
 		tr += '</td>';
 
 		tr += '<td>';
+		tr += bo[i].applicant;
+		tr += '</td>';
+
+		tr += '<td>';
 		tr += '<a href="javascript:seekDetail(' + bo[i].id + ')">';
 		tr += '查看';
 		tr += '</a>';
@@ -137,7 +141,7 @@ function appendIntoTBody(bo) {
  * @returns
  */
 function seekDetail(id) {
-	var url = '/stocker-manager/StockController/getStoreByIdHandler';
+	var url = '/stocker-manager/OutStockController/gainDataBySidHandler';
 
 	$.ajax({
 		url : url,
@@ -150,8 +154,9 @@ function seekDetail(id) {
 			if (rr.state === 200) {
 				console.log(rr.data);
 
+				var list = rr.data;
 				// 数据弹窗
-				launchData(rr.data);
+				launchData(list[0]);
 			} else {
 				layer.alert(rr.message);
 			}
@@ -174,10 +179,10 @@ function launchData(d) {
 		title : '出库货物详情',
 		closeBtn : true,// 关闭窗体按钮,真,显示
 		shade : 0.4,
-		id : 'dynamic_form',// 为上层div设1个ID,防止重复出现
+		id : 'details_form_outside',// 为上层div设1个ID,防止重复出现
 		resize : true,// 更改大小,假:禁止
 		moveType : 1,
-		area : [ '800px', '490px' ],// 宽,高
+		area : [ '800px', '522px' ],// 宽,高
 		content : form
 	});
 }
@@ -188,9 +193,166 @@ function launchData(d) {
  * @returns
  */
 function createFormByData(d) {
+	var substance = '';
 
+	substance += '<div class="own_base_div">';
+
+	substance += '<form class="gets_form" accept-charset="utf-8">';
+
+	substance += '<div class="input_info_div">';
+	substance += '<input type="number" name="uid" value="' + d.uid + '">';
+
+	substance += '<input type="number" name="purchaseId" value="'
+			+ d.purchaseId + '">';
+
+	substance += '<input type="number" name="salePrimaryKey" value="'
+			+ d.salePrimaryKey + '">';
+
+	substance += '<input type="number" name="storeQuantity" value="'
+			+ d.storeQuantity + '">';
+
+	substance += '<input type="number" name="stockTypeArea" value="'
+			+ d.stockTypeArea + '">  ';
+
+	substance += '<input type="text" name="storeCommodity" value="'
+			+ d.storeCommodity + '">  ';
+
+	substance += '<input type="number" name="id" value="' + d.id
+			+ '">            ';
+	substance += '</div>';
+
+	substance += '<div>';
+	substance += '<div class="details_p_div">';
+
+	substance += '<p>';
+	substance += '出库货物名:';
+	substance += '<b>';
+	substance += d.storeCommodity;
+	substance += '</b> ';
+	substance += '</p>';
+
+	substance += '<p>';
+	substance += '货物数量:';
+	substance += '<b>';
+	substance += d.storeQuantity;
+	substance += '</b> ';
+	substance += '</p>';
+
+	substance += '<p>';
+	substance += '单价:';
+	substance += '<b>';
+	substance += d.unitPrice;
+	substance += '</b> ';
+	substance += '</p>';
+
+	var area = gainTypeArea(d.stockTypeArea);
+	substance += '<p>';
+	substance += '原储存域:';
+	substance += '<b>';
+	substance += area;
+	substance += '</b> ';
+	substance += '</p>';
+
+	substance += '<p>';
+	substance += '原入库经手者:';
+	substance += '<b>';
+	substance += d.stockOperator;
+	substance += '</b> ';
+	substance += '</p>';
+
+	substance += '<p>';
+	substance += '入库时间:';
+	substance += '<b>';
+	substance += d.enterStockTime;
+	substance += '</b> ';
+	substance += '</p>';
+
+	substance += '<p>';
+	substance += '原入库备注:';
+	substance += '<br>';
+	substance += '<b>';
+	substance += '<textarea rows="4" readonly="readonly">';
+	substance += d.remark;
+	substance += '</textarea>     ';
+	substance += '</b> ';
+	substance += '</p>';
+	substance += '</div>';
+
+	substance += '<div class="input_radio_p_div">';
+	substance += '<p>是否同意入库:</p>';
+	substance += '<span>';
+	substance += '同意:';
+	substance += '<input type="radio" class="radio_00" name="stockerIsAgree" value="true">';
+	substance += '</span>';
+
+	substance += '<span class="second_span_radio">';
+	substance += '不同意:';
+	substance += '<input type="radio" class="radio_11" name="stockerIsAgree" value="false">';
+	substance += '</span>';
+	substance += '</div>';
+	substance += '</div>';
+
+	substance += '<div class="remark_div">';
+	substance += '<span>备注(如不同意出库,则此项必填)</span>';
+	substance += '<br>';
+	substance += '<textarea rows="4" name="remarks" maxlength="80"></textarea>';
+	substance += '</div>';
+
+	substance += '<div class="button_area_div">';
+	substance += '<input type="button" value="提交" class="btn btn-lg btn-primary own_of_button" onclick="submitted()">';
+	substance += '</div>';
+
+	substance += '</form>';
+	substance += '</div>';
+
+	return substance;
 }
 
+/**
+ * 
+ * @returns
+ */
+function submitted() {
+	var uri = '/stocker-manager/OutStockController/addOutHandler';
+
+	var agree = $('input[name="stockerIsAgree"]:checked').val();
+	console.log(agree);
+	console.log(typeof (agree));
+
+	var remark = $('.remark_div > textarea:nth-child(3)').val();
+	console.log(remark);
+
+	if (agree === 'false') {
+		if (remark === '' || null) {
+			layer.alert('备注未填');
+			return;
+		}
+	}
+
+	if (agree == undefined) {
+		layer.alert('出库选项未选');
+		return;
+	}
+
+	var bean = $('.gets_form').serialize();
+	console.log(bean);
+
+	$.ajax({
+		url : uri,
+		data : bean,
+		dataType : 'json',
+		type : 'POST',
+		success : function(rr) {
+			if (rr.state == 200) {
+				layer.msg(rr.data + '份出库申请单处理成功', function() {
+					location.reload();
+				});
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}
 /**
  * 
  * @param key
