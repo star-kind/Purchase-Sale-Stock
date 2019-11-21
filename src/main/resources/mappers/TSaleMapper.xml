@@ -985,7 +985,8 @@
 		has_submitted_approval=#{hasSubmittedApproval}
 
 		AND
-		id NOT IN
+		id NOT
+		IN
 		(SELECT original_order FROM t_approval WHERE department_number=3)
 
 		ORDER BY
@@ -994,4 +995,23 @@
 		LIMIT
 		#{pageNum},#{lines}
 	</select>
+
+	<select id="selectByGoodsOrder" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_sale
+		WHERE
+		warehouse_goods_order=#{warehouseGoodsOrder}
+	</select>
+
+	<update id="updateSurplusDemandByOrder">
+		UPDATE
+		t_sale
+		SET
+		surplus_demand=#{surplusDemand}
+		WHERE
+		warehouse_goods_order=#{warehouseGoodsOrder}
+	</update>
 </mapper>

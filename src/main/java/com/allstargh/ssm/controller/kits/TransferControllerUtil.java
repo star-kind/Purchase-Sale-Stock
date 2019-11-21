@@ -67,8 +67,13 @@ public class TransferControllerUtil extends ControllerUtils {
 		b.append("进入");
 		b.append(dept);
 		b.append(LINE_SEPARATOR_SUFFIX);
-		
+
 		writeRecordLog(RECORD_FILE_NAME, b.toString());
+	}
+
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
 	}
 
 }

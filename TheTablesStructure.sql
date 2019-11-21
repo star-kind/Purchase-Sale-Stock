@@ -144,9 +144,7 @@
 |       |   `remarks` varchar(80) DEFAULT NULL COMMENT '备注',                                                                                                       |
 |       |   `has_approval_handle` tinyint(1) NOT NULL COMMENT '是否经过审批部处理,false-未经过,true-已经过',                                                         |
 |       |   `has_stock_handle` tinyint(1) NOT NULL COMMENT '是否经过仓管处理,false-未经过,true-已经过',                                                              |
-|       |   PRIMARY KEY (`id`),                                                                                                                                      |
-|       |   UNIQUE KEY `sale_order` (`sale_order`),                                                                                                                  |
-|       |   UNIQUE KEY `store_order` (`store_order`)                                                                                                                 |
+|       |   PRIMARY KEY (`id`)                                                                                                                |
 |       | ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库记录表'                                                   |
 +-------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
 

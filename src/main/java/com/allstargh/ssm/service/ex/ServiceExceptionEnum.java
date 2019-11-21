@@ -8,8 +8,10 @@ package com.allstargh.ssm.service.ex;
  */
 public enum ServiceExceptionEnum {
 	/** 实例成员 */
-	INSTANCE,
+	//INSTANCE,
 
+	/** 该存储货物已经失效,请删除 */
+	STORE_HAD_INVALID(424, "该存储货物已经失效,请删除"),
 	/** 业已递交与审批部门,禁止更改 */
 	HAS_BEEN_SUBMITTED_TO_APPROVAL_DEPARTMENT(423, "业已递交与审批部门,禁止更改"),
 	/** 审批已过截止期,禁止更改 */
@@ -37,7 +39,7 @@ public enum ServiceExceptionEnum {
 	/** 提交为空 */
 	COMMIT_HAS_NULL(420, "提交为空"),
 	/** 权限错位,您没有相应权限 */
-	COMPETENCE_DISLOCATION(421, "权限错位,您没有相应权限"),;
+	COMPETENCE_DISLOCATION(421, "权限错位,您没有相应权限");
 
 	private Integer code;
 	private String description;
@@ -103,22 +105,22 @@ public enum ServiceExceptionEnum {
 	/*
 	 * 懒汉式
 	 */
-	private static ServiceExceptionEnum exEnum;
-
-	// 锁
-	private static final Object LOCK = new Object();
-
-	public static ServiceExceptionEnum getInstance() {
-		if (exEnum == null) {
-			// 决定是否需要锁定
-			synchronized (LOCK) {
-				if (exEnum == null) {
-					exEnum = ServiceExceptionEnum.INSTANCE;
-				}
-			}
-		}
-
-		return exEnum;
-	}
+//	private static ServiceExceptionEnum exEnum;
+//
+//	// 锁
+//	private static final Object LOCK = new Object();
+//
+//	public static ServiceExceptionEnum getInstance() {
+//		if (exEnum == null) {
+//			// 决定是否需要锁定
+//			synchronized (LOCK) {
+//				if (exEnum == null) {
+//					exEnum = ServiceExceptionEnum.INSTANCE;
+//				}
+//			}
+//		}
+//
+//		return exEnum;
+//	}
 
 }

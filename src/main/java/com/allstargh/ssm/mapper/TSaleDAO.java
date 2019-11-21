@@ -15,6 +15,24 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TSaleDAO {
 	/**
+	 * 根据对应的仓储ID更改剩余需求量
+	 * 
+	 * @param surplusDemand
+	 * @param warehouseGoodsOrder
+	 * @return
+	 */
+	abstract Integer updateSurplusDemandByOrder(@Param("surplusDemand") Integer surplusDemand,
+			@Param("warehouseGoodsOrder") Long warehouseGoodsOrder);
+
+	/**
+	 * 根据对应的仓储ID查询
+	 * 
+	 * @param warehouseGoodsOrder
+	 * @return
+	 */
+	abstract TSale selectByGoodsOrder(Long warehouseGoodsOrder);
+
+	/**
 	 * 根据hasSubmittedApproval分页查询
 	 * 
 	 * @param hasSubmittedApproval

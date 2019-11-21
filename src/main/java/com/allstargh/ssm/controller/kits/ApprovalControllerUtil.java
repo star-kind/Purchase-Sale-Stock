@@ -174,4 +174,9 @@ public class ApprovalControllerUtil extends ControllerUtils {
 		writeRecordLog(affect, DAILY_FILE_NAME, builder.toString());
 	}
 
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
+	}
+
 }

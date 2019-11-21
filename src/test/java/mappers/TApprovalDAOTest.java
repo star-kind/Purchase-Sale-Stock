@@ -24,6 +24,17 @@ public class TApprovalDAOTest {
 	}
 
 	@Test
+	public void selectAllLimitTest() {
+		dao = (TApprovalDAO) applicationContext.getBean("TApprovalDAO");
+
+		List<TApproval> list = dao.selectAllOffsetLimit(0, 3);
+
+		for (TApproval tApproval : list) {
+			System.err.println(tApproval.toString());
+		}
+	}
+
+	@Test
 	public void selectAllTest() {
 		dao = (TApprovalDAO) applicationContext.getBean("TApprovalDAO");
 
@@ -51,7 +62,7 @@ public class TApprovalDAOTest {
 
 		approval.setApprovalsTime(new Date());
 		approval.setAuditor(60);
-		
+
 		approval.setApproveOperates(false);
 		approval.setReplyOpinion("nothing at all");
 

@@ -17,6 +17,7 @@ import com.allstargh.ssm.controller.kits.ApprovalControllerUtil;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.IApprovalService;
 import com.allstargh.ssm.service.IPurchaseService;
@@ -37,6 +38,48 @@ public class ApprovalController extends ControllerUtils {
 	ApprovalControllerUtil instance = ApprovalControllerUtil.getInstance();
 
 	/**
+	 * /stocker-manager/ApprovalController/readOutputSubstanceLogHandler01?pageth=1
+	 * 
+	 * @param session
+	 * @param pageth
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readOutputSubstanceLogHandler01", method = RequestMethod.GET)
+	protected ResponseResult<PagingTextII> readOutputSubstanceLogHandler01(HttpSession session,
+			@RequestParam(value = "pageth", defaultValue = "0") Integer pageth)
+			throws SelfServiceException, IOException {
+		System.err.println(this.getClass().getName() + ",pageth===");
+		System.err.println(pageth);
+
+		Integer usrid = getUsridFromSession(session);
+
+		PagingTextII pagingTextII = ias.readOutputSubstanceLog(usrid, pageth, 12);
+
+		return new ResponseResult<PagingTextII>(SUCCESS, pagingTextII);
+	}
+
+	/**
+	 * /stocker-manager/ApprovalController/exhibitionAllOnPaginationHandler?pageth=1
+	 * 
+	 * @param session
+	 * @param pageth
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "exhibitionAllOnPaginationHandler", method = RequestMethod.GET)
+	protected ResponseResult<PaginationII<List<TApproval>>> exhibitionAllOnPaginationHandler(HttpSession session,
+			@RequestParam(value = "pageth", defaultValue = "0") Integer pageth) {
+		Integer uid = getUsridFromSession(session);
+
+		PaginationII<List<TApproval>> paginationII = ias.exhibitionAllOnPagination(uid, pageth, 6);
+
+		return new ResponseResult<PaginationII<List<TApproval>>>(SUCCESS, paginationII);
+	}
+
+	/**
 	 * /stocker-manager/ApprovalController/revampByIDHandler
 	 * 
 	 * @param session
@@ -52,7 +95,10 @@ public class ApprovalController extends ControllerUtils {
 			@RequestParam("replyOpinion") String replyOpinion) {
 		Integer uid = getUsridFromSession(session);
 
-		System.err.println(uid + "," + approveOperates + "," + replyOpinion + "," + tid);
+		System.err.println(this.getClass().getName() + ",===");
+		System.err.println(approveOperates);
+		System.err.println(replyOpinion);
+		System.err.println(tid);
 
 		Integer affect = ias.revampByID(uid, approveOperates, replyOpinion, tid);
 

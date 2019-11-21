@@ -23,6 +23,7 @@ import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IOutStockService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
+import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 
 /**
  * 
@@ -194,6 +195,11 @@ public class OutStockServiceImpl implements IOutStockService {
 
 		Purchase purchase = pm.selectByPrimaryKey(vo.getPurchaseId());
 
+		if (purchase == null) {
+			String description = ServiceExceptionEnum.STORE_HAD_INVALID.getDescription();
+			throw new SelfServiceException(description);
+		}
+
 		out.setApplicant(vo.getUid());
 		out.setApproverIsAgree(true);
 		out.setClassify(purchase.getClassify());
@@ -211,6 +217,10 @@ public class OutStockServiceImpl implements IOutStockService {
 		out.setSaleOperator(uid);
 
 		int affect = tod.insert(out);
+
+		/*
+		 * 出库成功(即仓管员同意出库)之后,该货物不应该存在于货仓中了,需要从仓库中删除 TODO
+		 */
 
 		return affect;
 	}

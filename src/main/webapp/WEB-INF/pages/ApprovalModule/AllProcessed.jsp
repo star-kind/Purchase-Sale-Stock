@@ -110,6 +110,29 @@
 	margin: 20px;
 	text-decoration: underline;
 }
+/* ------------------------ */
+li {
+	list-style: none;
+	float: left;
+}
+
+.table_6 {
+	margin: 6rem auto 2em auto;
+	width: 80%;
+}
+
+.pages_div_own {
+	margin: auto auto 98px 30%;
+	font-size: 25px;
+}
+
+.pages_div_own li {
+	margin: 18px;
+}
+
+.own_informations {
+	display: none;
+}
 </style>
 
 </head>
@@ -134,8 +157,7 @@
 	<!--  -->
 	<div>
 		<br>
-		<table class="table_6" cellspacing="0" cellpadding="0" border="1"
-			style="margin: 6rem auto 10em auto; width: 80%;">
+		<table class="table_6" cellspacing="0" cellpadding="0" border="1">
 			<thead>
 				<tr>
 					<th><input type="checkbox" class="tbl_head_check"
@@ -154,7 +176,25 @@
 			<tbody class="table_boby">
 			</tbody>
 		</table>
+		<br> <br>
 
+		<div class="pages_div_own">
+			<ol class="pages_ol_own">
+				<li><a href="javascript:pageTurns(0)">首页</a></li>
+				<li><a href="javascript:pageTurns(1)">上页</a></li>
+				<li><a href="javascript:pageTurns(2)">下页</a></li>
+				<li><a href="javascript:pageTurns(3)">尾页</a></li>
+				<div class="index_pages_paras">
+					<li><span>当前页:</span><b class="current_own"></b></li>
+					<li><span>总页数:</span><b class="total_own"></b></li>
+				</div>
+			</ol>
+		</div>
+
+		<div class="own_informations">
+			<i>还有下页吗</i> <em class="has_next"></em> <i>还有上页吗</i> <em
+				class="has_previous"></em>
+		</div>
 	</div>
 
 	<div class="uid_uname" style="display: none; text-align: center;">

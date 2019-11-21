@@ -5,11 +5,10 @@ package com.allstargh.ssm.service;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
-import com.allstargh.ssm.pojo.Pagination;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -18,6 +17,18 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IApprovalService {
+	/**
+	 * 分页显示数据列表
+	 * 
+	 * @param uid
+	 * @param pageNum
+	 * @param lines
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract PaginationII<List<TApproval>> exhibitionAllOnPagination(Integer uid, Integer pageNum, Integer lines)
+			throws SelfServiceException;
+
 	/**
 	 * 审批各部门审单
 	 * 
@@ -64,6 +75,19 @@ public interface IApprovalService {
 	 * @throws SelfServiceException
 	 */
 	List<TApproval> exhibitionAll(Integer uid) throws SelfServiceException;
+
+	/**
+	 * 读取记录<b>overload</b>
+	 * 
+	 * @param usrid
+	 * @param pageNum
+	 * @param lines
+	 * @return
+	 * @throws IOException
+	 * @throws SelfServiceException
+	 */
+	abstract PagingTextII readOutputSubstanceLog(Integer usrid, Integer pageNum, Integer lines)
+			throws IOException, SelfServiceException;
 
 	/**
 	 * 读取记录

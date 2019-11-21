@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allstargh.ssm.mapper.TApprovalDAO">
-
 	<resultMap id="BaseResultMap"
 		type="com.allstargh.ssm.pojo.TApproval">
 		<id column="id" jdbcType="INTEGER" property="id" />
@@ -33,7 +32,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -66,7 +66,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -84,7 +85,8 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, department_number, approvals_time, reply_opinion, original_order,
+		id, department_number, approvals_time, reply_opinion,
+		original_order,
 		auditor, approve_operates
 	</sql>
 	<select id="selectByExample"
@@ -125,12 +127,15 @@
 
 	<insert id="insert"
 		parameterType="com.allstargh.ssm.pojo.TApproval">
-		insert into t_approval (id, department_number, approvals_time,
+		insert into t_approval (id, department_number,
+		approvals_time,
 		reply_opinion, original_order, auditor,
 		approve_operates)
-		values (#{id,jdbcType=INTEGER}, #{departmentNumber,jdbcType=TINYINT},
+		values (#{id,jdbcType=INTEGER},
+		#{departmentNumber,jdbcType=TINYINT},
 		#{approvalsTime,jdbcType=TIMESTAMP},
-		#{replyOpinion,jdbcType=CHAR}, #{originalOrder,jdbcType=INTEGER}, #{auditor,jdbcType=INTEGER},
+		#{replyOpinion,jdbcType=CHAR},
+		#{originalOrder,jdbcType=INTEGER}, #{auditor,jdbcType=INTEGER},
 		#{approveOperates,jdbcType=BIT})
 	</insert>
 
@@ -191,7 +196,8 @@
 		values
 		<foreach collection="list" index="index" item="item"
 			separator=",">
-			(#{item.id,jdbcType=INTEGER}, #{item.departmentNumber,jdbcType=TINYINT},
+			(#{item.id,jdbcType=INTEGER},
+			#{item.departmentNumber,jdbcType=TINYINT},
 			#{item.approvalsTime,jdbcType=TIMESTAMP},
 			#{item.replyOpinion,jdbcType=CHAR},
 			#{item.originalOrder,jdbcType=INTEGER},
@@ -201,7 +207,8 @@
 	</insert>
 	<insert id="insertBatchSelective" parameterType="java.util.List">
 		insert into t_approval
-		(id, department_number, approvals_time, reply_opinion, original_order,
+		(id, department_number, approvals_time,
+		reply_opinion, original_order,
 		auditor, approve_operates
 		)
 		values
@@ -269,22 +276,26 @@
 				id = #{record.id,jdbcType=INTEGER},
 			</if>
 			<if test="record.departmentNumber != null">
-				department_number = #{record.departmentNumber,jdbcType=TINYINT},
+				department_number =
+				#{record.departmentNumber,jdbcType=TINYINT},
 			</if>
 			<if test="record.approvalsTime != null">
-				approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
+				approvals_time =
+				#{record.approvalsTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="record.replyOpinion != null">
 				reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
 			</if>
 			<if test="record.originalOrder != null">
-				original_order = #{record.originalOrder,jdbcType=INTEGER},
+				original_order =
+				#{record.originalOrder,jdbcType=INTEGER},
 			</if>
 			<if test="record.auditor != null">
 				auditor = #{record.auditor,jdbcType=INTEGER},
 			</if>
 			<if test="record.approveOperates != null">
-				approve_operates = #{record.approveOperates,jdbcType=BIT},
+				approve_operates =
+				#{record.approveOperates,jdbcType=BIT},
 			</if>
 		</set>
 		<if test="_parameter != null">
@@ -298,9 +309,12 @@
 		department_number = #{record.departmentNumber,jdbcType=TINYINT},
 		approvals_time = #{record.approvalsTime,jdbcType=TIMESTAMP},
 		reply_opinion = #{record.replyOpinion,jdbcType=CHAR},
-		original_order = #{record.originalOrder,jdbcType=INTEGER},
-		auditor = #{record.auditor,jdbcType=INTEGER},
-		approve_operates = #{record.approveOperates,jdbcType=BIT}
+		original_order =
+		#{record.originalOrder,jdbcType=INTEGER},
+		auditor =
+		#{record.auditor,jdbcType=INTEGER},
+		approve_operates =
+		#{record.approveOperates,jdbcType=BIT}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -333,12 +347,18 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.allstargh.ssm.pojo.TApproval">
 		update t_approval
-		set department_number = #{departmentNumber,jdbcType=TINYINT},
-		approvals_time = #{approvalsTime,jdbcType=TIMESTAMP},
-		reply_opinion = #{replyOpinion,jdbcType=CHAR},
-		original_order = #{originalOrder,jdbcType=INTEGER},
-		auditor = #{auditor,jdbcType=INTEGER},
-		approve_operates = #{approveOperates,jdbcType=BIT}
+		set department_number =
+		#{departmentNumber,jdbcType=TINYINT},
+		approvals_time =
+		#{approvalsTime,jdbcType=TIMESTAMP},
+		reply_opinion =
+		#{replyOpinion,jdbcType=CHAR},
+		original_order =
+		#{originalOrder,jdbcType=INTEGER},
+		auditor =
+		#{auditor,jdbcType=INTEGER},
+		approve_operates =
+		#{approveOperates,jdbcType=BIT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateBatchByPrimaryKey"
@@ -583,4 +603,16 @@
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
 	</update>
+
+	<select id="selectAllOffsetLimit" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_approval
+		ORDER BY
+		approvals_time,id
+		ASC
+		LIMIT
+		#{offset},#{rows}
+	</select>
 </mapper>

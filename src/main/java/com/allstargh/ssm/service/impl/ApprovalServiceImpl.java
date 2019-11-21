@@ -18,8 +18,10 @@ import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TApprovalDAO;
 import com.allstargh.ssm.mapper.TOutDAO;
 import com.allstargh.ssm.mapper.TSaleDAO;
+import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TApproval;
 import com.allstargh.ssm.pojo.TApprovalExample;
@@ -32,6 +34,7 @@ import com.allstargh.ssm.service.IOutStockService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.util.PurchaseServiceUtil;
+import com.allstargh.ssm.util.SegmentReadTextII;
 
 @Service
 public class ApprovalServiceImpl implements IApprovalService {
@@ -43,6 +46,9 @@ public class ApprovalServiceImpl implements IApprovalService {
 
 	@Autowired
 	private TOutDAO tod;
+
+	@Autowired
+	private TStockDAO tStockDAO;
 
 	@Autowired
 	private AccountsMapper acmp;
@@ -314,12 +320,98 @@ public class ApprovalServiceImpl implements IApprovalService {
 			affects = ioss.updateIsAgreeByApprover(uid, decide, order);
 			records = backupAdd(uid, remark, decide, order, deptNumber);
 
-			// TODO 批准之后,剩余需求数量要相应改变
+			/*
+			 * 批准之后,剩余需求数量要相应改变
+			 */
+			// 从仓库查出货物库存数量
+			long oid = order.intValue();
+			Integer storeQuantity = tStockDAO.selectByPrimaryKey(oid).getStoreQuantity();
 
+			// 从销售部查剩余需求量.
+			Integer surplusDemand = tsd.selectByGoodsOrder(oid).getSurplusDemand();
+
+			// 剩余需求量-货物库存数量
+			Integer surplus = surplusDemand - storeQuantity;
+			surplus = surplus < 0 ? 0 : surplus;
+
+			// 更新剩余需求量
+			Integer line = tsd.updateSurplusDemandByOrder(surplus, oid);
+
+			System.err.println(this.getClass().getName() + "line===");
+			System.err.println(line);
 			break;
 		}
 
 		return records;
+	}
+
+	@Override
+	public PaginationII<List<TApproval>> exhibitionAllOnPagination(Integer uid, Integer pageNum, Integer lines)
+			throws SelfServiceException {
+		Accounts account = ics.checkForAccount(uid, 1);
+
+		PaginationII<List<TApproval>> pagination = new PaginationII<List<TApproval>>();
+
+		TApprovalExample example = new TApprovalExample();
+
+		Criteria criteria = example.createCriteria();
+
+		example.setOrderByClause("approvals_time asc");
+		example.setDistinct(false);
+
+		criteria.andIdIsNotNull();
+
+		List<TApproval> list = tad.selectByExample(example);
+
+		List<TApproval> limits = tad.selectAllOffsetLimit(pageNum * lines, lines);
+
+		int totalPages = list.size() / lines;
+
+		/*
+		 * 判断是否有上一页和下一页
+		 */
+		if (pageNum == 0 && totalPages > 0) {// 总页数至少2页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(false);
+
+		} else if ((pageNum + 1) == totalPages && totalPages > 0) {// 总页数至少2页
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(true);
+
+		} else if (totalPages == 0 || limits == null) {// 总页数仅仅一页或冇数据
+			pagination.setHasNextPage(false);
+			pagination.setHasPreviousPage(false);
+
+		} else if (pageNum > 0 && pageNum < totalPages) {// 总页数至少3页
+			pagination.setHasNextPage(true);
+			pagination.setHasPreviousPage(true);
+
+		}
+
+		pagination.setCurrentPageth(pageNum);
+		pagination.setData(limits);
+		pagination.setRows(lines);
+		pagination.setTotalPages(totalPages);
+
+		return pagination;
+	}
+
+	@Override
+	public PagingTextII readOutputSubstanceLog(Integer usrid, Integer pageNum, Integer lines)
+			throws IOException, SelfServiceException {
+		Accounts account = ics.checkForAccount(usrid, 1);
+
+		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
+
+		String fileUri = builder.append(ApprovalControllerUtil.DAILY_FILE_NAME).toString();
+
+		SegmentReadTextII seg = new SegmentReadTextII(lines, fileUri);
+
+		ics.checkTextOutOfCapacity(fileUri, 26 * 1024);
+
+		PagingTextII text = seg.packaging(pageNum);
+
+		return text;
 	}
 
 }

@@ -152,6 +152,25 @@ public class SegmentReadText {
 	}
 
 	/**
+	 * 计算总页数
+	 * 
+	 * @param totalTextRows 原文件内内容总行数
+	 * @param line          设定每页行数
+	 * @return
+	 */
+	protected int countTotalpages(Integer totalTextRows, Integer line) {
+		Integer j = totalTextRows % line;
+
+		int t = totalTextRows / line;
+
+		if (j > 0) {
+			t++;
+		}
+
+		return t;
+	}
+
+	/**
 	 * 统计文本文件内容总行数
 	 * 
 	 * @param filePath
@@ -227,9 +246,8 @@ public class SegmentReadText {
 
 		Integer lines = countTextLines(filePath);
 
-		int totalPages = lines / LINE_COUNT;
-
-		text.setTotalPages(totalPages);
+		// int totalPages = lines / LINE_COUNT;
+		int totalPages = countTotalpages(lines, LINE_COUNT);
 
 		if (index >= totalPages && totalPages > 0) {
 			text.setIsNext(false);
@@ -249,6 +267,7 @@ public class SegmentReadText {
 
 		}
 
+		text.setTotalPages(totalPages);
 		text.setTextContent(data);
 		text.setCurrentPage(index);
 

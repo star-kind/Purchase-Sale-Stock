@@ -24,6 +24,22 @@ public class TSaleMapperTest {
 	}
 
 	@Test
+	public void updateByOrderTest() {
+		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
+
+		Integer affect = tSaleDAO.updateSurplusDemandByOrder(22, 28L);
+		System.err.println(affect);
+	}
+
+	@Test
+	public void selectOrderTest() {
+		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
+
+		TSale sale = tSaleDAO.selectByGoodsOrder(28L);
+		System.err.println(sale.toString());
+	}
+
+	@Test
 	public void selectTest() {
 		tSaleDAO = (TSaleDAO) applicationContext.getBean("TSaleDAO");
 

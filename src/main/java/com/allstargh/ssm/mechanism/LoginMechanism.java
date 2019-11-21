@@ -10,11 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * 不登录则拦截该请求,令其重定向
  * 
- * @author gzh
+ * @author admin
  *
  */
 public class LoginMechanism implements HandlerInterceptor {
-
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// 检查session中是否有usrname，有则放行，无则拦截并重定向
@@ -23,17 +22,16 @@ public class LoginMechanism implements HandlerInterceptor {
 			response.sendRedirect("../account/login.do");
 			return false;
 		}
+
 		return true;
 	}
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
 	}
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-
 	}
 
 }

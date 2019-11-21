@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -145,6 +147,10 @@ public class ControllerUtils {
 
 		case "业已递交与审批部门,禁止更改":
 			rr.setState(ServiceExceptionEnum.HAS_BEEN_SUBMITTED_TO_APPROVAL_DEPARTMENT.getCode());
+			break;
+
+		case "该存储货物已经失效,请删除":
+			rr.setState(ServiceExceptionEnum.STORE_HAD_INVALID.getCode());
 			break;
 
 		}
@@ -295,6 +301,34 @@ public class ControllerUtils {
 			}
 		}
 
+	}
+
+	/**
+	 * 参数标记,即<b>打桩</b>
+	 * 
+	 * @param args
+	 */
+	protected void parameterMark(Object... args) {
+		StringBuffer buffer = new StringBuffer();
+
+		LinkedList<Object> list = new LinkedList<Object>();
+
+		String clzName = this.getClass().getName();
+
+		for (int i = 0; i < args.length; i++) {
+			list.add(args[i]);
+		}
+
+		buffer.append(clzName);
+		buffer.append(",参数们:");
+
+		for (Object object : list) {
+			buffer.append("\n");
+			buffer.append(object);
+			buffer.append(";");
+		}
+
+		System.err.println(buffer.toString());
 	}
 
 }

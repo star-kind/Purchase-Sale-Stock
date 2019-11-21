@@ -3,11 +3,99 @@
  */
 $(function() {
 	getInnerTextFromTags();
-	exhibitionAllHandler();
+	// exhibitionAllHandler();
+	exhibitionAllOnPaginationHandler(null);
 })
 
-// 全局变量
+/* 全局变量 */
 var arrays1 = [];
+
+var total = $('.total_own');
+var current = $('.current_own');
+var has_next = $('.has_next');
+var has_previous = $('.has_previous');
+
+/*-------------------------------------------*/
+
+/**
+ * 翻页
+ * 
+ * @param key
+ * @returns
+ */
+function pageTurns(key) {
+	var index = null;
+	var bool = '';
+
+	switch (key) {
+	case 0:
+		exhibitionAllOnPaginationHandler(0);
+		break;
+
+	case 1:// 上页
+		bool = has_previous.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		index = parseInt(current.text()) - 2;
+		exhibitionAllOnPaginationHandler(index);
+		break;
+
+	case 2:
+		bool = has_next.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		index = parseInt(current.text());
+		exhibitionAllOnPaginationHandler(index);
+		break;
+
+	case 3:
+		index = parseInt(total.text()) - 1;
+		exhibitionAllOnPaginationHandler(index);
+		break;
+
+	}
+
+}
+
+/**
+ * 
+ * @param pageth
+ * @returns
+ */
+function exhibitionAllOnPaginationHandler(pageth) {
+	var uri = "/stocker-manager/ApprovalController/exhibitionAllOnPaginationHandler";
+
+	console.log(pageth);
+
+	$.ajax({
+		url : uri,
+		type : 'GET',
+		data : {
+			'pageth' : pageth
+		},
+		dataType : 'json',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				inToTbody(rr.data.data);
+
+				total.text(rr.data.totalPages);
+				current.text(rr.data.currentPageth + 1);
+				has_next.text(rr.data.hasNextPage);
+				has_previous.text(rr.data.hasPreviousPage);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	});
+}
 
 /**
  * 
@@ -38,6 +126,8 @@ function exhibitionAllHandler() {
  * @returns
  */
 function inToTbody(x) {
+	$('.table_boby').empty();
+
 	for (var i = 0; i < x.length; i++) {
 		var tr = '<tr id="rows_' + x[i].id + '">';
 

@@ -15,6 +15,15 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TApprovalDAO {
 	/**
+	 * 全表分页
+	 * 
+	 * @param offset 页标
+	 * @param rows
+	 * @return
+	 */
+	List<TApproval> selectAllOffsetLimit(@Param("offset") Integer offset, @Param("rows") Integer rows);
+
+	/**
 	 * 查询数量
 	 * 
 	 * @param example 条件对象

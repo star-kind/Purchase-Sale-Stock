@@ -72,6 +72,25 @@ body>main>div {
 body>main>div>p {
 	margin: 12px;
 }
+
+.logs_records {
+	margin: auto auto 45px 45px;
+}
+
+.pages_div_own {
+	margin: auto auto 20rem 30%;
+	font-size: 25px;
+}
+
+.pages_div_own li {
+	margin: 18px;
+	float: left;
+	list-style: none;
+}
+
+.program_information {
+	display: none;
+}
 </style>
 
 </head>
@@ -82,8 +101,28 @@ body>main>div>p {
 				href="/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1">返回审核部主页</a>
 		</h2>
 	</header>
+
+	<p class="program_information">
+		<em>下页否:</em><i class="has_next"></i> <br> <em>上页否:</em><i
+			class="has_previous"></i>
+	</p>
+
 	<main>
-		<div></div>
+		<div class="logs_records"></div>
+
+		<div class="pages_div_own">
+			<ol class="pages_ol_own">
+				<li><a href="javascript:pageTurns(0)">首页</a></li>
+				<li><a href="javascript:pageTurns(1)">上页</a></li>
+				<li><a href="javascript:pageTurns(2)">下页</a></li>
+				<li><a href="javascript:pageTurns(3)">尾页</a></li>
+				<div class="index_pages_paras">
+					<li><span>当前页:</span><b class="current_own"></b></li>
+					<li><span>总页数:</span><b class="total_own"></b></li>
+				</div>
+			</ol>
+		</div>
+
 	</main>
 </body>
 

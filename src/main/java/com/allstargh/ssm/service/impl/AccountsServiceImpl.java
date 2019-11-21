@@ -43,8 +43,6 @@ public class AccountsServiceImpl implements IAccountsService {
 	 */
 	private static String DEFAULT_KEY = "666";
 
-	public ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
-
 	protected AccountServiceUtil asu = AccountServiceUtil.getInstance();
 
 	@Override

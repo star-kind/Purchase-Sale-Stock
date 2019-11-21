@@ -92,6 +92,11 @@
 </head>
 
 <style type="text/css" media="screen">
+.button_div_delete {
+	text-align: center;
+	margin: 30px auto auto auto;
+}
+
 .tbl_belong_i thead tr th {
 	border-top-width: 3px;
 	border-top-style: solid;
@@ -107,7 +112,7 @@ li {
 }
 
 .mine_header_ol_0 {
-	transform: translateX(16em);
+	transform: translateX(10em);
 }
 
 .mine_header_ol_0 a {
@@ -146,7 +151,7 @@ main {
 
 .main_div_00 {
 	height: 3em;
-	margin: 8rem auto 3rem 26%;
+	margin: 6rem auto 3rem 26%;
 }
 
 .main_div_00 li a {
@@ -250,6 +255,7 @@ border-bottom-color: rgb(235, 242, 224);*/
 					href="/stocker-manager/StockController/checkEnterCompetenceHandler">返回仓库</a></li>
 				<li><a href="/stocker-manager/cross/toTransfer">返回导航</a></li>
 				<li><a href="/stocker-manager/login.jsp">返回登录页</a></li>
+				<li><a href="javascript:void()">查看出库日志记录</a></li>
 			</ol>
 
 		</div>
@@ -279,7 +285,12 @@ border-bottom-color: rgb(235, 242, 224);*/
 
 				</tbody>
 			</table>
-
+			<br>
+			<div class="button_div_delete">
+				<button class="btn btn-lg btn-warning delete_button_00" onclick="">
+					删除</button>
+			</div>
+			<br>
 		</div>
 
 		<div class="main_div_00">

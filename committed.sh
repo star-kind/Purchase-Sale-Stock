@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "out warehouse work almost done"
+git commit -m "start finish the delete"
 
 #github
 git pull github master

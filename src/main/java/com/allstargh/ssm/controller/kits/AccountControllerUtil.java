@@ -224,9 +224,12 @@ public class AccountControllerUtil extends ControllerUtils {
 	 */
 	public void inputAllLoginRecords(String usrname) {
 		String string = "";
-		string += p_tag_prefix;
 
-		string += usrname + "尝试登录本系统" + ",时间:" + now_time + LINE_SEPARATOR_SUFFIX;
+		string += p_tag_prefix;
+		string += usrname;
+		string += "尝试登录本系统,时间:";
+		string += now_time;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (usrname != null) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -243,12 +246,18 @@ public class AccountControllerUtil extends ControllerUtils {
 	 */
 	public void inputSuccessLoginRecords(Accounts acc, String usrname, HttpSession session) {
 		String string = "";
-		string += p_tag_prefix;
 
-		string += "地区:" + getRegion(acc.getRegionDepartment());
-		string += ",职务:" + getPosition(acc.getCompetence());
-		string += ",用户 " + usrname + " 登录成功";
-		string += ",时间:" + now_time + LINE_SEPARATOR_SUFFIX;
+		string += p_tag_prefix;
+		string += "地区:";
+		string += getRegion(acc.getRegionDepartment());
+		string += ",职务:";
+		string += getPosition(acc.getCompetence());
+		string += ",用户 ";
+		string += usrname;
+		string += " 登录成功";
+		string += ",时间:";
+		string += now_time;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (session.getAttribute("usrname").toString() != null) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -265,13 +274,20 @@ public class AccountControllerUtil extends ControllerUtils {
 	 */
 	public void multipleCancelRecords(Integer affects, HttpSession session, Integer[] usrids) {
 		String string = "";
-		string += p_tag_prefix;
 
 		String usridStr = geneateUsridStr(usrids);
 
-		string += usrids.length + "位用户:ID为[ " + usridStr + " ]提交注销请求,其中";
-		string += affects + "位用户于" + now_time + "完成注销,";
-		string += "执行人为: " + session.getAttribute("usrname").toString();
+		string += p_tag_prefix;
+		string += usrids.length;
+		string += "位用户:ID为[ ";
+		string += usridStr;
+		string += " ]提交注销请求,其中";
+		string += affects;
+		string += "位用户于";
+		string += now_time;
+		string += "完成注销,";
+		string += "执行人为: ";
+		string += session.getAttribute("usrname").toString();
 		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
@@ -291,9 +307,16 @@ public class AccountControllerUtil extends ControllerUtils {
 
 		String usridStr = geneateUsridStr(usrids);
 
-		string += usrids.length + "位用户:ID为[" + usridStr + "]提交激活请求,其中";
-		string += affects + "位用户于" + now_time + "完成激活,";
-		string += "执行人为: " + session.getAttribute("usrname").toString();
+		string += usrids.length;
+		string += "位用户:ID为[";
+		string += usridStr;
+		string += "]提交激活请求,其中";
+		string += affects;
+		string += "位用户于";
+		string += now_time;
+		string += "完成激活,";
+		string += "执行人为: ";
+		string += session.getAttribute("usrname").toString();
 		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
@@ -308,13 +331,20 @@ public class AccountControllerUtil extends ControllerUtils {
 	 */
 	public void multipleResetRecords(Integer affects, HttpSession session, Integer[] usrids) {
 		String string = "";
-		string += p_tag_prefix;
 
 		String usridStr = geneateUsridStr(usrids);
 
-		string += usrids.length + "位用户:ID为[" + usridStr + "]提交重置密码请求,其中";
-		string += affects + "位用户于" + now_time + "完成密码重置,";
-		string += "执行人为: " + session.getAttribute("usrname").toString();
+		string += p_tag_prefix;
+		string += usrids.length;
+		string += "位用户:ID为[";
+		string += usridStr;
+		string += "]提交重置密码请求,其中";
+		string += affects;
+		string += "位用户于";
+		string += now_time;
+		string += "完成密码重置,";
+		string += "执行人为: ";
+		string += session.getAttribute("usrname").toString();
 		string += LINE_SEPARATOR_SUFFIX;
 
 		textWriter(string, ACCOUNT_FILE_URI);
@@ -336,10 +366,24 @@ public class AccountControllerUtil extends ControllerUtils {
 		String string = "";
 		string += p_tag_prefix;
 
-		string += "ID为" + usrid + "的账号于" + now_time + "修改了资料,其新用户名为";
-		string += usrname + ",新电话为" + phone + ",新职务为" + competence;
-		string += ",新地区为" + regionDepartment + ",执行人:";
-		string += session.getAttribute("usrname").toString() + LINE_SEPARATOR_SUFFIX;
+		String region = getRegion(regionDepartment);
+		String position = getPosition(competence);
+
+		string += "ID为";
+		string += usrid;
+		string += "的账号于";
+		string += now_time;
+		string += "修改了资料,其新用户名为";
+		string += usrname;
+		string += ",新电话为";
+		string += phone;
+		string += ",新职务为";
+		string += position;
+		string += ",新地区为";
+		string += region;
+		string += ",执行人:";
+		string += session.getAttribute("usrname").toString();
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (affects == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -357,9 +401,12 @@ public class AccountControllerUtil extends ControllerUtils {
 		String string = "";
 		string += p_tag_prefix;
 
-		string += "ID为 " + usrid;
-		string += "的账户于 " + now_time;
-		string += "被删除,执行者为: " + session.getAttribute("usrname").toString();
+		string += "ID为";
+		string += usrid;
+		string += "的账户于";
+		string += now_time;
+		string += "被删除,执行者为: ";
+		string += session.getAttribute("usrname").toString();
 		string += LINE_SEPARATOR_SUFFIX;
 
 		if (code == 1) {
@@ -399,8 +446,12 @@ public class AccountControllerUtil extends ControllerUtils {
 		string += p_tag_prefix;
 
 		string += "ID为 " + uid + " 的账户于";
-		string += now_time + "修改了基本资料,新用户名为:" + uname;
-		string += ",新电话为:" + phone + LINE_SEPARATOR_SUFFIX;
+		string += now_time;
+		string += "修改了基本资料,新用户名为:";
+		string += uname;
+		string += ",新电话为:";
+		string += phone;
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (affect == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -422,6 +473,11 @@ public class AccountControllerUtil extends ControllerUtils {
 		}
 
 		return useridStr;
+	}
+
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
 	}
 
 }

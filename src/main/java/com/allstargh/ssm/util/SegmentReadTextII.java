@@ -170,7 +170,7 @@ public class SegmentReadTextII {
 	 * @return
 	 */
 	public Integer countTextLines(String filePath) {
-		int lines = 0;
+		Integer lines = 0;
 
 		try {
 			File file = new File(filePath);
@@ -183,11 +183,13 @@ public class SegmentReadTextII {
 				lineNumberReader.skip(fileLength);
 
 				lines = lineNumberReader.getLineNumber();
-				System.out.println("Total number of lines : " + lines);
+
+				System.err.println(this.getClass().getName() + ",Total number of lines===");
+				System.err.println(lines);
 
 				lineNumberReader.close();
 			} else {
-				System.out.println("File does't exists");
+				System.err.println("File does't exists");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -268,6 +270,25 @@ public class SegmentReadTextII {
 	}
 
 	/**
+	 * 计算总页数
+	 * 
+	 * @param totalTextRows 原文件内内容总行数
+	 * @param line          设定每页行数
+	 * @return
+	 */
+	protected int countTotalpages(Integer totalTextRows, Integer line) {
+		Integer j = totalTextRows % line;
+
+		int t = totalTextRows / line;
+
+		if (j > 0) {
+			t++;
+		}
+
+		return t;
+	}
+
+	/**
 	 * 封装v2.0
 	 * 
 	 * @param filePath
@@ -283,7 +304,8 @@ public class SegmentReadTextII {
 
 		Integer lines = countTextLines(filePath);
 
-		int totalPages = lines / lineCount;
+		// Integer totalPages = lines / lineCount;
+		int totalPages = countTotalpages(lines, lineCount);
 
 		text.setTotalPages(totalPages);
 

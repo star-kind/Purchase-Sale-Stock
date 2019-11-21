@@ -37,11 +37,6 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	private ICommonReplenishService ics;
 
 	/**
-	 * 
-	 */
-	ServiceExceptionEnum instance = ServiceExceptionEnum.getInstance();
-
-	/**
 	 * 服务层工具类
 	 */
 	PurchaseServiceUtil psu = PurchaseServiceUtil.getInstance();

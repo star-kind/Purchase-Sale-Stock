@@ -509,3 +509,5 @@ ORDER BY amount_money,purchase_id ASC LIMIT pageNum*row,row;
 SELECT purchase_id,is_agree from purchase WHERE is_agree=0  
 ORDER BY amount_money,purchase_id ASC LIMIT 1,4;  
 
+-- 移除唯一约束
+ALTER TABLE t_out DROP INDEX sale_order;

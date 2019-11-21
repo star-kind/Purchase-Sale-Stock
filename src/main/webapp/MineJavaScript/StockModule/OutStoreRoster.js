@@ -299,7 +299,8 @@ function createFormByData(d) {
 	substance += '</div>';
 
 	substance += '<div class="button_area_div">';
-	substance += '<input type="button" value="提交" class="btn btn-lg btn-primary own_of_button" onclick="submitted()">';
+	substance += '<input type="button" value="提交" class="btn btn-lg btn-primary own_of_button" onclick="submitted('
+			+ d.id + ')">';
 	substance += '</div>';
 
 	substance += '</form>';
@@ -310,9 +311,10 @@ function createFormByData(d) {
 
 /**
  * 
+ * @param id
  * @returns
  */
-function submitted() {
+function submitted(id) {
 	var uri = '/stocker-manager/OutStockController/addOutHandler';
 
 	var agree = $('input[name="stockerIsAgree"]:checked').val();
@@ -345,7 +347,10 @@ function submitted() {
 		success : function(rr) {
 			if (rr.state == 200) {
 				layer.msg(rr.data + '份出库申请单处理成功', function() {
-					location.reload();
+					// location.reload();
+					parent.layer.closeAll();
+					var selector = '#tr_ts_' + id;
+					$(selector).remove();
 				});
 			} else {
 				layer.alert(rr.message);
