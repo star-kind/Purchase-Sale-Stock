@@ -474,7 +474,7 @@ public class AccountsController extends ControllerUtils {
 
 		Integer effects = iAccountsService.revisePassword(oldPassword, newPassword, uid);
 
-		instance.revisePasswordHandlerRecord(uid, effects);
+		instance.revisePasswordHandlerRecord(uid, effects, account.getUsrname());
 
 		return new ResponseResult<Integer>(SUCCESS, effects);
 	}
@@ -524,6 +524,8 @@ public class AccountsController extends ControllerUtils {
 		parameterMark(usrname, phone);
 
 		Integer affects = iAccountsService.reviseBaseProfile(usrname, phone, uid);
+
+		instance.reviseBaseProfileHandlerRecord(account, affects);
 
 		return new ResponseResult<Integer>(SUCCESS, affects);
 	}

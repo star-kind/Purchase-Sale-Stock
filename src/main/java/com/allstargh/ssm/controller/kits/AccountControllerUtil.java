@@ -420,12 +420,16 @@ public class AccountControllerUtil extends ControllerUtils {
 	 * @param uid
 	 * @param row
 	 */
-	public void revisePasswordHandlerRecord(Integer uid, Integer row) {
+	public void revisePasswordHandlerRecord(Integer uid, Integer row, String uname) {
 		String string = "";
 		string += p_tag_prefix;
 
-		string += "ID为 " + uid + " 的账号于" + now_time;
-		string += "修改了密码" + LINE_SEPARATOR_SUFFIX;
+		string += "ID " + uid;
+		string += ",用户名:";
+		string += uname;
+		string += ",于" + now_time;
+		string += "修改了密码";
+		string += LINE_SEPARATOR_SUFFIX;
 
 		if (row == 1) {
 			textWriter(string, ACCOUNT_FILE_URI);
@@ -478,6 +482,25 @@ public class AccountControllerUtil extends ControllerUtils {
 	@Override
 	protected void parameterMark(Object... args) {
 		super.parameterMark(args);
+	}
+
+	public void reviseBaseProfileHandlerRecord(Accounts account, Integer affects) {
+		StringBuffer buffer = new StringBuffer(p_tag_prefix);
+
+		String region = getRegion(account.getRegionDepartment());
+
+		buffer.append(region);
+		buffer.append("地区");
+		buffer.append("用户");
+		buffer.append(account.getUsrname());
+		buffer.append("于");
+		buffer.append(now_time);
+		buffer.append("修改了自己的基础资料(名字和电话).");
+		buffer.append(LINE_SEPARATOR_SUFFIX);
+
+		if (affects == 1) {
+			textWriter(buffer.toString(), ACCOUNT_FILE_URI);
+		}
 	}
 
 }
