@@ -9,7 +9,7 @@ function confirmUpdate() {
 	if (lockWord01 != lockWord02) {
 		alert('两次新密码相异')
 		return;
-		
+
 	} else if (lockWord01 == null || lockWord01 == '' || lockWord02 == null
 			|| lockWord02 == '') {
 		alert('您还有参数尚未输入')
@@ -32,8 +32,10 @@ function confirmUpdate() {
 		dataType : 'json',
 		success : function(json) {
 			if (json.state == 200) {
-				alert('修改密码成功');
-				location.href = '/stocker-manager/login.jsp';
+				// alert('修改密码成功');
+				// location.href = '/stocker-manager/login.jsp';
+
+				prompt('修改密码成功', 2000, '/stocker-manager/login.jsp');
 			} else {
 				alert(json.message);
 				// $('#span_hint').text(json.message);

@@ -55,8 +55,10 @@ function confirmChange() {
 		dataType : 'json',
 		success : function(json) {
 			if (json.state == 200) {
-				alert('修改资料成功');
-				location.href = '/stocker-manager/cross/toTransfer';
+				// alert('修改资料成功');
+				// location.href = '/stocker-manager/cross/toTransfer';
+
+				prompt('修改资料成功', 2000, '/stocker-manager/cross/toTransfer');
 			} else {
 				// $('#span_hint').text(json.message);
 				alert(json.message);

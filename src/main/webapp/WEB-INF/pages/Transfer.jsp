@@ -26,7 +26,7 @@
 	<div id="total_area">
 
 		<div
-			style="text-align: center; margin-top: 30px; margin-bottom: 25px;">
+			style="text-align: center; margin-top: 56px; margin-bottom: 25px; font-size: 21px;">
 			<!--  -->
 			<a href="/stocker-manager/cross/toRevisePassword" class="revamp_link">修改密码</a>
 			<!--  -->

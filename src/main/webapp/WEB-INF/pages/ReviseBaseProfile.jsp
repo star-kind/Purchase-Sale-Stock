@@ -18,6 +18,10 @@
 <script type="text/javascript"
 	src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
 
+<!-- 延时跳转 -->
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/Prompt.js"></script>
+
 <!-- 表单样式 -->
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/PatternStyle/FormCommon.css">
@@ -34,45 +38,105 @@
 </head>
 
 <style type="text/css">
-.input-group {
-	margin-bottom: 18px;
+body {
+	font-family: 楷体;
+}
+
+.title_I {
+	width: 100%;
+	height: 88px; /*! text-align: center; */
+	margin: 36px auto;
+}
+
+.title_I h1 {
+	margin: 27px auto 22px 42%;
+}
+
+.mine_form_I {
+	width: 100%;
+	height: 530px;
+	font-size: 26px;
+}
+
+.mine_form_I form { /*! margin: 39px 43%; */
+	width: 499px;
+	height: 399px;
+	margin: 30px auto 38px 35%;
+	background: beige;
+}
+
+.inut_mine_div {
+	width: 100%;
+	margin: 55px auto;
+}
+
+.input_div_btn_0 {
+	margin: auto;
+}
+
+.input_div_btn_0 input {
+	margin: auto 15px;
+}
+
+.input_div_btn_0 input.btn:nth-child(2) {
+	font-size: 21px;
+}
+
+.address_div {
+	text-align: center;
+	font-size: 33px;
 }
 </style>
 
 <body>
-	<div style="text-align: center; font-family: 楷体;">
-		<h3 class="col-md-5">填入新内容</h3>
+	<div class="title_I">
+		<h1 class="col-md-5">修改基础资料</h1>
+	</div>
 
-		<div>
-			<span id="span_hint"
-				style="font-size: 28px; color: #eb3131; padding-top: 32px; padding-bottom: 32px;"></span>
-		</div>
 
-		<br>
+	<div>
+		<!-- <span id="span_hint"
+                style="font-size: 28px; color: #eb3131; padding-top: 32px; padding-bottom: 32px;"></span> -->
+	</div>
+
+	<br>
+
+	<div class="mine_form_I">
 		<form id="mineForm" class="bs-example bs-example-form col-md-5">
-			<div class="input-group">
+			<div class="input-group inut_mine_div">
 				<label>用户名</label>
 				<!--  -->
 				<input type="text" placeholder="" id="input00" name="usrname"
 					maxlength="46" class="form-control">
 			</div>
 
-			<div class="input-group">
-				<label>用户电话号码</label>
+			<div class="input-group inut_mine_div">
+				<label>电话号码</label>
 				<!--  -->
 				<input type="text" placeholder="" id="input01" name="phone"
 					maxlength="20" class="form-control">
 			</div>
 
-			<div class="input-group">
-				<input type="button" value="提交" class="btn" id="confirm"
-					onclick="confirmChange()">
+			<div class="input-group input_div_btn_0">
+				<input type="button" value="提交" class="btn btn-lg btn-primary"
+					id="confirm" onclick="confirmChange()"> <input type="reset"
+					value="重置" class="btn btn-lg btn-default">
 			</div>
-		</form>
 
-		<!--  -->
-		<a href="/stocker-manager/cross/toTransfer" style="margin-top: 18px;">返回</a>
+		</form>
 	</div>
+
+	</div>
+
+	<div class="address_div">
+		<a href="/stocker-manager/cross/toTransfer" style="margin-top: 18px;">返回导航界面</a>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 
 <script type="text/javascript"

@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "finish handing the projects work"
+git commit -m "basically IS OK"
 
 #github
 git pull github master

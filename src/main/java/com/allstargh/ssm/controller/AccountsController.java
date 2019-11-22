@@ -517,14 +517,20 @@ public class AccountsController extends ControllerUtils {
 
 		Accounts account = iAccountsService.gainAccount(uid01);
 
-		boolean b = icrs.checkForAccount(account, 0);
+		// boolean b = icrs.checkForAccount(account, 0);
 
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
-		System.out.println(uid + "," + usrname + "," + phone);
+
+		parameterMark(usrname, phone);
 
 		Integer affects = iAccountsService.reviseBaseProfile(usrname, phone, uid);
 
 		return new ResponseResult<Integer>(SUCCESS, affects);
+	}
+
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
 	}
 
 }
