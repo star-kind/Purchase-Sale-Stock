@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 
+import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 
@@ -91,6 +93,19 @@ public interface IPurchaseService {
 	 * @throws IOException
 	 */
 	String[] readOutputSubstanceLog(Integer usrid) throws IOException, SelfServiceException;
+
+	/**
+	 * 读取记录,分页
+	 * 
+	 * @param usrid
+	 * @param pageth
+	 * @param line
+	 * @return
+	 * @throws IOException
+	 * @throws SelfServiceException
+	 */
+	abstract PagingTextII readSubstanceLogPaging(Integer usrid, Integer pageth, Integer line)
+			throws IOException, SelfServiceException;
 
 	/**
 	 * 删除多份采购申请单,据ID们

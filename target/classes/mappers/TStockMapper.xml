@@ -824,6 +824,37 @@
 		t_stock
 	</select>
 
+	<select id="selectAllRowsPaginations"
+		resultType="com.allstargh.ssm.pojo.TStock">
+		SELECT
+		id,
+		purchase_id AS purchaseId,
+		store_commodity
+		AS
+		storeCommodity,
+		store_quantity AS storeQuantity,
+		unit_price AS
+		unitPrice,
+		stock_type_area AS stockTypeArea,
+		stock_operator AS
+		stockOperator,
+		enter_stock_time AS enterStockTime,
+		remark,
+		agree_enter_stock AS agreeEnterStock,
+
+		lastest_modified_time AS
+		lastestModifiedTime,
+		lastest_modifier AS lastestModifier
+
+		FROM
+		t_stock
+		ORDER BY
+		id,enter_stock_time
+		ASC
+		LIMIT
+		#{pageIndex},#{lines}
+	</select>
+
 	<select id="selectByPurchaseId"
 		resultType="com.allstargh.ssm.pojo.TStock">
 		SELECT
@@ -923,7 +954,7 @@
 		ta.approve_operates=#{approveOperation}
 		)
 
-		ORDER BY 
+		ORDER BY
 		id,store_quantity
 		LIMIT
 		#{pageth},#{lines}

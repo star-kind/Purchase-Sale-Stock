@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
@@ -16,6 +17,16 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IStcokSevice {
+	/**
+	 * 批量删除
+	 * 
+	 * @param uid
+	 * @param ids
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	Integer deleteByMultiID(Integer uid, Long[] ids) throws SelfServiceException;
+
 	/**
 	 * 
 	 * @param uid
@@ -102,6 +113,18 @@ public interface IStcokSevice {
 	 * @throws SelfServiceException
 	 */
 	abstract List<TStock> findAll(Integer uid) throws SelfServiceException;
+
+	/**
+	 * 分页限制查询
+	 * 
+	 * @param pageth
+	 * @param lines
+	 * @param usrid
+	 * @return
+	 * @throws SelfServiceException
+	 */
+	abstract PaginationII<List<TStock>> findAllLimits(Integer pageth, Integer lines, Integer usrid)
+			throws SelfServiceException;
 
 	/**
 	 * 登记入库

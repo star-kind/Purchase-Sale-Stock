@@ -55,8 +55,17 @@ public class SaleServiceImpl implements ISaleService {
 		Accounts account = icrs.checkForAccount(uid, 3);
 
 		// 从仓库中获取货品名称
-		Long pid = Long.parseLong(tSale.getCommodity());
-		TStock stock = tStockDAO.selectByPrimaryKey(pid);
+		Long pid = null;
+		TStock stock = null;
+		try {
+			pid = Long.parseLong(tSale.getCommodity());
+			stock = tStockDAO.selectByPrimaryKey(pid);
+			
+		} catch (NumberFormatException ee) {
+			ee.printStackTrace();
+			String description = ServiceExceptionEnum.SUBMIT_DATA_UNCOMPLETELY.getDescription();
+			throw new SelfServiceException(description);
+		}
 
 		tSale.setWarehouseGoodsOrder(pid);
 

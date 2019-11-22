@@ -1,10 +1,12 @@
 package com.allstargh.ssm.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.allstargh.ssm.pojo.AssociativeEntity;
 import com.allstargh.ssm.pojo.JointStockVO;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.ex.SelfServiceException;
@@ -16,6 +18,19 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
  *
  */
 public interface IOutStockService {
+	/**
+	 * 分页读取文本
+	 * 
+	 * @param uid
+	 * @param pageth
+	 * @param lines
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	abstract PagingTextII readTextOnLimit(Integer uid, Integer pageth, Integer lines)
+			throws SelfServiceException, IOException;
+
 	/**
 	 * 增
 	 * 

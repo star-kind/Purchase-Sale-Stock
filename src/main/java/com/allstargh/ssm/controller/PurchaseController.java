@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.service.IPurchaseService;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 
 @Controller
 @RequestMapping("/PurchaseController")
@@ -28,7 +30,34 @@ public class PurchaseController extends ControllerUtils {
 	private IPurchaseService ips;
 
 	// 工具类
-	protected PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+	PurchaseControllerUtil instance = PurchaseControllerUtil.getInstance();
+
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
+	}
+
+	/**
+	 * http://localhost:8080/stocker-manager/PurchaseController/readSubstanceLogPagingHandler?index=1
+	 * 
+	 * @param session
+	 * @param index
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readSubstanceLogPagingHandler", method = RequestMethod.GET)
+	public ResponseResult<PagingTextII> readSubstanceLogPagingHandler(HttpSession session,
+			@RequestParam(value = "index", defaultValue = "0") Integer index) throws SelfServiceException, IOException {
+		parameterMark(index);
+
+		Integer uid = getUsridFromSession(session);
+
+		PagingTextII textII = ips.readSubstanceLogPaging(uid, index, 14);
+
+		return new ResponseResult<PagingTextII>(SUCCESS, textII);
+	}
 
 	/**
 	 * http://localhost:8080/stocker-manager/PurchaseController/exhibitedClassifyNumsHandler

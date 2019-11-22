@@ -66,7 +66,7 @@ body {
 }
 
 .mine_title {
-	margin: 45px 0 45px 0;
+	margin: 4px 0 45px 0;
 	font-size: 32px;
 }
 
@@ -119,10 +119,7 @@ hr {
 	</header>
 
 	<br>
-	<br>
-	<br>
 	<hr>
-	<br>
 	<br>
 
 	<main>

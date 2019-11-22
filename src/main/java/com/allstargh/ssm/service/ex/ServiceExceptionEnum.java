@@ -7,9 +7,8 @@ package com.allstargh.ssm.service.ex;
  * 
  */
 public enum ServiceExceptionEnum {
-	/** 实例成员 */
-	//INSTANCE,
-
+	/** 原密码错误 */
+	OLD_PASSWORD_ERR(425, "原密码错误"),
 	/** 该存储货物已经失效,请删除 */
 	STORE_HAD_INVALID(424, "该存储货物已经失效,请删除"),
 	/** 业已递交与审批部门,禁止更改 */
@@ -101,26 +100,5 @@ public enum ServiceExceptionEnum {
 
 		return null;
 	}
-
-	/*
-	 * 懒汉式
-	 */
-//	private static ServiceExceptionEnum exEnum;
-//
-//	// 锁
-//	private static final Object LOCK = new Object();
-//
-//	public static ServiceExceptionEnum getInstance() {
-//		if (exEnum == null) {
-//			// 决定是否需要锁定
-//			synchronized (LOCK) {
-//				if (exEnum == null) {
-//					exEnum = ServiceExceptionEnum.INSTANCE;
-//				}
-//			}
-//		}
-//
-//		return exEnum;
-//	}
 
 }

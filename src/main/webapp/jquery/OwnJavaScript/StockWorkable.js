@@ -25,7 +25,7 @@ function exhibitedClassifyNumsHandler() {
 				console.log(map);
 				console.log(typeof (map));
 
-				/* 该功能失败 TODO */
+				/* 该功能失效 TODO */
 				// putNumIntoSelector(map);
 			} else {
 				layer.alert(rr.message);
@@ -216,8 +216,6 @@ function exhibitTableList() {
 					var list = rr.data;
 					console.log(list);
 
-					$('#tag0 tbody').empty();
-
 					executes(list);// 执行赋予表格内容
 
 					exhibitLenAmount(list);// .len_amount
@@ -255,6 +253,8 @@ function exhibitLenAmount(list) {
  * @returns
  */
 function executes(list) {
+	$('#tag0 tbody').empty();
+
 	for (var i = 0; i < list.length; i++) {
 		var tr = '<tr id="table_row_#{purchaseId}" class="table_row_purchase">';
 		tr += '<td>';

@@ -127,6 +127,8 @@
 			<mvc:exclude-mapping
 				path="/account/findAccountByUseridHandler" />
 			<mvc:exclude-mapping path="/account/toSubstacne" />
+			<mvc:exclude-mapping
+				path="/account/exhibitionBaseProfileHandler" />
 
 			<!-- 3. 拦截器,各请求前往该类接受处理 -->
 			<bean class="com.allstargh.ssm.mechanism.LoginMechanism" />
@@ -168,6 +170,8 @@
 				path="/PurchaseController/jumpToPurchaseDeptHandler" />
 			<mvc:exclude-mapping
 				path="/PurchaseController/exhibitedClassifyNumsHandler" />
+			<mvc:exclude-mapping
+				path="/PurchaseController/readSubstanceLogPagingHandler" />
 
 			<!-- 3. 拦截器,各请求前往该类接受处理 -->
 			<bean class="com.allstargh.ssm.mechanism.LoginMechanism" />

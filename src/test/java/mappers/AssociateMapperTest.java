@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.allstargh.ssm.mapper.AssociativeMapper;
 import com.allstargh.ssm.pojo.AssociativeEntity;
 import com.allstargh.ssm.pojo.JointStockVO;
+import com.allstargh.ssm.util.TblAndPrimaryEnum;
 
 public class AssociateMapperTest {
 	private ApplicationContext applicationContext;
@@ -41,13 +42,13 @@ public class AssociateMapperTest {
 			System.err.println(associativeEntity.toString());
 		}
 	}
-	
+
 	@Test
 	public void selectsTest() {
 		am = (AssociativeMapper) applicationContext.getBean("associativeMapper");
 
 		List<JointStockVO> jointStockVO = am.queryByStID(21);
-		
+
 		System.err.println(jointStockVO);
 	}
 

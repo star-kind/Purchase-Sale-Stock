@@ -116,8 +116,7 @@
 |        |   `has_submitted_approval` smallint(1) NOT NULL DEFAULT '0' COMMENT '是否已送审:0未送,1已送',                                                                                                                                                                                                            |
 |        |   `surplus_demand` int(11) NOT NULL COMMENT '剩余需求量',      
 |        |   `warehouse_goods_order` bigint(20) NOT NULL COMMENT '对应的仓储库货物序号',                                                                                                                                                                                                                            |
-|        |   PRIMARY KEY (`id`),                                                                                                                                                                                                                                                                                    |
-|        |   UNIQUE KEY `warehouse_goods_order` (`warehouse_goods_order`)                                                                                                                                                  |
+|        |   PRIMARY KEY (`id`)                                                                                                                                                                                                  |
 |        | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售记录表'                                                                             |
 +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 

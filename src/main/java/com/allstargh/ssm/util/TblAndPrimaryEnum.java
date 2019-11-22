@@ -3,10 +3,12 @@ package com.allstargh.ssm.util;
 /**
  * 表名与primary_key列名之枚举
  * 
+ * <em>无用</em>
+ * 
  * @author admin
  *
  */
-public enum TableAndPrimaryColNameEnum {
+public enum TblAndPrimaryEnum {
 	/** 账号表 */
 	ACCOUNTS(0, "accounts", "usrid"),
 	/** 采购表 */
@@ -35,14 +37,14 @@ public enum TableAndPrimaryColNameEnum {
 	 */
 	private String primaryColumn;
 
-	private TableAndPrimaryColNameEnum(Integer order, String tblName, String primaryColumn) {
+	private TblAndPrimaryEnum(Integer order, String tblName, String primaryColumn) {
 		this.order = order;
 		this.tblName = tblName;
 		this.setPrimaryColumn(primaryColumn);
 	}
 
-	private TableAndPrimaryColNameEnum() {
-		System.err.println("Table And Primary ColName Enum Constructor");
+	private TblAndPrimaryEnum() {
+		System.err.println("Table And Primary Column Name Enum No Parameter Constructor");
 	}
 
 	public Integer getOrder() {
@@ -74,10 +76,10 @@ public enum TableAndPrimaryColNameEnum {
 	 * @param order
 	 * @return
 	 */
-	public String getTblByOrder(Integer order) {
-		for (TableAndPrimaryColNameEnum element : TableAndPrimaryColNameEnum.values()) {
-			if (order == this.order) {
-				return this.tblName;
+	public static String getTblByOrder(Integer order) {
+		for (TblAndPrimaryEnum element : TblAndPrimaryEnum.values()) {
+			if (order == element.order) {
+				return element.tblName;
 			}
 		}
 
@@ -89,10 +91,10 @@ public enum TableAndPrimaryColNameEnum {
 	 * @param order
 	 * @return
 	 */
-	public String getPrimaryColumnByOrder(Integer order) {
-		for (TableAndPrimaryColNameEnum element : TableAndPrimaryColNameEnum.values()) {
-			if (order == this.order) {
-				return this.primaryColumn;
+	public static String getPrimaryColumnByOrder(Integer order) {
+		for (TblAndPrimaryEnum element : TblAndPrimaryEnum.values()) {
+			if (order == element.order) {
+				return element.primaryColumn;
 			}
 		}
 

@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +17,7 @@ import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TStockDAO;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
@@ -29,6 +29,7 @@ import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 import com.allstargh.ssm.service.util.PurchaseServiceUtil;
 import com.allstargh.ssm.service.util.StockServiceUtil;
+import com.allstargh.ssm.util.PaginationsSupply;
 import com.allstargh.ssm.util.SegmentReadText;
 
 @Service
@@ -267,8 +268,56 @@ public class StockServiceImpl implements IStcokSevice {
 		Long id = (long) sid.intValue();
 
 		TStock tStock = tsd.selectByPrimaryKey(id);
-		
+
 		return tStock;
+	}
+
+	@Override
+	public Integer deleteByMultiID(Integer uid, Long[] ids) throws SelfServiceException {
+		Accounts account = ics.checkForAccount(uid, 4);
+
+		ArrayList<Long> list = new ArrayList<Long>();
+
+		TStockExample example = new TStockExample();
+
+		Criteria criteria = example.createCriteria();
+
+		for (int i = 0; i < ids.length; i++) {
+			list.add(ids[i]);
+		}
+
+		criteria.andIdIn(list);
+
+		int rows = tsd.deleteByExample(example);
+
+		return rows;
+	}
+
+	@Override
+	public PaginationII<List<TStock>> findAllLimits(Integer pageth, Integer lines, Integer usrid)
+			throws SelfServiceException {
+		Accounts account = ics.checkForAccount(usrid, 4);
+
+		PaginationII<List<TStock>> paginationII = new PaginationII<List<TStock>>();
+
+		PaginationsSupply supply = new PaginationsSupply();
+
+		List<TStock> allRows = tsd.selectAllRows();
+		
+		List<TStock> rowsPaginations = tsd.selectAllRowsPaginations(pageth * lines, lines);
+
+		int allpages = supply.getAllpages(allRows.size(), lines);
+		
+		Boolean[] booleans = supply.judgePrevOrNext(pageth, allpages);
+
+		paginationII.setCurrentPageth(pageth);
+		paginationII.setData(rowsPaginations);
+		paginationII.setHasNextPage(booleans[1]);
+		paginationII.setHasPreviousPage(booleans[0]);
+		paginationII.setRows(lines);
+		paginationII.setTotalPages(allpages);
+
+		return paginationII;
 	}
 
 }

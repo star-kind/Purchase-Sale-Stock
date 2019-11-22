@@ -15,6 +15,7 @@ import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.service.IOutStockService;
 
 /**
+ * 不小心多弄出的重复的离仓控制器
  * 
  * @author admin
  *

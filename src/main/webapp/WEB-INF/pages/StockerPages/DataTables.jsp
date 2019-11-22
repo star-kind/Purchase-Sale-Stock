@@ -36,6 +36,26 @@
 <!-- Google Font -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<style type="text/css">
+.pagination_div_00 {
+	margin: auto auto auto 34%;
+}
+
+.page_text_0 {
+	margin: 39px;
+}
+
+.pages_div_02 {
+	font-size: 18px;
+	margin: 25px auto auto 15px;
+}
+
+.pagin_info {
+	display: none;
+}
+</style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -388,7 +408,9 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"> <!-- 00000000000000000000001000000000000000000000010000000000000000000000100000000000000000000001 -->
+							<li><a
+								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/OutStoreRoster&competence=4">
+									<!-- 00000000000000000000001000000000000000000000010000000000000000000000100000000000000000000001 -->
 									<i class="fa fa-circle-o"></i> 提货申请队列
 							</a></li>
 							<li class="active"><a href="#"><i class="fa fa-circle-o"></i>
@@ -529,7 +551,7 @@
 											<th>
 												<!-- 808080808080808080808080808080808080808080808080808080808080 -->
 												<input type="checkbox" id="head_check"
-												onclick="headInfluence();">
+												onclick="headInfluence();">全选
 											</th>
 											<th>名称</th>
 											<th>数量</th>
@@ -540,6 +562,39 @@
 								</table>
 							</div>
 							<!-- /.box-body -->
+
+							<!-- 翻页 -->
+							<div class="pagination_div_00">
+								<ul class="pagination">
+
+									<li class="paginate_button previous"><a
+										href="javascript:pagingTurning(0)" aria-controls="example2"
+										data-dt-idx="0" tabindex="0">首页</a></li>
+
+									<li class="paginate_button previous"><a
+										href="javascript:pagingTurning(1)" aria-controls="example2"
+										data-dt-idx="0" tabindex="0">上页</a></li>
+
+
+									<li class="paginate_button previous"><a
+										href="javascript:pagingTurning(2)" aria-controls="example2"
+										data-dt-idx="0" tabindex="0">下页</a></li>
+
+									<li class="paginate_button previous"><a
+										href="javascript:pagingTurning(3)" aria-controls="example2"
+										data-dt-idx="0" tabindex="0">尾页</a></li>
+
+									<span class="pages_div_02"> <span class="page_text_0">当前页
+											<b class="current_pageth"></b>
+									</span> <span class="page_text_0">总页数 <b class="total_all_page"></b></span>
+									</span>
+									<p class="pagin_info">
+										上:<em class="prev_has"></em> 下:<em class="next_has"></em>
+									</p>
+								</ul>
+
+							</div>
+
 						</div>
 						<!-- /.box -->
 

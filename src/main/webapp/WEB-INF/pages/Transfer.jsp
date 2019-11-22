@@ -28,9 +28,10 @@
 		<div
 			style="text-align: center; margin-top: 30px; margin-bottom: 25px;">
 			<!--  -->
-			<a href="${basePath}/cross/toRevisePassword" class="revamp_link">修改密码</a>
+			<a href="/stocker-manager/cross/toRevisePassword" class="revamp_link">修改密码</a>
 			<!--  -->
-			<a href="${basePath}/cross/toReviseBaseProfile" class="revamp_link">修改基本资料</a>
+			<a href="/stocker-manager/cross/toReviseBaseProfile"
+				class="revamp_link">修改基本资料</a>
 		</div>
 
 		<table>

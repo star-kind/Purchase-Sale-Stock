@@ -15,6 +15,16 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TStockDAO {
 	/**
+	 * 全表分页查询
+	 * 
+	 * @param pageIndex
+	 * @param lines
+	 * @return
+	 */
+	abstract List<TStock> selectAllRowsPaginations(@Param("pageIndex") Integer pageIndex,
+			@Param("lines") Integer lines);
+
+	/**
 	 * 根据审核表中已经同意的销售部申请单序号从仓库中查找对应数据,分页查询
 	 * 
 	 * @param deptNum          部门号

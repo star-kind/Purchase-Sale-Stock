@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.allstargh.ssm.controller.kits.ControllerUtils;
 import com.allstargh.ssm.controller.kits.StockControllerUtil;
 import com.allstargh.ssm.json.ResponseResult;
+import com.allstargh.ssm.pojo.PaginationII;
 import com.allstargh.ssm.pojo.PagingText;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TStock;
@@ -235,6 +236,26 @@ public class StockController extends ControllerUtils {
 
 		return new ResponseResult<List<TStock>>(SUCCESS, list);
 
+	}
+
+	/**
+	 * http://localhost:8080/stocker-manager/StockController/findAllLimitsHandler?pageth=1
+	 * 
+	 * @param session
+	 * @param pageth
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findAllLimitsHandler", method = RequestMethod.GET)
+	public ResponseResult<PaginationII<List<TStock>>> findAllLimitsHandler(HttpSession session,
+			@RequestParam(value = "pageth", defaultValue = "0") Integer pageth) {
+		parameterMark(pageth);
+
+		Integer uid = getUsridFromSession(session);
+
+		PaginationII<List<TStock>> paginationII = iss.findAllLimits(pageth, 8, uid);
+
+		return new ResponseResult<PaginationII<List<TStock>>>(SUCCESS, paginationII);
 	}
 
 	/**

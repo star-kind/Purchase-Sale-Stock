@@ -52,7 +52,7 @@ p {
 }
 
 .log_substance {
-	margin: 35px 0 200px 80px;
+	margin: 3px 0 200px 80px;
 }
 </style>
 
@@ -64,8 +64,8 @@ p {
 
 			<!--  -->
 			<div style="text-align: center;">
-				<br> <br> <a
-					href="/stocker-manager/account/toAdminWorkable">返回</a> <br> <br>
+				<br> <a href="/stocker-manager/account/toAdminWorkable">返回</a>
+				<br> 
 				<h3 class="col-md-5">账号活动日志记录</h3>
 
 				<br>
@@ -80,12 +80,10 @@ p {
 					</ol>
 				</div>
 
-
-				<br> <br>
+				<br>
 			</div>
 
-			<br> <br>
-
+			<br>
 			<div class="mine_index_invoke">
 				<p>
 					<i> 总共:<i class="total_page"></i>
@@ -97,7 +95,7 @@ p {
 			</div>
 
 			<hr>
-			<br> <br>
+			<br>
 
 			<div class="log_substance row"></div>
 

@@ -153,6 +153,10 @@ public class ControllerUtils {
 			rr.setState(ServiceExceptionEnum.STORE_HAD_INVALID.getCode());
 			break;
 
+		case "原密码错误":
+			rr.setState(ServiceExceptionEnum.OLD_PASSWORD_ERR.getCode());
+			break;
+
 		}
 
 		return rr;
@@ -198,6 +202,7 @@ public class ControllerUtils {
 
 		try {
 			usrname = session.getAttribute("usrname").toString();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			anchor = 1;

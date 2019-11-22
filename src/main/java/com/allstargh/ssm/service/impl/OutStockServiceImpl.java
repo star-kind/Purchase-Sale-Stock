@@ -1,11 +1,15 @@
 package com.allstargh.ssm.service.impl;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.allstargh.ssm.controller.kits.ControllerUtils;
+import com.allstargh.ssm.controller.kits.OutStockControllerUtil;
+import com.allstargh.ssm.controller.kits.SaleControllerUtil;
 import com.allstargh.ssm.mapper.AssociativeMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.mapper.TOutDAO;
@@ -15,6 +19,7 @@ import com.allstargh.ssm.pojo.Accounts;
 import com.allstargh.ssm.pojo.AssociativeEntity;
 import com.allstargh.ssm.pojo.JointStockVO;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.pojo.TOut;
 import com.allstargh.ssm.pojo.TOutExample;
@@ -24,6 +29,7 @@ import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IOutStockService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
+import com.allstargh.ssm.util.SegmentReadTextII;
 
 /**
  * 
@@ -95,12 +101,16 @@ public class OutStockServiceImpl implements IOutStockService {
 
 		PaginationII<List<TStock>> pagination = new PaginationII<List<TStock>>();
 
+		SegmentReadTextII seg = new SegmentReadTextII();
+
 		List<TStock> list = tStockDAO.selectNotInApprovalFromStock(deptNum, operate);
+		System.err.println(this.getClass().getName());
+		System.err.println(list.size());
 
 		List<TStock> data = tStockDAO.selectNotInApprovalFromStockLimit(deptNum, operate, pageth * lines, lines);
 
 		// 总页数
-		Integer totalPages = list.size() / lines;
+		int totalPages = seg.countTotalpages(list.size(), lines);
 
 		/*
 		 * 判断是否有上一页和下一页
@@ -136,18 +146,19 @@ public class OutStockServiceImpl implements IOutStockService {
 			Integer pageth, Integer lines) throws SelfServiceException {
 		Accounts account = icrs.checkForAccount(uid, 4);
 
+		SegmentReadTextII seg = new SegmentReadTextII();
+
 		PaginationII<List<AssociativeEntity>> pagination = new PaginationII<List<AssociativeEntity>>();
 
 		List<AssociativeEntity> list = associativeMapper.multiTableJointQuery(deptNum, operate);
+		System.err.println(this.getClass().getName());
+		System.err.println(list.size());
 
 		List<AssociativeEntity> data = associativeMapper.multiTableJointQueryLimit(deptNum, operate, pageth * lines,
 				lines);
 
-		System.err.println("size: ");
-		System.err.println(list.size());
-
 		// 总页数
-		Integer totalPages = list.size() / lines;
+		int totalPages = seg.countTotalpages(list.size(), lines);
 
 		/*
 		 * 判断是否有上一页和下一页
@@ -218,11 +229,29 @@ public class OutStockServiceImpl implements IOutStockService {
 
 		int affect = tod.insert(out);
 
-		/*
-		 * 出库成功(即仓管员同意出库)之后,该货物不应该存在于货仓中了,需要从仓库中删除 TODO
-		 */
+		if (vo.getStockerIsAgree() == true) {
+			tStockDAO.deleteByPrimaryKey(vo.getId());
+		}
 
 		return affect;
+	}
+
+	@Override
+	public PagingTextII readTextOnLimit(Integer uid, Integer pageth, Integer lines)
+			throws SelfServiceException, IOException {
+		Accounts account = icrs.checkForAccount(uid, 4);
+
+		StringBuilder builder = new StringBuilder(ControllerUtils.ENGINE_DAILY_PATH);
+
+		String fileUri = builder.append(OutStockControllerUtil.LOGGING_RECORD_OUT_WAREHOUSE).toString();
+
+		SegmentReadTextII seg = new SegmentReadTextII(lines, fileUri);
+
+		icrs.checkTextOutOfCapacity(fileUri, 36 * 1024);
+
+		PagingTextII text = seg.packaging(pageth);
+
+		return text;
 	}
 
 }

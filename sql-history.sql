@@ -511,3 +511,5 @@ ORDER BY amount_money,purchase_id ASC LIMIT 1,4;
 
 -- 移除唯一约束
 ALTER TABLE t_out DROP INDEX sale_order;
+
+ALTER TABLE t_sale DROP INDEX warehouse_goods_order;

@@ -2,8 +2,96 @@
  * 开幕雷击
  */
 $(function() {
-	exhibitDataList();
+	// exhibitDataList();
+	findAllLimitsHandler(null);
 })
+
+/* global variable */
+var prev = $('.prev_has');
+var next = $('.next_has');
+var current = $('.current_pageth');
+var total = $('.total_all_page');
+
+/*----------------------------------------------------*/
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function pagingTurning(key) {
+	var index = parseInt(current.text());
+	var bool = '';
+
+	switch (key) {
+	case 0:
+		findAllLimitsHandler(0);
+		break;
+
+	case 1:// 上页
+		bool = prev.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		findAllLimitsHandler(index - 2);
+		break;
+
+	case 2:// 下页
+		bool = next.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		findAllLimitsHandler(index);
+		break;
+
+	case 3:
+		index = parseInt(total.text());
+		findAllLimitsHandler(index - 1);
+		break;
+	}
+}
+
+/**
+ * 
+ * @param index
+ * @returns
+ */
+function findAllLimitsHandler(index) {
+	console.log(index);
+
+	var url = '/stocker-manager/StockController/findAllLimitsHandler';
+
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		data : {
+			'pageth' : index
+		},
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state === 200) {
+				console.log(rr.data);
+
+				if (rr.data != null) {
+					var list = rr.data.data;
+					generateTableRows(list);// 产生并赋予表格内容
+
+				}
+
+				prev.text(rr.data.hasPreviousPage);
+				next.text(rr.data.hasNextPage);
+				current.text(rr.data.currentPageth + 1);
+				total.text(rr.data.totalPages);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}
 
 /**
  * 
@@ -18,10 +106,8 @@ function exhibitDataList() {
 		type : 'GET',
 		success : function(rr) {
 			if (rr.state === 200) {
-				if (rr.data != null || '') {
+				if (rr.data != null) {
 					var list = rr.data;
-
-					$('#example2 tbody').empty();
 
 					generateTableRows(list);// 产生并赋予表格内容
 
@@ -65,8 +151,6 @@ function foundByTypeAreaHandler(areaOrder) {
 			if (rr.state == 200 && rr.data != null) {
 				var list = rr.data;
 
-				$('#example2 tbody').empty();
-
 				generateTableRows(list);// 产生并赋予表格内容
 
 			} else {
@@ -83,14 +167,15 @@ function foundByTypeAreaHandler(areaOrder) {
  * @returns
  */
 function generateTableRows(list) {
-	for (var i = 0; i < list.length; i++) {
+	$('#example2 tbody').empty();
 
+	for (var i = 0; i < list.length; i++) {
 		var tr = '<tr role="row">';
-		
+
 		tr += '<td class="sorting_1">';
 		tr += '<input type="checkbox" value="#{id}" class="td_order_number">';
 		tr += '</td>';
-		
+
 		tr += '<td>#{storeCommodity}</td>';
 		tr += '<td>#{storeQuantity}</td>';
 		tr += '<td id="stockTypeArea-#{purchaseId}"></td>';
@@ -166,7 +251,7 @@ function layerOpenEject(ts) {
  */
 function manufactureContent(ts) {
 	var typeArea = null;
-	
+
 	switch (ts.stockTypeArea) {
 	case 0:
 		typeArea = '电器区';

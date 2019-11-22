@@ -21,39 +21,75 @@
 	href="${basePath}/CssFrame/bootstrap-theme.css">
 
 </head>
-<body>
 
+<style type="text/css">
+body {
+	font-size: 23px;
+}
+
+p {
+	margin-bottom: 16px;
+	font-family: 中文楷体;
+}
+
+.page_div {
+	margin: 15px 0 0 27%;
+}
+
+.page_div li {
+	list-style: none;
+	float: left;
+	margin: 0 25px 0 25px;
+}
+
+/* +++++++++++++ */
+.mine_index_invoke, .mine_hints {
+	display: none;
+}
+
+.log_substance {
+	margin: 3px 0 200px 90px;
+}
+</style>
+
+<body>
 	<br>
+
 	<div
 		style="text-align: center; font-size: 22px; font-family: monospace;">
 		<a
 			href="/stocker-manager/PurchaseController/jumpToPurchaseWorkableHandler">返回采购模块主页</a>
 	</div>
 
-	<hr>
+	<p class="mine_hints">
+		P:<em class="pr"></em> || N:<em class="ne"></em>
+	</p>
 
-	<div id="records_logs" style="margin-left: 100px; font-size: 18px;"></div>
+	<br>
+
+	<div class="page_div">
+		<ol>
+			<li><a href="javascript:pageTurning(0)">首页</a></li>
+			<li><a href="javascript:pageTurning(1)">上页</a></li>
+
+			<li><a href="javascript:pageTurning(2)">下页</a></li>
+			<li><a href="javascript:pageTurning(3)">尾页</a></li>
+
+			<li><span>当前 <b class="mine_current_page"></b> 页
+			</span></li>
+			<li><span>总共 <b class="total_page"></b> 页
+			</span></li>
+		</ol>
+	</div>
+
+	<br>
+	<hr>
+	<br>
+
+	<div class="records_logs log_substance"></div>
 
 </body>
 
-<script type="text/javascript">
-	/*=========================临时日志记录===========================*/
-	$(function() {
-		var uri = '/stocker-manager/PurchaseController/readOutputSubstanceLogHandler';
-
-		$.ajax({
-			url : uri,
-			type : 'GET',
-			dataType : 'json',
-			success : function(rr) {
-				if (rr.state === 200) {
-					$('#records_logs').html(rr.data);
-				} else {
-					alert(rr.message);
-				}
-			}
-		});
-
-	});
-</script>
+<script
+	src="${basePath}/MineJavaScript/PurchaseModule/PurchaseTranceLog.js"></script>
 </html>

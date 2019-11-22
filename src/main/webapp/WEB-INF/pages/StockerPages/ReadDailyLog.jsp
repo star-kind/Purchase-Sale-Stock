@@ -302,7 +302,9 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> 提货申请队列</a></li>
+							<li><a
+								href="/stocker-manager/cross/generalAccess?moduleName=StockerPages/OutStoreRoster&competence=4"><i
+									class="fa fa-circle-o"></i> 提货申请队列</a></li>
 							<li><a href="/stocker-manager/StockController/DataTables"><i
 									class="fa fa-circle-o"></i> 全部仓储物资</a></li>
 						</ul></li>
@@ -567,9 +569,7 @@
 							</div>
 
 							<div class="box-body no-padding">
-								<div class="mailbox-read-info records_stock_dept">
-									
-								</div>
+								<div class="mailbox-read-info records_stock_dept"></div>
 								<!-- /.mailbox-read-info -->
 								<div class="mailbox-controls with-border text-center">
 									<div class="btn-group">
@@ -686,17 +686,15 @@
 								<div class="address_div">
 									<!-- 当前页 -->
 									<span class="current_page_index page_index"></span>
-									
-									<!-- 总页数 --> 
+
+									<!-- 总页数 -->
 									<span class="total_page_index page_index"></span>
-									
+
 									<!-- 是否还有上一页 -->
 									<span class="previous_page_index page_index"></span>
-									
+
 									<!-- 是否还有下一页 -->
-									<span class="next_page_index page_index"></span>
-									
-									<a
+									<span class="next_page_index page_index"></span> <a
 										href="javascript:pageNumber(2)" class="first_page">首页</a> <a
 										href="javascript:pageNumber(1)" class="prev_page">上一页</a> <a
 										href="javascript:pageNumber(0)" class="next_page">下一页</a> <a

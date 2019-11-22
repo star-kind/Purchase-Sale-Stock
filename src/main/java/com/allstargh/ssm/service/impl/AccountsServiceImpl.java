@@ -333,8 +333,9 @@ public class AccountsServiceImpl implements IAccountsService {
 
 		// 检验旧密码与藏中一致
 		boolean verify = asu.verify(old, tablePwd);
+		
 		if (!verify) {
-			String description = ServiceExceptionEnum.KEYWORD_ERR.getDescription();
+			String description = ServiceExceptionEnum.OLD_PASSWORD_ERR.getDescription();
 			throw new SelfServiceException(description);
 		}
 

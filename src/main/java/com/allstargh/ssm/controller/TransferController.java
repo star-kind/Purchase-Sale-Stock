@@ -23,11 +23,11 @@ import com.allstargh.ssm.service.ICommonReplenishService;
 public class TransferController extends ControllerUtils {
 	@Autowired
 	private ICommonReplenishService ics;
-	
+
 	/**
 	 * 工具类
 	 */
-	TransferControllerUtil instance=TransferControllerUtil.getInstance();
+	TransferControllerUtil instance = TransferControllerUtil.getInstance();
 
 	/**
 	 * 例如:/stocker-manager/cross/generalAccess?moduleName=ApprovalModule/ApprovalWorkable&competence=1
@@ -44,11 +44,11 @@ public class TransferController extends ControllerUtils {
 
 		System.err.println("competence:" + competence + "," + "moduleName:" + moduleName);
 		String target = ics.checkEnterCompetence(uid, competence, model, moduleName);
-		
+
 		String username = getUsrnameFromSession(session);
 
 		instance.generalAccessRecords(username, competence);
-		
+
 		return target;
 
 	}
@@ -84,7 +84,7 @@ public class TransferController extends ControllerUtils {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "toReviseBaseProfile")
+	@RequestMapping("toReviseBaseProfile")
 	public String toReviseBaseProfile() {
 		return "ReviseBaseProfile";
 	}

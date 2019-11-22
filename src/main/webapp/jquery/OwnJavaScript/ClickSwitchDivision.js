@@ -20,7 +20,6 @@ function opens(obj) {
 
 		}
 	}
-
 }
 
 /**
@@ -32,16 +31,14 @@ function opens(obj) {
  */
 function switchStatus(obj) {
 	var tag_select = $('.tag_select');
-	// console.log(tag_select);
-	console.log('id=obj' + obj);
 
 	for (let i = 0; i < tag_select.length; i++) {
 		if (obj == i) {
 			$('#tag' + i).show();
+
 		} else {
 			$('#tag' + i).hide();
+
 		}
-
 	}
-
 }

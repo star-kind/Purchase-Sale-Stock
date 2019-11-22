@@ -468,7 +468,7 @@ public class AccountsController extends ControllerUtils {
 
 		Accounts account = iAccountsService.gainAccount(uid01);
 
-		boolean b = icrs.checkForAccount(account, 0);
+		// boolean b = icrs.checkForAccount(account, 0);
 
 		Integer uid = Integer.parseInt(session.getAttribute("usrid").toString());
 
@@ -494,7 +494,7 @@ public class AccountsController extends ControllerUtils {
 
 		Accounts account = iAccountsService.gainAccount(uid01);
 
-		boolean b = icrs.checkForAccount(account, 0);
+		// boolean b = icrs.checkForAccount(account, 0);
 
 		Integer uid = Integer.parseInt(s.getAttribute("usrid").toString());
 

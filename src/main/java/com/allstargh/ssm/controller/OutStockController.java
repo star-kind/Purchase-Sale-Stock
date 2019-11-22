@@ -1,5 +1,6 @@
 package com.allstargh.ssm.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,11 @@ import com.allstargh.ssm.json.ResponseResult;
 import com.allstargh.ssm.pojo.AssociativeEntity;
 import com.allstargh.ssm.pojo.JointStockVO;
 import com.allstargh.ssm.pojo.PaginationII;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.TStock;
 import com.allstargh.ssm.service.IOutStockService;
+import com.allstargh.ssm.service.IStcokSevice;
+import com.allstargh.ssm.service.ex.SelfServiceException;
 
 /**
  * 出库
@@ -32,7 +36,63 @@ public class OutStockController extends ControllerUtils {
 	@Autowired
 	private IOutStockService ioss;
 
+	@Autowired
+	private IStcokSevice iss;
+
 	OutStockControllerUtil inst = OutStockControllerUtil.getInstance();
+
+	@Override
+	protected void parameterMark(Object... args) {
+		super.parameterMark(args);
+	}
+
+	/**
+	 * 分页读取文本控制器 <br>
+	 * /stocker-manager/OutStockController/readTextOnLimitHandler?pageth=2
+	 * 
+	 * @param session
+	 * @param pageth
+	 * @return
+	 * @throws SelfServiceException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "readTextOnLimitHandler", method = RequestMethod.GET)
+	public ResponseResult<PagingTextII> readTextOnLimitHandler(HttpSession session,
+			@RequestParam(value = "pageth", defaultValue = "0") Integer pageth)
+			throws SelfServiceException, IOException {
+		parameterMark(pageth);
+
+		Integer uid = getUsridFromSession(session);
+
+		PagingTextII textII = ioss.readTextOnLimit(uid, pageth, 13);
+
+		return new ResponseResult<PagingTextII>(SUCCESS, textII);
+	}
+
+	/**
+	 * 删除亦是出仓<br>
+	 * /stocker-manager/OutStockController/deleteOutHandler
+	 * 
+	 * @param session
+	 * @param array
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteOutHandler", method = RequestMethod.POST)
+	protected ResponseResult<Integer> deleteOutHandler(HttpSession session, @RequestParam("array") Long[] array) {
+		parameterMark(array);
+
+		Integer uid = getUsridFromSession(session);
+
+		Integer affects = iss.deleteByMultiID(uid, array);
+
+		// 写入自设日志
+		String uname = getUsrnameFromSession(session);
+		inst.deleteOutHandlerRecords(array, uname, affects);
+
+		return new ResponseResult<Integer>(SUCCESS, affects);
+	}
 
 	/**
 	 * /stocker-manager/OutStockController/addOutHandler

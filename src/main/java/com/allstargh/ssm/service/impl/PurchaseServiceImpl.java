@@ -18,12 +18,14 @@ import com.allstargh.ssm.controller.kits.PurchaseControllerUtil;
 import com.allstargh.ssm.mapper.AccountsMapper;
 import com.allstargh.ssm.mapper.PurchaseMapper;
 import com.allstargh.ssm.pojo.Accounts;
+import com.allstargh.ssm.pojo.PagingTextII;
 import com.allstargh.ssm.pojo.Purchase;
 import com.allstargh.ssm.service.ICommonReplenishService;
 import com.allstargh.ssm.service.IPurchaseService;
 import com.allstargh.ssm.service.ex.SelfServiceException;
 import com.allstargh.ssm.service.ex.ServiceExceptionEnum;
 import com.allstargh.ssm.service.util.PurchaseServiceUtil;
+import com.allstargh.ssm.util.SegmentReadTextII;
 
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
@@ -373,6 +375,26 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		Map<Integer, Integer> map = pm.countPurchaseIdGroupByClassify();
 
 		return map;
+	}
+
+	@Override
+	public PagingTextII readSubstanceLogPaging(Integer usrid, Integer pageth, Integer line)
+			throws IOException, SelfServiceException {
+		Integer[] competences = { 2 };
+
+		Accounts account = ics.checkForAccount(usrid, competences);
+
+		StringBuffer b = new StringBuffer(ControllerUtils.ENGINE_DAILY_PATH);
+		
+		String filePath = b.append(PurchaseControllerUtil.PURCHASE_FILE_NAME).toString();
+
+		ics.checkTextOutOfCapacity(filePath, 60 * 1024);
+
+		SegmentReadTextII textII = new SegmentReadTextII(line, filePath);
+		
+		PagingTextII pagingTextII = textII.packaging(pageth);
+
+		return pagingTextII;
 	}
 
 }

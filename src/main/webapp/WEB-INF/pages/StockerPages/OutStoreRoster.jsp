@@ -86,6 +86,8 @@
 
 <script type="text/javascript"
 	src="${basePath}/jquery/OwnJavaScript/BoxsCheckedAll.js"></script>
+<script type="text/javascript"
+	src="${basePath}/jquery/OwnJavaScript/ClickSwitchDivision.js"></script>
 
 <meta charset="UTF-8">
 <title>出库展示队列</title>
@@ -113,6 +115,7 @@ li {
 
 .mine_header_ol_0 {
 	transform: translateX(10em);
+	font-size: 28px;
 }
 
 .mine_header_ol_0 a {
@@ -151,7 +154,7 @@ main {
 
 .main_div_00 {
 	height: 3em;
-	margin: 6rem auto 3rem 26%;
+	margin: 6rem auto 5rem 26%;
 }
 
 .main_div_00 li a {
@@ -244,6 +247,19 @@ border-bottom-color: rgb(235, 242, 224);*/
 .gets_form textarea {
 	margin-top: 13px;
 }
+
+/*  --------------------  */
+.tag_select {
+	display: none;
+}
+
+.records_out {
+	margin: 26px auto auto 50px;
+}
+
+.informations {
+	display: none;
+}
 </style>
 
 <body>
@@ -251,11 +267,13 @@ border-bottom-color: rgb(235, 242, 224);*/
 		<div class="header_div_0">
 
 			<ol class="mine_header_ol_0">
+				<li><a href="javascript:switchStatus(0)">显示队列表格</a></li>
+				<li><a href="javascript:switchStatus(1)"
+					onclick="readTextOnLimitHandler(0)">查看出库日志记录</a></li>
 				<li><a
 					href="/stocker-manager/StockController/checkEnterCompetenceHandler">返回仓库</a></li>
 				<li><a href="/stocker-manager/cross/toTransfer">返回导航</a></li>
 				<li><a href="/stocker-manager/login.jsp">返回登录页</a></li>
-				<li><a href="javascript:void()">查看出库日志记录</a></li>
 			</ol>
 
 		</div>
@@ -266,44 +284,70 @@ border-bottom-color: rgb(235, 242, 224);*/
 	<br>
 
 	<main>
-		<div class="main_div_0">
-			<table class="tbl_belong_i">
-				<caption>待处理出库队列表</caption>
-				<thead>
-					<tr>
-						<th><input type="checkbox" id="head_check"
-							onclick="headInfluence()"></th>
-						<th>序号</th>
-						<th>名称</th>
-						<th>数量</th>
-						<th>申请人</th>
-						<th>详情</th>
+		<div class="tag_select" id="tag0">
+			<div class="main_div_0">
+				<table class="tbl_belong_i">
+					<caption>待处理出库队列表</caption>
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="head_check"
+								onclick="headInfluence()"></th>
+							<th>序号</th>
+							<th>名称</th>
+							<th>数量</th>
+							<th>申请人</th>
+							<th>详情</th>
 
-					</tr>
-				</thead>
-				<tbody>
+						</tr>
+					</thead>
+					<tbody>
 
-				</tbody>
-			</table>
-			<br>
-			<div class="button_div_delete">
-				<button class="btn btn-lg btn-warning delete_button_00" onclick="">
-					删除</button>
+					</tbody>
+				</table>
+				<br>
+				<div class="button_div_delete">
+					<button class="btn btn-lg btn-warning delete_button_00"
+						onclick="deleteGoods()">删除</button>
+				</div>
+				<br>
 			</div>
-			<br>
+
+			<div class="main_div_00">
+				<ul>
+					<li><a href="javascript:pageTurning(0)">首页</a></li>
+					<li><a href="javascript:pageTurning(1)">上页</a></li>
+					<li>当前页:<b><span class="span_current"></span></b></li>
+					<li><a href="javascript:pageTurning(2)">下页</a></li>
+					<li><a href="javascript:pageTurning(3)">尾页</a></li>
+					<li>总页数:<span class="span_all_page"></span>
+					</li>
+				</ul>
+			</div>
 		</div>
 
-		<div class="main_div_00">
-			<ul>
-				<li><a href="javascript:pageTurning(0)">首页</a></li>
-				<li><a href="javascript:pageTurning(1)">上页</a></li>
-				<li>当前页:<b><span class="span_current"></span></b></li>
-				<li><a href="javascript:pageTurning(2)">下页</a></li>
-				<li><a href="javascript:pageTurning(3)">尾页</a></li>
-				<li>总页数:<span class="span_all_page"></span>
-				</li>
-			</ul>
+		<!-- 显示记录日志 -->
+		<div class="tag_select" id="tag1">
+			<p class="informations">
+				<em>下</em> <em class="next_record"></em> <br> <em>上</em> <em
+					class="prev_record"></em>
+			</p>
+
+			<!--  -->
+			<div class="records_out"></div>
+
+			<div class="main_div_00">
+				<ul>
+					<li><a href="javascript:pageWent(0)">首页</a></li>
+					<li><a href="javascript:pageWent(1)">上页</a></li>
+					<li><a href="javascript:pageWent(2)">下页</a></li>
+					<li><a href="javascript:pageWent(3)">尾页</a></li>
+					<!--  -->
+					<li><span>当前页</span> <b class="current_record"></b></li>
+					<li><span>总页数</span> <b class="total_record"></b></li>
+				</ul>
+			</div>
 		</div>
+
 	</main>
 
 	<br>

@@ -158,7 +158,7 @@ public class SegmentReadText {
 	 * @param line          设定每页行数
 	 * @return
 	 */
-	protected int countTotalpages(Integer totalTextRows, Integer line) {
+	public int countTotalpages(Integer totalTextRows, Integer line) {
 		Integer j = totalTextRows % line;
 
 		int t = totalTextRows / line;

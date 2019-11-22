@@ -49,7 +49,7 @@ public class OutStockControllerUtil extends ControllerUtils {
 	/**
 	 * 出仓记录日志
 	 */
-	protected static String logging_record_out_warehouse = "logging_record_out_warehouse.txt";
+	public final static String LOGGING_RECORD_OUT_WAREHOUSE = "logging_record_out_warehouse.txt";
 
 	/**
 	 * 
@@ -86,7 +86,40 @@ public class OutStockControllerUtil extends ControllerUtils {
 		b.append(".");
 		b.append(LINE_SEPARATOR_SUFFIX);
 
-		writeRecordLog(affect, logging_record_out_warehouse, b.toString());
+		writeRecordLog(affect, LOGGING_RECORD_OUT_WAREHOUSE, b.toString());
+	}
+
+	/**
+	 * 
+	 * @param arr
+	 * @param uname
+	 * @param affects
+	 */
+	public void deleteOutHandlerRecords(Long[] arr, String uname, Integer affects) {
+		StringBuilder b = new StringBuilder(p_tag_prefix);
+
+		String string = "";
+
+		for (int i = 0; i < arr.length; i++) {
+			string += arr[i];
+			string += ",";
+		}
+
+		string = string.substring(0, string.length() - 1);
+
+		b.append("仓管员");
+		b.append(uname);
+		b.append("于");
+		b.append(now_time);
+		b.append("从库中删除了序列号为:[");
+		b.append(string);
+		b.append("]的货物");
+		b.append(",共");
+		b.append(affects);
+		b.append("笔.");
+		b.append(LINE_SEPARATOR_SUFFIX);
+
+		writeRecordLog(LOGGING_RECORD_OUT_WAREHOUSE, b.toString());
 	}
 
 }

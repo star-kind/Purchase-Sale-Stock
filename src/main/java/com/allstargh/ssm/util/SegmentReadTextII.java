@@ -37,9 +37,17 @@ public class SegmentReadTextII {
 	 */
 	private String filePath;
 
+	/**
+	 * 
+	 * @param lineCount 设定每页行数
+	 * @param filePath
+	 */
 	public SegmentReadTextII(Integer lineCount, String filePath) {
 		this.lineCount = lineCount;
 		this.filePath = filePath;
+	}
+
+	public SegmentReadTextII() {
 	}
 
 	/**
@@ -226,7 +234,7 @@ public class SegmentReadTextII {
 	}
 
 	/**
-	 * 封装
+	 * 封装v1.0
 	 * 
 	 * @param filePath
 	 * @param index
@@ -276,7 +284,7 @@ public class SegmentReadTextII {
 	 * @param line          设定每页行数
 	 * @return
 	 */
-	protected int countTotalpages(Integer totalTextRows, Integer line) {
+	public int countTotalpages(Integer totalTextRows, Integer line) {
 		Integer j = totalTextRows % line;
 
 		int t = totalTextRows / line;

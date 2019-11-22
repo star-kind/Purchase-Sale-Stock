@@ -1,5 +1,6 @@
 package mappers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,42 @@ public class TStockMapperTest {
 	@Before
 	public void before() throws Exception {
 		applicationContext = new ClassPathXmlApplicationContext("spring/spring-dao.xml");
+	}
+
+	@Test
+	public void paginationTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		List<TStock> list = dao.selectAllRowsPaginations(0, 3);
+
+		for (TStock tStock : list) {
+			System.err.println(tStock);
+		}
+	}
+
+	@Test
+	public void deleteTest() {
+		dao = (TStockDAO) applicationContext.getBean("TStockDAO");
+
+		Long[] arr = { 3L, 4L };
+
+		ArrayList<Long> list = new ArrayList<Long>();
+
+		TStockExample e = new TStockExample();
+		Criteria c = e.createCriteria();
+
+		for (int i = 0; i < arr.length; i++) {
+			list.add(arr[i]);
+		}
+
+		c.andIdIn(list);
+
+		/*
+		 * Preparing: delete from t_stock WHERE ( id in ( ? , ? ) )
+		 */
+		int rows = dao.deleteByExample(e);
+
+		System.err.println(rows);
 	}
 
 	@Test

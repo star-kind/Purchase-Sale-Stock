@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "start finish the delete"
+git commit -m "finish handing the projects work"
 
 #github
 git pull github master

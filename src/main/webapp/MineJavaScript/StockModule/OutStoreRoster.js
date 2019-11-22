@@ -11,6 +11,139 @@ var span_all_page = $('.span_all_page');
 var has_next = $('.has_next');
 var has_prev = $('.has_prev');
 
+/* global variable of text */
+var current_record = $('.current_record');
+var total_record = $('.total_record');
+var next_record = $('.next_record');
+var prev_record = $('.prev_record');
+
+/*----------------------------------*/
+
+/**
+ * 
+ * @param key
+ * @returns
+ */
+function pageWent(key) {
+	var index = parseInt(current_record.text());
+	var bool = '';
+
+	switch (key) {
+	case 0:
+		readTextOnLimitHandler(0);
+		break;
+
+	case 1:
+		bool = prev_record.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		readTextOnLimitHandler(index - 2);
+		break;
+
+	case 2:
+		bool = next_record.text();
+
+		if (bool === 'false') {
+			return;
+		}
+
+		readTextOnLimitHandler(index);
+		break;
+
+	case 3:
+		index = parseInt(total_record.text()) - 1;
+		readTextOnLimitHandler(index);
+		break;
+	}
+}
+
+/**
+ * 
+ * @param index
+ * @returns
+ */
+function readTextOnLimitHandler(index) {
+	console.log(index);
+
+	var url = '/stocker-manager/OutStockController/readTextOnLimitHandler';
+
+	$.ajax({
+		url : url,
+		data : {
+			'pageth' : index
+		},
+		dataType : 'json',
+		type : 'GET',
+		success : function(rr) {
+			if (rr.state == 200) {
+				console.log(rr.data);
+
+				$('.records_out').empty();
+
+				current_record.text(rr.data.currentPage + 1);
+				total_record.text(rr.data.totalPages);
+				next_record.text(rr.data.isNext);
+				prev_record.text(rr.data.isPrevious);
+
+				$('.records_out').html(rr.data.textContent);
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+}
+
+/**
+ * 从仓库中删除
+ * 
+ * @returns
+ */
+function deleteGoods() {
+	var url = '/stocker-manager/OutStockController/deleteOutHandler';
+
+	var array = [];
+
+	var checks = $('input[class="td_order_number"]:checked');
+
+	checks.each(function() {
+		array.push(this.value);
+	});
+
+	if (array.length < 1) {
+		layer.alert('您还未勾选中一项');
+		return;
+	}
+
+	$.ajax({
+		url : url,
+		data : {
+			'array' : array.join(',')
+		},
+		dataType : 'json',
+		type : 'POST',
+		success : function(rr) {
+			if (rr.state == 200) {
+				layer.msg('您已经成功删除' + rr.data + '笔存储物', function() {
+					location.reload();
+				})
+			} else {
+				layer.alert(rr.message);
+			}
+		}
+	})
+
+	// 重新初始化
+	array = [];
+}
+
+/**
+ * 
+ * @param flag
+ * @returns
+ */
 function pageTurning(flag) {
 	var index = null;
 	var bool = null;

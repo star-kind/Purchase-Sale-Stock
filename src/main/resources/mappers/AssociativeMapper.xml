@@ -126,6 +126,9 @@
 		ta.department_number=#{deptNum}
 		AND
 		ta.approve_operates=#{operate}
+
+		AND NOT ISNULL (st.id)
+
 		ORDER BY ta.original_order,ta.id ASC
 	</select>
 
@@ -151,7 +154,7 @@
 		ta.approve_operates=#{operate}
 		AND
 		NOT ISNULL(st.id)
-		
+
 		ORDER BY
 		ta.original_order,ta.id
 		ASC
@@ -160,8 +163,3 @@
 	</select>
 
 </mapper>
-
-
-
-
-
