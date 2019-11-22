@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "basically IS OK"
+git commit -m "some minor changes"
 
 #github
 git pull github master

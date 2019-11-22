@@ -21,7 +21,8 @@ function emergeProfile() {
 				uname.prop('placeholder', json.data.usrname);
 				phone.prop('placeholder', json.data.phone);
 			} else {
-				spanHint.text('系统繁忙,请刷新页面再重试');
+				// spanHint.text('系统繁忙,请刷新页面再重试');
+				alert('系统繁忙,请刷新页面再重试');
 			}
 		}
 	});
