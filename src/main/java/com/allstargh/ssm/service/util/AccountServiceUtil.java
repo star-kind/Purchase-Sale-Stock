@@ -250,7 +250,7 @@ public class AccountServiceUtil {
 			competence = 0;
 			break;
 
-		case "总经理":
+		case "审查员":
 			competence = 1;
 			break;
 
