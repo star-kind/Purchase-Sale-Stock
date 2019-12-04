@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "some minor changes"
+git commit -m "the adminLTE"
 
 #github
 git pull github master

@@ -5,5 +5,5 @@
 .TXT*
 .gitignore
 
-src/main/webapp/AdminLTE/
+#src/main/webapp/AdminLTE/
 /target/
