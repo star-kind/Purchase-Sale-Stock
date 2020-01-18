@@ -43,7 +43,7 @@ public class ControllerUtils {
 	/**
 	 * 日志目录实际路径: "/home/admin/workspace/eclipse/eclipse-workspace/Logs/"
 	 */
-	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Logs/";
+	public final static String ENGINE_DAILY_PATH = "/home/admin/workspace/eclipse/eclipse-workspace/Logs/purchase-sale-stock/self/";
 
 	/**
 	 * 换行分隔符+p闭合标签后缀

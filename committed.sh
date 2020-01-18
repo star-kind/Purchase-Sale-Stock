@@ -2,7 +2,7 @@ git status
 
 git add -A .
 
-git commit -m "the adminLTE"
+git commit -m "revamp the logs path"
 
 #github
 git pull github master
